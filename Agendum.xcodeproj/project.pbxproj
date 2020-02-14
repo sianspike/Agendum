@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		D743ED8823F692A2007341D5 /* HorizontalLineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED8723F692A2007341D5 /* HorizontalLineShape.swift */; };
 		D743ED8A23F6931D007341D5 /* TextFieldWithBottomBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED8923F6931D007341D5 /* TextFieldWithBottomBorder.swift */; };
+		D743ED8C23F6A8C8007341D5 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED8B23F6A8C8007341D5 /* SignUpView.swift */; };
+		D743ED8E23F6A908007341D5 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED8D23F6A908007341D5 /* SignInView.swift */; };
 		D777A77C23EB3A840021315E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D777A77B23EB3A840021315E /* AppDelegate.swift */; };
 		D777A77E23EB3A840021315E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D777A77D23EB3A840021315E /* SceneDelegate.swift */; };
 		D777A78123EB3A840021315E /* Agendum.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D777A77F23EB3A840021315E /* Agendum.xcdatamodeld */; };
@@ -19,7 +21,6 @@
 		D777A79623EB3A860021315E /* AgendumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D777A79523EB3A860021315E /* AgendumTests.swift */; };
 		D777A7A123EB3A860021315E /* AgendumUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D777A7A023EB3A860021315E /* AgendumUITests.swift */; };
 		D777A7AF23EB3BD30021315E /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = D777A7AE23EB3BD30021315E /* Fonts */; };
-		D7F508A023ED814E00D66155 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F5089F23ED814E00D66155 /* SignUpView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,8 @@
 /* Begin PBXFileReference section */
 		D743ED8723F692A2007341D5 /* HorizontalLineShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalLineShape.swift; sourceTree = "<group>"; };
 		D743ED8923F6931D007341D5 /* TextFieldWithBottomBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithBottomBorder.swift; sourceTree = "<group>"; };
+		D743ED8B23F6A8C8007341D5 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		D743ED8D23F6A908007341D5 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		D777A77823EB3A840021315E /* Agendum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Agendum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D777A77B23EB3A840021315E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D777A77D23EB3A840021315E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,7 +61,6 @@
 		D777A7A023EB3A860021315E /* AgendumUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendumUITests.swift; sourceTree = "<group>"; };
 		D777A7A223EB3A860021315E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D777A7AE23EB3BD30021315E /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
-		D7F5089F23ED814E00D66155 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpView.swift; path = ../SignUpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +112,8 @@
 			isa = PBXGroup;
 			children = (
 				D777A7AE23EB3BD30021315E /* Fonts */,
-				D7F5089F23ED814E00D66155 /* SignUpView.swift */,
+				D743ED8B23F6A8C8007341D5 /* SignUpView.swift */,
+				D743ED8D23F6A908007341D5 /* SignInView.swift */,
 				D743ED8723F692A2007341D5 /* HorizontalLineShape.swift */,
 				D743ED8923F6931D007341D5 /* TextFieldWithBottomBorder.swift */,
 				D777A77B23EB3A840021315E /* AppDelegate.swift */,
@@ -284,11 +287,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D777A78123EB3A840021315E /* Agendum.xcdatamodeld in Sources */,
-				D7F508A023ED814E00D66155 /* SignUpView.swift in Sources */,
 				D777A77C23EB3A840021315E /* AppDelegate.swift in Sources */,
 				D777A78323EB3A840021315E /* ContentView.swift in Sources */,
+				D743ED8C23F6A8C8007341D5 /* SignUpView.swift in Sources */,
 				D743ED8A23F6931D007341D5 /* TextFieldWithBottomBorder.swift in Sources */,
 				D777A77E23EB3A840021315E /* SceneDelegate.swift in Sources */,
+				D743ED8E23F6A908007341D5 /* SignInView.swift in Sources */,
 				D743ED8823F692A2007341D5 /* HorizontalLineShape.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
