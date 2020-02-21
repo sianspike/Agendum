@@ -22,7 +22,7 @@ struct TextWithBottomBorder: View {
                 .multilineTextAlignment(TextAlignment.center)
                 .font(Font.custom("Montserrat-Medium", size: 30))
                 HorizontalLineShape
-                    .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3)
+                    .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: .infinity)
         }.padding()
     }
 }

@@ -23,7 +23,7 @@ struct TextFieldWithBottomBorder: View {
                 .multilineTextAlignment(TextAlignment.center)
                 .font(Font.custom("Montserrat-Regular", size: 20))
                 HorizontalLineShape
-                    .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3)
+                    .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: .infinity)
         }.padding()
     }
 }

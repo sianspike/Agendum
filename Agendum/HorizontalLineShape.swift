@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct HorizontalLineShape: Shape {
+    
     func path(in rect: CGRect) -> Path {
 
         let fill = CGRect(x: 0, y: 0, width: rect.size.width, height: rect.size.height)
@@ -20,15 +21,19 @@ struct HorizontalLineShape: Shape {
 
     struct HorizontalLine: View {
         private var color: Color? = nil
-        private var height: CGFloat = 1.0
+        private var height: CGFloat = 3.0
+        private var width: CGFloat = 3.0
 
-        init(color: Color, height: CGFloat = 1.0) {
+        init(color: Color, height: CGFloat = 3.0, width: CGFloat = 3.0) {
             self.color = color
             self.height = height
+            self.width = width
         }
 
         var body: some View {
-        HorizontalLineShape().fill(self.color!).frame(minWidth: 0, maxWidth: .infinity, minHeight: height, maxHeight: height)
+            HorizontalLineShape()
+                .fill(self.color!)
+                .frame(minWidth: 0, maxWidth: width, minHeight: 0, maxHeight: height)
         }
     }
 
