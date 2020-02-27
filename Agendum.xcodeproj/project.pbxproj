@@ -27,6 +27,7 @@
 		D7B1570F2403CBB90031671F /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B1570E2403CBB90031671F /* Timer.swift */; };
 		D7B157112407B8720031671F /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = D777A7AE23EB3BD30021315E /* Fonts */; };
 		D7B157152407D6160031671F /* AllItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B157142407D6160031671F /* AllItemsView.swift */; };
+		D7B157172407DE600031671F /* FloatingAddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B157162407DE600031671F /* FloatingAddButton.swift */; };
 		D7C3296523FFD2CA008F3F4F /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C3296423FFD2CA008F3F4F /* NavigationBar.swift */; };
 		D7C3296723FFD6D4008F3F4F /* Icons in Resources */ = {isa = PBXBuildFile; fileRef = D7C3296623FFD6D4008F3F4F /* Icons */; };
 /* End PBXBuildFile section */
@@ -75,6 +76,7 @@
 		D7B1570C2403CAEA0031671F /* FocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusView.swift; sourceTree = "<group>"; };
 		D7B1570E2403CBB90031671F /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		D7B157142407D6160031671F /* AllItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllItemsView.swift; sourceTree = "<group>"; };
+		D7B157162407DE600031671F /* FloatingAddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingAddButton.swift; sourceTree = "<group>"; };
 		D7C3296423FFD2CA008F3F4F /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		D7C3296623FFD6D4008F3F4F /* Icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icons; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,6 +150,7 @@
 				D743ED9123F6C906007341D5 /* TextWithBottomBorder.swift */,
 				D7B1570E2403CBB90031671F /* Timer.swift */,
 				D7B157142407D6160031671F /* AllItemsView.swift */,
+				D7B157162407DE600031671F /* FloatingAddButton.swift */,
 			);
 			path = Agendum;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				D743ED9223F6C906007341D5 /* TextWithBottomBorder.swift in Sources */,
 				D7B1570F2403CBB90031671F /* Timer.swift in Sources */,
 				D7B157152407D6160031671F /* AllItemsView.swift in Sources */,
+				D7B157172407DE600031671F /* FloatingAddButton.swift in Sources */,
 				D7B1570D2403CAEA0031671F /* FocusView.swift in Sources */,
 				D743ED8E23F6A908007341D5 /* SignInView.swift in Sources */,
 				D743ED8823F692A2007341D5 /* HorizontalLineShape.swift in Sources */,
