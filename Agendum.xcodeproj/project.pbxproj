@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D73B804B2407F5760098FAD0 /* FriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73B804A2407F5760098FAD0 /* FriendView.swift */; };
 		D743ED8823F692A2007341D5 /* HorizontalLineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED8723F692A2007341D5 /* HorizontalLineShape.swift */; };
 		D743ED8A23F6931D007341D5 /* TextFieldWithBottomBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED8923F6931D007341D5 /* TextFieldWithBottomBorder.swift */; };
 		D743ED8C23F6A8C8007341D5 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED8B23F6A8C8007341D5 /* SignUpView.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D73B804A2407F5760098FAD0 /* FriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendView.swift; sourceTree = "<group>"; };
 		D743ED8723F692A2007341D5 /* HorizontalLineShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalLineShape.swift; sourceTree = "<group>"; };
 		D743ED8923F6931D007341D5 /* TextFieldWithBottomBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithBottomBorder.swift; sourceTree = "<group>"; };
 		D743ED8B23F6A8C8007341D5 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				D7B1570E2403CBB90031671F /* Timer.swift */,
 				D7B157142407D6160031671F /* AllItemsView.swift */,
 				D7B157162407DE600031671F /* FloatingAddButton.swift */,
+				D73B804A2407F5760098FAD0 /* FriendView.swift */,
 			);
 			path = Agendum;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				D743ED8C23F6A8C8007341D5 /* SignUpView.swift in Sources */,
 				D743ED9023F6C712007341D5 /* Dashboard.swift in Sources */,
 				D743ED8A23F6931D007341D5 /* TextFieldWithBottomBorder.swift in Sources */,
+				D73B804B2407F5760098FAD0 /* FriendView.swift in Sources */,
 				D777A77E23EB3A840021315E /* SceneDelegate.swift in Sources */,
 				D743ED9223F6C906007341D5 /* TextWithBottomBorder.swift in Sources */,
 				D7B1570F2403CBB90031671F /* Timer.swift in Sources */,
