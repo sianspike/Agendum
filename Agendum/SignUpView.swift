@@ -29,34 +29,15 @@ struct SignUpView: View {
             
             TextFieldWithBottomBorder(placeholder: "Password", text: password)
             
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                Text("C R E A T E  A C C O U N T")
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .font(Font.custom("Monsterrat-Medium", size: 15))
-                    .foregroundColor(.black)
-                    .padding(10)
-                    .background(Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
-            }.padding(.bottom)
+            ButtonOne(text: "C R E A T E  A C C O U N T", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
+                .padding(.bottom)
             
-            Button(action: {}) {
-                Text("S I G N  U P  W I T H  F A C E B O O K")
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .font(Font.custom("Monsterrat-Medium", size: 15))
-                    .foregroundColor(.black)
-                    .padding(10)
-                    .background(Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
-            }
+            ButtonOne(text: "S I G N  U P  W I T H  F A C E B O O K", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
             
             Spacer()
             
-            Button(action: {}) {
-                Text("S I G N  I N")
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .font(Font.custom("Monsterrat-Medium", size: 15))
-                    .foregroundColor(.black)
-                    .padding(10)
-                    .background(Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0))
-            }
+            ButtonOne(text: "S I G N  I N", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0))
+            
         }.padding()
     }
 }

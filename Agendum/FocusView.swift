@@ -19,14 +19,7 @@ struct FocusView: View {
             
             Timer().padding(.bottom)
             
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                Text("B E G I N")
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .font(Font.custom("Monsterrat-Medium", size: 15))
-                    .foregroundColor(.black)
-                    .padding(10)
-                    .background(Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
-            }.padding()
+            ButtonOne(text: "B E G I N", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
             
             Spacer()
             

@@ -18,32 +18,11 @@ struct SettingsView: View {
             
             TextWithBottomBorder(text: "Settings")
             
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                Text("C H A N G E  E M A I L")
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .font(Font.custom("Monsterrat-Medium", size: 15))
-                    .foregroundColor(.black)
-                    .padding(10)
-                    .background(Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
-            }.padding()
+            ButtonOne(text: "C H A N G E  E M A I L", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
+        
+            ButtonOne(text: "C H A N G E  P A S S W O R D", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
             
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                Text("C H A N G E  P A S S W O R D")
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .font(Font.custom("Monsterrat-Medium", size: 15))
-                    .foregroundColor(.black)
-                    .padding(10)
-                    .background(Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
-            }.padding()
-            
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                Text("C O N N E C T  C A L E N D A R")
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .font(Font.custom("Monsterrat-Medium", size: 15))
-                    .foregroundColor(.black)
-                    .padding(10)
-                    .background(Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
-            }.padding()
+            ButtonOne(text: "C O N N E C T  C A L E N D A R", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
             
             HStack{
                 
@@ -57,14 +36,7 @@ struct SettingsView: View {
             
             Spacer()
             
-            Button(action: {}) {
-                Text("D E L E T E  A C C O U N T")
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .font(Font.custom("Monsterrat-Medium", size: 15))
-                    .foregroundColor(.black)
-                    .padding(10)
-                    .background(Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0))
-            }.padding()
+            ButtonOne(text: "D E L E T E  A C C O U N T", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0))
             
             NavigationBar()
         }
