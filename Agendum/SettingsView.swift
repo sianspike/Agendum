@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @State private var touchID = true
+    @State private var touchID = false
     
     var body: some View {
         

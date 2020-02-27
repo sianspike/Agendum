@@ -11,6 +11,7 @@
 		D73B804D2407FA170098FAD0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73B804C2407FA170098FAD0 /* SettingsView.swift */; };
 		D73B804F2407FF780098FAD0 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73B804E2407FF780098FAD0 /* ResetPasswordView.swift */; };
 		D73B80512408006A0098FAD0 /* ButtonOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73B80502408006A0098FAD0 /* ButtonOne.swift */; };
+		D73B805324080A240098FAD0 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73B805224080A240098FAD0 /* AddItemView.swift */; };
 		D743ED8823F692A2007341D5 /* HorizontalLineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED8723F692A2007341D5 /* HorizontalLineShape.swift */; };
 		D743ED8A23F6931D007341D5 /* TextFieldWithBottomBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED8923F6931D007341D5 /* TextFieldWithBottomBorder.swift */; };
 		D743ED8C23F6A8C8007341D5 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED8B23F6A8C8007341D5 /* SignUpView.swift */; };
@@ -58,6 +59,7 @@
 		D73B804C2407FA170098FAD0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D73B804E2407FF780098FAD0 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		D73B80502408006A0098FAD0 /* ButtonOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonOne.swift; sourceTree = "<group>"; };
+		D73B805224080A240098FAD0 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
 		D743ED8723F692A2007341D5 /* HorizontalLineShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalLineShape.swift; sourceTree = "<group>"; };
 		D743ED8923F6931D007341D5 /* TextFieldWithBottomBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithBottomBorder.swift; sourceTree = "<group>"; };
 		D743ED8B23F6A8C8007341D5 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				D73B804C2407FA170098FAD0 /* SettingsView.swift */,
 				D73B804E2407FF780098FAD0 /* ResetPasswordView.swift */,
 				D73B80502408006A0098FAD0 /* ButtonOne.swift */,
+				D73B805224080A240098FAD0 /* AddItemView.swift */,
 			);
 			path = Agendum;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				D7B157152407D6160031671F /* AllItemsView.swift in Sources */,
 				D7B157172407DE600031671F /* FloatingAddButton.swift in Sources */,
 				D73B804F2407FF780098FAD0 /* ResetPasswordView.swift in Sources */,
+				D73B805324080A240098FAD0 /* AddItemView.swift in Sources */,
 				D7B1570D2403CAEA0031671F /* FocusView.swift in Sources */,
 				D743ED8E23F6A908007341D5 /* SignInView.swift in Sources */,
 				D743ED8823F692A2007341D5 /* HorizontalLineShape.swift in Sources */,
