@@ -23,7 +23,9 @@
 		D777A78B23EB3A860021315E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D777A78923EB3A860021315E /* LaunchScreen.storyboard */; };
 		D777A79623EB3A860021315E /* AgendumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D777A79523EB3A860021315E /* AgendumTests.swift */; };
 		D777A7A123EB3A860021315E /* AgendumUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D777A7A023EB3A860021315E /* AgendumUITests.swift */; };
-		D777A7AF23EB3BD30021315E /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = D777A7AE23EB3BD30021315E /* Fonts */; };
+		D7B1570D2403CAEA0031671F /* FocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B1570C2403CAEA0031671F /* FocusView.swift */; };
+		D7B1570F2403CBB90031671F /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B1570E2403CBB90031671F /* Timer.swift */; };
+		D7B157112407B8720031671F /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = D777A7AE23EB3BD30021315E /* Fonts */; };
 		D7C3296523FFD2CA008F3F4F /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C3296423FFD2CA008F3F4F /* NavigationBar.swift */; };
 		D7C3296723FFD6D4008F3F4F /* Icons in Resources */ = {isa = PBXBuildFile; fileRef = D7C3296623FFD6D4008F3F4F /* Icons */; };
 /* End PBXBuildFile section */
@@ -69,6 +71,8 @@
 		D777A7A023EB3A860021315E /* AgendumUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendumUITests.swift; sourceTree = "<group>"; };
 		D777A7A223EB3A860021315E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D777A7AE23EB3BD30021315E /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
+		D7B1570C2403CAEA0031671F /* FocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusView.swift; sourceTree = "<group>"; };
+		D7B1570E2403CBB90031671F /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		D7C3296423FFD2CA008F3F4F /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		D7C3296623FFD6D4008F3F4F /* Icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icons; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,24 +125,26 @@
 		D777A77A23EB3A840021315E /* Agendum */ = {
 			isa = PBXGroup;
 			children = (
-				D7C3296623FFD6D4008F3F4F /* Icons */,
-				D777A7AE23EB3BD30021315E /* Fonts */,
-				D743ED8B23F6A8C8007341D5 /* SignUpView.swift */,
-				D743ED8D23F6A908007341D5 /* SignInView.swift */,
+				D777A77F23EB3A840021315E /* Agendum.xcdatamodeld */,
+				D777A77B23EB3A840021315E /* AppDelegate.swift */,
+				D777A78423EB3A860021315E /* Assets.xcassets */,
+				D777A78223EB3A840021315E /* ContentView.swift */,
 				D743ED8F23F6C712007341D5 /* Dashboard.swift */,
-				D7C3296423FFD2CA008F3F4F /* NavigationBar.swift */,
-				D743ED9323F6CE0B007341D5 /* ProgressBar.swift */,
+				D7B1570C2403CAEA0031671F /* FocusView.swift */,
+				D777A7AE23EB3BD30021315E /* Fonts */,
 				D743ED8723F692A2007341D5 /* HorizontalLineShape.swift */,
+				D7C3296623FFD6D4008F3F4F /* Icons */,
+				D777A78C23EB3A860021315E /* Info.plist */,
+				D777A78923EB3A860021315E /* LaunchScreen.storyboard */,
+				D7C3296423FFD2CA008F3F4F /* NavigationBar.swift */,
+				D777A78623EB3A860021315E /* Preview Content */,
+				D743ED9323F6CE0B007341D5 /* ProgressBar.swift */,
+				D777A77D23EB3A840021315E /* SceneDelegate.swift */,
+				D743ED8D23F6A908007341D5 /* SignInView.swift */,
+				D743ED8B23F6A8C8007341D5 /* SignUpView.swift */,
 				D743ED8923F6931D007341D5 /* TextFieldWithBottomBorder.swift */,
 				D743ED9123F6C906007341D5 /* TextWithBottomBorder.swift */,
-				D777A77B23EB3A840021315E /* AppDelegate.swift */,
-				D777A77D23EB3A840021315E /* SceneDelegate.swift */,
-				D777A78223EB3A840021315E /* ContentView.swift */,
-				D777A78423EB3A860021315E /* Assets.xcassets */,
-				D777A78923EB3A860021315E /* LaunchScreen.storyboard */,
-				D777A78C23EB3A860021315E /* Info.plist */,
-				D777A77F23EB3A840021315E /* Agendum.xcdatamodeld */,
-				D777A78623EB3A860021315E /* Preview Content */,
+				D7B1570E2403CBB90031671F /* Timer.swift */,
 			);
 			path = Agendum;
 			sourceTree = "<group>";
@@ -273,8 +279,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7B157112407B8720031671F /* Fonts in Resources */,
 				D777A78B23EB3A860021315E /* LaunchScreen.storyboard in Resources */,
-				D777A7AF23EB3BD30021315E /* Fonts in Resources */,
 				D7C3296723FFD6D4008F3F4F /* Icons in Resources */,
 				D777A78823EB3A860021315E /* Preview Assets.xcassets in Resources */,
 				D777A78523EB3A860021315E /* Assets.xcassets in Resources */,
@@ -311,6 +317,8 @@
 				D743ED8A23F6931D007341D5 /* TextFieldWithBottomBorder.swift in Sources */,
 				D777A77E23EB3A840021315E /* SceneDelegate.swift in Sources */,
 				D743ED9223F6C906007341D5 /* TextWithBottomBorder.swift in Sources */,
+				D7B1570F2403CBB90031671F /* Timer.swift in Sources */,
+				D7B1570D2403CAEA0031671F /* FocusView.swift in Sources */,
 				D743ED8E23F6A908007341D5 /* SignInView.swift in Sources */,
 				D743ED8823F692A2007341D5 /* HorizontalLineShape.swift in Sources */,
 				D7C3296523FFD2CA008F3F4F /* NavigationBar.swift in Sources */,
