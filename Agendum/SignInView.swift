@@ -13,32 +13,41 @@ struct SignInView: View {
     @State var password: String = ""
     
     var body: some View {
+        
             VStack {
+                
                 Spacer()
-                Text("Sign In")
+                
+                Text("S i g n  I n")
                     .font(Font.custom("Montserrat-Medium", size: 30))
                     .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
+                
                 TextFieldWithBottomBorder(placeholder: "Username or Email", text: usernameOrEmail)
+                
                 TextFieldWithBottomBorder(placeholder: "Password", text: password)
+                
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                    Text("CREATE ACCOUNT")
+                    Text("C R E A T E  A C C O U N T")
                         .frame(minWidth: 0, maxWidth: .infinity)
                         .font(Font.custom("Monsterrat-Medium", size: 15))
                         .foregroundColor(.black)
                         .padding(10)
                         .background(Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
                 }.padding(.bottom)
+                
                 Button(action: {}) {
-                    Text("SIGN IN WITH FACEBOOK")
+                    Text("S I G N  I N  W I T H  F A C E B O O K")
                         .frame(minWidth: 0, maxWidth: .infinity)
                         .font(Font.custom("Monsterrat-Medium", size: 15))
                         .foregroundColor(.black)
                         .padding(10)
                         .background(Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
                 }
+                
                 Spacer()
+                
                 Button(action: {}) {
-                    Text("SIGN UP")
+                    Text("S I G N  U P")
                         .frame(minWidth: 0, maxWidth: .infinity)
                         .font(Font.custom("Monsterrat-Medium", size: 15))
                         .foregroundColor(.black)
