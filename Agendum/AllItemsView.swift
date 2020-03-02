@@ -15,7 +15,7 @@ struct AllItemsView: View {
             
             VStack (alignment: .leading){
                 
-                TextWithBottomBorder(text: "All Items")
+                TextWithBottomBorder(text: "A l l  I t e m s")
                 
                 HStack {
                     

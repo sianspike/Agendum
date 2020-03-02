@@ -14,7 +14,7 @@ struct FriendView: View {
             
             VStack (alignment: .leading){
                 
-                TextWithBottomBorder(text: "Friends")
+                TextWithBottomBorder(text: "F r i e n d s")
                 
                 Spacer()
                 

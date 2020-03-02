@@ -16,7 +16,7 @@ struct SettingsView: View {
         
         VStack {
             
-            TextWithBottomBorder(text: "Settings")
+            TextWithBottomBorder(text: "S e t t i n g s")
             
             ButtonOne(text: "C H A N G E  E M A I L", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
         

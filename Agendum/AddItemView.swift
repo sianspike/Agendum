@@ -27,7 +27,7 @@ struct AddItemView: View {
                         .renderingMode(.original)
                 }.padding()
                 
-                TextWithBottomBorder(text: "Add Item")
+                TextWithBottomBorder(text: "A d d  I t e m")
             }
             
             TextFieldWithBottomBorder(placeholder: "Title", text: title)
