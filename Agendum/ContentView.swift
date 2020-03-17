@@ -9,10 +9,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var showSplash = true
+    
     var body: some View {
-        Text("A G E N D U M")
-            .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
-            .font(Font.custom("Montserrat-Bold", size: 30))
+        ZStack{
+            SignUpView()
+            StartUpView()
+                .opacity(showSplash ? 1 : 0)
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                            self.showSplash = false
+                        }
+                }
+        }
     }
 }
 
