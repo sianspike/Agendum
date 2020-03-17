@@ -7,11 +7,33 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct SignUpView: View {
     @State var username: String = ""
     @State var email: String = ""
     @State var password: String = ""
+    @State var loading = false
+    @State var error = false
+    
+    @EnvironmentObject var session: FirebaseSession
+    
+    func signUp() {
+        loading = true
+        error = false
+        let emailAsString = $email.wrappedValue
+        let passwordAsString = $password.wrappedValue
+        
+        session.signUp(email: emailAsString, password: passwordAsString) { (result, error) in
+            self.loading = false
+            if error != nil {
+                self.error = true
+            } else {
+                self.email = ""
+                self.password = ""
+            }
+        }
+    }
     
     var body: some View {
         
@@ -23,20 +45,40 @@ struct SignUpView: View {
                 .font(Font.custom("Montserrat-Medium", size: 30))
                 .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
             
-            TextFieldWithBottomBorder(placeholder: "Username", text: username)
+            VStack {
+                TextField("U s e r n a m e", text: $username)
+                    .multilineTextAlignment(TextAlignment.center)
+                    .font(Font.custom("Montserrat-Regular", size: 20))
+                HorizontalLineShape
+                    .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: .infinity)
+            }.padding()
             
-            TextFieldWithBottomBorder(placeholder: "Email", text: email)
+            VStack {
+                TextField("E m a i l", text: $email)
+                    .multilineTextAlignment(TextAlignment.center)
+                    .font(Font.custom("Montserrat-Regular", size: 20))
+                    HorizontalLineShape
+                        .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: .infinity)
+            }.padding()
             
-            TextFieldWithBottomBorder(placeholder: "Password", text: password)
+            VStack {
+                SecureField("P a s s w o r d", text: $password)
+                    .multilineTextAlignment(TextAlignment.center)
+                    .font(Font.custom("Montserrat-Regular", size: 20))
+                    HorizontalLineShape
+                        .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: .infinity)
+            }.padding()
             
-            ButtonOne(text: "C R E A T E  A C C O U N T", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
+            Text("\(email)")
+            
+            ButtonOne(text: "C R E A T E  A C C O U N T", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: { self.signUp()})
                 .padding(.bottom)
             
-            ButtonOne(text: "S I G N  U P  W I T H  F A C E B O O K", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
+            ButtonOne(text: "S I G N  U P  W I T H  F A C E B O O K", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {})
             
             Spacer()
             
-            ButtonOne(text: "S I G N  I N", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0))
+            ButtonOne(text: "S I G N  I N", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {SignInView()})
             
         }.padding()
     }

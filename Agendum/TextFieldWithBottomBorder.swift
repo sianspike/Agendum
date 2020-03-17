@@ -9,27 +9,29 @@
 import SwiftUI
 
 struct TextFieldWithBottomBorder: View {
-    @State var text: String = ""
+    private var text: String = ""
     private var placeholder = ""
 
     init(placeholder: String, text: String) {
-            self.placeholder = placeholder
-            self.text = text
+        self.placeholder = placeholder
+        self.text = text
     }
 
     var body: some View {
-        VStack() {
-            TextField(placeholder, text: $text)
-                .multilineTextAlignment(TextAlignment.center)
-                .font(Font.custom("Montserrat-Regular", size: 20))
-                HorizontalLineShape
-                    .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: .infinity)
-        }.padding()
+//        VStack() {
+//            TextField(placeholder, text: text)
+//                .multilineTextAlignment(TextAlignment.center)
+//                .font(Font.custom("Montserrat-Regular", size: 20))
+////                HorizontalLineShape
+////                    .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: .infinity)
+//        }.padding()
+        Text("")
     }
 }
 
 struct TextFieldWithBottomLine_Previews: PreviewProvider {
+    
     static var previews: some View {
-        TextFieldWithBottomBorder(placeholder: "My placeholder", text: "Input")
+        TextFieldWithBottomBorder(placeholder: "Placeholder", text: "")
     }
 }

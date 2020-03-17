@@ -18,11 +18,11 @@ struct SettingsView: View {
             
             TextWithBottomBorder(text: "S e t t i n g s")
             
-            ButtonOne(text: "C H A N G E  E M A I L", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
+            ButtonOne(text: "C H A N G E  E M A I L", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {})
         
-            ButtonOne(text: "C H A N G E  P A S S W O R D", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
+            ButtonOne(text: "C H A N G E  P A S S W O R D", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {})
             
-            ButtonOne(text: "C O N N E C T  C A L E N D A R", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
+            ButtonOne(text: "C O N N E C T  C A L E N D A R", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {})
             
             HStack{
                 
@@ -36,7 +36,7 @@ struct SettingsView: View {
             
             Spacer()
             
-            ButtonOne(text: "D E L E T E  A C C O U N T", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0))
+            ButtonOne(text: "D E L E T E  A C C O U N T", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {})
             
             NavigationBar()
         }

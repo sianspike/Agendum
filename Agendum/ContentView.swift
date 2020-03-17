@@ -9,24 +9,27 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var showSplash = true
+    
+    @EnvironmentObject var session: FirebaseSession
+    
+    func getUser () {
+        session.listen()
+    }
     
     var body: some View {
-        ZStack{
-            SignUpView()
-            StartUpView()
-                .opacity(showSplash ? 1 : 0)
-                .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                            self.showSplash = false
-                        }
-                }
-        }
+
+        Group {
+            if (session.session != nil) {
+                Dashboard()
+            } else {
+                SignUpView()
+            }
+        }.onAppear(perform: getUser)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(FirebaseSession())
     }
 }

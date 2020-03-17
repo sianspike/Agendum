@@ -16,9 +16,9 @@ struct ResetPasswordView: View {
         
         VStack{
             
-            TextFieldWithBottomBorder(placeholder: "Email", text: email)
+//            TextFieldWithBottomBorder(placeholder: "Email", text: $email)
             
-            ButtonOne(text: "R E S E T  P A S S W O R D", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
+            ButtonOne(text: "R E S E T  P A S S W O R D", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {})
         }
     }
 }

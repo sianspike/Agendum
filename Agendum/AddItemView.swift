@@ -29,8 +29,8 @@ struct AddItemView: View {
                 
                 TextWithBottomBorder(text: "A d d  I t e m")
             }
-            
-            TextFieldWithBottomBorder(placeholder: "Title", text: title)
+//            
+//            TextFieldWithBottomBorder(placeholder: "Title", text: $title)
             
             Toggle(isOn: $task) {
                                    
@@ -77,7 +77,7 @@ struct AddItemView: View {
                 Text("Label 3")
             }
             
-            ButtonOne(text: "A D D", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
+            ButtonOne(text: "A D D", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {})
         }.padding()
     }
 }

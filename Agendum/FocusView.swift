@@ -19,7 +19,7 @@ struct FocusView: View {
             
             Timer().padding(.bottom)
             
-            ButtonOne(text: "B E G I N", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
+            ButtonOne(text: "B E G I N", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {})
             
             Spacer()
             

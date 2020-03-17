@@ -21,19 +21,31 @@ struct SignInView: View {
                 Text("S i g n  I n")
                     .font(Font.custom("Montserrat-Medium", size: 30))
                     .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
+
+            VStack {
+                TextField("U s e r n a m e  o r  E m a i l", text: $password)
+                    .multilineTextAlignment(TextAlignment.center)
+                    .font(Font.custom("Montserrat-Regular", size: 20))
+                HorizontalLineShape
+                    .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: .infinity)
+            }.padding()
                 
-                TextFieldWithBottomBorder(placeholder: "Username or Email", text: usernameOrEmail)
+            VStack {
+                SecureField("P a s s w o r d", text: $password)
+                    .multilineTextAlignment(TextAlignment.center)
+                    .font(Font.custom("Montserrat-Regular", size: 20))
+                HorizontalLineShape
+                    .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: .infinity)
+            }.padding()
                 
-                TextFieldWithBottomBorder(placeholder: "Password", text: password)
-                
-                ButtonOne(text: "C R E A T E  A C C O U N T", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
+            ButtonOne(text: "S I G N  I N", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {})
                     .padding(.bottom)
                 
-                ButtonOne(text: "S I G N  I N  W I T H  F A C E B O O K", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
+            ButtonOne(text: "S I G N  I N  W I T H  F A C E B O O K", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {})
                 
-                Spacer()
+            Spacer()
                 
-                ButtonOne(text: "S I G N  U P", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0))
+            ButtonOne(text: "S I G N  U P", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {})
                 
             }.padding()
         }
