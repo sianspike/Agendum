@@ -11,7 +11,7 @@ import Firebase
 import Combine
 import SwiftUI
 
-class FirebaseSession : ObservableObject {
+final class FirebaseSession: ObservableObject {
 
     var didChange = PassthroughSubject<FirebaseSession, Never>()
     var session: User? { didSet { self.didChange.send(self) }}

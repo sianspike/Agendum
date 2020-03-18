@@ -12,7 +12,7 @@ struct ContentView: View {
     
     @EnvironmentObject var session: FirebaseSession
     
-    @ObservedObject var viewRouter : ViewRouter
+    @ObservedObject var viewRouter: ViewRouter
     
     func getUser () {
         session.listen()

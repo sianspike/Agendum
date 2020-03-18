@@ -10,11 +10,11 @@ import Foundation
 import Combine
 import SwiftUI
 
-class ViewRouter : ObservableObject {
+final class ViewRouter : ObservableObject {
     
     let objectWillChange = PassthroughSubject<ViewRouter, Never>()
     
-    var currentPage : String = "Sign Up" {
+    var currentPage: String = "Sign Up" {
         didSet {
             objectWillChange.send(self)
         }
