@@ -15,8 +15,11 @@ struct SignUpView: View {
     @State var password: String = ""
     @State var loading = false
     @State var error = false
+    @State var goToSignIn = false
     
     @EnvironmentObject var session: FirebaseSession
+    
+    @ObservedObject var viewRouter: ViewRouter
     
     func signUp() {
         loading = true
@@ -31,6 +34,7 @@ struct SignUpView: View {
             } else {
                 self.email = ""
                 self.password = ""
+                self.viewRouter.currentPage = "Dashboard"
             }
         }
     }
@@ -38,8 +42,6 @@ struct SignUpView: View {
     var body: some View {
         
         VStack {
-            
-            Spacer()
             
             Text("S i g n  U p")
                 .font(Font.custom("Montserrat-Medium", size: 30))
@@ -71,14 +73,14 @@ struct SignUpView: View {
             
             Text("\(email)")
             
-            ButtonOne(text: "C R E A T E  A C C O U N T", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: { self.signUp()})
+            ButtonOne(text: "C R E A T E  A C C O U N T", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {
+                self.signUp()
+            })
                 .padding(.bottom)
             
             ButtonOne(text: "S I G N  U P  W I T H  F A C E B O O K", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {})
             
-            Spacer()
-            
-            ButtonOne(text: "S I G N  I N", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {SignInView()})
+            ButtonOne(text: "S I G N  I N", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {self.viewRouter.currentPage = "Sign In"})
             
         }.padding()
     }
@@ -86,6 +88,6 @@ struct SignUpView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView()
+        SignUpView(viewRouter: ViewRouter())
     }
 }

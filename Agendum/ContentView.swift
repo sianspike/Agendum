@@ -12,6 +12,8 @@ struct ContentView: View {
     
     @EnvironmentObject var session: FirebaseSession
     
+    @ObservedObject var viewRouter : ViewRouter
+    
     func getUser () {
         session.listen()
     }
@@ -19,17 +21,21 @@ struct ContentView: View {
     var body: some View {
 
         Group {
-            if (session.session != nil) {
+            
+            if (viewRouter.currentPage == "Sign Up") {
+                SignUpView(viewRouter: viewRouter)
+            } else if (viewRouter.currentPage == "Sign In") {
+                SignInView(viewRouter: viewRouter)
+            } else if (viewRouter.currentPage == "Dashboard") {
                 Dashboard()
-            } else {
-                SignUpView()
             }
+    
         }.onAppear(perform: getUser)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environmentObject(FirebaseSession())
+        ContentView(viewRouter: ViewRouter()).environmentObject(FirebaseSession())
     }
 }

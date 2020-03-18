@@ -11,41 +11,68 @@ import SwiftUI
 struct SignInView: View {
     @State var usernameOrEmail: String = ""
     @State var password: String = ""
+    @State var loading = false
+    @State var error = false
+    @State var goToSignIn = false
+    
+    @EnvironmentObject var session: FirebaseSession
+    
+    @ObservedObject var viewRouter: ViewRouter
+    
+    func signIn() {
+        loading = true
+        error = false
+        let emailAsString = $usernameOrEmail.wrappedValue
+        let passwordAsString = $password.wrappedValue
+        
+        session.signIn(email: emailAsString, password: passwordAsString) { (result, error) in
+            self.loading = false
+            if error != nil {
+                self.error = true
+            } else {
+                self.usernameOrEmail = ""
+                self.password = ""
+                self.viewRouter.currentPage = "Dashboard"
+            }
+        }
+    }
     
     var body: some View {
         
             VStack {
                 
-                Spacer()
-                
                 Text("S i g n  I n")
                     .font(Font.custom("Montserrat-Medium", size: 30))
                     .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
 
-            VStack {
-                TextField("U s e r n a m e  o r  E m a i l", text: $password)
-                    .multilineTextAlignment(TextAlignment.center)
-                    .font(Font.custom("Montserrat-Regular", size: 20))
-                HorizontalLineShape
-                    .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: .infinity)
-            }.padding()
+                VStack {
+                    TextField("U s e r n a m e  o r  E m a i l", text: $usernameOrEmail)
+                        .multilineTextAlignment(TextAlignment.center)
+                        .font(Font.custom("Montserrat-Regular", size: 20))
+                    HorizontalLineShape
+                        .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: .infinity)
+                }.padding()
                 
-            VStack {
-                SecureField("P a s s w o r d", text: $password)
-                    .multilineTextAlignment(TextAlignment.center)
-                    .font(Font.custom("Montserrat-Regular", size: 20))
-                HorizontalLineShape
-                    .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: .infinity)
-            }.padding()
+                VStack {
+                    SecureField("P a s s w o r d", text: $password)
+                        .multilineTextAlignment(TextAlignment.center)
+                        .font(Font.custom("Montserrat-Regular", size: 20))
+                    HorizontalLineShape
+                        .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: .infinity)
+                }.padding()
+
+                ButtonOne(text: "S I G N  I N", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {
+                    self.signIn()
+                }).padding(.bottom)
                 
-            ButtonOne(text: "S I G N  I N", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {})
-                    .padding(.bottom)
+                ButtonOne(text: "S I G N  I N  W I T H  F A C E B O O K", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {})
                 
-            ButtonOne(text: "S I G N  I N  W I T H  F A C E B O O K", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {})
+                ButtonOne(text: "S I G N  U P", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {self.viewRouter.currentPage = "Sign Up"})
                 
-            Spacer()
                 
-            ButtonOne(text: "S I G N  U P", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {})
+                if (error) {
+                    Text("error")
+                }
                 
             }.padding()
         }
@@ -54,6 +81,6 @@ struct SignInView: View {
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView()
+        SignInView(viewRouter: ViewRouter()).environmentObject(FirebaseSession())
     }
 }
