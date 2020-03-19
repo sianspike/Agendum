@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5A08323394CCEBE7972CAA9B /* Pods_Agendum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E633C5C6B0D4B57CF6CFF7 /* Pods_Agendum.framework */; };
+		0CA73534D02C71A00892AF6E /* Pods_Agendum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 254483BAA2667200A638503C /* Pods_Agendum.framework */; };
 		D73B804B2407F5760098FAD0 /* FriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73B804A2407F5760098FAD0 /* FriendView.swift */; };
 		D73B804D2407FA170098FAD0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73B804C2407FA170098FAD0 /* SettingsView.swift */; };
 		D73B804F2407FF780098FAD0 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73B804E2407FF780098FAD0 /* ResetPasswordView.swift */; };
@@ -21,7 +21,6 @@
 		D743ED9423F6CE0B007341D5 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED9323F6CE0B007341D5 /* ProgressBar.swift */; };
 		D777A77C23EB3A840021315E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D777A77B23EB3A840021315E /* AppDelegate.swift */; };
 		D777A77E23EB3A840021315E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D777A77D23EB3A840021315E /* SceneDelegate.swift */; };
-		D777A78123EB3A840021315E /* Agendum.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D777A77F23EB3A840021315E /* Agendum.xcdatamodeld */; };
 		D777A78323EB3A840021315E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D777A78223EB3A840021315E /* ContentView.swift */; };
 		D777A78523EB3A860021315E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D777A78423EB3A860021315E /* Assets.xcassets */; };
 		D777A78823EB3A860021315E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D777A78723EB3A860021315E /* Preview Assets.xcassets */; };
@@ -35,13 +34,15 @@
 		D7C3296723FFD6D4008F3F4F /* Icons in Resources */ = {isa = PBXBuildFile; fileRef = D7C3296623FFD6D4008F3F4F /* Icons */; };
 		FC3DC4522422156F003610D2 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3DC4512422156F003610D2 /* ViewRouter.swift */; };
 		FC3DC45724222F21003610D2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC3DC45624222F21003610D2 /* Default-568h@2x.png */; };
+		FC67FDA62423A6F50098345B /* Agendum.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = D777A77F23EB3A840021315E /* Agendum.xcdatamodeld */; };
+		FC6BAE642423ABB100AC0F4F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC67FDA22423A42D0098345B /* GoogleService-Info.plist */; };
 		FC9A92B02420DFD4005F6888 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9A92AF2420DFD4005F6888 /* User.swift */; };
 		FC9A92B22420E0A8005F6888 /* FirebaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9A92B12420E0A8005F6888 /* FirebaseSession.swift */; };
-		FCF6046E2420DC3F00CB041E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCF6046D2420DC3F00CB041E /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5F21D0CA22D2E86AE912D803 /* Pods-Agendum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendum.debug.xcconfig"; path = "Target Support Files/Pods-Agendum/Pods-Agendum.debug.xcconfig"; sourceTree = "<group>"; };
+		254483BAA2667200A638503C /* Pods_Agendum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Agendum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D0C48340301EB040444C3DB /* Pods-Agendum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendum.debug.xcconfig"; path = "Target Support Files/Pods-Agendum/Pods-Agendum.debug.xcconfig"; sourceTree = "<group>"; };
 		D73B804A2407F5760098FAD0 /* FriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendView.swift; sourceTree = "<group>"; };
 		D73B804C2407FA170098FAD0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D73B804E2407FF780098FAD0 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
@@ -69,13 +70,12 @@
 		D7B157162407DE600031671F /* FloatingAddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingAddButton.swift; sourceTree = "<group>"; };
 		D7C3296423FFD2CA008F3F4F /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		D7C3296623FFD6D4008F3F4F /* Icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icons; sourceTree = "<group>"; };
-		E2E633C5C6B0D4B57CF6CFF7 /* Pods_Agendum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Agendum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA25091153B28B617E04DD9F /* Pods-Agendum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendum.release.xcconfig"; path = "Target Support Files/Pods-Agendum/Pods-Agendum.release.xcconfig"; sourceTree = "<group>"; };
+		EC744976A4EE4145BE078379 /* Pods-Agendum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendum.release.xcconfig"; path = "Target Support Files/Pods-Agendum/Pods-Agendum.release.xcconfig"; sourceTree = "<group>"; };
 		FC3DC4512422156F003610D2 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
 		FC3DC45624222F21003610D2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		FC67FDA22423A42D0098345B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "/Users/sianspike/Documents/Swansea_University/Final Year Project/Agendum/Agendum/GoogleService-Info.plist"; sourceTree = "<absolute>"; };
 		FC9A92AF2420DFD4005F6888 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FC9A92B12420E0A8005F6888 /* FirebaseSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseSession.swift; sourceTree = "<group>"; };
-		FCF6046D2420DC3F00CB041E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,28 +83,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A08323394CCEBE7972CAA9B /* Pods_Agendum.framework in Frameworks */,
+				0CA73534D02C71A00892AF6E /* Pods_Agendum.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F7ABA435F6AE44D32F37B4E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				254483BAA2667200A638503C /* Pods_Agendum.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8AB2F1CA9E6607C109BFE975 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5F21D0CA22D2E86AE912D803 /* Pods-Agendum.debug.xcconfig */,
-				EA25091153B28B617E04DD9F /* Pods-Agendum.release.xcconfig */,
+				7D0C48340301EB040444C3DB /* Pods-Agendum.debug.xcconfig */,
+				EC744976A4EE4145BE078379 /* Pods-Agendum.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		C8861B9CA629C5E42F4F7D67 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				E2E633C5C6B0D4B57CF6CFF7 /* Pods_Agendum.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		D777A76F23EB3A840021315E = {
@@ -113,7 +113,7 @@
 				D777A77A23EB3A840021315E /* Agendum */,
 				D777A77923EB3A840021315E /* Products */,
 				8AB2F1CA9E6607C109BFE975 /* Pods */,
-				C8861B9CA629C5E42F4F7D67 /* Frameworks */,
+				7F7ABA435F6AE44D32F37B4E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,10 +128,12 @@
 		D777A77A23EB3A840021315E /* Agendum */ = {
 			isa = PBXGroup;
 			children = (
+				D777A78C23EB3A860021315E /* Info.plist */,
+				FC67FDA22423A42D0098345B /* GoogleService-Info.plist */,
 				FC3DC45824222F45003610D2 /* Models */,
 				FC3DC45524222EF2003610D2 /* Resources */,
 				FC3DC45424222EB9003610D2 /* Views */,
-				FC3DC45324222E26003610D2 /* Support Files */,
+				FC3DC45324222E26003610D2 /* SupportFiles */,
 				D777A78223EB3A840021315E /* ContentView.swift */,
 				FC3DC4512422156F003610D2 /* ViewRouter.swift */,
 				D777A78623EB3A860021315E /* Preview Content */,
@@ -149,17 +151,15 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		FC3DC45324222E26003610D2 /* Support Files */ = {
+		FC3DC45324222E26003610D2 /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
 				D777A77F23EB3A840021315E /* Agendum.xcdatamodeld */,
 				D777A78923EB3A860021315E /* LaunchScreen.storyboard */,
-				D777A78C23EB3A860021315E /* Info.plist */,
 				D777A78423EB3A860021315E /* Assets.xcassets */,
-				FCF6046D2420DC3F00CB041E /* GoogleService-Info.plist */,
 				D777A77B23EB3A840021315E /* AppDelegate.swift */,
 			);
-			path = "Support Files";
+			path = SupportFiles;
 			sourceTree = "<group>";
 		};
 		FC3DC45424222EB9003610D2 /* Views */ = {
@@ -210,11 +210,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D777A7A523EB3A860021315E /* Build configuration list for PBXNativeTarget "Agendum" */;
 			buildPhases = (
-				04EEDD4E1F1BF8ED61E3A3CB /* [CP] Check Pods Manifest.lock */,
+				E837B72583463E55EB5DA93C /* [CP] Check Pods Manifest.lock */,
 				D777A77423EB3A840021315E /* Sources */,
 				D777A77523EB3A840021315E /* Frameworks */,
 				D777A77623EB3A840021315E /* Resources */,
-				0644EC1164BD1D536DC371BC /* [CP] Embed Pods Frameworks */,
+				3392F5001535F668881AE395 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -263,20 +263,38 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC67FDA62423A6F50098345B /* Agendum.xcdatamodeld in Resources */,
+				FC6BAE642423ABB100AC0F4F /* GoogleService-Info.plist in Resources */,
 				D7B157112407B8720031671F /* Fonts in Resources */,
 				D777A78B23EB3A860021315E /* LaunchScreen.storyboard in Resources */,
 				D7C3296723FFD6D4008F3F4F /* Icons in Resources */,
 				D777A78823EB3A860021315E /* Preview Assets.xcassets in Resources */,
 				D777A78523EB3A860021315E /* Assets.xcassets in Resources */,
 				FC3DC45724222F21003610D2 /* Default-568h@2x.png in Resources */,
-				FCF6046E2420DC3F00CB041E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		04EEDD4E1F1BF8ED61E3A3CB /* [CP] Check Pods Manifest.lock */ = {
+		3392F5001535F668881AE395 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Agendum/Pods-Agendum-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Agendum/Pods-Agendum-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Agendum/Pods-Agendum-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E837B72583463E55EB5DA93C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -298,23 +316,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		0644EC1164BD1D536DC371BC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Agendum/Pods-Agendum-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Agendum/Pods-Agendum-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Agendum/Pods-Agendum-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -322,7 +323,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D777A78123EB3A840021315E /* Agendum.xcdatamodeld in Sources */,
 				D743ED9423F6CE0B007341D5 /* ProgressBar.swift in Sources */,
 				D777A77C23EB3A840021315E /* AppDelegate.swift in Sources */,
 				D73B804D2407FA170098FAD0 /* SettingsView.swift in Sources */,
@@ -478,20 +478,22 @@
 		};
 		D777A7A623EB3A860021315E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5F21D0CA22D2E86AE912D803 /* Pods-Agendum.debug.xcconfig */;
+			baseConfigurationReference = 7D0C48340301EB040444C3DB /* Pods-Agendum.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Agendum/Preview Content\"";
 				DEVELOPMENT_TEAM = F5XRH8MLFK;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/Agendum/Support Files/GoogleService-Info.plist";
+				INFOPLIST_FILE = "/Users/sianspike/Documents/Swansea_University/Final Year Project/Agendum/Agendum/GoogleService-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sianspike.Agendum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -499,20 +501,22 @@
 		};
 		D777A7A723EB3A860021315E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA25091153B28B617E04DD9F /* Pods-Agendum.release.xcconfig */;
+			baseConfigurationReference = EC744976A4EE4145BE078379 /* Pods-Agendum.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Agendum/Preview Content\"";
 				DEVELOPMENT_TEAM = F5XRH8MLFK;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/Agendum/Support Files/GoogleService-Info.plist";
+				INFOPLIST_FILE = "/Users/sianspike/Documents/Swansea_University/Final Year Project/Agendum/Agendum/GoogleService-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sianspike.Agendum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

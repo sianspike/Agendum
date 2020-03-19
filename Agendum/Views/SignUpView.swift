@@ -7,7 +7,8 @@
 //
 
 import SwiftUI
-import Firebase
+import FirebaseAuth
+import FBSDKLoginKit
 
 struct SignUpView: View {
     @State var username: String = ""
@@ -35,6 +36,23 @@ struct SignUpView: View {
                 self.email = ""
                 self.password = ""
                 self.viewRouter.currentPage = "Dashboard"
+            }
+        }
+    }
+    
+    func fbSignUp() {
+        
+        if (AccessToken.current != nil) {
+            let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
+            
+            session.fbSignUp(with: credential) { (result, error) in
+                
+                if (error != nil) {
+                    print((error?.localizedDescription)!)
+                    return
+                } else {
+                    self.viewRouter.currentPage = "Dashboard"
+                }
             }
         }
     }
@@ -78,7 +96,7 @@ struct SignUpView: View {
             })
                 .padding(.bottom)
             
-            ButtonOne(text: "S I G N  U P  W I T H  F A C E B O O K", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {})
+            ButtonOne(text: "S I G N  U P  W I T H  F A C E B O O K", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {self.fbSignUp()})
             
             ButtonOne(text: "S I G N  I N", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {self.viewRouter.currentPage = "Sign In"})
             

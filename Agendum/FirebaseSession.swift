@@ -43,6 +43,10 @@ final class FirebaseSession: ObservableObject {
         ) {
         Auth.auth().createUser(withEmail: email, password: password, completion: handler)
     }
+    
+    func fbSignUp(with: AuthCredential, handler: @escaping AuthDataResultCallback) {
+        Auth.auth().signIn(with: with, completion: handler)
+    }
 
     func signIn(
         email: String,
