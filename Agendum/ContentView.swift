@@ -22,7 +22,7 @@ struct ContentView: View {
     var body: some View {
 
         Group {
-            
+
             if (viewRouter.currentPage == "Sign Up") {
                 SignUpView(viewRouter: viewRouter)
             } else if (viewRouter.currentPage == "Sign In") {
@@ -30,7 +30,7 @@ struct ContentView: View {
             } else if (viewRouter.currentPage == "Dashboard") {
                 Dashboard()
             }
-    
+
         }.onAppear(perform: getUser)
     }
 }

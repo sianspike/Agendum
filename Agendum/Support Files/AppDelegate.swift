@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 import Firebase
-import FacebookCore
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,8 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-      return ApplicationDelegate.shared.application(app, open: url, options: options)
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+
+        return ApplicationDelegate.shared.application(application,
+                                                                         open: url,
+                                                                         sourceApplication: sourceApplication,
+                                                                         annotation: annotation)
     }
 
     // MARK: UISceneSession Lifecycle

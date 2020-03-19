@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0CA73534D02C71A00892AF6E /* Pods_Agendum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 254483BAA2667200A638503C /* Pods_Agendum.framework */; };
 		D73B804B2407F5760098FAD0 /* FriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73B804A2407F5760098FAD0 /* FriendView.swift */; };
 		D73B804D2407FA170098FAD0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73B804C2407FA170098FAD0 /* SettingsView.swift */; };
 		D73B804F2407FF780098FAD0 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73B804E2407FF780098FAD0 /* ResetPasswordView.swift */; };
@@ -19,12 +18,9 @@
 		D743ED9023F6C712007341D5 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED8F23F6C712007341D5 /* Dashboard.swift */; };
 		D743ED9223F6C906007341D5 /* TextWithBottomBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED9123F6C906007341D5 /* TextWithBottomBorder.swift */; };
 		D743ED9423F6CE0B007341D5 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED9323F6CE0B007341D5 /* ProgressBar.swift */; };
-		D777A77C23EB3A840021315E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D777A77B23EB3A840021315E /* AppDelegate.swift */; };
 		D777A77E23EB3A840021315E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D777A77D23EB3A840021315E /* SceneDelegate.swift */; };
 		D777A78323EB3A840021315E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D777A78223EB3A840021315E /* ContentView.swift */; };
-		D777A78523EB3A860021315E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D777A78423EB3A860021315E /* Assets.xcassets */; };
 		D777A78823EB3A860021315E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D777A78723EB3A860021315E /* Preview Assets.xcassets */; };
-		D777A78B23EB3A860021315E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D777A78923EB3A860021315E /* LaunchScreen.storyboard */; };
 		D7B1570D2403CAEA0031671F /* FocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B1570C2403CAEA0031671F /* FocusView.swift */; };
 		D7B1570F2403CBB90031671F /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B1570E2403CBB90031671F /* Timer.swift */; };
 		D7B157112407B8720031671F /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = D777A7AE23EB3BD30021315E /* Fonts */; };
@@ -32,17 +28,20 @@
 		D7B157172407DE600031671F /* FloatingAddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B157162407DE600031671F /* FloatingAddButton.swift */; };
 		D7C3296523FFD2CA008F3F4F /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C3296423FFD2CA008F3F4F /* NavigationBar.swift */; };
 		D7C3296723FFD6D4008F3F4F /* Icons in Resources */ = {isa = PBXBuildFile; fileRef = D7C3296623FFD6D4008F3F4F /* Icons */; };
+		D8A787546A20F116506414C7 /* Pods_Agendum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E915D66670AE9F3B82F7469E /* Pods_Agendum.framework */; };
+		FC2CD0CF2423BF81004A1D8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2CD0CE2423BF80004A1D8E /* AppDelegate.swift */; };
+		FC2CD0D12423BFB4004A1D8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC2CD0D02423BFB4004A1D8E /* LaunchScreen.storyboard */; };
+		FC2CD0D82423C87F004A1D8E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC2CD0D22423BFF4004A1D8E /* GoogleService-Info.plist */; };
 		FC3DC4522422156F003610D2 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3DC4512422156F003610D2 /* ViewRouter.swift */; };
-		FC3DC45724222F21003610D2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC3DC45624222F21003610D2 /* Default-568h@2x.png */; };
-		FC67FDA62423A6F50098345B /* Agendum.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = D777A77F23EB3A840021315E /* Agendum.xcdatamodeld */; };
-		FC6BAE642423ABB100AC0F4F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC67FDA22423A42D0098345B /* GoogleService-Info.plist */; };
 		FC9A92B02420DFD4005F6888 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9A92AF2420DFD4005F6888 /* User.swift */; };
 		FC9A92B22420E0A8005F6888 /* FirebaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9A92B12420E0A8005F6888 /* FirebaseSession.swift */; };
+		FCC21D522423BC2200485781 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCC21D512423BC2200485781 /* Assets.xcassets */; };
+		FCC21D5B2423BCBF00485781 /* Agendum.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FCC21D592423BCBF00485781 /* Agendum.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		254483BAA2667200A638503C /* Pods_Agendum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Agendum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7D0C48340301EB040444C3DB /* Pods-Agendum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendum.debug.xcconfig"; path = "Target Support Files/Pods-Agendum/Pods-Agendum.debug.xcconfig"; sourceTree = "<group>"; };
+		027507F23D6C28B021C483AB /* Pods-Agendum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendum.release.xcconfig"; path = "Target Support Files/Pods-Agendum/Pods-Agendum.release.xcconfig"; sourceTree = "<group>"; };
+		5F8ED031BD8A7560857E9F55 /* Pods-Agendum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendum.debug.xcconfig"; path = "Target Support Files/Pods-Agendum/Pods-Agendum.debug.xcconfig"; sourceTree = "<group>"; };
 		D73B804A2407F5760098FAD0 /* FriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendView.swift; sourceTree = "<group>"; };
 		D73B804C2407FA170098FAD0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D73B804E2407FF780098FAD0 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
@@ -55,14 +54,9 @@
 		D743ED9123F6C906007341D5 /* TextWithBottomBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWithBottomBorder.swift; sourceTree = "<group>"; };
 		D743ED9323F6CE0B007341D5 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		D777A77823EB3A840021315E /* Agendum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Agendum.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D777A77B23EB3A840021315E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D777A77D23EB3A840021315E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D777A78023EB3A840021315E /* Agendum.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Agendum.xcdatamodel; sourceTree = "<group>"; };
 		D777A78223EB3A840021315E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		D777A78423EB3A860021315E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D777A78723EB3A860021315E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D777A78A23EB3A860021315E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		D777A78C23EB3A860021315E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D777A7AE23EB3BD30021315E /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		D7B1570C2403CAEA0031671F /* FocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusView.swift; sourceTree = "<group>"; };
 		D7B1570E2403CBB90031671F /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
@@ -70,12 +64,17 @@
 		D7B157162407DE600031671F /* FloatingAddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingAddButton.swift; sourceTree = "<group>"; };
 		D7C3296423FFD2CA008F3F4F /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		D7C3296623FFD6D4008F3F4F /* Icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icons; sourceTree = "<group>"; };
-		EC744976A4EE4145BE078379 /* Pods-Agendum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendum.release.xcconfig"; path = "Target Support Files/Pods-Agendum/Pods-Agendum.release.xcconfig"; sourceTree = "<group>"; };
+		E915D66670AE9F3B82F7469E /* Pods_Agendum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Agendum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC2CD0CE2423BF80004A1D8E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "Agendum/Support Files/AppDelegate.swift"; sourceTree = SOURCE_ROOT; };
+		FC2CD0D02423BFB4004A1D8E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "Agendum/Support Files/LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
+		FC2CD0D22423BFF4004A1D8E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FC2CD0D42423C5DF004A1D8E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC3DC4512422156F003610D2 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
 		FC3DC45624222F21003610D2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		FC67FDA22423A42D0098345B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "/Users/sianspike/Documents/Swansea_University/Final Year Project/Agendum/Agendum/GoogleService-Info.plist"; sourceTree = "<absolute>"; };
 		FC9A92AF2420DFD4005F6888 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FC9A92B12420E0A8005F6888 /* FirebaseSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseSession.swift; sourceTree = "<group>"; };
+		FCC21D512423BC2200485781 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Agendum/Support Files/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
+		FCC21D5A2423BCBF00485781 /* Agendum.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Agendum.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,17 +82,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CA73534D02C71A00892AF6E /* Pods_Agendum.framework in Frameworks */,
+				D8A787546A20F116506414C7 /* Pods_Agendum.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7F7ABA435F6AE44D32F37B4E /* Frameworks */ = {
+		881ECF120CD6E19ED241CC56 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				254483BAA2667200A638503C /* Pods_Agendum.framework */,
+				E915D66670AE9F3B82F7469E /* Pods_Agendum.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -101,8 +100,8 @@
 		8AB2F1CA9E6607C109BFE975 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7D0C48340301EB040444C3DB /* Pods-Agendum.debug.xcconfig */,
-				EC744976A4EE4145BE078379 /* Pods-Agendum.release.xcconfig */,
+				5F8ED031BD8A7560857E9F55 /* Pods-Agendum.debug.xcconfig */,
+				027507F23D6C28B021C483AB /* Pods-Agendum.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -113,7 +112,7 @@
 				D777A77A23EB3A840021315E /* Agendum */,
 				D777A77923EB3A840021315E /* Products */,
 				8AB2F1CA9E6607C109BFE975 /* Pods */,
-				7F7ABA435F6AE44D32F37B4E /* Frameworks */,
+				881ECF120CD6E19ED241CC56 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,8 +127,8 @@
 		D777A77A23EB3A840021315E /* Agendum */ = {
 			isa = PBXGroup;
 			children = (
-				D777A78C23EB3A860021315E /* Info.plist */,
-				FC67FDA22423A42D0098345B /* GoogleService-Info.plist */,
+				FC2CD0D42423C5DF004A1D8E /* Info.plist */,
+				FC2CD0D22423BFF4004A1D8E /* GoogleService-Info.plist */,
 				FC3DC45824222F45003610D2 /* Models */,
 				FC3DC45524222EF2003610D2 /* Resources */,
 				FC3DC45424222EB9003610D2 /* Views */,
@@ -154,10 +153,10 @@
 		FC3DC45324222E26003610D2 /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
-				D777A77F23EB3A840021315E /* Agendum.xcdatamodeld */,
-				D777A78923EB3A860021315E /* LaunchScreen.storyboard */,
-				D777A78423EB3A860021315E /* Assets.xcassets */,
-				D777A77B23EB3A840021315E /* AppDelegate.swift */,
+				FCC21D592423BCBF00485781 /* Agendum.xcdatamodeld */,
+				FC2CD0CE2423BF80004A1D8E /* AppDelegate.swift */,
+				FC2CD0D02423BFB4004A1D8E /* LaunchScreen.storyboard */,
+				FCC21D512423BC2200485781 /* Assets.xcassets */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -210,11 +209,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D777A7A523EB3A860021315E /* Build configuration list for PBXNativeTarget "Agendum" */;
 			buildPhases = (
-				E837B72583463E55EB5DA93C /* [CP] Check Pods Manifest.lock */,
+				B54A1A5ED45C9E2F4BD39BCC /* [CP] Check Pods Manifest.lock */,
 				D777A77423EB3A840021315E /* Sources */,
 				D777A77523EB3A840021315E /* Frameworks */,
 				D777A77623EB3A840021315E /* Resources */,
-				3392F5001535F668881AE395 /* [CP] Embed Pods Frameworks */,
+				FA4694C9378628E23963AB66 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -263,38 +262,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC67FDA62423A6F50098345B /* Agendum.xcdatamodeld in Resources */,
-				FC6BAE642423ABB100AC0F4F /* GoogleService-Info.plist in Resources */,
+				FC2CD0D82423C87F004A1D8E /* GoogleService-Info.plist in Resources */,
 				D7B157112407B8720031671F /* Fonts in Resources */,
-				D777A78B23EB3A860021315E /* LaunchScreen.storyboard in Resources */,
 				D7C3296723FFD6D4008F3F4F /* Icons in Resources */,
 				D777A78823EB3A860021315E /* Preview Assets.xcassets in Resources */,
-				D777A78523EB3A860021315E /* Assets.xcassets in Resources */,
-				FC3DC45724222F21003610D2 /* Default-568h@2x.png in Resources */,
+				FC2CD0D12423BFB4004A1D8E /* LaunchScreen.storyboard in Resources */,
+				FCC21D522423BC2200485781 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3392F5001535F668881AE395 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Agendum/Pods-Agendum-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Agendum/Pods-Agendum-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Agendum/Pods-Agendum-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E837B72583463E55EB5DA93C /* [CP] Check Pods Manifest.lock */ = {
+		B54A1A5ED45C9E2F4BD39BCC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -316,6 +296,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		FA4694C9378628E23963AB66 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Agendum/Pods-Agendum-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Agendum/Pods-Agendum-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Agendum/Pods-Agendum-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -323,8 +320,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC2CD0CF2423BF81004A1D8E /* AppDelegate.swift in Sources */,
 				D743ED9423F6CE0B007341D5 /* ProgressBar.swift in Sources */,
-				D777A77C23EB3A840021315E /* AppDelegate.swift in Sources */,
+				FCC21D5B2423BCBF00485781 /* Agendum.xcdatamodeld in Sources */,
 				D73B804D2407FA170098FAD0 /* SettingsView.swift in Sources */,
 				D777A78323EB3A840021315E /* ContentView.swift in Sources */,
 				D743ED8C23F6A8C8007341D5 /* SignUpView.swift in Sources */,
@@ -349,17 +347,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		D777A78923EB3A860021315E /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D777A78A23EB3A860021315E /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		D777A7A323EB3A860021315E /* Debug */ = {
@@ -478,7 +465,7 @@
 		};
 		D777A7A623EB3A860021315E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7D0C48340301EB040444C3DB /* Pods-Agendum.debug.xcconfig */;
+			baseConfigurationReference = 5F8ED031BD8A7560857E9F55 /* Pods-Agendum.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -487,6 +474,7 @@
 				DEVELOPMENT_TEAM = F5XRH8MLFK;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "/Users/sianspike/Documents/Swansea_University/Final Year Project/Agendum/Agendum/GoogleService-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -501,7 +489,7 @@
 		};
 		D777A7A723EB3A860021315E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC744976A4EE4145BE078379 /* Pods-Agendum.release.xcconfig */;
+			baseConfigurationReference = 027507F23D6C28B021C483AB /* Pods-Agendum.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -510,6 +498,7 @@
 				DEVELOPMENT_TEAM = F5XRH8MLFK;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "/Users/sianspike/Documents/Swansea_University/Final Year Project/Agendum/Agendum/GoogleService-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -546,13 +535,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		D777A77F23EB3A840021315E /* Agendum.xcdatamodeld */ = {
+		FCC21D592423BCBF00485781 /* Agendum.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				D777A78023EB3A840021315E /* Agendum.xcdatamodel */,
+				FCC21D5A2423BCBF00485781 /* Agendum.xcdatamodel */,
 			);
-			currentVersion = D777A78023EB3A840021315E /* Agendum.xcdatamodel */;
-			path = Agendum.xcdatamodeld;
+			currentVersion = FCC21D5A2423BCBF00485781 /* Agendum.xcdatamodel */;
+			name = Agendum.xcdatamodeld;
+			path = "../Support Files/Agendum.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
