@@ -8,10 +8,12 @@
 
 import SwiftUI
 import Firebase
+import FBSDKLoginKit
 
 struct ContentView: View {
     
     @EnvironmentObject var session: FirebaseSession
+    @EnvironmentObject var userData: ViewRouter
     
     @ObservedObject var viewRouter: ViewRouter
     

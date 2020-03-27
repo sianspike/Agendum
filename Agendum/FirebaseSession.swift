@@ -10,8 +10,9 @@ import Foundation
 import Firebase
 import Combine
 import SwiftUI
+import FBSDKLoginKit
 
-final class FirebaseSession: ObservableObject {
+class FirebaseSession: ObservableObject {
 
     var didChange = PassthroughSubject<FirebaseSession, Never>()
     var session: User? { didSet { self.didChange.send(self) }}
@@ -45,6 +46,7 @@ final class FirebaseSession: ObservableObject {
     }
     
     func fbSignUp(with: AuthCredential, handler: @escaping AuthDataResultCallback) {
+        
         Auth.auth().signIn(with: with, completion: handler)
     }
 

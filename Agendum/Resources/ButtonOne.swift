@@ -30,7 +30,7 @@ struct ButtonOne: View {
                 .foregroundColor(.black)
                 .padding(10)
                 .background(color)
-        }.padding()
+        }
     }
 }
 

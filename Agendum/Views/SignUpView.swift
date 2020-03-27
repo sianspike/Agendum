@@ -40,23 +40,6 @@ struct SignUpView: View {
         }
     }
     
-    func fbSignUp() {
-        
-        if (AccessToken.current != nil) {
-            let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
-            
-            session.fbSignUp(with: credential) { (result, error) in
-                
-                if (error != nil) {
-                    print((error?.localizedDescription)!)
-                    return
-                } else {
-                    self.viewRouter.currentPage = "Dashboard"
-                }
-            }
-        }
-    }
-    
     var body: some View {
         
         VStack {
@@ -93,12 +76,11 @@ struct SignUpView: View {
             
             ButtonOne(text: "C R E A T E  A C C O U N T", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {
                 self.signUp()
-            })
-                .padding(.bottom)
+            }).padding()
             
-            ButtonOne(text: "S I G N  U P  W I T H  F A C E B O O K", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {self.fbSignUp()})
+            FaceBookLoginView().frame(height: 40).padding(.horizontal)
             
-            ButtonOne(text: "S I G N  I N", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {self.viewRouter.currentPage = "Sign In"})
+            ButtonOne(text: "S I G N  I N", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {self.viewRouter.currentPage = "Sign In"}).padding()
             
         }.padding()
     }
@@ -107,5 +89,49 @@ struct SignUpView: View {
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
         SignUpView(viewRouter: ViewRouter())
+    }
+}
+
+struct FaceBookLoginView: UIViewRepresentable {
+
+    func makeCoordinator() -> FaceBookLoginView.Coordinator {
+    
+        return FaceBookLoginView.Coordinator()
+    }
+
+    func makeUIView(context: UIViewRepresentableContext<FaceBookLoginView>) -> FBLoginButton {
+        let loginButton = FBLoginButton()
+        loginButton.permissions = ["email"]
+        loginButton.delegate = context.coordinator
+        return loginButton
+    }
+
+    func updateUIView(_ uiView: FBLoginButton, context: UIViewRepresentableContext<FaceBookLoginView>) { }
+
+    class Coordinator: NSObject, LoginButtonDelegate {
+    
+        func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+        
+        if (AccessToken.current != nil) {
+        
+            let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
+            Auth.auth().signIn(with: credential) { (authResult, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                
+                
+            }
+        }
+    }
+    
+        func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+            try! Auth.auth().signOut()
+        }
     }
 }
