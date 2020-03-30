@@ -12,10 +12,9 @@ import FBSDKLoginKit
 
 struct ContentView: View {
     
-    @EnvironmentObject var session: FirebaseSession
-    @EnvironmentObject var userData: ViewRouter
-    
+    @EnvironmentObject var session: FirebaseSession    
     @ObservedObject var viewRouter: ViewRouter
+    var loggedIn = false
     
     func getUser () {
         session.listen()
@@ -24,6 +23,15 @@ struct ContentView: View {
     var body: some View {
 
         Group {
+            
+//            if (loggedIn == true) {
+//                Dashboard()
+//
+//            } else if (viewRouter.currentPage == "Sign Up") {
+//                SignUpView(viewRouter: viewRouter)
+//            } else {
+//                SignUpView(viewRouter: viewRouter)
+//            }
 
             if (viewRouter.currentPage == "Sign Up") {
                 SignUpView(viewRouter: viewRouter)

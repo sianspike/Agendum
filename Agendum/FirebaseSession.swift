@@ -18,7 +18,7 @@ class FirebaseSession: ObservableObject {
     var session: User? { didSet { self.didChange.send(self) }}
     var handle: AuthStateDidChangeListenerHandle?
 
-    func listen () {
+    func listen () { //-> Bool {
         // monitor authentication changes using firebase
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
@@ -34,6 +34,12 @@ class FirebaseSession: ObservableObject {
                 self.session = nil
             }
         }
+        
+//        if (self.session == nil) {
+//            return false
+//        }
+//
+//        return true
     }
 
     

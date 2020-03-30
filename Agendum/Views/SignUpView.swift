@@ -78,7 +78,7 @@ struct SignUpView: View {
                 self.signUp()
             }).padding()
             
-            FaceBookLoginView().frame(height: 40).padding(.horizontal)
+            FaceBookLoginView(viewRouter: viewRouter).frame(height: 40).padding(.horizontal)
             
             ButtonOne(text: "S I G N  I N", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {self.viewRouter.currentPage = "Sign In"}).padding()
             
@@ -89,49 +89,5 @@ struct SignUpView: View {
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
         SignUpView(viewRouter: ViewRouter())
-    }
-}
-
-struct FaceBookLoginView: UIViewRepresentable {
-
-    func makeCoordinator() -> FaceBookLoginView.Coordinator {
-    
-        return FaceBookLoginView.Coordinator()
-    }
-
-    func makeUIView(context: UIViewRepresentableContext<FaceBookLoginView>) -> FBLoginButton {
-        let loginButton = FBLoginButton()
-        loginButton.permissions = ["email"]
-        loginButton.delegate = context.coordinator
-        return loginButton
-    }
-
-    func updateUIView(_ uiView: FBLoginButton, context: UIViewRepresentableContext<FaceBookLoginView>) { }
-
-    class Coordinator: NSObject, LoginButtonDelegate {
-    
-        func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-        
-        if (AccessToken.current != nil) {
-        
-            let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
-            Auth.auth().signIn(with: credential) { (authResult, error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                    return
-                }
-                
-                
-            }
-        }
-    }
-    
-        func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-            try! Auth.auth().signOut()
-        }
     }
 }

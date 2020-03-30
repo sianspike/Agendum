@@ -32,6 +32,7 @@
 		FC2CD0CF2423BF81004A1D8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2CD0CE2423BF80004A1D8E /* AppDelegate.swift */; };
 		FC2CD0D12423BFB4004A1D8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC2CD0D02423BFB4004A1D8E /* LaunchScreen.storyboard */; };
 		FC3DC4522422156F003610D2 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3DC4512422156F003610D2 /* ViewRouter.swift */; };
+		FC8A863F2431E2C200E3265F /* FacebookLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8A863E2431E2C200E3265F /* FacebookLoginView.swift */; };
 		FC9A92B02420DFD4005F6888 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9A92AF2420DFD4005F6888 /* User.swift */; };
 		FC9A92B22420E0A8005F6888 /* FirebaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9A92B12420E0A8005F6888 /* FirebaseSession.swift */; };
 		FCABF8D7242E115700B3E9F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC2CD0D22423BFF4004A1D8E /* GoogleService-Info.plist */; };
@@ -70,6 +71,7 @@
 		FC2CD0D22423BFF4004A1D8E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FC2CD0D42423C5DF004A1D8E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC3DC4512422156F003610D2 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
+		FC8A863E2431E2C200E3265F /* FacebookLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLoginView.swift; sourceTree = "<group>"; };
 		FC9A92AF2420DFD4005F6888 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FC9A92B12420E0A8005F6888 /* FirebaseSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseSession.swift; sourceTree = "<group>"; };
 		FCC21D512423BC2200485781 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Agendum/Support Files/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
@@ -169,6 +171,7 @@
 				D73B804A2407F5760098FAD0 /* FriendView.swift */,
 				D7B157142407D6160031671F /* AllItemsView.swift */,
 				D743ED8B23F6A8C8007341D5 /* SignUpView.swift */,
+				FC8A863E2431E2C200E3265F /* FacebookLoginView.swift */,
 				D743ED8D23F6A908007341D5 /* SignInView.swift */,
 				D7B1570C2403CAEA0031671F /* FocusView.swift */,
 				D743ED8F23F6C712007341D5 /* Dashboard.swift */,
@@ -318,6 +321,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC8A863F2431E2C200E3265F /* FacebookLoginView.swift in Sources */,
 				FC2CD0CF2423BF81004A1D8E /* AppDelegate.swift in Sources */,
 				D743ED9423F6CE0B007341D5 /* ProgressBar.swift in Sources */,
 				FCC21D5B2423BCBF00485781 /* Agendum.xcdatamodeld in Sources */,
