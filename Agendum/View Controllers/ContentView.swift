@@ -12,9 +12,8 @@ import FBSDKLoginKit
 
 struct ContentView: View {
     
-    @EnvironmentObject var session: FirebaseSession    
-    @ObservedObject var goToSignIn: GoToSignIn
-    @ObservedObject var goToDashboard: GoToDashboard
+    @EnvironmentObject var session: FirebaseSession
+    @ObservedObject var viewRouter: ViewRouter
     
     func getUser () {
         session.listen()
@@ -25,15 +24,15 @@ struct ContentView: View {
         Group {
             
             if(Auth.auth().currentUser != nil) {
-                Dashboard(goToSignIn: goToSignIn, goToDashboard: goToDashboard)
+                Dashboard(viewRouter: viewRouter)
             } else {
-                if (goToDashboard.goToDashboard) {
-                    Dashboard(goToSignIn: goToSignIn, goToDashboard: goToDashboard)
+                if (viewRouter.viewRouter == "Dashboard") {
+                    Dashboard(viewRouter: viewRouter)
                 } else {
-                    if(goToSignIn.goToSignIn) {
-                        SignInView(goToSignIn: goToSignIn, goToDashboard: goToDashboard)
+                    if(viewRouter.viewRouter == "Sign In") {
+                        SignInView(viewRouter: viewRouter)
                     } else {
-                        SignUpView(goToSignIn: goToSignIn, goToDashboard: goToDashboard)
+                        SignUpView(viewRouter: viewRouter)
                     }
                 }
             }
@@ -43,6 +42,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(goToSignIn: GoToSignIn(), goToDashboard: GoToDashboard()).environmentObject(FirebaseSession(goToDashboard: GoToDashboard()))
+        ContentView(viewRouter: ViewRouter()).environmentObject(FirebaseSession(viewRouter: ViewRouter()))
     }
 }

@@ -11,5 +11,7 @@ target 'Agendum' do
   # https://firebase.google.com/docs/ios/setup#available-pods
   pod 'Firebase'
   pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
+  pod 'FirebaseFirestoreSwift'
 
 end

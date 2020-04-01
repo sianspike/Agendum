@@ -17,10 +17,11 @@ class FirebaseSession: ObservableObject {
     var didChange = PassthroughSubject<FirebaseSession, Never>()
     var session: User? { didSet { self.didChange.send(self) }}
     var handle: AuthStateDidChangeListenerHandle?
-    @ObservedObject var goToDashboard: GoToDashboard
     
-    init(goToDashboard: GoToDashboard){
-        self.goToDashboard = goToDashboard
+    @ObservedObject var viewRouter: ViewRouter
+    
+    init(viewRouter: ViewRouter){
+        self.viewRouter = viewRouter
     }
 
     func listen () {
@@ -35,12 +36,12 @@ class FirebaseSession: ObservableObject {
                     username: user.displayName
                 )
                 
-                self.goToDashboard.goToDashboard = true
+                self.viewRouter.viewRouter = "Dashboard"
                 
             } else {
                 // if we don't have a user, set our session to nil
                 self.session = nil
-                self.goToDashboard.goToDashboard = false
+                self.viewRouter.viewRouter = "Sign Up"
             }
         }
     }

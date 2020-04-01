@@ -11,8 +11,7 @@ import SwiftUI
 struct Dashboard: View {
     
     @EnvironmentObject var session: FirebaseSession
-    @ObservedObject var goToSignIn: GoToSignIn
-    @ObservedObject var goToDashboard: GoToDashboard
+    @ObservedObject var viewRouter: ViewRouter
     
     @State var progress: CGFloat = 69
     
@@ -20,8 +19,7 @@ struct Dashboard: View {
         let signedOut = self.session.signOut()
         
         if (signedOut) {
-            self.goToSignIn.goToSignIn = true
-            self.goToDashboard.goToDashboard = false
+            self.viewRouter.viewRouter = "Sign In"
             return
         }
         
@@ -81,6 +79,6 @@ struct Dashboard: View {
 
 struct Dashboard_Previews: PreviewProvider {
     static var previews: some View {
-        Dashboard(goToSignIn: GoToSignIn(), goToDashboard: GoToDashboard())
+        Dashboard(viewRouter: ViewRouter())
     }
 }

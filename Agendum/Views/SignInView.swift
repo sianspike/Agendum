@@ -9,16 +9,14 @@
 import SwiftUI
 
 struct SignInView: View {
+    
     @State var usernameOrEmail: String = ""
     @State var password: String = ""
     @State var loading = false
     @State var error = false
-    @ObservedObject var goToSignIn: GoToSignIn
-    @ObservedObject var goToDashboard: GoToDashboard
+    @ObservedObject var viewRouter: ViewRouter
     
     @EnvironmentObject var session: FirebaseSession
-    
-    //@ObservedObject var viewRouter: ViewRouter
     
     func signIn() {
         loading = true
@@ -30,11 +28,10 @@ struct SignInView: View {
             self.loading = false
             if error != nil {
                 self.error = true
-                self.goToDashboard.goToDashboard = false
             } else {
                 self.usernameOrEmail = ""
                 self.password = ""
-                self.goToDashboard.goToDashboard = true
+                self.viewRouter.viewRouter = "Dashboard"
             }
         }
     }
@@ -67,9 +64,12 @@ struct SignInView: View {
                     self.signIn()
                     }).padding()
                 
-                FaceBookLoginView(goToDashboard: goToDashboard).frame(height: 40).padding(.horizontal)
+                FaceBookLoginView(viewRouter: viewRouter).frame(height: 40).padding(.horizontal)
                 
-                ButtonOne(text: "S I G N  U P", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {self.goToSignIn.goToSignIn = false}).padding()
+                ButtonOne(text: "S I G N  U P", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {
+                    self.viewRouter.viewRouter = "Sign Up"
+                    
+                }).padding()
                 
                 
                 if (error) {
@@ -83,6 +83,6 @@ struct SignInView: View {
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView(goToSignIn: GoToSignIn(), goToDashboard: GoToDashboard()).environmentObject(FirebaseSession(goToDashboard: GoToDashboard()))
+        SignInView(viewRouter: ViewRouter()).environmentObject(FirebaseSession(viewRouter: ViewRouter()))
     }
 }

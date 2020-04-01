@@ -19,8 +19,7 @@ struct SignUpView: View {
     
     @EnvironmentObject var session: FirebaseSession
     
-    @ObservedObject var goToSignIn: GoToSignIn
-    @ObservedObject var goToDashboard: GoToDashboard
+    @ObservedObject var viewRouter: ViewRouter
     
     func signUp() {
         loading = true
@@ -32,11 +31,10 @@ struct SignUpView: View {
             self.loading = false
             if error != nil {
                 self.error = true
-                self.goToDashboard.goToDashboard = false
             } else {
                 self.email = ""
                 self.password = ""
-                self.goToDashboard.goToDashboard = true
+                self.viewRouter.viewRouter = "Dashboard"
             }
         }
     }
@@ -79,9 +77,12 @@ struct SignUpView: View {
                 self.signUp()
             }).padding()
             
-            FaceBookLoginView(goToDashboard: goToDashboard).frame(height: 40).padding(.horizontal)
+            FaceBookLoginView(viewRouter: viewRouter).frame(height: 40).padding(.horizontal)
             
-            ButtonOne(text: "S I G N  I N", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {self.goToSignIn.goToSignIn = true}).padding()
+            ButtonOne(text: "S I G N  I N", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {
+                self.viewRouter.viewRouter = "Sign In"
+                
+            }).padding()
             
         }.padding()
     }
@@ -89,6 +90,6 @@ struct SignUpView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView(goToSignIn: GoToSignIn(), goToDashboard: GoToDashboard())
+        SignUpView(viewRouter: ViewRouter())
     }
 }
