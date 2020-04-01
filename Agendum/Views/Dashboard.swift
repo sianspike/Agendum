@@ -69,7 +69,7 @@ struct Dashboard: View {
                     Text("Log out")
                 }
 
-                NavigationBar()
+                NavigationBar(viewRouter: viewRouter)
             }
             
             FloatingAddButton()

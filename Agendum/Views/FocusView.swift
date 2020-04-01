@@ -28,7 +28,7 @@ struct FocusView: View {
             
             Spacer()
             
-            NavigationBar()
+            NavigationBar(viewRouter: ViewRouter())
         }
     }
 }

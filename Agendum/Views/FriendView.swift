@@ -34,7 +34,7 @@ struct FriendView: View {
                     
                 }.padding()
                 
-                NavigationBar()
+                NavigationBar(viewRouter: ViewRouter())
             }
             
             FloatingAddButton()

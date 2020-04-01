@@ -9,6 +9,9 @@
 import SwiftUI
 
 struct NavigationBar: View {
+    
+    @ObservedObject var viewRouter: ViewRouter
+    
     let gradientColours = Gradient(colors:[Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), .white])
     
     var body: some View {
@@ -25,7 +28,9 @@ struct NavigationBar: View {
             }.frame(maxWidth: .infinity, alignment: .leading)
             
             HStack{
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                Button(action: {
+                    self.viewRouter.viewRouter = "Focus"
+                }) {
                     Image(uiImage: UIImage(named: "Icons/Timer.png")!)
                         .renderingMode(.original)
                 }.padding([.horizontal])
@@ -66,6 +71,6 @@ struct NavigationBar: View {
 
 struct NavigationBar_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationBar()
+        NavigationBar(viewRouter: ViewRouter())
     }
 }

@@ -13,7 +13,7 @@ class ViewRouter: ObservableObject {
     
     let objectWillChange = PassthroughSubject<ViewRouter, Never>()
     
-    @Published var viewRouter: String = "Sign Up" {
+    @Published var viewRouter: String = "" {
         didSet {
             objectWillChange.send(self)
         }

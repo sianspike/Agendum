@@ -23,19 +23,22 @@ struct ContentView: View {
 
         Group {
             
-            if(Auth.auth().currentUser != nil) {
+            if(viewRouter.viewRouter == "" && Auth.auth().currentUser != nil) {
                 Dashboard(viewRouter: viewRouter)
             } else {
-                if (viewRouter.viewRouter == "Dashboard") {
-                    Dashboard(viewRouter: viewRouter)
-                } else {
-                    if(viewRouter.viewRouter == "Sign In") {
-                        SignInView(viewRouter: viewRouter)
-                    } else {
-                        SignUpView(viewRouter: viewRouter)
-                    }
-                }
+                SignInView(viewRouter: viewRouter)
             }
+            
+            if (viewRouter.viewRouter == "Dashboard" || viewRouter.viewRouter == "") {
+                Dashboard(viewRouter: viewRouter)
+            } else if(viewRouter.viewRouter == "Sign In") {
+                SignInView(viewRouter: viewRouter)
+            } else if(viewRouter.viewRouter == "Sign Up"){
+                SignUpView(viewRouter: viewRouter)
+            } else if(viewRouter.viewRouter == "Focus") {
+                FocusView()
+            }
+            
         }.onAppear(perform: getUser)
     }
 }

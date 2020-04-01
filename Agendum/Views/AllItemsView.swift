@@ -54,7 +54,7 @@ struct AllItemsView: View {
                 
                 Spacer()
                 
-                NavigationBar()
+                NavigationBar(viewRouter: ViewRouter())
             }
             
             FloatingAddButton()
