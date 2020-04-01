@@ -12,11 +12,11 @@ import FirebaseAuth
 
 struct FaceBookLoginView: UIViewRepresentable {
     
-    @ObservedObject var viewRouter: ViewRouter
+    @ObservedObject var goToDashboard: GoToDashboard
 
     func makeCoordinator() -> FaceBookLoginView.Coordinator {
     
-        return FaceBookLoginView.Coordinator(viewRouter: viewRouter)
+        return FaceBookLoginView.Coordinator(goToDashboard: goToDashboard)
     }
 
     func makeUIView(context: UIViewRepresentableContext<FaceBookLoginView>) -> FBLoginButton {
@@ -30,10 +30,10 @@ struct FaceBookLoginView: UIViewRepresentable {
 
     class Coordinator: NSObject, LoginButtonDelegate {
         
-        @ObservedObject var viewRouter: ViewRouter
+        @ObservedObject var goToDashboard: GoToDashboard
         
-        init(viewRouter: ViewRouter) {
-            self.viewRouter = viewRouter
+        init(goToDashboard: GoToDashboard) {
+            self.goToDashboard = goToDashboard
             super.init()
         }
     
@@ -49,10 +49,11 @@ struct FaceBookLoginView: UIViewRepresentable {
             Auth.auth().signIn(with: credential) { (authResult, error) in
                 if let error = error {
                     print(error.localizedDescription)
+                    self.goToDashboard.goToDashboard = false
                     return
                 }
                 
-                self.viewRouter.currentPage = "Dashboard"
+                self.goToDashboard.goToDashboard = true
             }
         }
     }

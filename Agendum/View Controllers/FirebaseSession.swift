@@ -17,8 +17,13 @@ class FirebaseSession: ObservableObject {
     var didChange = PassthroughSubject<FirebaseSession, Never>()
     var session: User? { didSet { self.didChange.send(self) }}
     var handle: AuthStateDidChangeListenerHandle?
+    @ObservedObject var goToDashboard: GoToDashboard
+    
+    init(goToDashboard: GoToDashboard){
+        self.goToDashboard = goToDashboard
+    }
 
-    func listen () { //-> Bool {
+    func listen () {
         // monitor authentication changes using firebase
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
@@ -29,17 +34,15 @@ class FirebaseSession: ObservableObject {
                     email: user.email,
                     username: user.displayName
                 )
+                
+                self.goToDashboard.goToDashboard = true
+                
             } else {
                 // if we don't have a user, set our session to nil
                 self.session = nil
+                self.goToDashboard.goToDashboard = false
             }
         }
-        
-//        if (self.session == nil) {
-//            return false
-//        }
-//
-//        return true
     }
 
     

@@ -16,11 +16,11 @@ struct SignUpView: View {
     @State var password: String = ""
     @State var loading = false
     @State var error = false
-    @State var goToSignIn = false
     
     @EnvironmentObject var session: FirebaseSession
     
-    @ObservedObject var viewRouter: ViewRouter
+    @ObservedObject var goToSignIn: GoToSignIn
+    @ObservedObject var goToDashboard: GoToDashboard
     
     func signUp() {
         loading = true
@@ -32,10 +32,11 @@ struct SignUpView: View {
             self.loading = false
             if error != nil {
                 self.error = true
+                self.goToDashboard.goToDashboard = false
             } else {
                 self.email = ""
                 self.password = ""
-                self.viewRouter.currentPage = "Dashboard"
+                self.goToDashboard.goToDashboard = true
             }
         }
     }
@@ -78,9 +79,9 @@ struct SignUpView: View {
                 self.signUp()
             }).padding()
             
-            FaceBookLoginView(viewRouter: viewRouter).frame(height: 40).padding(.horizontal)
+            FaceBookLoginView(goToDashboard: goToDashboard).frame(height: 40).padding(.horizontal)
             
-            ButtonOne(text: "S I G N  I N", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {self.viewRouter.currentPage = "Sign In"}).padding()
+            ButtonOne(text: "S I G N  I N", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {self.goToSignIn.goToSignIn = true}).padding()
             
         }.padding()
     }
@@ -88,6 +89,6 @@ struct SignUpView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView(viewRouter: ViewRouter())
+        SignUpView(goToSignIn: GoToSignIn(), goToDashboard: GoToDashboard())
     }
 }

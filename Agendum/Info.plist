@@ -2,26 +2,26 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>CFBundleURLTypes</key>
-    <array>
-      <dict>
-        <key>CFBundleURLSchemes</key>
-        <array>
-          <string>fb291917178439921</string>
-        </array>
-      </dict>
-    </array>
-    <key>FacebookAppID</key>
-    <string>291917178439921</string>
-    <key>FacebookDisplayName</key>
-    <string>Agendum</string>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-      <string>fbapi</string>
-      <string>fb-messenger-api</string>
-      <string>fbauth2</string>
-      <string>fbshareextension</string>
-    </array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb291917178439921</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>291917178439921</string>
+	<key>FacebookDisplayName</key>
+	<string>Agendum</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -73,10 +73,10 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Fonts/Montserrat-SemiBold.ttf</string>
-		<string>Fonts/Montserrat-Medium.ttf</string>
-		<string>Fonts/Montserrat-Regular.ttf</string>
-		<string>Fonts/Montserrat-Bold.ttf</string>
+		<string>Resources/Fonts/Montserrat-SemiBold.ttf</string>
+		<string>Resources/Fonts/Montserrat-Medium.ttf</string>
+		<string>Resources/Fonts/Montserrat-Regular.ttf</string>
+		<string>Resources/Fonts/Montserrat-Bold.ttf</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

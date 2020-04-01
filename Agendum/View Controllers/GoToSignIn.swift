@@ -1,5 +1,5 @@
 //
-//  ViewRouter.swift
+//  GoToSignIn.swift
 //  Agendum
 //
 //  Created by Sian Pike on 18/03/2020.
@@ -10,11 +10,11 @@ import Foundation
 import Combine
 import SwiftUI
 
-final class ViewRouter : ObservableObject {
+class GoToSignIn : ObservableObject {
     
-    let objectWillChange = PassthroughSubject<ViewRouter, Never>()
+    let objectWillChange = PassthroughSubject<GoToSignIn, Never>()
     
-    @Published var currentPage: String = "Sign Up" {
+    @Published var goToSignIn: Bool = false {
         didSet {
             objectWillChange.send(self)
         }

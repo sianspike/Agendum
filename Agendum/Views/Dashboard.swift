@@ -10,7 +10,23 @@ import SwiftUI
 
 struct Dashboard: View {
     
+    @EnvironmentObject var session: FirebaseSession
+    @ObservedObject var goToSignIn: GoToSignIn
+    @ObservedObject var goToDashboard: GoToDashboard
+    
     @State var progress: CGFloat = 69
+    
+    func signOut() {
+        let signedOut = self.session.signOut()
+        
+        if (signedOut) {
+            self.goToSignIn.goToSignIn = true
+            self.goToDashboard.goToDashboard = false
+            return
+        }
+        
+        print("error signing out")
+    }
     
     var body: some View {
         
@@ -51,6 +67,10 @@ struct Dashboard: View {
                 
                 Spacer()
                 
+                Button(action: {self.signOut()}) {
+                    Text("Log out")
+                }
+
                 NavigationBar()
             }
             
@@ -61,6 +81,6 @@ struct Dashboard: View {
 
 struct Dashboard_Previews: PreviewProvider {
     static var previews: some View {
-        Dashboard()
+        Dashboard(goToSignIn: GoToSignIn(), goToDashboard: GoToDashboard())
     }
 }
