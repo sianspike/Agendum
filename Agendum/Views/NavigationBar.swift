@@ -35,7 +35,9 @@ struct NavigationBar: View {
                         .renderingMode(.original)
                 }.padding([.horizontal])
                 
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                Button(action: {
+                    self.viewRouter.viewRouter = "All Items"
+                }) {
                     Image(uiImage: UIImage(named: "Icons/List.png")!)
                     .renderingMode(.original)
                 }.padding([.horizontal])
@@ -45,7 +47,9 @@ struct NavigationBar: View {
                     .foregroundColor(.clear)
                     .background(LinearGradient(gradient: gradientColours, startPoint: .top, endPoint: .bottom))
                 
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                Button(action: {
+                    self.viewRouter.viewRouter = "Dashboard"
+                }) {
                     Image(uiImage: UIImage(named: "Icons/Home.png")!)
                     .renderingMode(.original)
                 }.padding([.horizontal])
@@ -55,12 +59,16 @@ struct NavigationBar: View {
                 .foregroundColor(.clear)
                 .background(LinearGradient(gradient: gradientColours, startPoint: .top, endPoint: .bottom))
                 
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                Button(action:{
+                    self.viewRouter.viewRouter = "Friends"
+                }) {
                     Image(uiImage: UIImage(named: "Icons/People.png")!)
                     .renderingMode(.original)
                 }.padding([.horizontal])
                 
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                Button(action: {
+                    self.viewRouter.viewRouter = "Settings"
+                }) {
                     Image(uiImage: UIImage(named: "Icons/Settings.png")!)
                     .renderingMode(.original)
                 }.padding([.horizontal])

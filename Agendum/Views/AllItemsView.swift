@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct AllItemsView: View {
+    @ObservedObject var viewRouter: ViewRouter
+    
     var body: some View {
         
         ZStack{
@@ -64,6 +66,6 @@ struct AllItemsView: View {
 
 struct AllItemsView_Previews: PreviewProvider {
     static var previews: some View {
-        AllItemsView()
+        AllItemsView(viewRouter: ViewRouter())
     }
 }

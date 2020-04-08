@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct FocusView: View {
+    @ObservedObject var viewRouter: ViewRouter
+    
     var body: some View {
         
         VStack {
@@ -27,14 +29,12 @@ struct FocusView: View {
                 .font(Font.custom("Monsterrat-Regular", size: 20))
             
             Spacer()
-            
-            NavigationBar(viewRouter: ViewRouter())
         }
     }
 }
 
 struct FocusView_Previews: PreviewProvider {
     static var previews: some View {
-        FocusView()
+        FocusView(viewRouter: ViewRouter())
     }
 }

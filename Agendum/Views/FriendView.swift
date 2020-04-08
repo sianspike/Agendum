@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct FriendView: View {
+    @ObservedObject var viewRouter: ViewRouter
+    
     var body: some View {
         ZStack {
             
@@ -45,6 +47,6 @@ struct FriendView: View {
 
 struct FriendView_Previews: PreviewProvider {
     static var previews: some View {
-        FriendView()
+        FriendView(viewRouter: ViewRouter())
     }
 }

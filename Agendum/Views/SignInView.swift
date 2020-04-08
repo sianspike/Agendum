@@ -83,6 +83,6 @@ struct SignInView: View {
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView(viewRouter: ViewRouter()).environmentObject(FirebaseSession(viewRouter: ViewRouter()))
+        SignInView(viewRouter: ViewRouter()).environmentObject(FirebaseSession())
     }
 }

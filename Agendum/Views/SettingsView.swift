@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    
+    @ObservedObject var viewRouter: ViewRouter
     @State private var touchID = false
     
     var body: some View {
@@ -45,6 +45,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView(viewRouter: ViewRouter())
     }
 }

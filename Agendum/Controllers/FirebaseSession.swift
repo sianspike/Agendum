@@ -12,35 +12,30 @@ import Combine
 import SwiftUI
 import FBSDKLoginKit
 
-class FirebaseSession: ObservableObject {
-
-    var didChange = PassthroughSubject<FirebaseSession, Never>()
-    var session: User? { didSet { self.didChange.send(self) }}
+class FirebaseSession: NSObject, ObservableObject {
+    
+    @Published var loggedInUser: User?
+    var viewRouter = ViewRouter()
+    
+    static let shared = FirebaseSession()
     var handle: AuthStateDidChangeListenerHandle?
-    
-    @ObservedObject var viewRouter: ViewRouter
-    
-    init(viewRouter: ViewRouter){
-        self.viewRouter = viewRouter
-    }
 
     func listen () {
         // monitor authentication changes using firebase
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
                 // if we have a user, create a new user model
+                self.viewRouter.viewRouter = "Dashboard"
                 print("Got user: \(user)")
-                self.session = User(
+                self.loggedInUser = User(
                     uid: user.uid,
                     email: user.email,
                     username: user.displayName
                 )
                 
-                self.viewRouter.viewRouter = "Dashboard"
-                
             } else {
                 // if we don't have a user, set our session to nil
-                self.session = nil
+                self.loggedInUser = nil
                 self.viewRouter.viewRouter = "Sign Up"
             }
         }
@@ -71,7 +66,7 @@ class FirebaseSession: ObservableObject {
     func signOut () -> Bool {
         do {
             try Auth.auth().signOut()
-            self.session = nil
+            self.loggedInUser = nil
             return true
         } catch {
             return false

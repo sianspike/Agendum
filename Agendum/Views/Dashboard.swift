@@ -9,12 +9,11 @@
 import SwiftUI
 
 struct Dashboard: View {
-    
+
     @EnvironmentObject var session: FirebaseSession
     @ObservedObject var viewRouter: ViewRouter
-    
     @State var progress: CGFloat = 69
-    
+
     func signOut() {
         let signedOut = self.session.signOut()
         
@@ -68,8 +67,8 @@ struct Dashboard: View {
                 Button(action: {self.signOut()}) {
                     Text("Log out")
                 }
-
-                NavigationBar(viewRouter: viewRouter)
+                
+                Spacer()
             }
             
             FloatingAddButton()
