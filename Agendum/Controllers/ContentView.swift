@@ -8,7 +8,6 @@
 
 import SwiftUI
 import Firebase
-import FBSDKLoginKit
 
 struct ContentView: View {
     
@@ -19,32 +18,43 @@ struct ContentView: View {
         session.listen()
     }
     
+    func switchViews() -> AnyView {
+        switch viewRouter.viewRouter {
+        case "Dashboard":
+            return AnyView(Dashboard(viewRouter: viewRouter))
+        case "Focus":
+            return AnyView(FocusView(viewRouter: viewRouter))
+        case "All Items":
+            return AnyView(AllItemsView(viewRouter: viewRouter))
+        case "Friends":
+            return AnyView(FriendView(viewRouter: viewRouter))
+        case "Settings":
+            return AnyView(SettingsView(viewRouter: viewRouter))
+        case "Add Item":
+            return AnyView(AddItemView())
+        default:
+            return AnyView(SignInView(viewRouter: viewRouter))
+        }
+    }
+    
     var body: some View {
 
         Group {
             
             if(session.loggedInUser != nil) {
-                Dashboard(viewRouter: viewRouter)
-                HomeView(viewRouter: viewRouter)
-            } else {
+
+                switchViews()
                 
-                if (viewRouter.viewRouter == "Sign In") {
+                HomeView(viewRouter: viewRouter)
+
+            } else {
+
+                if (viewRouter.viewRouter == "Sign In" || viewRouter.viewRouter == "Dashboard") {
                     SignInView(viewRouter: viewRouter)
                 } else if (viewRouter.viewRouter == "Sign Up") {
                     SignUpView(viewRouter: viewRouter)
                 }
             }
-            
-//            if (viewRouter.viewRouter == "Dashboard") {
-//                Dashboard(viewRouter: viewRouter)
-//                HomeView(viewRouter: viewRouter)
-//            } else if(viewRouter.viewRouter == "Sign In") {
-//                SignInView(viewRouter: viewRouter)
-//            } else if(viewRouter.viewRouter == "Sign Up"){
-//                SignUpView(viewRouter: viewRouter)
-//            } else {
-//                SignInView(viewRouter: viewRouter)
-//            }
         }.onAppear(perform: getUser)
     }
 }

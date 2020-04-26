@@ -55,11 +55,11 @@ struct AllItemsView: View {
                     .padding()
                 
                 Spacer()
-                
-                NavigationBar(viewRouter: ViewRouter())
             }
             
-            FloatingAddButton()
+            FloatingAddButton(action: {
+                self.viewRouter.viewRouter = "Add Item"
+            })
         }
     }
 }

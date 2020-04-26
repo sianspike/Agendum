@@ -39,7 +39,8 @@ struct HorizontalLineShape: Shape {
 
     struct HorizontalLine_Previews: PreviewProvider {
         static var previews: some View {
-            HorizontalLine(color: .black)
+            HorizontalLineShape
+                .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: 70)
         }
     }
 }

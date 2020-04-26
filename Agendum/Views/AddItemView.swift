@@ -15,22 +15,23 @@ struct AddItemView: View {
     @State private var date = false
     @State private var reminder = false
     @State private var calendar = false
+    @State private var completed = false
     
     var body: some View {
         
-        VStack (alignment: .leading){
+        VStack{
             
             ZStack(alignment: .leading){
                 
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                    Image(uiImage: UIImage(named: "Icons/back.png")!)
+                    Image(uiImage: UIImage(named: "Icons/Back - black.png")!)
                         .renderingMode(.original)
-                }.padding()
+                }.padding(.bottom)
                 
                 TextWithBottomBorder(text: "A d d  I t e m")
             }
-//            
-//            TextFieldWithBottomBorder(placeholder: "Title", text: $title)
+
+            TextFieldWithBottomBorder(placeholder: "Title", text: $title)
             
             Toggle(isOn: $task) {
                                    
@@ -77,7 +78,9 @@ struct AddItemView: View {
                 Text("Label 3")
             }
             
-            ButtonOne(text: "A D D", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {})
+            ButtonOne(text: "A D D", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {
+                Item(title: self.title, task: self.task, habit: self.habit, dateToggle: self.date, reminderToggle: self.reminder, completed: self.completed)
+            })
         }.padding()
     }
 }

@@ -37,8 +37,6 @@ struct SettingsView: View {
             Spacer()
             
             ButtonOne(text: "D E L E T E  A C C O U N T", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {})
-            
-            NavigationBar(viewRouter: ViewRouter())
         }
     }
 }

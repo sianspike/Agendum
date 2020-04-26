@@ -12,20 +12,19 @@ import Combine
 import SwiftUI
 import FBSDKLoginKit
 
-class FirebaseSession: NSObject, ObservableObject {
+class FirebaseSession: ObservableObject {
     
     @Published var loggedInUser: User?
-    var viewRouter = ViewRouter()
-    
     static let shared = FirebaseSession()
+    var viewRouter = ViewRouter()
     var handle: AuthStateDidChangeListenerHandle?
 
     func listen () {
         // monitor authentication changes using firebase
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
-                // if we have a user, create a new user model
                 self.viewRouter.viewRouter = "Dashboard"
+                // if we have a user, create a new user model
                 print("Got user: \(user)")
                 self.loggedInUser = User(
                     uid: user.uid,
@@ -36,7 +35,7 @@ class FirebaseSession: NSObject, ObservableObject {
             } else {
                 // if we don't have a user, set our session to nil
                 self.loggedInUser = nil
-                self.viewRouter.viewRouter = "Sign Up"
+                self.viewRouter.viewRouter = "Sign In"
             }
         }
     }

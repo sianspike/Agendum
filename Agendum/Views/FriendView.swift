@@ -35,11 +35,11 @@ struct FriendView: View {
                         .font(Font.custom("Montserrat-Regular", size: 15))
                     
                 }.padding()
-                
-                NavigationBar(viewRouter: ViewRouter())
             }
             
-            FloatingAddButton()
+            FloatingAddButton(action: {
+                self.viewRouter.viewRouter = "Add Friend"
+            })
                 .frame(height: 550)
         }
     }

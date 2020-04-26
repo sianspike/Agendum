@@ -71,7 +71,9 @@ struct Dashboard: View {
                 Spacer()
             }
             
-            FloatingAddButton()
+            FloatingAddButton(action: {
+                self.viewRouter.viewRouter = "Add Item"
+            })
         }
     }
 }
