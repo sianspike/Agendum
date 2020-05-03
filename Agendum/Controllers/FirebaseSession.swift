@@ -18,6 +18,7 @@ class FirebaseSession: ObservableObject {
     static let shared = FirebaseSession()
     var viewRouter = ViewRouter()
     var handle: AuthStateDidChangeListenerHandle?
+    let db = Firestore.firestore()
 
     func listen () {
         // monitor authentication changes using firebase
@@ -26,10 +27,7 @@ class FirebaseSession: ObservableObject {
                 self.viewRouter.viewRouter = "Dashboard"
                 // if we have a user, create a new user model
                 print("Got user: \(user)")
-                self.loggedInUser = User(
-                    uid: user.uid,
-                    email: user.email,
-                    username: user.displayName
+                self.loggedInUser = User(email: user.email, username: user.displayName, uid: user.uid,  items: []
                 )
                 
             } else {
@@ -39,7 +37,43 @@ class FirebaseSession: ObservableObject {
             }
         }
     }
+    
+    func retrieveItems() {
+        let itemsRef = db.collection("users").document(loggedInUser!.uid).collection("items")
+        
+        itemsRef.getDocuments() { querySnapshot, error in
+            
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    
+                    for document in querySnapshot!.documents {
+                        
+                        let title = document.get("title") as! String
+                        let task = document.get("task") as! Bool
+                        let habit = document.get("habit") as! Bool
+                        let dateToggle = document.get("dateToggle") as! Bool
+                        let date = document.get("date") as? Date
+                        let reminderToggle = document.get("reminderToggle") as! Bool
+                        let reminder = document.get("reminder") as? Date
+                        let completed = document.get("completed") as! Bool
+                        let labels = document.get("labels") as? Array<String>
+                    
+                        
+                        self.loggedInUser?.items.append(Item(title: title, task: task, habit: habit, dateToggle: dateToggle, date: date ?? nil, reminderToggle: reminderToggle, reminder: reminder ?? nil, completed: completed, labels: labels ?? []))
+                    }
+                }
+            }
+    }
 
+    func addUsername(username: String) {
+        
+        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+        changeRequest?.displayName = username
+        changeRequest?.commitChanges { error in
+            print(error ?? nil)
+        }
+    }
     
     func signUp(
         email: String,
@@ -47,6 +81,7 @@ class FirebaseSession: ObservableObject {
         handler: @escaping AuthDataResultCallback
         ) {
         Auth.auth().createUser(withEmail: email, password: password, completion: handler)
+    
     }
     
     func fbSignUp(with: AuthCredential, handler: @escaping AuthDataResultCallback) {

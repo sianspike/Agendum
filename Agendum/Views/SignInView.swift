@@ -7,10 +7,11 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct SignInView: View {
     
-    @State var usernameOrEmail: String = ""
+    @State var email: String = ""
     @State var password: String = ""
     @State var loading = false
     @State var error = false
@@ -21,7 +22,7 @@ struct SignInView: View {
     func signIn() {
         loading = true
         error = false
-        let emailAsString = $usernameOrEmail.wrappedValue
+        let emailAsString = $email.wrappedValue
         let passwordAsString = $password.wrappedValue
         
         session.signIn(email: emailAsString, password: passwordAsString) { (result, error) in
@@ -29,7 +30,7 @@ struct SignInView: View {
             if error != nil {
                 self.error = true
             } else {
-                self.usernameOrEmail = ""
+                self.email = ""
                 self.password = ""
                 self.viewRouter.viewRouter = "Dashboard"
             }
@@ -45,7 +46,7 @@ struct SignInView: View {
                     .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
 
                 VStack {
-                    TextField("U s e r n a m e  o r  E m a i l", text: $usernameOrEmail)
+                    TextField("U s e r n a m e  o r  E m a i l", text: $email)
                         .multilineTextAlignment(TextAlignment.center)
                         .font(Font.custom("Montserrat-Regular", size: 20))
                     HorizontalLineShape

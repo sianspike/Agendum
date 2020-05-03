@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct AddItemView: View {
     @State private var title: String = ""
@@ -16,6 +17,7 @@ struct AddItemView: View {
     @State private var reminder = false
     @State private var calendar = false
     @State private var completed = false
+    @EnvironmentObject var session: FirebaseSession
     
     var body: some View {
         
@@ -79,7 +81,7 @@ struct AddItemView: View {
             }
             
             ButtonOne(text: "A D D", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {
-                Item(title: self.title, task: self.task, habit: self.habit, dateToggle: self.date, reminderToggle: self.reminder, completed: self.completed)
+                self.session.loggedInUser?.items.append(Item(title: self.title, task: self.task, habit: self.habit, dateToggle: self.date, reminderToggle: self.reminder, completed: self.completed))
             })
         }.padding()
     }

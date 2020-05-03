@@ -26,6 +26,7 @@ struct SignUpView: View {
         error = false
         let emailAsString = $email.wrappedValue
         let passwordAsString = $password.wrappedValue
+        let usernameAsString = $username.wrappedValue
         
         session.signUp(email: emailAsString, password: passwordAsString) { (result, error) in
             self.loading = false
@@ -34,9 +35,14 @@ struct SignUpView: View {
             } else {
                 self.email = ""
                 self.password = ""
+                self.username = ""
+                self.session.addUsername(username: usernameAsString)
                 self.viewRouter.viewRouter = "Dashboard"
             }
         }
+        
+        print(session.loggedInUser)
+        print()
     }
     
     var body: some View {
