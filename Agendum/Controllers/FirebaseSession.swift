@@ -27,8 +27,8 @@ class FirebaseSession: ObservableObject {
                 self.viewRouter.viewRouter = "Dashboard"
                 // if we have a user, create a new user model
                 print("Got user: \(user)")
-                self.loggedInUser = User(email: user.email, username: user.displayName, uid: user.uid,  items: []
-                )
+                self.loggedInUser = User(email: user.email, username: user.displayName, uid: user.uid,  items: [])
+                self.retrieveItems()
                 
             } else {
                 // if we don't have a user, set our session to nil
@@ -38,13 +38,47 @@ class FirebaseSession: ObservableObject {
         }
     }
     
+    func saveItems(items: Array<Item>) {
+        let itemsLocation = db.collection("users").document(loggedInUser!.uid).collection("items")
+        
+        for item in items {
+            
+            itemsLocation.document(item.getTitle()).setData([
+                "title": item.getTitle(),
+                "task": item.isTask(),
+                "habit": item.isHabit(),
+                "dateToggle": item.isDateSet(),
+                "date": item.getDate() as Any,
+                "reminderToggle": item.isReminderSet(),
+                "reminder": item.getReminderDate() as Any,
+                "labels": item.getLabels(),
+                "completed": item.isCompleted()
+            ], merge: true) { error in
+                
+                if let error = error {
+                    
+                    print("Error writing document: \(error)")
+                    
+                } else {
+                    
+                    print("Saved items succesfully!")
+                }
+            }
+        }
+    }
+    
     func retrieveItems() {
+        
         let itemsRef = db.collection("users").document(loggedInUser!.uid).collection("items")
+        var itemArray: Array<Item> = []
         
         itemsRef.getDocuments() { querySnapshot, error in
             
                 if let error = error {
+                    
                     print("Error getting documents: \(error)")
+                    return
+                    
                 } else {
                     
                     for document in querySnapshot!.documents {
@@ -59,11 +93,12 @@ class FirebaseSession: ObservableObject {
                         let completed = document.get("completed") as! Bool
                         let labels = document.get("labels") as? Array<String>
                     
-                        
-                        self.loggedInUser?.items.append(Item(title: title, task: task, habit: habit, dateToggle: dateToggle, date: date ?? nil, reminderToggle: reminderToggle, reminder: reminder ?? nil, completed: completed, labels: labels ?? []))
+                        itemArray.append(Item(title: title, task: task, habit: habit, dateToggle: dateToggle, date: date ?? nil, reminderToggle: reminderToggle, reminder: reminder ?? nil, completed: completed, labels: labels ?? []))
                     }
+                    
+                    self.loggedInUser?.items = itemArray
                 }
-            }
+        }
     }
 
     func addUsername(username: String) {
