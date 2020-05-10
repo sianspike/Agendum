@@ -41,6 +41,7 @@
 		FCC21D522423BC2200485781 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCC21D512423BC2200485781 /* Assets.xcassets */; };
 		FCC21D5B2423BCBF00485781 /* Agendum.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FCC21D592423BCBF00485781 /* Agendum.xcdatamodeld */; };
 		FCCC972F243CBA480085A4FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCCC972E243CBA470085A4FE /* LaunchScreen.storyboard */; };
+		FCE8AF42246840820038DCF6 /* ItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8AF41246840820038DCF6 /* ItemRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,7 @@
 		FCC21D512423BC2200485781 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Agendum/Support Files/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
 		FCC21D5A2423BCBF00485781 /* Agendum.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Agendum.xcdatamodel; sourceTree = "<group>"; };
 		FCCC972E243CBA470085A4FE /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FCE8AF41246840820038DCF6 /* ItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +190,7 @@
 				D743ED8F23F6C712007341D5 /* Dashboard.swift */,
 				FC7469AE243B2E6700AFC1E9 /* HomeView.swift */,
 				FCCC972E243CBA470085A4FE /* LaunchScreen.storyboard */,
+				FCE8AF41246840820038DCF6 /* ItemRow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				FC8A863F2431E2C200E3265F /* FacebookLoginView.swift in Sources */,
 				FC2CD0CF2423BF81004A1D8E /* AppDelegate.swift in Sources */,
 				D743ED9423F6CE0B007341D5 /* ProgressBar.swift in Sources */,
+				FCE8AF42246840820038DCF6 /* ItemRow.swift in Sources */,
 				FC7469AF243B2E6700AFC1E9 /* HomeView.swift in Sources */,
 				FC54A0B824615C8D009938C2 /* Item.swift in Sources */,
 				FCBCB21924348E1A00FFA65F /* ViewRouter.swift in Sources */,

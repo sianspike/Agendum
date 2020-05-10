@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Item {
+class Item: Identifiable {
     
     private var title: String
     private var task: Bool

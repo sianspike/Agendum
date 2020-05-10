@@ -20,7 +20,7 @@ class FirebaseSession: ObservableObject {
     var handle: AuthStateDidChangeListenerHandle?
     let db = Firestore.firestore()
 
-    func listen () {
+    func listen() {
         // monitor authentication changes using firebase
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
@@ -29,7 +29,6 @@ class FirebaseSession: ObservableObject {
                 print("Got user: \(user)")
                 self.loggedInUser = User(email: user.email, username: user.displayName, uid: user.uid,  items: [])
                 self.retrieveItems()
-                
             } else {
                 // if we don't have a user, set our session to nil
                 self.loggedInUser = nil

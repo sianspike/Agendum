@@ -38,43 +38,59 @@ struct Dashboard: View {
                 TextWithBottomBorder(text: "A g e n d a")
                     .font(Font.custom("Montserrat-Regular", size: 25))
                 
-                Text("E v e n t s")
-                    .font(Font.custom("Montserrat-SemiBold", size: 20))
-                    .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
-                    .multilineTextAlignment(.leading)
-                    .padding()
-            
-                Text("R e m i n d e r s")
-                    .font(Font.custom("Montserrat-SemiBold", size: 20))
-                    .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
-                    .multilineTextAlignment(.leading)
-                    .padding()
-                
-                Text("T a s k s")
-                    .font(Font.custom("Montserrat-SemiBold", size: 20))
-                    .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
-                    .multilineTextAlignment(.leading)
-                    .padding()
-                
-                Text("S u g g e s t i o n s")
-                    .font(Font.custom("Montserrat-SemiBold", size: 20))
-                    .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
-                    .multilineTextAlignment(.leading)
-                    .padding()
+                Group {
+                    
+                    Text("E v e n t s")
+                        .font(Font.custom("Montserrat-SemiBold", size: 20))
+                        .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
+                        .multilineTextAlignment(.leading)
+                        .padding()
+                    
+                    List(session.loggedInUser?.items ?? []) { item in
+                        
+                        ItemRow(item: item, isEvent: true, isReminder: false, isTask: false)
+                    }
+
+                    Text("R e m i n d e r s")
+                        .font(Font.custom("Montserrat-SemiBold", size: 20))
+                        .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
+                        .multilineTextAlignment(.leading)
+                        .padding()
+                    
+                    List(session.loggedInUser?.items ?? []) { item in
+                        
+                        ItemRow(item: item, isEvent: false, isReminder: true, isTask: false)
+                    }
+                    
+                    Text("T a s k s")
+                        .font(Font.custom("Montserrat-SemiBold", size: 20))
+                        .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
+                        .multilineTextAlignment(.leading)
+                        .padding()
+                    
+                    List(session.loggedInUser?.items ?? []) { item in
+                        
+                        ItemRow(item: item, isEvent: false, isReminder: false, isTask: true)
+                    }
+                    
+                    Text("S u g g e s t i o n s")
+                        .font(Font.custom("Montserrat-SemiBold", size: 20))
+                        .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
+                        .multilineTextAlignment(.leading)
+                        .padding()
+                }
                 
                 Spacer()
                 
                 Button(action: {self.signOut()}) {
                     Text("Log out")
                 }
-                
-                Spacer()
             }
             
             FloatingAddButton(action: {
                 self.viewRouter.viewRouter = "Add Item"
             })
-        }
+        }.onAppear()
     }
 }
 
