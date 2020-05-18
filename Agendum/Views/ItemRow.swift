@@ -21,15 +21,54 @@ struct ItemRow: View {
             
             if (isEvent && item.isDateSet()) {
                 
-                Text(String(item.getTitle()))
+                HStack{
+                    Text(String(item.getTitle()))
+                    
+                    Button(action: {}) {
+                        
+                        Image(uiImage: UIImage(named: "Icons/InComplete Tick.png")!)
+                            .resizable()
+                            .renderingMode(.original)
+                            .shadow(color: Color.black.opacity(0.2), radius: 2, x: 2, y: 2)
+                            .frame(width: 30, height: 30)
+                    }.frame(maxWidth: .infinity, alignment: .trailing)
+                }
+                
+                Divider()
                 
             } else if (isReminder && item.isReminderSet()) {
                 
-                Text(String(item.getTitle()))
+                HStack{
+                    Text(String(item.getTitle()))
+                    
+                    Button(action: {}) {
+                        
+                        Image(uiImage: UIImage(named: "Icons/InComplete Tick.png")!)
+                            .resizable()
+                            .renderingMode(.original)
+                            .shadow(color: Color.black.opacity(0.2), radius: 2, x: 2, y: 2)
+                            .frame(width: 30, height: 30)
+                    }.frame(maxWidth: .infinity, alignment: .trailing)
+                }
+                
+                Divider()
                 
             } else if (isTask && item.isTask()){
                 
-                Text(item.getTitle())
+                HStack{
+                    Text(String(item.getTitle()))
+                    
+                    Button(action: {}) {
+                        
+                        Image(uiImage: UIImage(named: "Icons/InComplete Tick.png")!)
+                            .resizable()
+                            .renderingMode(.original)
+                            .shadow(color: Color.black.opacity(0.2), radius: 2, x: 2, y: 2)
+                            .frame(width: 30, height: 30)
+                    }.frame(maxWidth: .infinity, alignment: .trailing)
+                }
+                
+                Divider()
             }
         }
     }

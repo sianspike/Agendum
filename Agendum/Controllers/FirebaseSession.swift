@@ -152,7 +152,11 @@ class FirebaseSession: ObservableObject {
         let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
         changeRequest?.displayName = username
         changeRequest?.commitChanges { error in
-            print(error ?? nil)
+            
+            if let error = error {
+                
+                print(error)
+            }
         }
     }
     

@@ -13,17 +13,6 @@ struct Dashboard: View {
     @EnvironmentObject var session: FirebaseSession
     @ObservedObject var viewRouter: ViewRouter
     @State var progress: CGFloat = 69
-
-    func signOut() {
-        let signedOut = self.session.signOut()
-        
-        if (signedOut) {
-            self.viewRouter.viewRouter = "Sign In"
-            return
-        }
-        
-        print("error signing out")
-    }
     
     var body: some View {
         
@@ -37,65 +26,61 @@ struct Dashboard: View {
                 
                 TextWithBottomBorder(text: "A g e n d a")
                     .font(Font.custom("Montserrat-Regular", size: 25))
-                    
-                ScrollView(.vertical, showsIndicators: false) {
-                    
-                    VStack {
-
-                        Text("E v e n t s")
-                            .font(Font.custom("Montserrat-SemiBold", size: 20))
-                            .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
-                            .multilineTextAlignment(.leading)
-                            .padding()
-                        
-                        ForEach(session.loggedInUser?.items ?? []) { item in
-                            
-                            ItemRow(item: item, isEvent: true, isReminder: false, isTask: false)
-                        }
-                            
-
-                        Text("R e m i n d e r s")
-                            .font(Font.custom("Montserrat-SemiBold", size: 20))
-                            .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
-                            .multilineTextAlignment(.leading)
-                            .padding()
-                        
-                        ForEach(session.loggedInUser?.items ?? []) { item in
-                            
-                            ItemRow(item: item, isEvent: false, isReminder: true, isTask: false)
-                        }
-                            
-                        Text("T a s k s")
-                            .font(Font.custom("Montserrat-SemiBold", size: 20))
-                            .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
-                            .multilineTextAlignment(.leading)
-                            .padding()
-                        
-                        ForEach(session.loggedInUser?.items ?? []) { item in
-                            
-                            ItemRow(item: item, isEvent: false, isReminder: false, isTask: true)
-                        }
-                            
-                        Text("S u g g e s t i o n s")
-                            .font(Font.custom("Montserrat-SemiBold", size: 20))
-                            .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
-                            .multilineTextAlignment(.leading)
-                            .padding()
-                    }.frame(width: UIScreen.main.bounds.width)
-                    
-                }.frame(width: UIScreen.main.bounds.width)
                 
-                Spacer()
-                
-                Button(action: {self.signOut()}) {
-                    Text("Log out")
+                GeometryReader { geometry in
+                    
+                    ScrollView(.vertical, showsIndicators: false) {
+                        
+                        VStack(alignment: .leading) {
+
+                            Text("E v e n t s")
+                                .font(Font.custom("Montserrat-SemiBold", size: 20))
+                                .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
+                                .padding()
+                            
+                            ForEach(self.session.loggedInUser?.items ?? []) { item in
+                                
+                                    ItemRow(item: item, isEvent: true, isReminder: false, isTask: false)
+                                    .padding(.horizontal)
+                            }
+                                
+                            Text("R e m i n d e r s")
+                                .font(Font.custom("Montserrat-SemiBold", size: 20))
+                                .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
+                                .padding()
+                            
+                            ForEach(self.session.loggedInUser?.items ?? []) { item in
+                                
+                                ItemRow(item: item, isEvent: false, isReminder: true, isTask: false)
+                                    .padding(.horizontal)
+                            }
+                                
+                            Text("T a s k s")
+                                .font(Font.custom("Montserrat-SemiBold", size: 20))
+                                .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
+                                .padding()
+                            
+                            ForEach(self.session.loggedInUser?.items ?? []) { item in
+                                
+                                ItemRow(item: item, isEvent: false, isReminder: false, isTask: true)
+                                    .padding(.horizontal)
+                            }
+                                
+                            Text("S u g g e s t i o n s")
+                                .font(Font.custom("Montserrat-SemiBold", size: 20))
+                                .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
+                                .padding()
+                            
+                        }.frame(width: geometry.size.width, alignment: .leading)
+                        
+                    }.frame(width: geometry.size.width, alignment: .leading)
                 }
             }
             
             FloatingAddButton(action: {
                 self.viewRouter.viewRouter = "Add Item"
             })
-        }.onAppear()
+        }
     }
 }
 
