@@ -21,19 +21,15 @@ struct ItemRow: View {
             
             if (isEvent && item.isDateSet()) {
                 
-                Text(String(item.getDate()!.description))
+                Text(String(item.getTitle()))
                 
             } else if (isReminder && item.isReminderSet()) {
                 
-                Text(String(item.getReminderDate()!.description))
+                Text(String(item.getTitle()))
                 
             } else if (isTask && item.isTask()){
                 
                 Text(item.getTitle())
-                
-            } else {
-                
-                Text("none")
             }
         }
     }

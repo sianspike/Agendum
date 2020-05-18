@@ -14,4 +14,5 @@ struct User {
     var username: String?
     var uid: String
     var items: Array<Item>
+    var labels: Array<String>
 }

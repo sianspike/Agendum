@@ -37,48 +37,53 @@ struct Dashboard: View {
                 
                 TextWithBottomBorder(text: "A g e n d a")
                     .font(Font.custom("Montserrat-Regular", size: 25))
-                
-                Group {
                     
-                    Text("E v e n t s")
-                        .font(Font.custom("Montserrat-SemiBold", size: 20))
-                        .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
-                        .multilineTextAlignment(.leading)
-                        .padding()
+                ScrollView(.vertical, showsIndicators: false) {
                     
-                    List(session.loggedInUser?.items ?? []) { item in
-                        
-                        ItemRow(item: item, isEvent: true, isReminder: false, isTask: false)
-                    }
+                    VStack {
 
-                    Text("R e m i n d e r s")
-                        .font(Font.custom("Montserrat-SemiBold", size: 20))
-                        .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
-                        .multilineTextAlignment(.leading)
-                        .padding()
-                    
-                    List(session.loggedInUser?.items ?? []) { item in
+                        Text("E v e n t s")
+                            .font(Font.custom("Montserrat-SemiBold", size: 20))
+                            .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
+                            .multilineTextAlignment(.leading)
+                            .padding()
                         
-                        ItemRow(item: item, isEvent: false, isReminder: true, isTask: false)
-                    }
-                    
-                    Text("T a s k s")
-                        .font(Font.custom("Montserrat-SemiBold", size: 20))
-                        .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
-                        .multilineTextAlignment(.leading)
-                        .padding()
-                    
-                    List(session.loggedInUser?.items ?? []) { item in
+                        ForEach(session.loggedInUser?.items ?? []) { item in
+                            
+                            ItemRow(item: item, isEvent: true, isReminder: false, isTask: false)
+                        }
+                            
+
+                        Text("R e m i n d e r s")
+                            .font(Font.custom("Montserrat-SemiBold", size: 20))
+                            .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
+                            .multilineTextAlignment(.leading)
+                            .padding()
                         
-                        ItemRow(item: item, isEvent: false, isReminder: false, isTask: true)
-                    }
+                        ForEach(session.loggedInUser?.items ?? []) { item in
+                            
+                            ItemRow(item: item, isEvent: false, isReminder: true, isTask: false)
+                        }
+                            
+                        Text("T a s k s")
+                            .font(Font.custom("Montserrat-SemiBold", size: 20))
+                            .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
+                            .multilineTextAlignment(.leading)
+                            .padding()
+                        
+                        ForEach(session.loggedInUser?.items ?? []) { item in
+                            
+                            ItemRow(item: item, isEvent: false, isReminder: false, isTask: true)
+                        }
+                            
+                        Text("S u g g e s t i o n s")
+                            .font(Font.custom("Montserrat-SemiBold", size: 20))
+                            .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
+                            .multilineTextAlignment(.leading)
+                            .padding()
+                    }.frame(width: UIScreen.main.bounds.width)
                     
-                    Text("S u g g e s t i o n s")
-                        .font(Font.custom("Montserrat-SemiBold", size: 20))
-                        .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
-                        .multilineTextAlignment(.leading)
-                        .padding()
-                }
+                }.frame(width: UIScreen.main.bounds.width)
                 
                 Spacer()
                 

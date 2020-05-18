@@ -27,8 +27,9 @@ class FirebaseSession: ObservableObject {
                 self.viewRouter.viewRouter = "Dashboard"
                 // if we have a user, create a new user model
                 print("Got user: \(user)")
-                self.loggedInUser = User(email: user.email, username: user.displayName, uid: user.uid,  items: [])
+                self.loggedInUser = User(email: user.email, username: user.displayName, uid: user.uid,  items: [], labels: [])
                 self.retrieveItems()
+                self.retrieveLabels()
             } else {
                 // if we don't have a user, set our session to nil
                 self.loggedInUser = nil
@@ -61,6 +62,52 @@ class FirebaseSession: ObservableObject {
                 } else {
                     
                     print("Saved items succesfully!")
+                }
+            }
+        }
+    }
+    
+    func retrieveLabels() {
+        
+        let labelsRef = db.collection("users").document(loggedInUser!.uid).collection("labels")
+        var labelArray: Array<String> = []
+        
+        labelsRef.getDocuments() { querySnapshot, error in
+            
+            if let error = error {
+                
+                print("Error getting documents: \(error)")
+                return
+                
+            } else {
+                
+                for document in querySnapshot!.documents {
+                    
+                    labelArray.append(document.documentID)
+                }
+                
+                self.loggedInUser?.labels = labelArray
+            }
+        }
+    }
+    
+    func saveLabels(labels: Array<String>) {
+        
+        let labelLocation = db.collection("users").document(loggedInUser!.uid).collection("labels")
+        
+        for label in labels {
+            
+            labelLocation.document(label).setData([
+                "name": label]
+            , merge: true) { error in
+                
+                if let error = error {
+                    
+                    print("Error writing document: \(error)")
+                    
+                } else {
+                    
+                    print("Saved labels succesfully!")
                 }
             }
         }

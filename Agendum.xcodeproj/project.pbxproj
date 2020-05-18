@@ -42,6 +42,7 @@
 		FCC21D5B2423BCBF00485781 /* Agendum.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FCC21D592423BCBF00485781 /* Agendum.xcdatamodeld */; };
 		FCCC972F243CBA480085A4FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCCC972E243CBA470085A4FE /* LaunchScreen.storyboard */; };
 		FCE8AF42246840820038DCF6 /* ItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8AF41246840820038DCF6 /* ItemRow.swift */; };
+		FCF1092F24728D9E0030771F /* LabelRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF1092E24728D9E0030771F /* LabelRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +85,7 @@
 		FCC21D5A2423BCBF00485781 /* Agendum.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Agendum.xcdatamodel; sourceTree = "<group>"; };
 		FCCC972E243CBA470085A4FE /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FCE8AF41246840820038DCF6 /* ItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRow.swift; sourceTree = "<group>"; };
+		FCF1092E24728D9E0030771F /* LabelRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +193,7 @@
 				FC7469AE243B2E6700AFC1E9 /* HomeView.swift */,
 				FCCC972E243CBA470085A4FE /* LaunchScreen.storyboard */,
 				FCE8AF41246840820038DCF6 /* ItemRow.swift */,
+				FCF1092E24728D9E0030771F /* LabelRow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				D7B157172407DE600031671F /* FloatingAddButton.swift in Sources */,
 				D73B804F2407FF780098FAD0 /* ResetPasswordView.swift in Sources */,
 				D73B805324080A240098FAD0 /* AddItemView.swift in Sources */,
+				FCF1092F24728D9E0030771F /* LabelRow.swift in Sources */,
 				D7B1570D2403CAEA0031671F /* FocusView.swift in Sources */,
 				D743ED8E23F6A908007341D5 /* SignInView.swift in Sources */,
 				D743ED8823F692A2007341D5 /* HorizontalLineShape.swift in Sources */,
