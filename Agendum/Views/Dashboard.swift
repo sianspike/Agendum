@@ -36,7 +36,7 @@ struct Dashboard: View {
                             Text("E v e n t s")
                                 .font(Font.custom("Montserrat-SemiBold", size: 20))
                                 .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
-                                .padding()
+                                .padding(.horizontal)
                             
                             ForEach(self.session.loggedInUser?.items ?? []) { item in
                                 
