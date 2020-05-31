@@ -13,5 +13,6 @@ target 'Agendum' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'
+  pod 'SwiftUIPager'
 
 end

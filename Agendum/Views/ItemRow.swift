@@ -8,14 +8,16 @@
 
 import SwiftUI
 
+//-TODO: Disable swiping to right
 struct ItemRow: View {
     
     var item: Item
     var isEvent: Bool
     var isReminder: Bool
     var isTask: Bool
-    @State private var completed = false
+    var timeFrame: Int
     @State var dragOffset = CGSize.zero
+    @EnvironmentObject var session: FirebaseSession
     
     var body: some View {
         
@@ -26,43 +28,60 @@ struct ItemRow: View {
                 ZStack {
                     
                     HStack{
-                                
+                            
                         Text(String(item.getTitle()))
+                            .strikethrough(self.item.isCompleted() ? true : false, color: Color(.gray))
                             .background(Color(.white))
-                            .foregroundColor(completed ? Color(.gray) : Color(.black))
+                            .foregroundColor(self.item.isCompleted() ? Color(.gray) : Color(.black))
                             .frame(alignment: .leading)
-                        
+                            
                         Spacer()
-                                
+                                    
                         Button(action: {
-                                    
+                                        
                             self.item.toggleCompleted()
-                            self.completed.toggle()
+                                
+                            if (self.item.isCompleted()) {
                                     
+                                self.session.loggedInUser!.progress += 1
+                                    
+                            } else {
+                                    
+                                self.session.loggedInUser!.progress -= 1
+                            }
+                                
+                            self.session.saveProgress(progress: self.session.loggedInUser!.progress)
+                            self.session.saveItem(item: self.item)
+                                        
                         }) {
-                                    
-                            Image(uiImage: UIImage(named: completed ? "Icons/Complete Tick.png" : "Icons/InComplete Tick.png")!)
+                                        
+                            Image(uiImage: UIImage(named: self.item.isCompleted() ? "Icons/Complete Tick.png" : "Icons/InComplete Tick.png")!)
                                 .resizable()
                                 .renderingMode(.original)
                                 .shadow(color: Color.black.opacity(0.2), radius: 2, x: 2, y: 2)
                                 .frame(width: 30, height: 30)
-                                    
-                        }.frame(alignment: .trailing)
-                        .background(Color(.white))
+                                        
+                        }
+                            .frame(alignment: .trailing)
+                            .background(Color(.white))
                             
-                    }.frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Color(.white))
-                    .offset(x: self.dragOffset.width)
-                        .gesture(completed ? DragGesture()
-                            .onChanged { value in
-                                self.dragOffset = value.translation
-                            }
-                            .onEnded { value in
-                                self.dragOffset = .zero
-                            } : nil)
+                    }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(Color(.white))
+                        .offset(x: self.dragOffset.width)
+                            .gesture(DragGesture()
+                                .onChanged { value in
+                                    
+                                    self.dragOffset = value.translation
+                                }
+                                .onEnded { value in
+                                    
+                                    self.dragOffset = .zero
+                                })
                     
-                }.frame(maxWidth: .infinity)
-                .background(Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0))
+                }
+                    .frame(maxWidth: .infinity)
+                    .background(Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0))
                 
             } else if (isReminder && item.isReminderSet()) {
                 
@@ -71,8 +90,9 @@ struct ItemRow: View {
                     HStack{
                                 
                         Text(String(item.getTitle()))
+                            .strikethrough(self.item.isCompleted() ? true : false, color: Color(.gray))
                             .background(Color(.white))
-                            .foregroundColor(completed ? Color(.gray) : Color(.black))
+                            .foregroundColor(self.item.isCompleted() ? Color(.gray) : Color(.black))
                             .frame(alignment: .leading)
                         
                         Spacer()
@@ -80,11 +100,22 @@ struct ItemRow: View {
                         Button(action: {
                                     
                             self.item.toggleCompleted()
-                            self.completed.toggle()
+                            
+                            if (self.item.isCompleted()) {
+                                
+                                self.session.loggedInUser!.progress += 1
+                                
+                            } else {
+                                
+                                self.session.loggedInUser!.progress -= 1
+                            }
+                            
+                            self.session.saveProgress(progress: self.session.loggedInUser!.progress)
+                            self.session.saveItem(item: self.item)
                                     
                         }) {
                                     
-                            Image(uiImage: UIImage(named: completed ? "Icons/Complete Tick.png" : "Icons/InComplete Tick.png")!)
+                            Image(uiImage: UIImage(named: self.item.isCompleted() ? "Icons/Complete Tick.png" : "Icons/InComplete Tick.png")!)
                                 .resizable()
                                 .renderingMode(.original)
                                 .shadow(color: Color.black.opacity(0.2), radius: 2, x: 2, y: 2)
@@ -96,13 +127,13 @@ struct ItemRow: View {
                     }.frame(maxWidth: .infinity, alignment: .leading)
                     .background(Color(.white))
                     .offset(x: self.dragOffset.width)
-                        .gesture(completed ? DragGesture()
+                        .gesture(DragGesture()
                             .onChanged { value in
                                 self.dragOffset = value.translation
                             }
                             .onEnded { value in
                                 self.dragOffset = .zero
-                            } : nil)
+                            })
                     
                 }.frame(maxWidth: .infinity)
                 .background(Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0))
@@ -114,8 +145,9 @@ struct ItemRow: View {
                     HStack{
                                 
                         Text(String(item.getTitle()))
+                            .strikethrough(self.item.isCompleted() ? true : false, color: Color(.gray))
                             .background(Color(.white))
-                            .foregroundColor(completed ? Color(.gray) : Color(.black))
+                            .foregroundColor(self.item.isCompleted() ? Color(.gray) : Color(.black))
                             .frame(alignment: .leading)
                         
                         Spacer()
@@ -123,11 +155,22 @@ struct ItemRow: View {
                         Button(action: {
                                     
                             self.item.toggleCompleted()
-                            self.completed.toggle()
+                            
+                            if (self.item.isCompleted()) {
+                                
+                                self.session.loggedInUser!.progress += 1
+                                
+                            } else {
+                                
+                                self.session.loggedInUser!.progress -= 1
+                            }
+                            
+                            self.session.saveProgress(progress: self.session.loggedInUser!.progress)
+                            self.session.saveItem(item: self.item)
                                     
                         }) {
                                     
-                            Image(uiImage: UIImage(named: completed ? "Icons/Complete Tick.png" : "Icons/InComplete Tick.png")!)
+                            Image(uiImage: UIImage(named: self.item.isCompleted() ? "Icons/Complete Tick.png" : "Icons/InComplete Tick.png")!)
                                 .resizable()
                                 .renderingMode(.original)
                                 .shadow(color: Color.black.opacity(0.2), radius: 2, x: 2, y: 2)
@@ -139,13 +182,13 @@ struct ItemRow: View {
                     }.frame(maxWidth: .infinity, alignment: .leading)
                     .background(Color(.white))
                     .offset(x: self.dragOffset.width)
-                        .gesture(completed ? DragGesture()
+                        .gesture(DragGesture()
                             .onChanged { value in
                                 self.dragOffset = value.translation
                             }
                             .onEnded { value in
                                 self.dragOffset = .zero
-                            } : nil)
+                            })
                     
                 }.frame(maxWidth: .infinity)
                 .background(Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0))

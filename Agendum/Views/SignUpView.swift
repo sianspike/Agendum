@@ -22,27 +22,34 @@ struct SignUpView: View {
     @ObservedObject var viewRouter: ViewRouter
     
     func signUp() {
+        
         loading = true
         error = false
         let emailAsString = $email.wrappedValue
         let passwordAsString = $password.wrappedValue
         let usernameAsString = $username.wrappedValue
         
-        session.signUp(email: emailAsString, password: passwordAsString) { (result, error) in
+        session.signUp(email: emailAsString, password: passwordAsString) { result, error in
+            
             self.loading = false
+            
             if error != nil {
+                
                 self.error = true
+                
             } else {
+                
                 self.email = ""
                 self.password = ""
                 self.username = ""
+                
                 self.session.addUsername(username: usernameAsString)
+                
                 self.viewRouter.viewRouter = "Dashboard"
             }
         }
         
-        print(session.loggedInUser)
-        print()
+        print(session.loggedInUser!)
     }
     
     var body: some View {

@@ -27,13 +27,47 @@ class FirebaseSession: ObservableObject {
                 self.viewRouter.viewRouter = "Dashboard"
                 // if we have a user, create a new user model
                 print("Got user: \(user)")
-                self.loggedInUser = User(email: user.email, username: user.displayName, uid: user.uid,  items: [], labels: [])
+                self.loggedInUser = User(email: user.email, username: user.displayName, uid: user.uid,  items: [], labels: [], progress: 0)
                 self.retrieveItems()
                 self.retrieveLabels()
+                self.retrieveProgress()
             } else {
                 // if we don't have a user, set our session to nil
                 self.loggedInUser = nil
                 self.viewRouter.viewRouter = "Sign In"
+            }
+        }
+    }
+    
+    func saveItem(item: Item) {
+        
+        let itemsLocation = db.collection("users").document(loggedInUser!.uid).collection("items")
+        
+        for existingItems in loggedInUser!.items {
+            
+            if (existingItems.getTitle() == item.getTitle()) {
+                
+                itemsLocation.document(item.getTitle()).setData([
+                    "title": item.getTitle(),
+                    "task": item.isTask(),
+                    "habit": item.isHabit(),
+                    "dateToggle": item.isDateSet(),
+                    "date": item.getDate() as Any,
+                    "reminderToggle": item.isReminderSet(),
+                    "reminder": item.getReminderDate() as Any,
+                    "labels": item.getLabels(),
+                    "completed": item.isCompleted()
+                ], merge: true) { error in
+                    
+                    if let error = error {
+                        
+                        print("Error writing document: \(error)")
+                        
+                    } else {
+                        
+                        print("Saved items succesfully!")
+                    }
+                }
             }
         }
     }
@@ -64,6 +98,52 @@ class FirebaseSession: ObservableObject {
                     print("Saved items succesfully!")
                 }
             }
+        }
+    }
+    
+    func retrieveProgress() {
+        
+        let progressRef = db.collection("users").document(loggedInUser!.uid).collection("progress")
+        var progress = 0
+
+        progressRef.getDocuments() { querySnapshot, error in
+
+            if let error = error {
+
+                print("Error getting documents: \(error)")
+                return
+
+            } else {
+
+                for document in querySnapshot!.documents {
+
+                    progress = document.get("progress") as! Int
+                }
+
+                self.loggedInUser?.progress = progress
+            }
+        }
+    }
+    
+    func saveProgress(progress: Int) {
+        
+        let progressLocation = db.collection("users").document(loggedInUser!.uid).collection("progress")
+        
+        progressLocation.document("progress").setData([
+            
+            "progress": progress
+            
+            ],
+            merge: true) { error in
+                
+                if let error = error {
+                    
+                    print("Error writing document: \(error)")
+                    
+                } else {
+                    
+                    print("Saved progress succesfully!")
+                }
         }
     }
     

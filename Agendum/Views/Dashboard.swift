@@ -7,73 +7,44 @@
 //
 
 import SwiftUI
+import SwiftUIPager
 
 struct Dashboard: View {
-
+    
     @EnvironmentObject var session: FirebaseSession
     @ObservedObject var viewRouter: ViewRouter
-    @State var progress: CGFloat = 69
+    @State var timePageNum = 0
+    @State var calPageNum = 0
+    var timePages: [String] = ["T o d a y", "T h i s  w e e k", "T h i s  M o n t h"]
+    var calPages: [String] = ["A g e n d a", "C a l e n d a r"]
     
     var body: some View {
         
         ZStack {
-            
             VStack(alignment: .leading) {
                 
-                TextWithBottomBorder(text: "T o d a y")
-                
-                ProgressBar(progress: $progress)
-                
-                TextWithBottomBorder(text: "A g e n d a")
-                    .font(Font.custom("Montserrat-Regular", size: 25))
-                
-                GeometryReader { geometry in
+                Pager(page: self.$timePageNum, data: timePages, id: \.self) {
                     
-                    ScrollView(.vertical, showsIndicators: false) {
-                        
-                        VStack(alignment: .leading) {
-
-                            Text("E v e n t s")
-                                .font(Font.custom("Montserrat-SemiBold", size: 20))
-                                .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
-                                .padding(.horizontal)
+                    TextWithBottomBorder(text: $0)
+                    
+                }.frame(height: 100)
+                
+                ProgressBar(progress: session.loggedInUser!.progress)
+                
+                Pager(page: self.$calPageNum, data: calPages, id: \.self) {
+                    
+                    TextWithBottomBorder(text: $0)
+                        .font(Font.custom("Montserrat-Regular", size: 25))
+                    
+                }.frame(height: 100)
+                
+                if (calPageNum == 0) {
                             
-                            ForEach(self.session.loggedInUser?.items ?? []) { item in
-                                
-                                    ItemRow(item: item, isEvent: true, isReminder: false, isTask: false)
-                                    .padding(.horizontal)
-                            }
-                                
-                            Text("R e m i n d e r s")
-                                .font(Font.custom("Montserrat-SemiBold", size: 20))
-                                .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
-                                .padding()
+                    AgendaView(timeFrame: timePageNum)
                             
-                            ForEach(self.session.loggedInUser?.items ?? []) { item in
-                                
-                                ItemRow(item: item, isEvent: false, isReminder: true, isTask: false)
-                                    .padding(.horizontal)
-                            }
-                                
-                            Text("T a s k s")
-                                .font(Font.custom("Montserrat-SemiBold", size: 20))
-                                .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
-                                .padding()
+                } else if (calPageNum == 1) {
                             
-                            ForEach(self.session.loggedInUser?.items ?? []) { item in
-                                
-                                ItemRow(item: item, isEvent: false, isReminder: false, isTask: true)
-                                    .padding(.horizontal)
-                            }
-                                
-                            Text("S u g g e s t i o n s")
-                                .font(Font.custom("Montserrat-SemiBold", size: 20))
-                                .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
-                                .padding()
-                            
-                        }.frame(width: geometry.size.width, alignment: .leading)
-                        
-                    }.frame(width: geometry.size.width, alignment: .leading)
+                    CalendarView()
                 }
             }
             
