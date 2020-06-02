@@ -56,7 +56,8 @@ class FirebaseSession: ObservableObject {
                     "reminderToggle": item.isReminderSet(),
                     "reminder": item.getReminderDate() as Any,
                     "labels": item.getLabels(),
-                    "completed": item.isCompleted()
+                    "completed": item.isCompleted(),
+                    "event": item.isEvent()
                 ], merge: true) { error in
                     
                     if let error = error {
@@ -86,7 +87,8 @@ class FirebaseSession: ObservableObject {
                 "reminderToggle": item.isReminderSet(),
                 "reminder": item.getReminderDate() as Any,
                 "labels": item.getLabels(),
-                "completed": item.isCompleted()
+                "completed": item.isCompleted(),
+                "event": item.isEvent()
             ], merge: true) { error in
                 
                 if let error = error {
@@ -213,13 +215,16 @@ class FirebaseSession: ObservableObject {
                         let task = document.get("task") as! Bool
                         let habit = document.get("habit") as! Bool
                         let dateToggle = document.get("dateToggle") as! Bool
-                        let date = document.get("date") as? Date
+                        let dateTimeStamp = document.get("date") as? Timestamp
+                        let date = dateTimeStamp?.dateValue() as NSDate?
                         let reminderToggle = document.get("reminderToggle") as! Bool
-                        let reminder = document.get("reminder") as? Date
+                        let reminderTimeStamp = document.get("reminder") as? Timestamp
+                        let reminder = reminderTimeStamp?.dateValue() as NSDate?
                         let completed = document.get("completed") as! Bool
                         let labels = document.get("labels") as? Array<String>
+                        let event = document.get("event") as! Bool
                     
-                        itemArray.append(Item(title: title, task: task, habit: habit, dateToggle: dateToggle, date: date ?? nil, reminderToggle: reminderToggle, reminder: reminder ?? nil, completed: completed, labels: labels ?? []))
+                        itemArray.append(Item(title: title, task: task, habit: habit, dateToggle: dateToggle, date: date ?? nil, reminderToggle: reminderToggle, reminder: reminder ?? nil, completed: completed, labels: labels ?? [], event: event))
                     }
                     
                     self.loggedInUser?.items = itemArray

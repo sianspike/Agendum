@@ -21,6 +21,7 @@ struct Dashboard: View {
     var body: some View {
         
         ZStack {
+            
             VStack(alignment: .leading) {
                 
                 Pager(page: self.$timePageNum, data: timePages, id: \.self) {

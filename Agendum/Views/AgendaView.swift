@@ -12,24 +12,27 @@ struct AgendaView: View {
     
     @EnvironmentObject var session: FirebaseSession
     var timeFrame: Int
+    var currentItem: Item? = nil
     
     var body: some View {
         
         GeometryReader { geometry in
+            
             ScrollView(.vertical, showsIndicators: false) {
+                
                 VStack(alignment: .leading) {
 
                     Text("E v e n t s")
                         .font(Font.custom("Montserrat-SemiBold", size: 20))
                         .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
                         .padding(.horizontal)
-                    
-                    ForEach(self.session.loggedInUser?.items ?? []) { item in
+                            
+                    ForEach(self.session.loggedInUser?.items ?? [], id: \.title) { item in
 
                         ItemRow(item: item, isEvent: true, isReminder: false, isTask: false, timeFrame: self.timeFrame)
                             .padding(.horizontal)
                     }
-                        
+  
                     Text("R e m i n d e r s")
                         .font(Font.custom("Montserrat-SemiBold", size: 20))
                         .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))

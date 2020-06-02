@@ -42,6 +42,8 @@
 		FCC21D522423BC2200485781 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCC21D512423BC2200485781 /* Assets.xcassets */; };
 		FCC21D5B2423BCBF00485781 /* Agendum.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FCC21D592423BCBF00485781 /* Agendum.xcdatamodeld */; };
 		FCCC972F243CBA480085A4FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCCC972E243CBA470085A4FE /* LaunchScreen.storyboard */; };
+		FCD42845248649E000A2A1D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC2CD0D22423BFF4004A1D8E /* GoogleService-Info.plist */; };
+		FCD940CB24867AE1006ABB8C /* ItemElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD940CA24867AE1006ABB8C /* ItemElement.swift */; };
 		FCE8AF42246840820038DCF6 /* ItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8AF41246840820038DCF6 /* ItemRow.swift */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +88,7 @@
 		FCC21D512423BC2200485781 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Agendum/Support Files/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
 		FCC21D5A2423BCBF00485781 /* Agendum.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Agendum.xcdatamodel; sourceTree = "<group>"; };
 		FCCC972E243CBA470085A4FE /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FCD940CA24867AE1006ABB8C /* ItemElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemElement.swift; sourceTree = "<group>"; };
 		FCE8AF41246840820038DCF6 /* ItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -196,6 +199,7 @@
 				FCE8AF41246840820038DCF6 /* ItemRow.swift */,
 				FC791FD82483EF7600DE407F /* AgendaView.swift */,
 				FC791FDA2483EFE900DE407F /* CalendarView.swift */,
+				FCD940CA24867AE1006ABB8C /* ItemElement.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -293,6 +297,7 @@
 				FCCC972F243CBA480085A4FE /* LaunchScreen.storyboard in Resources */,
 				D777A78823EB3A860021315E /* Preview Assets.xcassets in Resources */,
 				FCC21D522423BC2200485781 /* Assets.xcassets in Resources */,
+				FCD42845248649E000A2A1D2 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +359,7 @@
 				FCBCB21924348E1A00FFA65F /* ViewRouter.swift in Sources */,
 				FCC21D5B2423BCBF00485781 /* Agendum.xcdatamodeld in Sources */,
 				D73B804D2407FA170098FAD0 /* SettingsView.swift in Sources */,
+				FCD940CB24867AE1006ABB8C /* ItemElement.swift in Sources */,
 				D777A78323EB3A840021315E /* ContentView.swift in Sources */,
 				D743ED8C23F6A8C8007341D5 /* SignUpView.swift in Sources */,
 				D743ED9023F6C712007341D5 /* Dashboard.swift in Sources */,

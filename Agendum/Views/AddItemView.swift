@@ -14,6 +14,7 @@ struct AddItemView: View {
     @State private var taskToggle = false
     @State private var habitToggle = false
     @State private var dateToggle = false
+    @State private var eventToggle = false
     @State private var date = Date()
     @State private var reminderToggle = false
     @State private var reminder = Date()
@@ -63,6 +64,12 @@ struct AddItemView: View {
                         Text("H a b i t")
                             .font(Font.custom("Montserrat-Regular", size: 15))
                         
+                    }.padding()
+                    
+                    Toggle(isOn: $eventToggle) {
+                        
+                        Text("E v e n t")
+                            .font(Font.custom("Montserrat-Regular", size: 15))
                     }.padding()
                     
                     Toggle(isOn: $dateToggle) {
@@ -167,7 +174,7 @@ struct AddItemView: View {
                 
                 if (self.title != "") {
                     
-                    self.session.loggedInUser?.items.append(Item(title: self.title, task: self.taskToggle, habit: self.habitToggle, dateToggle: self.dateToggle, date: self.date, reminderToggle: self.reminderToggle, reminder: self.reminder, completed: self.completedToggle, labels: self.selectedLabels))
+                    self.session.loggedInUser?.items.append(Item(title: self.title, task: self.taskToggle, habit: self.habitToggle, dateToggle: self.dateToggle, date: self.date as NSDate, reminderToggle: self.reminderToggle, reminder: self.reminder as NSDate, completed: self.completedToggle, labels: self.selectedLabels, event: self.eventToggle))
                     self.session.saveItems(items: self.session.loggedInUser?.items ?? [])
                     self.session.saveLabels(labels: self.session.loggedInUser?.labels ?? [])
                     self.viewRouter.viewRouter = "Dashboard"

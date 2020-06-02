@@ -10,40 +10,51 @@ import Foundation
 
 class Item: Identifiable {
     
-    private var title: String
+    var title: String
     private var task: Bool
+    private var event: Bool
     private var habit: Bool
     private var dateToggle: Bool
-    private var date: Date?
+    private var date: NSDate?
     private var reminderToggle: Bool
-    private var reminder: Date?
+    private var reminder: NSDate?
     private var labels: Array<String>
     private var completed: Bool
     
-    init(title: String, task: Bool, habit: Bool, dateToggle: Bool, reminderToggle: Bool, completed: Bool) {
+    init(title: String, task: Bool, habit: Bool, dateToggle: Bool, reminderToggle: Bool, completed: Bool, event: Bool) {
         self.title = title
         self.task = task
         self.habit = habit
         self.dateToggle = dateToggle
         self.reminderToggle = reminderToggle
         self.completed = completed
-        
+        self.event = event
         self.date = nil
         self.reminder = nil
         self.labels = []
     }
     
-    init(title: String, task: Bool, habit: Bool, dateToggle: Bool, date: Date?, reminderToggle: Bool, reminder: Date?, completed: Bool, labels: Array<String>) {
+    init(title: String, task: Bool, habit: Bool, dateToggle: Bool, date: NSDate?, reminderToggle: Bool, reminder: NSDate?, completed: Bool, labels: Array<String>, event: Bool) {
         self.title = title
         self.task = task
         self.habit = habit
         self.dateToggle = dateToggle
         self.reminderToggle = reminderToggle
         self.completed = completed
-        
+        self.event = event
         self.date = date
         self.reminder = reminder
         self.labels = labels
+    }
+    
+    func isEvent() -> Bool {
+        
+        return self.event
+    }
+    
+    func eventToggle() {
+        
+        self.event.toggle()
     }
     
     func setTitle(newTitle: String) {
@@ -78,11 +89,11 @@ class Item: Identifiable {
         return self.dateToggle
     }
     
-    func setDate(newDate: Date?) {
+    func setDate(newDate: NSDate?) {
         self.date = newDate
     }
     
-    func getDate() -> Date? {
+    func getDate() -> NSDate? {
         return self.date
     }
     
@@ -94,11 +105,11 @@ class Item: Identifiable {
         return self.reminderToggle
     }
     
-    func setReminderDate(newDate: Date?) {
+    func setReminderDate(newDate: NSDate?) {
         self.reminder = newDate
     }
     
-    func getReminderDate() -> Date? {
+    func getReminderDate() -> NSDate? {
         return self.reminder
     }
     
