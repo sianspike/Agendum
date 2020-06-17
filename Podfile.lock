@@ -279,6 +279,7 @@ PODS:
     - nanopb (~> 0.3)
   - gRPC-Core/Interface (1.21.0)
   - GTMSessionFetcher/Core (1.3.1)
+  - KVKCalendar (0.3.1)
   - leveldb-library (1.22)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
@@ -286,6 +287,7 @@ PODS:
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
   - PromisesObjC (1.2.8)
+  - SwiftUIPager (1.5.1)
 
 DEPENDENCIES:
   - FBSDKLoginKit
@@ -293,6 +295,8 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Firestore
   - FirebaseFirestoreSwift
+  - KVKCalendar
+  - SwiftUIPager
 
 SPEC REPOS:
   trunk:
@@ -317,9 +321,11 @@ SPEC REPOS:
     - "gRPC-C++"
     - gRPC-Core
     - GTMSessionFetcher
+    - KVKCalendar
     - leveldb-library
     - nanopb
     - PromisesObjC
+    - SwiftUIPager
 
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
@@ -343,10 +349,12 @@ SPEC CHECKSUMS:
   "gRPC-C++": 9dfe7b44821e7b3e44aacad2af29d2c21f7cde83
   gRPC-Core: c9aef9a261a1247e881b18059b84d597293c9947
   GTMSessionFetcher: cea130bbfe5a7edc8d06d3f0d17288c32ffe9925
+  KVKCalendar: 10b18ad41e601a3df45b8bef1d08ce7ca10b646b
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  SwiftUIPager: 7417c918be1071cab5fbbe1e226b9bd76a97041e
 
-PODFILE CHECKSUM: bd981e08586328ac235e40b066ae9d6750b20fec
+PODFILE CHECKSUM: 123ec2e6dcac06a5818ebfd63ffd8855b3022bd4
 
-COCOAPODS: 1.9.0
+COCOAPODS: 1.9.1

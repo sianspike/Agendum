@@ -34,7 +34,6 @@
 		FC54A0B824615C8D009938C2 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC54A0B724615C8D009938C2 /* Item.swift */; };
 		FC7469AF243B2E6700AFC1E9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7469AE243B2E6700AFC1E9 /* HomeView.swift */; };
 		FC791FD92483EF7600DE407F /* AgendaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC791FD82483EF7600DE407F /* AgendaView.swift */; };
-		FC791FDB2483EFE900DE407F /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC791FDA2483EFE900DE407F /* CalendarView.swift */; };
 		FC8A863F2431E2C200E3265F /* FacebookLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8A863E2431E2C200E3265F /* FacebookLoginView.swift */; };
 		FC9A92B02420DFD4005F6888 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9A92AF2420DFD4005F6888 /* User.swift */; };
 		FC9A92B22420E0A8005F6888 /* FirebaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9A92B12420E0A8005F6888 /* FirebaseSession.swift */; };
@@ -42,6 +41,7 @@
 		FCC21D522423BC2200485781 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCC21D512423BC2200485781 /* Assets.xcassets */; };
 		FCC21D5B2423BCBF00485781 /* Agendum.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FCC21D592423BCBF00485781 /* Agendum.xcdatamodeld */; };
 		FCCC972F243CBA480085A4FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCCC972E243CBA470085A4FE /* LaunchScreen.storyboard */; };
+		FCCE59F62493B1F000E4BE0F /* CalendarDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCE59F52493B1F000E4BE0F /* CalendarDisplayView.swift */; };
 		FCD42845248649E000A2A1D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC2CD0D22423BFF4004A1D8E /* GoogleService-Info.plist */; };
 		FCD940CB24867AE1006ABB8C /* ItemElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD940CA24867AE1006ABB8C /* ItemElement.swift */; };
 		FCE8AF42246840820038DCF6 /* ItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8AF41246840820038DCF6 /* ItemRow.swift */; };
@@ -80,7 +80,6 @@
 		FC54A0B724615C8D009938C2 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		FC7469AE243B2E6700AFC1E9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FC791FD82483EF7600DE407F /* AgendaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaView.swift; sourceTree = "<group>"; };
-		FC791FDA2483EFE900DE407F /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		FC8A863E2431E2C200E3265F /* FacebookLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLoginView.swift; sourceTree = "<group>"; };
 		FC9A92AF2420DFD4005F6888 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FC9A92B12420E0A8005F6888 /* FirebaseSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseSession.swift; sourceTree = "<group>"; };
@@ -88,6 +87,7 @@
 		FCC21D512423BC2200485781 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Agendum/Support Files/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
 		FCC21D5A2423BCBF00485781 /* Agendum.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Agendum.xcdatamodel; sourceTree = "<group>"; };
 		FCCC972E243CBA470085A4FE /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FCCE59F52493B1F000E4BE0F /* CalendarDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDisplayView.swift; sourceTree = "<group>"; };
 		FCD940CA24867AE1006ABB8C /* ItemElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemElement.swift; sourceTree = "<group>"; };
 		FCE8AF41246840820038DCF6 /* ItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -198,8 +198,8 @@
 				FCCC972E243CBA470085A4FE /* LaunchScreen.storyboard */,
 				FCE8AF41246840820038DCF6 /* ItemRow.swift */,
 				FC791FD82483EF7600DE407F /* AgendaView.swift */,
-				FC791FDA2483EFE900DE407F /* CalendarView.swift */,
 				FCD940CA24867AE1006ABB8C /* ItemElement.swift */,
+				FCCE59F52493B1F000E4BE0F /* CalendarDisplayView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -362,6 +362,7 @@
 				FCD940CB24867AE1006ABB8C /* ItemElement.swift in Sources */,
 				D777A78323EB3A840021315E /* ContentView.swift in Sources */,
 				D743ED8C23F6A8C8007341D5 /* SignUpView.swift in Sources */,
+				FCCE59F62493B1F000E4BE0F /* CalendarDisplayView.swift in Sources */,
 				D743ED9023F6C712007341D5 /* Dashboard.swift in Sources */,
 				D73B804B2407F5760098FAD0 /* FriendView.swift in Sources */,
 				FC791FD92483EF7600DE407F /* AgendaView.swift in Sources */,
@@ -371,7 +372,6 @@
 				D7B1570F2403CBB90031671F /* Timer.swift in Sources */,
 				D73B80512408006A0098FAD0 /* ButtonOne.swift in Sources */,
 				D7B157152407D6160031671F /* AllItemsView.swift in Sources */,
-				FC791FDB2483EFE900DE407F /* CalendarView.swift in Sources */,
 				D7B157172407DE600031671F /* FloatingAddButton.swift in Sources */,
 				D73B804F2407FF780098FAD0 /* ResetPasswordView.swift in Sources */,
 				D73B805324080A240098FAD0 /* AddItemView.swift in Sources */,

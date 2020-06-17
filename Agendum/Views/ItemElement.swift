@@ -66,7 +66,17 @@ struct ItemElement: View {
                             self.dragOffset = value.translation
                         }
                         .onEnded { value in
-                                    
+                            
+                            if (self.dragOffset.width < 0) {
+                                
+                                self.session.deleteItem(item: self.item)
+                                self.session.retrieveItems()
+                                
+                            } else if (self.dragOffset.width > 0) {
+                                
+                                //edit item
+                            }
+                            
                             self.dragOffset = .zero
                         })
                     

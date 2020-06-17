@@ -45,7 +45,10 @@ struct Dashboard: View {
                             
                 } else if (calPageNum == 1) {
                             
-                    CalendarView()
+                    //NavigationView {
+                        
+                        CalendarDisplayView(timeFrame: timePageNum)
+                    //}
                 }
             }
             

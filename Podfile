@@ -14,5 +14,6 @@ target 'Agendum' do
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'
   pod 'SwiftUIPager'
+  pod 'KVKCalendar'
 
 end

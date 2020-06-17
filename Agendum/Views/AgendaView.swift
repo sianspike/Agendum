@@ -14,6 +14,15 @@ struct AgendaView: View {
     var timeFrame: Int
     var currentItem: Item? = nil
     
+    func deleteItems(at offsets: IndexSet) {
+            
+        session.loggedInUser?.items.remove(atOffsets: offsets)
+        //session.deleteItem(item: itemToDelete)
+            
+        print("deleted")
+        
+    }
+    
     var body: some View {
         
         GeometryReader { geometry in
@@ -31,6 +40,7 @@ struct AgendaView: View {
 
                         ItemRow(item: item, isEvent: true, isReminder: false, isTask: false, timeFrame: self.timeFrame)
                             .padding(.horizontal)
+                        
                     }
   
                     Text("R e m i n d e r s")
@@ -42,6 +52,7 @@ struct AgendaView: View {
 
                         ItemRow(item: item, isEvent: false, isReminder: true, isTask: false, timeFrame: self.timeFrame)
                             .padding(.horizontal)
+                        
                     }
                         
                     Text("T a s k s")
@@ -53,6 +64,7 @@ struct AgendaView: View {
 
                         ItemRow(item: item, isEvent: false, isReminder: false, isTask: true, timeFrame: self.timeFrame)
                             .padding(.horizontal)
+                        
                     }
                         
                     Text("S u g g e s t i o n s")

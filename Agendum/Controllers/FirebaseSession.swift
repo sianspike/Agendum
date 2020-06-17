@@ -39,6 +39,22 @@ class FirebaseSession: ObservableObject {
         }
     }
     
+    func deleteItem(item: Item) {
+        
+        let itemsLocation = db.collection("users").document(loggedInUser!.uid).collection("items")
+        
+        itemsLocation.document(item.getTitle()).delete() { error in
+            if let error = error {
+                
+                print("Error removing document: \(error)")
+                
+            } else {
+                
+                print("Document successfully removed!")
+            }
+        }
+    }
+    
     func saveItem(item: Item) {
         
         let itemsLocation = db.collection("users").document(loggedInUser!.uid).collection("items")
