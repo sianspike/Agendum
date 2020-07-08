@@ -16,9 +16,7 @@ struct AgendaView: View {
     
     func deleteItems(at offsets: IndexSet) {
             
-        session.loggedInUser?.items.remove(atOffsets: offsets)
-        //session.deleteItem(item: itemToDelete)
-            
+        session.loggedInUser?.items.remove(atOffsets: offsets)            
         print("deleted")
         
     }

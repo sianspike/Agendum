@@ -18,6 +18,10 @@
 		D743ED9023F6C712007341D5 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED8F23F6C712007341D5 /* Dashboard.swift */; };
 		D743ED9223F6C906007341D5 /* TextWithBottomBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED9123F6C906007341D5 /* TextWithBottomBorder.swift */; };
 		D743ED9423F6CE0B007341D5 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED9323F6CE0B007341D5 /* ProgressBar.swift */; };
+		D756916524B60EDF00CCD17B /* CalendarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D756916424B60EDF00CCD17B /* CalendarController.swift */; };
+		D756916724B60FFC00CCD17B /* CalendarTodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D756916624B60FFC00CCD17B /* CalendarTodayView.swift */; };
+		D756916924B6125100CCD17B /* CalendarWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D756916824B6125100CCD17B /* CalendarWeekView.swift */; };
+		D756916B24B612EB00CCD17B /* CalendarMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D756916A24B612EB00CCD17B /* CalendarMonthView.swift */; };
 		D777A77E23EB3A840021315E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D777A77D23EB3A840021315E /* SceneDelegate.swift */; };
 		D777A78323EB3A840021315E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D777A78223EB3A840021315E /* ContentView.swift */; };
 		D777A78823EB3A860021315E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D777A78723EB3A860021315E /* Preview Assets.xcassets */; };
@@ -41,7 +45,6 @@
 		FCC21D522423BC2200485781 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCC21D512423BC2200485781 /* Assets.xcassets */; };
 		FCC21D5B2423BCBF00485781 /* Agendum.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FCC21D592423BCBF00485781 /* Agendum.xcdatamodeld */; };
 		FCCC972F243CBA480085A4FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCCC972E243CBA470085A4FE /* LaunchScreen.storyboard */; };
-		FCCE59F62493B1F000E4BE0F /* CalendarDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCE59F52493B1F000E4BE0F /* CalendarDisplayView.swift */; };
 		FCD42845248649E000A2A1D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC2CD0D22423BFF4004A1D8E /* GoogleService-Info.plist */; };
 		FCD940CB24867AE1006ABB8C /* ItemElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD940CA24867AE1006ABB8C /* ItemElement.swift */; };
 		FCE8AF42246840820038DCF6 /* ItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8AF41246840820038DCF6 /* ItemRow.swift */; };
@@ -61,6 +64,10 @@
 		D743ED8F23F6C712007341D5 /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
 		D743ED9123F6C906007341D5 /* TextWithBottomBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWithBottomBorder.swift; sourceTree = "<group>"; };
 		D743ED9323F6CE0B007341D5 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		D756916424B60EDF00CCD17B /* CalendarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarController.swift; sourceTree = "<group>"; };
+		D756916624B60FFC00CCD17B /* CalendarTodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTodayView.swift; sourceTree = "<group>"; };
+		D756916824B6125100CCD17B /* CalendarWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWeekView.swift; sourceTree = "<group>"; };
+		D756916A24B612EB00CCD17B /* CalendarMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMonthView.swift; sourceTree = "<group>"; };
 		D777A77823EB3A840021315E /* Agendum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Agendum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D777A77D23EB3A840021315E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D777A78223EB3A840021315E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -87,7 +94,6 @@
 		FCC21D512423BC2200485781 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Agendum/Support Files/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
 		FCC21D5A2423BCBF00485781 /* Agendum.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Agendum.xcdatamodel; sourceTree = "<group>"; };
 		FCCC972E243CBA470085A4FE /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		FCCE59F52493B1F000E4BE0F /* CalendarDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDisplayView.swift; sourceTree = "<group>"; };
 		FCD940CA24867AE1006ABB8C /* ItemElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemElement.swift; sourceTree = "<group>"; };
 		FCE8AF41246840820038DCF6 /* ItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -199,7 +205,9 @@
 				FCE8AF41246840820038DCF6 /* ItemRow.swift */,
 				FC791FD82483EF7600DE407F /* AgendaView.swift */,
 				FCD940CA24867AE1006ABB8C /* ItemElement.swift */,
-				FCCE59F52493B1F000E4BE0F /* CalendarDisplayView.swift */,
+				D756916624B60FFC00CCD17B /* CalendarTodayView.swift */,
+				D756916824B6125100CCD17B /* CalendarWeekView.swift */,
+				D756916A24B612EB00CCD17B /* CalendarMonthView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -225,6 +233,7 @@
 		FCBCB21724347DA000FFA65F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D756916424B60EDF00CCD17B /* CalendarController.swift */,
 				D777A78223EB3A840021315E /* ContentView.swift */,
 				FC9A92B12420E0A8005F6888 /* FirebaseSession.swift */,
 				FCBCB21824348E1A00FFA65F /* ViewRouter.swift */,
@@ -353,6 +362,7 @@
 				FC8A863F2431E2C200E3265F /* FacebookLoginView.swift in Sources */,
 				FC2CD0CF2423BF81004A1D8E /* AppDelegate.swift in Sources */,
 				D743ED9423F6CE0B007341D5 /* ProgressBar.swift in Sources */,
+				D756916724B60FFC00CCD17B /* CalendarTodayView.swift in Sources */,
 				FCE8AF42246840820038DCF6 /* ItemRow.swift in Sources */,
 				FC7469AF243B2E6700AFC1E9 /* HomeView.swift in Sources */,
 				FC54A0B824615C8D009938C2 /* Item.swift in Sources */,
@@ -362,11 +372,11 @@
 				FCD940CB24867AE1006ABB8C /* ItemElement.swift in Sources */,
 				D777A78323EB3A840021315E /* ContentView.swift in Sources */,
 				D743ED8C23F6A8C8007341D5 /* SignUpView.swift in Sources */,
-				FCCE59F62493B1F000E4BE0F /* CalendarDisplayView.swift in Sources */,
 				D743ED9023F6C712007341D5 /* Dashboard.swift in Sources */,
 				D73B804B2407F5760098FAD0 /* FriendView.swift in Sources */,
 				FC791FD92483EF7600DE407F /* AgendaView.swift in Sources */,
 				D777A77E23EB3A840021315E /* SceneDelegate.swift in Sources */,
+				D756916524B60EDF00CCD17B /* CalendarController.swift in Sources */,
 				FC385DE52455BFC300DE256D /* TextFieldWithBottomBorder.swift in Sources */,
 				D743ED9223F6C906007341D5 /* TextWithBottomBorder.swift in Sources */,
 				D7B1570F2403CBB90031671F /* Timer.swift in Sources */,
@@ -380,7 +390,9 @@
 				D743ED8823F692A2007341D5 /* HorizontalLineShape.swift in Sources */,
 				FC9A92B22420E0A8005F6888 /* FirebaseSession.swift in Sources */,
 				D7C3296523FFD2CA008F3F4F /* NavigationBar.swift in Sources */,
+				D756916924B6125100CCD17B /* CalendarWeekView.swift in Sources */,
 				FC9A92B02420DFD4005F6888 /* User.swift in Sources */,
+				D756916B24B612EB00CCD17B /* CalendarMonthView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,7 +525,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Agendum/Preview Content\"";
 				DEVELOPMENT_TEAM = F5XRH8MLFK;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "/Users/sianspike/Documents/Swansea_University/Final Year Project/Agendum/Agendum/Support Files/GoogleService-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Agendum/Support Files/GoogleService-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -537,7 +549,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Agendum/Preview Content\"";
 				DEVELOPMENT_TEAM = F5XRH8MLFK;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "/Users/sianspike/Documents/Swansea_University/Final Year Project/Agendum/Agendum/Support Files/GoogleService-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Agendum/Support Files/GoogleService-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

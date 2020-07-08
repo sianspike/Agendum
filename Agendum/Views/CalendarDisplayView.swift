@@ -12,7 +12,7 @@ import KVKCalendar
 struct CalendarDisplayView: UIViewRepresentable {
     
     @EnvironmentObject var session: FirebaseSession
-    var timeFrame: Int
+    @State var timeFrame: Int
     
     var calendarDayView: CalendarView = {
         var style = Style()
@@ -29,24 +29,106 @@ struct CalendarDisplayView: UIViewRepresentable {
         return CalendarView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 470), style: style)
     }()
     
-    func makeUIView(context: UIViewRepresentableContext<CalendarDisplayView>) -> CalendarView {
+    var calendarWeekView: CalendarView = {
+        var style = Style()
+        style.startWeekDay = .monday
+        style.timeHourSystem = .twentyFourHour
+        style.headerScroll.isScrollEnabled = false
+        style.event.isEnableMoveEvent = true
+        style.locale = Locale.current
+        style.timezone = TimeZone.current
+        
+        return CalendarView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 470), style: style)
+    }()
+    
+    var calendarMonthView: CalendarView = {
+        var style = Style()
+        style.defaultType = .month
+        style.timeHourSystem = .twentyFourHour
+        style.headerScroll.isScrollEnabled = false
+        style.headerScroll.isHiddenTitleDate = true
+        style.headerScroll.isHiddenCornerTitleDate = true
+        style.headerScroll.heightHeaderWeek = 0
+        style.headerScroll.heightTitleDate = 0
+        style.event.isEnableMoveEvent = true
+        style.locale = Locale.current
+        style.timezone = TimeZone.current
+        
+        return CalendarView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 470), style: style)
+    }()
+    
+    func makeUIView(context: Context) -> CalendarView {
         
         if (timeFrame == 0) {
-            
+
             calendarDayView.dataSource = context.coordinator
             calendarDayView.delegate = context.coordinator
-            
+
             calendarDayView.reloadData()
+
+            return calendarDayView
+
+        } else if (timeFrame == 1) {
+
+            calendarWeekView.dataSource = context.coordinator
+            calendarWeekView.delegate = context.coordinator
+
+            calendarWeekView.reloadData()
+
+            return calendarWeekView
+
+        } else if (timeFrame == 2) {
+
+            calendarMonthView.dataSource = context.coordinator
+            calendarMonthView.delegate = context.coordinator
+
+            calendarMonthView.reloadData()
+
+            return calendarMonthView
         }
-        
+
         return calendarDayView
     }
     
-    func updateUIView(_ uiView: CalendarView, context: UIViewRepresentableContext<CalendarDisplayView>) {
+    func updateUIView(_ uiView: CalendarView, context: Context) {
         
+        
+        
+//        let views = [calendarDayView, calendarWeekView, calendarMonthView]
+//
+//        if (timeFrame == 0) {
+//
+//            calendarDayView.delegate = context.coordinator
+//            calendarDayView.dataSource = context.coordinator
+//            calendarDayView.reloadData()
+//
+//            uiView.delegate = calendarDayView.delegate
+//            uiView.dataSource = calendarDayView.dataSource
+//
+//        } else if (timeFrame == 1) {
+//
+//            calendarWeekView.delegate = context.coordinator
+//            calendarWeekView.dataSource = context.coordinator
+//            calendarWeekView.reloadData()
+//
+//            uiView.delegate = calendarWeekView.delegate
+//            uiView.dataSource = calendarWeekView.dataSource
+//
+//        } else if (timeFrame == 2) {
+//
+//            calendarMonthView.delegate = context.coordinator
+//            calendarMonthView.dataSource = context.coordinator
+//            calendarMonthView.reloadData()
+//
+//            uiView.delegate = calendarMonthView.delegate
+//            uiView.dataSource = calendarMonthView.dataSource
+//        }
+//
+//        uiView.addSubview(views[timeFrame])
+//        uiView.reloadData()
     }
     
-    func makeCoordinator() -> CalendarDisplayView.Coordinator {
+    func makeCoordinator() -> Coordinator {
         
         Coordinator(self)
     }
@@ -68,8 +150,16 @@ struct CalendarDisplayView: UIViewRepresentable {
                 self.events = events
 
                 if (self.view.timeFrame == 0) {
-                    
+
                     self.view.calendarDayView.reloadData()
+
+                } else if (self.view.timeFrame == 1) {
+
+                    self.view.calendarWeekView.reloadData()
+
+                } else if (self.view.timeFrame == 2) {
+
+                    self.view.calendarMonthView.reloadData()
                 }
             }
         }
@@ -91,7 +181,7 @@ struct CalendarDisplayView: UIViewRepresentable {
             
             for item in models {
                 
-                if (self.view.timeFrame == 0 && item.isDateSet()) {
+                if (item.isDateSet()) {
                     
                     var event = Event()
                     event.id = item.id
@@ -116,14 +206,4 @@ struct CalendarDisplayView: UIViewRepresentable {
             completion(events)
         }
     }
-}
-
-extension UIViewController {
-    
-  func presentInFullScreen(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
-    
-    viewController.modalPresentationStyle = .fullScreen
-    
-    present(viewController, animated: animated, completion: completion)
-  }
 }
