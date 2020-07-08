@@ -25,7 +25,7 @@ struct CalendarWeekView: UIViewRepresentable {
         return CalendarView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 470), style: style)
     }()
     
-    func makeUIView(context: Context) -> CalendarView {
+    func makeUIView(context: UIViewRepresentableContext<CalendarWeekView>) -> CalendarView {
 
             calendarWeekView.dataSource = context.coordinator
             calendarWeekView.delegate = context.coordinator
@@ -35,8 +35,9 @@ struct CalendarWeekView: UIViewRepresentable {
             return calendarWeekView
     }
     
-    func updateUIView(_ uiView: CalendarView, context: Context) {
+    func updateUIView(_ uiView: CalendarView, context: UIViewRepresentableContext<CalendarWeekView>) {
         
+        uiView.reloadData()
     }
     
     func makeCoordinator() -> Coordinator {
@@ -50,16 +51,16 @@ struct CalendarWeekView: UIViewRepresentable {
         private let view: CalendarWeekView
         var events = [Event]()
         
-        init(_ view: CalendarWeekView) {
+        init(_ currentView: CalendarWeekView) {
             
-            self.view = view
+            self.view = currentView
             
             super.init()
             
             loadEvents { (events) in
                 
                 self.events = events
-                self.view.calendarWeekView.reloadData()
+                currentView.calendarWeekView.reloadData()
             }
         }
         
@@ -70,6 +71,7 @@ struct CalendarWeekView: UIViewRepresentable {
         
         func willDisplayDate(_ date: Date?, events: [Event]) -> DateStyle? {
             
+            view.calendarWeekView.reloadData()
             return nil
         }
         

@@ -25,6 +25,7 @@
 		D777A77E23EB3A840021315E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D777A77D23EB3A840021315E /* SceneDelegate.swift */; };
 		D777A78323EB3A840021315E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D777A78223EB3A840021315E /* ContentView.swift */; };
 		D777A78823EB3A860021315E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D777A78723EB3A860021315E /* Preview Assets.xcassets */; };
+		D79A543824B632DC007DEDEC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC2CD0D22423BFF4004A1D8E /* GoogleService-Info.plist */; };
 		D7B1570D2403CAEA0031671F /* FocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B1570C2403CAEA0031671F /* FocusView.swift */; };
 		D7B1570F2403CBB90031671F /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B1570E2403CBB90031671F /* Timer.swift */; };
 		D7B157112407B8720031671F /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = D777A7AE23EB3BD30021315E /* Fonts */; };
@@ -45,7 +46,6 @@
 		FCC21D522423BC2200485781 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCC21D512423BC2200485781 /* Assets.xcassets */; };
 		FCC21D5B2423BCBF00485781 /* Agendum.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FCC21D592423BCBF00485781 /* Agendum.xcdatamodeld */; };
 		FCCC972F243CBA480085A4FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCCC972E243CBA470085A4FE /* LaunchScreen.storyboard */; };
-		FCD42845248649E000A2A1D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC2CD0D22423BFF4004A1D8E /* GoogleService-Info.plist */; };
 		FCD940CB24867AE1006ABB8C /* ItemElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD940CA24867AE1006ABB8C /* ItemElement.swift */; };
 		FCE8AF42246840820038DCF6 /* ItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8AF41246840820038DCF6 /* ItemRow.swift */; };
 /* End PBXBuildFile section */
@@ -270,7 +270,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Sian Pike";
 				TargetAttributes = {
 					D777A77723EB3A840021315E = {
@@ -301,12 +301,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D79A543824B632DC007DEDEC /* GoogleService-Info.plist in Resources */,
 				D7B157112407B8720031671F /* Fonts in Resources */,
 				D7C3296723FFD6D4008F3F4F /* Icons in Resources */,
 				FCCC972F243CBA480085A4FE /* LaunchScreen.storyboard in Resources */,
 				D777A78823EB3A860021315E /* Preview Assets.xcassets in Resources */,
 				FCC21D522423BC2200485781 /* Assets.xcassets in Resources */,
-				FCD42845248649E000A2A1D2 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +425,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -486,6 +487,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

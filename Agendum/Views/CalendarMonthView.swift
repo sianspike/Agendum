@@ -29,7 +29,7 @@ struct CalendarMonthView: UIViewRepresentable {
         return CalendarView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 470), style: style)
     }()
     
-    func makeUIView(context: Context) -> CalendarView {
+    func makeUIView(context: UIViewRepresentableContext<CalendarMonthView>) -> CalendarView {
 
             calendarMonthView.dataSource = context.coordinator
             calendarMonthView.delegate = context.coordinator
@@ -39,7 +39,7 @@ struct CalendarMonthView: UIViewRepresentable {
             return calendarMonthView
     }
     
-    func updateUIView(_ uiView: CalendarView, context: Context) {
+    func updateUIView(_ uiView: CalendarView, context: UIViewRepresentableContext<CalendarMonthView>) {
         
     }
     
@@ -74,6 +74,7 @@ struct CalendarMonthView: UIViewRepresentable {
         
         func willDisplayDate(_ date: Date?, events: [Event]) -> DateStyle? {
             
+            view.calendarMonthView.reloadData()
             return nil
         }
         

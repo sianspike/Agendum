@@ -28,7 +28,7 @@ struct CalendarTodayView: UIViewRepresentable {
         return CalendarView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 470), style: style)
     }()
     
-    func makeUIView(context: Context) -> CalendarView {
+    func makeUIView(context: UIViewRepresentableContext<CalendarTodayView>) -> CalendarView {
 
             calendarDayView.dataSource = context.coordinator
             calendarDayView.delegate = context.coordinator
@@ -38,7 +38,7 @@ struct CalendarTodayView: UIViewRepresentable {
             return calendarDayView
     }
     
-    func updateUIView(_ uiView: CalendarView, context: Context) {
+    func updateUIView(_ uiView: CalendarView, context: UIViewRepresentableContext<CalendarTodayView>) {
         
     }
     
