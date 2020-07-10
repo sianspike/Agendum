@@ -15,6 +15,7 @@ struct AddItemView: View {
     @State private var habitToggle = false
     @State private var dateToggle = false
     @State private var eventToggle = false
+    @State private var eventDuration = 0
     @State private var date = Date()
     @State private var reminderToggle = false
     @State private var reminder = Date()
@@ -25,8 +26,33 @@ struct AddItemView: View {
     @State private var addLabel: Bool = false
     @State private var selectedLabels: Array<String> = []
     
+    var timeIntervals = ["30 minutes", "1 hour", "1.5 hours", "2 hours"]
+    
     @EnvironmentObject var session: FirebaseSession
     @ObservedObject var viewRouter: ViewRouter
+    
+    func convertToInterval(interval: Int) -> TimeInterval? {
+        
+        var newInterval: TimeInterval?
+        let minute: TimeInterval = 60.0
+        let hour: TimeInterval = 60.0 * minute
+        
+        switch interval {
+        
+            case 0:
+                newInterval = minute * 30
+            case 1:
+                newInterval = hour
+            case 2:
+                newInterval = hour + (minute * 30)
+            case 3:
+                newInterval = hour * 2
+            default:
+                newInterval = nil
+        }
+        
+        return newInterval
+    }
     
     var body: some View {
         
@@ -50,58 +76,71 @@ struct AddItemView: View {
                 
                 VStack {
                     
-                    TextFieldWithBottomBorder(placeholder: "Title", text: $title)
-                    
-                    Toggle(isOn: $taskToggle) {
-                                           
-                        Text("T a s k")
-                            .font(Font.custom("Montserrat-Regular", size: 15))
+                    Group {
                         
-                    }.padding()
-                    
-                    Toggle(isOn: $habitToggle) {
-                                           
-                        Text("H a b i t")
-                            .font(Font.custom("Montserrat-Regular", size: 15))
+                        TextFieldWithBottomBorder(placeholder: "Title", text: $title)
                         
-                    }.padding()
-                    
-                    Toggle(isOn: $eventToggle) {
+                        Toggle(isOn: $taskToggle) {
+                                               
+                            Text("T a s k")
+                                .font(Font.custom("Montserrat-Regular", size: 15))
+                            
+                        }.padding()
                         
-                        Text("E v e n t")
-                            .font(Font.custom("Montserrat-Regular", size: 15))
-                    }.padding()
-                    
-                    Toggle(isOn: $dateToggle) {
-                                           
-                        Text("D a t e")
-                            .font(Font.custom("Montserrat-Regular", size: 15))
+                        Toggle(isOn: $habitToggle) {
+                                               
+                            Text("H a b i t")
+                                .font(Font.custom("Montserrat-Regular", size: 15))
+                            
+                        }.padding()
                         
-                    }.padding()
-                    
-                    if (dateToggle) {
+                        Toggle(isOn: $eventToggle) {
+                            
+                            Text("E v e n t")
+                                .font(Font.custom("Montserrat-Regular", size: 15))
+                        }.padding()
                         
-                        DatePicker("", selection: $date, in: Date()...)
+                        if (eventToggle) {
+                            
+                            Picker(selection: $eventDuration, label: Text("")) {
+                                
+                                ForEach(0 ..< timeIntervals.count) {
+                                    Text(self.timeIntervals[$0]).tag($0)
+                                }
+                            }
+                        }
+                        
+                        Toggle(isOn: $dateToggle) {
+                                               
+                            Text("D a t e")
+                                .font(Font.custom("Montserrat-Regular", size: 15))
+                            
+                        }.padding()
+                        
+                        if (dateToggle) {
+                            
+                            DatePicker("", selection: $date, in: Date()...)
+                        }
+                        
+                        Toggle(isOn: $reminderToggle) {
+                                               
+                            Text("S e t  a  r e m i n d e r")
+                                .font(Font.custom("Montserrat-Regular", size: 15))
+                            
+                        }.padding()
+                        
+                        if (reminderToggle) {
+                            
+                            DatePicker("", selection: $reminder, in: Date()...)
+                        }
+                        
+                        Toggle(isOn: $calendarToggle) {
+                                               
+                            Text("A d d  t o  c a l e n d a r")
+                                .font(Font.custom("Montserrat-Regular", size: 15))
+                            
+                        }.padding()
                     }
-                    
-                    Toggle(isOn: $reminderToggle) {
-                                           
-                        Text("S e t  a  r e m i n d e r")
-                            .font(Font.custom("Montserrat-Regular", size: 15))
-                        
-                    }.padding()
-                    
-                    if (reminderToggle) {
-                        
-                        DatePicker("", selection: $reminder, in: Date()...)
-                    }
-                    
-                    Toggle(isOn: $calendarToggle) {
-                                           
-                        Text("A d d  t o  c a l e n d a r")
-                            .font(Font.custom("Montserrat-Regular", size: 15))
-                        
-                    }.padding()
                     
                     Group {
                         
@@ -174,7 +213,7 @@ struct AddItemView: View {
                 
                 if (self.title != "") {
                     
-                    self.session.loggedInUser?.items.append(Item(title: self.title, task: self.taskToggle, habit: self.habitToggle, dateToggle: self.dateToggle, date: self.date as NSDate, reminderToggle: self.reminderToggle, reminder: self.reminder as NSDate, completed: self.completedToggle, labels: self.selectedLabels, event: self.eventToggle))
+                    self.session.loggedInUser?.items.append(Item(title: self.title, task: self.taskToggle, habit: self.habitToggle, dateToggle: self.dateToggle, date: self.date as NSDate, reminderToggle: self.reminderToggle, reminder: self.reminder as NSDate, completed: self.completedToggle, labels: self.selectedLabels, event: self.eventToggle, duration: convertToInterval(interval: eventDuration)))
                     self.session.saveItems(items: self.session.loggedInUser?.items ?? [])
                     self.session.saveLabels(labels: self.session.loggedInUser?.labels ?? [])
                     self.viewRouter.viewRouter = "Dashboard"

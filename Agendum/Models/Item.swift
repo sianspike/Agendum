@@ -20,6 +20,7 @@ class Item: Identifiable {
     private var reminder: NSDate?
     private var labels: Array<String>
     private var completed: Bool
+    private var duration: TimeInterval?
     
     init(title: String, task: Bool, habit: Bool, dateToggle: Bool, reminderToggle: Bool, completed: Bool, event: Bool) {
         self.title = title
@@ -32,9 +33,10 @@ class Item: Identifiable {
         self.date = nil
         self.reminder = nil
         self.labels = []
+        self.duration = nil
     }
     
-    init(title: String, task: Bool, habit: Bool, dateToggle: Bool, date: NSDate?, reminderToggle: Bool, reminder: NSDate?, completed: Bool, labels: Array<String>, event: Bool) {
+    init(title: String, task: Bool, habit: Bool, dateToggle: Bool, date: NSDate?, reminderToggle: Bool, reminder: NSDate?, completed: Bool, labels: Array<String>, event: Bool, duration: TimeInterval?) {
         self.title = title
         self.task = task
         self.habit = habit
@@ -45,6 +47,7 @@ class Item: Identifiable {
         self.date = date
         self.reminder = reminder
         self.labels = labels
+        self.duration = duration
     }
     
     func isEvent() -> Bool {
@@ -139,5 +142,15 @@ class Item: Identifiable {
     
     func isCompleted() -> Bool {
         return self.completed
+    }
+    
+    func setDuration(interval: TimeInterval) {
+        
+        self.duration = interval
+    }
+    
+    func getDuration() -> TimeInterval? {
+        
+        return self.duration
     }
 }

@@ -25,6 +25,7 @@ struct CalendarMonthView: UIViewRepresentable {
         style.event.isEnableMoveEvent = true
         style.locale = Locale.current
         style.timezone = TimeZone.current
+        style.allDay.isPinned = true
         
         return CalendarView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 470), style: style)
     }()
@@ -74,7 +75,6 @@ struct CalendarMonthView: UIViewRepresentable {
         
         func willDisplayDate(_ date: Date?, events: [Event]) -> DateStyle? {
             
-            view.calendarMonthView.reloadData()
             return nil
         }
         
@@ -89,11 +89,21 @@ struct CalendarMonthView: UIViewRepresentable {
                     
                     var event = Event()
                     event.id = item.id
-                    event.start = item.getDate()! as Date // start date event
-                    event.end = item.getDate()!.addingTimeInterval(10000) as Date// end date event
+                    event.start = item.getDate()! as Date
+                    
+                    if (item.getDuration() != nil) {
+                        
+                        event.end = item.getDate()!.addingTimeInterval(item.getDuration()!) as Date
+                        print(event.end)
+                        
+                    } else {
+                        
+                        event.isAllDay = true
+                    }
+                    
                     event.color = EventColor(UIColor(red: 0.6, green: 0.8, blue: 1, alpha: 1))
                     event.backgroundColor = UIColor(red: 0.6, green: 0.8, blue: 1, alpha: 1)
-                    //event.isAllDay = item.allDay
+                    
                     //event.isContainsFile = !item.files.isEmpty
                     
                     // Add text event (title, info, location, time)

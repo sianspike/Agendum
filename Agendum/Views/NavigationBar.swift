@@ -15,62 +15,64 @@ struct NavigationBar: View {
     let gradientColours = Gradient(colors:[Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), .white])
     
     var body: some View {
-            HStack{
-                Button(action: {
-                    self.viewRouter.viewRouter = "Focus"
-                }) {
-                    VStack{
-                        HorizontalLineShape
-                            .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: 70)
-                        Image(uiImage: UIImage(named: "Icons/Timer.png")!)
-                            .renderingMode(.original)
-                    }
-                }.padding([.horizontal])
-                
-                Button(action: {
-                    self.viewRouter.viewRouter = "All Items"
-                }) {
-                    VStack{
-                        HorizontalLineShape
+            
+        HStack {
+            Button(action: {
+                self.viewRouter.viewRouter = "Focus"
+            }) {
+                VStack {
+                    HorizontalLineShape
                         .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: 70)
-                        Image(uiImage: UIImage(named: "Icons/List.png")!)
+                    
+                    Image(uiImage: UIImage(named: "Icons/Timer.png")!)
                         .renderingMode(.original)
-                    }
-                }.padding([.horizontal])
-                
-                Button(action: {
-                    self.viewRouter.viewRouter = "Dashboard"
-                }) {
-                    VStack{
-                        HorizontalLineShape
-                        .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: 70)
-                        Image(uiImage: UIImage(named: "Icons/Home.png")!)
-                        .renderingMode(.original)
-                    }
-                }.padding([.horizontal])
+                }
+            }.padding([.horizontal])
 
-                Button(action:{
-                    self.viewRouter.viewRouter = "Friends"
-                }) {
-                    VStack{
-                        HorizontalLineShape
+            Button(action: {
+                    self.viewRouter.viewRouter = "All Items"
+            }) {
+                VStack {
+                    HorizontalLineShape
                         .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: 70)
-                        Image(uiImage: UIImage(named: "Icons/People.png")!)
+                    Image(uiImage: UIImage(named: "Icons/List.png")!)
                         .renderingMode(.original)
-                    }
-                }.padding([.horizontal])
-                
-                Button(action: {
-                    self.viewRouter.viewRouter = "Settings"
-                }) {
-                    VStack{
-                        HorizontalLineShape
+                }
+            }.padding([.horizontal])
+
+            Button(action: {
+                self.viewRouter.viewRouter = "Dashboard"
+            }) {
+                VStack {
+                    HorizontalLineShape
                         .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: 70)
-                        Image(uiImage: UIImage(named: "Icons/Settings.png")!)
+                    Image(uiImage: UIImage(named: "Icons/Home.png")!)
                         .renderingMode(.original)
-                    }
-                }.padding([.horizontal])
-            }.frame(maxWidth: .infinity)
+                }
+            }.padding([.horizontal])
+
+            Button(action:{
+                self.viewRouter.viewRouter = "Friends"
+            }) {
+                VStack {
+                    HorizontalLineShape
+                        .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: 70)
+                    Image(uiImage: UIImage(named: "Icons/People.png")!)
+                        .renderingMode(.original)
+                }
+            }.padding([.horizontal])
+
+            Button(action: {
+                self.viewRouter.viewRouter = "Settings"
+            }) {
+                VStack {
+                    HorizontalLineShape
+                        .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: 70)
+                    Image(uiImage: UIImage(named: "Icons/Settings.png")!)
+                        .renderingMode(.original)
+                }
+            }.padding([.horizontal])
+        }.frame(maxWidth: .infinity)
     }
 }
 

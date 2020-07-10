@@ -73,7 +73,8 @@ class FirebaseSession: ObservableObject {
                     "reminder": item.getReminderDate() as Any,
                     "labels": item.getLabels(),
                     "completed": item.isCompleted(),
-                    "event": item.isEvent()
+                    "event": item.isEvent(),
+                    "duration": item.getDuration() as Any
                 ], merge: true) { error in
                     
                     if let error = error {
@@ -104,7 +105,8 @@ class FirebaseSession: ObservableObject {
                 "reminder": item.getReminderDate() as Any,
                 "labels": item.getLabels(),
                 "completed": item.isCompleted(),
-                "event": item.isEvent()
+                "event": item.isEvent(),
+                "duration": item.getDuration() as Any
             ], merge: true) { error in
                 
                 if let error = error {
@@ -239,8 +241,9 @@ class FirebaseSession: ObservableObject {
                         let completed = document.get("completed") as! Bool
                         let labels = document.get("labels") as? Array<String>
                         let event = document.get("event") as! Bool
+                        let duration = document.get("duration") as? TimeInterval
                     
-                        itemArray.append(Item(title: title, task: task, habit: habit, dateToggle: dateToggle, date: date ?? nil, reminderToggle: reminderToggle, reminder: reminder ?? nil, completed: completed, labels: labels ?? [], event: event))
+                        itemArray.append(Item(title: title, task: task, habit: habit, dateToggle: dateToggle, date: date ?? nil, reminderToggle: reminderToggle, reminder: reminder ?? nil, completed: completed, labels: labels ?? [], event: event, duration: duration ?? nil))
                     }
                     
                     self.loggedInUser?.items = itemArray
