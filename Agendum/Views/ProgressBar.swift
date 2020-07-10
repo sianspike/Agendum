@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ProgressBar: View {
     
-    var progress: Int
+    var progress: Double
     
     var minPoints = 0
     var maxPoints = 100
@@ -20,13 +20,20 @@ struct ProgressBar: View {
         VStack {
             
             HStack {
-                
-                Text(String(minPoints))
 
-                ZStack(alignment: .leading) {
+                Text(String(minPoints))
+                
+                if #available(iOS 14.0, *) {
                     
-                    Rectangle().frame(width: 325, height: 20).foregroundColor(Color.white).border(Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), width: 2)
-                    Rectangle().frame(width: 325.0 * CGFloat((Double(progress) / 100.0)), height: 20).foregroundColor(Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
+                    ProgressView(value: progress/100).accentColor(Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
+                    
+                } else {
+                    
+                    ZStack(alignment: .leading) {
+
+                        Rectangle().frame(width: 325, height: 20).foregroundColor(Color.white).border(Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), width: 2)
+                        Rectangle().frame(width: 325.0 * CGFloat(progress/100), height: 20).foregroundColor(Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0))
+                    }
                 }
                 
                 Text(String(maxPoints))

@@ -15,5 +15,5 @@ struct User {
     var uid: String
     var items: Array<Item>
     var labels: Array<String>
-    var progress: Int
+    var progress: Double
 }

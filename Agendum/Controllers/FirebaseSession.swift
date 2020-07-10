@@ -122,7 +122,7 @@ class FirebaseSession: ObservableObject {
     func retrieveProgress() {
         
         let progressRef = db.collection("users").document(loggedInUser!.uid).collection("progress")
-        var progress = 0
+        var progress: Double = 0
 
         progressRef.getDocuments() { querySnapshot, error in
 
@@ -135,7 +135,7 @@ class FirebaseSession: ObservableObject {
 
                 for document in querySnapshot!.documents {
 
-                    progress = document.get("progress") as! Int
+                    progress = document.get("progress") as! Double
                 }
 
                 self.loggedInUser?.progress = progress
@@ -143,7 +143,7 @@ class FirebaseSession: ObservableObject {
         }
     }
     
-    func saveProgress(progress: Int) {
+    func saveProgress(progress: Double) {
         
         let progressLocation = db.collection("users").document(loggedInUser!.uid).collection("progress")
         

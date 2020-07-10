@@ -46,7 +46,6 @@ struct Dashboard: View {
                 } else if (calPageNum == 1) {
                         
                     CalendarController(timeFrame: timePageNum)
-                    //CalendarDisplayView(timeFrame: timePageNum)
                 }
             }
             
