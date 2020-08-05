@@ -29,14 +29,19 @@ struct CalendarTodayView: UIViewRepresentable {
         return CalendarView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 470), style: style)
     }()
     
+    var detail: ItemDetailView = {
+        
+        return ItemDetailView()
+    }()
+    
     func makeUIView(context: UIViewRepresentableContext<CalendarTodayView>) -> CalendarView {
+            
+        calendarDayView.dataSource = context.coordinator
+        calendarDayView.delegate = context.coordinator
 
-            calendarDayView.dataSource = context.coordinator
-            calendarDayView.delegate = context.coordinator
+        calendarDayView.reloadData()
 
-            calendarDayView.reloadData()
-
-            return calendarDayView
+        return calendarDayView
     }
     
     func updateUIView(_ uiView: CalendarView, context: UIViewRepresentableContext<CalendarTodayView>) {
@@ -55,7 +60,7 @@ struct CalendarTodayView: UIViewRepresentable {
         var events = [Event]()
         
         init(_ view: CalendarTodayView) {
-            
+        
             self.view = view
             
             super.init()
@@ -75,6 +80,13 @@ struct CalendarTodayView: UIViewRepresentable {
         func willDisplayDate(_ date: Date?, events: [Event]) -> DateStyle? {
             
             return nil
+        }
+        
+        func didSelectEvent(_ event: Event, type: CalendarType, frame: CGRect?) {
+            
+            let vc = UIHostingController(rootView: ItemDetailView())
+            
+            view.calendarDayView.findViewController()?.present(vc, animated: true)
         }
         
         func loadEvents(completion: ([Event]) -> Void) {
@@ -102,15 +114,7 @@ struct CalendarTodayView: UIViewRepresentable {
                     
                     event.color = EventColor(UIColor(red: 0.6, green: 0.8, blue: 1, alpha: 1))
                     event.backgroundColor = UIColor(red: 0.6, green: 0.8, blue: 1, alpha: 1)
-                    
-                    //event.isContainsFile = !item.files.isEmpty
-                    
-                    // Add text event (title, info, location, time)
-                    //if item.allDay {
-                    //    event.text = "\(model.title)"
-                    //} else {
                     event.text = "\(item.getTitle())"
-                    //}
                     
                     events.append(event)
                 }
@@ -129,4 +133,17 @@ extension UIViewController {
     
     present(viewController, animated: animated, completion: completion)
   }
+}
+
+extension UIView {
+    
+    func findViewController() -> UIViewController? {
+        if let nextResponder = self.next as? UIViewController {
+            return nextResponder
+        } else if let nextResponder = self.next as? UIView {
+            return nextResponder.findViewController()
+        } else {
+            return nil
+        }
+    }
 }

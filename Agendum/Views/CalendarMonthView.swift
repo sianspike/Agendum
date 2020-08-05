@@ -78,6 +78,15 @@ struct CalendarMonthView: UIViewRepresentable {
             return nil
         }
         
+        func didSelectEvent(_ event: Event, type: CalendarType, frame: CGRect?) {
+            
+            print("event selected: \(event.text)")
+            
+            let vc = UIHostingController(rootView: ItemDetailView())
+            
+            view.calendarMonthView.findViewController()?.present(vc, animated: true)
+        }
+        
         func loadEvents(completion: ([Event]) -> Void) {
             
             var events = [Event]()
@@ -103,16 +112,7 @@ struct CalendarMonthView: UIViewRepresentable {
                     
                     event.color = EventColor(UIColor(red: 0.6, green: 0.8, blue: 1, alpha: 1))
                     event.backgroundColor = UIColor(red: 0.6, green: 0.8, blue: 1, alpha: 1)
-                    
-                    //event.isContainsFile = !item.files.isEmpty
-                    
-                    // Add text event (title, info, location, time)
-                    //if item.allDay {
-                    //    event.text = "\(model.title)"
-                    //} else {
                     event.text = "\(item.getTitle())"
-                    //}
-                    
                     events.append(event)
                 }
             }
@@ -121,3 +121,4 @@ struct CalendarMonthView: UIViewRepresentable {
         }
     }
 }
+

@@ -76,6 +76,15 @@ struct CalendarWeekView: UIViewRepresentable {
             return nil
         }
         
+        func didSelectEvent(_ event: Event, type: CalendarType, frame: CGRect?) {
+            
+            print("event selected: \(event.text)")
+            
+            let vc = UIHostingController(rootView: ItemDetailView())
+            
+            view.calendarWeekView.findViewController()?.present(vc, animated: true)
+        }
+        
         func loadEvents(completion: ([Event]) -> Void) {
             
             var events = [Event]()
@@ -119,3 +128,4 @@ struct CalendarWeekView: UIViewRepresentable {
         }
     }
 }
+
