@@ -12,6 +12,7 @@ import CareKitUI
 struct AgendaView: View {
     
     @EnvironmentObject var session: FirebaseSession
+    @Environment(\.defaultMinListRowHeight) var minRowHeight
     var timeFrame: Int
     var currentItem: Item? = nil
     
@@ -34,12 +35,12 @@ struct AgendaView: View {
                         .font(Font.custom("Montserrat-SemiBold", size: 20))
                         .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
                         .padding(.horizontal)
+                    
                             
                     ForEach(self.session.loggedInUser?.items ?? [], id: \.title) { item in
 
                         ItemRow(item: item, isEvent: true, isReminder: false, isTask: false, timeFrame: self.timeFrame)
                             .padding(.horizontal)
-                        
                     }
   
                     Text("R e m i n d e r s")
