@@ -120,6 +120,7 @@ struct AddItemView: View {
                         if (dateToggle) {
                             
                             DatePicker("", selection: $date, in: Date()...)
+                                .frame(minHeight: 50)
                         }
                         
                         Toggle(isOn: $reminderToggle) {
@@ -132,6 +133,7 @@ struct AddItemView: View {
                         if (reminderToggle) {
                             
                             DatePicker("", selection: $reminder, in: Date()...)
+                                .frame(minHeight: 50)
                         }
                         
                         Toggle(isOn: $calendarToggle) {

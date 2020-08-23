@@ -19,7 +19,7 @@ struct ItemDetailView: View {
         dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
 
         let dateFormatterPrint = DateFormatter()
-        dateFormatterPrint.dateFormat = "dd/MM/yy"
+        dateFormatterPrint.dateFormat = "dd/MM/yy HH:mm"
         
         let str = dateFormatterGet.string(from: date as Date)
         
@@ -70,7 +70,7 @@ struct ItemDetailView: View {
                         .foregroundColor(.white)
                         .padding(.horizontal)
                     
-                    Text("T a s k")
+                    Text("Task")
                         .font(Font.custom("Montserrat-SemiBold", size: 25))
                         .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
                     
@@ -86,7 +86,7 @@ struct ItemDetailView: View {
                         .foregroundColor(.white)
                         .padding(.horizontal)
                     
-                    Text("H a b i t")
+                    Text("Habit")
                         .font(Font.custom("Montserrat-SemiBold", size: 25))
                         .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
                     
@@ -134,7 +134,7 @@ struct ItemDetailView: View {
                         .foregroundColor(.white)
                         .padding(.horizontal)
                     
-                    Text("Reminder: \(item.getReminderDate()!)")
+                    Text("Reminder: \(convertDate(date: item.getReminderDate()!))")
                         .font(Font.custom("Montserrat-SemiBold", size: 25))
                         .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
                     
