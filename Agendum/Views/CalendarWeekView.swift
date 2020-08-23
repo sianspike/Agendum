@@ -78,9 +78,18 @@ struct CalendarWeekView: UIViewRepresentable {
         
         func didSelectEvent(_ event: Event, type: CalendarType, frame: CGRect?) {
             
-            print("event selected: \(event.text)")
+            let items = self.view.session.loggedInUser!.items
+            var currentItem: Item? = nil
             
-            let vc = UIHostingController(rootView: ItemDetailView())
+            for item in items {
+                
+                if (item.getTitle() == event.text) {
+                    
+                    currentItem = item
+                }
+            }
+            
+            let vc = UIHostingController(rootView: ItemDetailView(item: currentItem!))
             
             view.calendarWeekView.findViewController()?.present(vc, animated: true)
         }

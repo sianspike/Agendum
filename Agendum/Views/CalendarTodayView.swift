@@ -29,11 +29,6 @@ struct CalendarTodayView: UIViewRepresentable {
         return CalendarView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 470), style: style)
     }()
     
-    var detail: ItemDetailView = {
-        
-        return ItemDetailView()
-    }()
-    
     func makeUIView(context: UIViewRepresentableContext<CalendarTodayView>) -> CalendarView {
             
         calendarDayView.dataSource = context.coordinator
@@ -84,7 +79,18 @@ struct CalendarTodayView: UIViewRepresentable {
         
         func didSelectEvent(_ event: Event, type: CalendarType, frame: CGRect?) {
             
-            let vc = UIHostingController(rootView: ItemDetailView())
+            let items = self.view.session.loggedInUser!.items
+            var currentItem: Item? = nil
+            
+            for item in items {
+                
+                if (item.getTitle() == event.text) {
+                    
+                    currentItem = item
+                }
+            }
+            
+            let vc = UIHostingController(rootView: ItemDetailView(item: currentItem!))
             
             view.calendarDayView.findViewController()?.present(vc, animated: true)
         }
@@ -92,9 +98,9 @@ struct CalendarTodayView: UIViewRepresentable {
         func loadEvents(completion: ([Event]) -> Void) {
             
             var events = [Event]()
-            let models = self.view.session.loggedInUser!.items
+            let items = self.view.session.loggedInUser!.items
             
-            for item in models {
+            for item in items {
                 
                 if (item.isDateSet()) {
                     

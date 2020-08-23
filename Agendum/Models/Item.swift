@@ -153,4 +153,14 @@ class Item: Identifiable {
         
         return self.duration
     }
+    
+    func hasLabels() -> Bool {
+        
+        if (self.labels.isEmpty) {
+            
+            return false
+        }
+        
+        return true
+    }
 }
