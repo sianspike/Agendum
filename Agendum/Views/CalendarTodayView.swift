@@ -25,6 +25,7 @@ struct CalendarTodayView: UIViewRepresentable {
         style.locale = Locale.current
         style.timezone = TimeZone.current
         style.allDay.isPinned = true
+        style.timeline.startFromFirstEvent = false
         
         return CalendarView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 470), style: style)
     }()
@@ -111,8 +112,7 @@ struct CalendarTodayView: UIViewRepresentable {
                     if (item.getDuration() != nil) {
                         
                         event.end = item.getDate()!.addingTimeInterval(item.getDuration()!) as Date
-                        print(event.end)
-                        
+                                                
                     } else {
                         
                         event.isAllDay = true

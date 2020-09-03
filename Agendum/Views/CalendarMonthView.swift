@@ -27,7 +27,7 @@ struct CalendarMonthView: UIViewRepresentable {
         style.timezone = TimeZone.current
         style.allDay.isPinned = true
         
-        return CalendarView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 470), style: style)
+        return CalendarView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 400), style: style)
     }()
     
     func makeUIView(context: UIViewRepresentableContext<CalendarMonthView>) -> CalendarView {
@@ -96,6 +96,50 @@ struct CalendarMonthView: UIViewRepresentable {
             view.calendarMonthView.findViewController()?.present(vc, animated: true)
         }
         
+        func convertDate(date: NSDate) -> String {
+            
+            let dateFormatterGet = DateFormatter()
+            dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+
+            let dateFormatterPrint = DateFormatter()
+            dateFormatterPrint.dateFormat = "dd/MM/yy"
+            
+            let str = dateFormatterGet.string(from: date as Date)
+            
+            if let date = dateFormatterGet.date(from: str) {
+                
+                return dateFormatterPrint.string(from: date)
+                
+            } else {
+                
+               return ("There was an error decoding the string")
+            }
+        }
+        
+        func didSelectDate(_ date: Date?, type: CalendarType, frame: CGRect?) {
+            
+            let items = self.view.session.loggedInUser!.items
+            var currentItems: [Item] = []
+        
+            for item in items {
+                
+                if (item.isDateSet()) {
+                    
+                    if (convertDate(date: item.getDate()!) == convertDate(date: date! as NSDate)) {
+                        
+                        currentItems.append(item)
+                    }
+                }
+            }
+            
+            let vc = UIHostingController(rootView: MonthDetailView(items: currentItems))
+            
+            view.calendarMonthView.findViewController()?.addChild(vc)
+            vc.view.frame = CGRect(x: 0, y: 350, width: UIScreen.main.bounds.width, height: 120)
+            view.calendarMonthView.addSubview(vc.view)
+            vc.didMove(toParent: view.calendarMonthView.findViewController())
+        }
+        
         func loadEvents(completion: ([Event]) -> Void) {
             
             var events = [Event]()
@@ -112,7 +156,6 @@ struct CalendarMonthView: UIViewRepresentable {
                     if (item.getDuration() != nil) {
                         
                         event.end = item.getDate()!.addingTimeInterval(item.getDuration()!) as Date
-                        print(event.end)
                         
                     } else {
                         

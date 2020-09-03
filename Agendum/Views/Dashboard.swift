@@ -21,35 +21,37 @@ struct Dashboard: View {
     var body: some View {
         
         ZStack {
-            
+                
             VStack(alignment: .leading) {
-                
+                    
                 Pager(page: self.$timePageNum, data: timePages, id: \.self) {
-                    
-                    TextWithBottomBorder(text: $0)
-                    
-                }.frame(height: 100)
-                
-                ProgressBar(progress: session.loggedInUser!.progress)
-                
-                Pager(page: self.$calPageNum, data: calPages, id: \.self) {
-                    
-                    TextWithBottomBorder(text: $0)
-                        .font(Font.custom("Montserrat-Regular", size: 25))
-                    
-                }.frame(height: 100)
-                
-                if (calPageNum == 0) {
-                            
-                    AgendaView(timeFrame: timePageNum)
-                            
-                } else if (calPageNum == 1) {
                         
+                    TextWithBottomBorder(text: $0)
+                        
+                }.frame(height: 100)
+                    
+                ProgressBar(progress: session.loggedInUser!.progress)
+                    
+                Pager(page: self.$calPageNum, data: calPages, id: \.self) {
+                        
+                    TextWithBottomBorder(text: $0)
+                            .font(Font.custom("Montserrat-Regular", size: 25))
+                        
+                }.frame(height: 100)
+                    
+                if (calPageNum == 0) {
+                                
+                    AgendaView(timeFrame: timePageNum)
+                                
+                } else if (calPageNum == 1) {
+                            
                     CalendarController(timeFrame: timePageNum)
                 }
             }
+        
             
             FloatingAddButton(action: {
+                
                 self.viewRouter.viewRouter = "Add Item"
             })
         }
