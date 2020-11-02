@@ -12,6 +12,7 @@ struct AllItemsDueSoonView: View {
     
     @EnvironmentObject var session: FirebaseSession
     var searchText: String
+    var filterClicked: Bool
     
     var body: some View {
         
@@ -21,19 +22,41 @@ struct AllItemsDueSoonView: View {
             .multilineTextAlignment(.leading)
             .padding()
         
-        ForEach(self.session.loggedInUser?.items.filter({searchText.isEmpty ? true : $0.getTitle().contains(searchText)}) ?? [], id: \.title) { item in
+        if (!filterClicked) {
             
-            let currentItem: Item = item
-            
-            if (currentItem.isDateSet()) {
+            ForEach(self.session.loggedInUser?.items.filter({searchText.isEmpty ? true : $0.getTitle().contains(searchText)}).sorted(by: {$0.title < $1.title}) ?? [], id: \.title) { item in
                 
-                let soon = NSDate().addDays(daysToAdd: 7)
-                let today = NSDate()
-                let itemDue = currentItem.getDate()!
+                let currentItem: Item = item
                 
-                if (itemDue.isLessThanDate(dateToCompare: soon) && itemDue.isGreaterThanDate(dateToCompare: today)) {
+                if (currentItem.isDateSet()) {
                     
-                    ItemElement(item: currentItem)
+                    let soon = NSDate().addDays(daysToAdd: 7)
+                    let today = NSDate()
+                    let itemDue = currentItem.getDate()!
+                    
+                    if (itemDue.isLessThanDate(dateToCompare: soon) && itemDue.isGreaterThanDate(dateToCompare: today)) {
+                        
+                        ItemElement(item: currentItem)
+                    }
+                }
+            }
+            
+        } else {
+                
+            ForEach(self.session.loggedInUser?.items.filter({searchText.isEmpty ? true : $0.getTitle().contains(searchText)}).sorted(by: {$0.title > $1.title}) ?? [], id: \.title) { item in
+                
+                let currentItem: Item = item
+                
+                if (currentItem.isDateSet()) {
+                    
+                    let soon = NSDate().addDays(daysToAdd: 7)
+                    let today = NSDate()
+                    let itemDue = currentItem.getDate()!
+                    
+                    if (itemDue.isLessThanDate(dateToCompare: soon) && itemDue.isGreaterThanDate(dateToCompare: today)) {
+                        
+                        ItemElement(item: currentItem)
+                    }
                 }
             }
         }

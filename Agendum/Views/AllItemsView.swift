@@ -14,6 +14,7 @@ struct AllItemsView: View {
     @ObservedObject var viewRouter: ViewRouter
     
     @State private var searchText = ""
+    @State private var filterClicked = false
     
     func dueSoon(itemDate: NSDate) -> Bool{
         
@@ -55,7 +56,7 @@ struct AllItemsView: View {
                 
                 HStack {
                     
-                    Button(action: {self.session.loggedInUser?.items.sorted(by: {$0.title < $1.title})}) {
+                    Button(action: {filterClicked.toggle()}) {
                         Image(uiImage: UIImage(named: "Icons/Filter.png")!)
                             .renderingMode(.original)
                             .padding(.horizontal)
@@ -66,17 +67,31 @@ struct AllItemsView: View {
                 
                 ScrollView {
                     
-                    ForEach(self.session.loggedInUser?.items.filter({searchText.isEmpty ? true : $0.getTitle().contains(searchText)}) ?? [], id: \.title) { item in
+                    Group {
                         
-                        let currentItem: Item = item
+                        if (!filterClicked) {
+                            
+                            ForEach(self.session.loggedInUser?.items.filter({searchText.isEmpty ? true : $0.getTitle().contains(searchText)}).sorted(by: {$0.title < $1.title}) ?? [], id: \.title) { item in
+                                
+                                let currentItem: Item = item
+                                
+                                findExcludedItems(item: currentItem)
+                            }
+                        } else {
+                            
+                            ForEach(self.session.loggedInUser?.items.filter({searchText.isEmpty ? true : $0.getTitle().contains(searchText)}).sorted(by: {$0.title > $1.title}) ?? [], id: \.title) { item in
+                                
+                                let currentItem: Item = item
+                                
+                                findExcludedItems(item: currentItem)
+                            }
+                        }
                         
-                        findExcludedItems(item: currentItem)
+                        AllItemsDueSoonView(searchText: searchText, filterClicked: filterClicked)
+                        AllItemsHabitView(searchText: searchText, filterClicked: filterClicked)
+                        AllItemsLabelView(searchText: searchText, filterClicked: filterClicked)
+                        AllItemsCompletedView(searchText: searchText, filterClicked: filterClicked)
                     }
-                    
-                    AllItemsDueSoonView(searchText: searchText)
-                    AllItemsHabitView(searchText: searchText)
-                    AllItemsLabelView(searchText: searchText)
-                    AllItemsCompletedView(searchText: searchText)
                 }
                 
                 Spacer()

@@ -12,6 +12,7 @@ struct AllItemsHabitView: View {
     
     @EnvironmentObject var session: FirebaseSession
     var searchText: String
+    var filterClicked: Bool
     
     var body: some View {
         
@@ -21,15 +22,32 @@ struct AllItemsHabitView: View {
             .multilineTextAlignment(.leading)
             .padding()
         
-        ForEach(self.session.loggedInUser?.items.filter({searchText.isEmpty ? true : $0.getTitle().contains(searchText)}) ?? [], id: \.title) { item in
+        if(!filterClicked) {
             
-            let currentItem: Item = item
+            ForEach(self.session.loggedInUser?.items.filter({searchText.isEmpty ? true : $0.getTitle().contains(searchText)}).sorted(by: {$0.title < $1.title}) ?? [], id: \.title) { item in
+                
+                let currentItem: Item = item
+                
+                if (currentItem.isHabit()) {
+                    
+                    ItemElement(item: currentItem)
+                    
+                }
+            }
             
-            if (currentItem.isHabit()) {
+        } else {
+            
+            ForEach(self.session.loggedInUser?.items.filter({searchText.isEmpty ? true : $0.getTitle().contains(searchText)}).sorted(by: {$0.title > $1.title}) ?? [], id: \.title) { item in
                 
-                ItemElement(item: currentItem)
+                let currentItem: Item = item
                 
+                if (currentItem.isHabit()) {
+                    
+                    ItemElement(item: currentItem)
+                    
+                }
             }
         }
+
     }
 }

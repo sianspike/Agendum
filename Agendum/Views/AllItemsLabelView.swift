@@ -12,6 +12,7 @@ struct AllItemsLabelView: View {
     
     @EnvironmentObject var session: FirebaseSession
     var searchText: String
+    var filterClicked: Bool
     
     var body: some View {
         
@@ -23,19 +24,41 @@ struct AllItemsLabelView: View {
                 .multilineTextAlignment(.leading)
                 .padding()
             
-            ForEach(self.session.loggedInUser?.items.filter({searchText.isEmpty ? true : $0.getTitle().contains(searchText)}) ?? [], id: \.title) { item in
+            if (!filterClicked) {
                 
-                let currentItem: Item = item
-                
-                if (currentItem.hasLabels()) {
+                ForEach(self.session.loggedInUser?.items.filter({searchText.isEmpty ? true : $0.getTitle().contains(searchText)}).sorted(by: {$0.title < $1.title}) ?? [], id: \.title) { item in
                     
-                    let currentLabels = currentItem.getLabels()
+                    let currentItem: Item = item
                     
-                    ForEach(currentLabels, id: \.self) { current in
+                    if (currentItem.hasLabels()) {
                         
-                        if (current == label) {
+                        let currentLabels = currentItem.getLabels()
+                        
+                        ForEach(currentLabels, id: \.self) { current in
                             
-                            ItemElement(item: currentItem)
+                            if (current == label) {
+                                
+                                ItemElement(item: currentItem)
+                            }
+                        }
+                    }
+                }
+            } else {
+                
+                ForEach(self.session.loggedInUser?.items.filter({searchText.isEmpty ? true : $0.getTitle().contains(searchText)}).sorted(by: {$0.title > $1.title}) ?? [], id: \.title) { item in
+                    
+                    let currentItem: Item = item
+                    
+                    if (currentItem.hasLabels()) {
+                        
+                        let currentLabels = currentItem.getLabels()
+                        
+                        ForEach(currentLabels, id: \.self) { current in
+                            
+                            if (current == label) {
+                                
+                                ItemElement(item: currentItem)
+                            }
                         }
                     }
                 }
