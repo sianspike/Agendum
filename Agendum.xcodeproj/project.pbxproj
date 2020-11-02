@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		D701FC7124F41D9600C7E892 /* MonthDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D701FC7024F41D9600C7E892 /* MonthDetailView.swift */; };
+		D71DF03C25502FA2003AC048 /* AllItemsDueSoonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71DF03B25502FA1003AC048 /* AllItemsDueSoonView.swift */; };
+		D71DF03F2550304C003AC048 /* AllItemsHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71DF03E2550304C003AC048 /* AllItemsHabitView.swift */; };
+		D71DF042255033A6003AC048 /* AllItemsLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71DF041255033A6003AC048 /* AllItemsLabelView.swift */; };
+		D71DF04525503F96003AC048 /* AllItemsCompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71DF04425503F96003AC048 /* AllItemsCompletedView.swift */; };
+		D71DF048255041EA003AC048 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71DF047255041EA003AC048 /* SearchBarView.swift */; };
 		D73B804B2407F5760098FAD0 /* FriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73B804A2407F5760098FAD0 /* FriendView.swift */; };
 		D73B804D2407FA170098FAD0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73B804C2407FA170098FAD0 /* SettingsView.swift */; };
 		D73B804F2407FF780098FAD0 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73B804E2407FF780098FAD0 /* ResetPasswordView.swift */; };
@@ -59,6 +64,11 @@
 		027507F23D6C28B021C483AB /* Pods-Agendum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendum.release.xcconfig"; path = "Target Support Files/Pods-Agendum/Pods-Agendum.release.xcconfig"; sourceTree = "<group>"; };
 		5F8ED031BD8A7560857E9F55 /* Pods-Agendum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendum.debug.xcconfig"; path = "Target Support Files/Pods-Agendum/Pods-Agendum.debug.xcconfig"; sourceTree = "<group>"; };
 		D701FC7024F41D9600C7E892 /* MonthDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthDetailView.swift; sourceTree = "<group>"; };
+		D71DF03B25502FA1003AC048 /* AllItemsDueSoonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllItemsDueSoonView.swift; sourceTree = "<group>"; };
+		D71DF03E2550304C003AC048 /* AllItemsHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllItemsHabitView.swift; sourceTree = "<group>"; };
+		D71DF041255033A6003AC048 /* AllItemsLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllItemsLabelView.swift; sourceTree = "<group>"; };
+		D71DF04425503F96003AC048 /* AllItemsCompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllItemsCompletedView.swift; sourceTree = "<group>"; };
+		D71DF047255041EA003AC048 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		D73B804A2407F5760098FAD0 /* FriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendView.swift; sourceTree = "<group>"; };
 		D73B804C2407FA170098FAD0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D73B804E2407FF780098FAD0 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
@@ -220,6 +230,11 @@
 				D756916A24B612EB00CCD17B /* CalendarMonthView.swift */,
 				D7549B9624DAEABE00EF002F /* ItemDetailView.swift */,
 				D701FC7024F41D9600C7E892 /* MonthDetailView.swift */,
+				D71DF03B25502FA1003AC048 /* AllItemsDueSoonView.swift */,
+				D71DF03E2550304C003AC048 /* AllItemsHabitView.swift */,
+				D71DF041255033A6003AC048 /* AllItemsLabelView.swift */,
+				D71DF04425503F96003AC048 /* AllItemsCompletedView.swift */,
+				D71DF047255041EA003AC048 /* SearchBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -388,11 +403,13 @@
 				FC54A0B824615C8D009938C2 /* Item.swift in Sources */,
 				FCBCB21924348E1A00FFA65F /* ViewRouter.swift in Sources */,
 				FCC21D5B2423BCBF00485781 /* Agendum.xcdatamodeld in Sources */,
+				D71DF042255033A6003AC048 /* AllItemsLabelView.swift in Sources */,
 				D73B804D2407FA170098FAD0 /* SettingsView.swift in Sources */,
 				FCD940CB24867AE1006ABB8C /* ItemElement.swift in Sources */,
 				D777A78323EB3A840021315E /* ContentView.swift in Sources */,
 				D701FC7124F41D9600C7E892 /* MonthDetailView.swift in Sources */,
 				D743ED8C23F6A8C8007341D5 /* SignUpView.swift in Sources */,
+				D71DF048255041EA003AC048 /* SearchBarView.swift in Sources */,
 				D743ED9023F6C712007341D5 /* Dashboard.swift in Sources */,
 				D73B804B2407F5760098FAD0 /* FriendView.swift in Sources */,
 				FC791FD92483EF7600DE407F /* AgendaView.swift in Sources */,
@@ -401,12 +418,15 @@
 				FC385DE52455BFC300DE256D /* TextFieldWithBottomBorder.swift in Sources */,
 				D743ED9223F6C906007341D5 /* TextWithBottomBorder.swift in Sources */,
 				D7B1570F2403CBB90031671F /* Timer.swift in Sources */,
+				D71DF03F2550304C003AC048 /* AllItemsHabitView.swift in Sources */,
 				D73B80512408006A0098FAD0 /* ButtonOne.swift in Sources */,
+				D71DF04525503F96003AC048 /* AllItemsCompletedView.swift in Sources */,
 				D7B157152407D6160031671F /* AllItemsView.swift in Sources */,
 				D7B157172407DE600031671F /* FloatingAddButton.swift in Sources */,
 				D73B804F2407FF780098FAD0 /* ResetPasswordView.swift in Sources */,
 				D73B805324080A240098FAD0 /* AddItemView.swift in Sources */,
 				D7B1570D2403CAEA0031671F /* FocusView.swift in Sources */,
+				D71DF03C25502FA2003AC048 /* AllItemsDueSoonView.swift in Sources */,
 				D743ED8E23F6A908007341D5 /* SignInView.swift in Sources */,
 				D743ED8823F692A2007341D5 /* HorizontalLineShape.swift in Sources */,
 				FC9A92B22420E0A8005F6888 /* FirebaseSession.swift in Sources */,

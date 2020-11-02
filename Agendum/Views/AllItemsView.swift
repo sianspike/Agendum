@@ -9,7 +9,41 @@
 import SwiftUI
 
 struct AllItemsView: View {
+    
+    @EnvironmentObject var session: FirebaseSession
     @ObservedObject var viewRouter: ViewRouter
+    
+    @State private var searchText = ""
+    
+    func dueSoon(itemDate: NSDate) -> Bool{
+        
+        let soon = NSDate().addDays(daysToAdd: 7)
+        let today = NSDate()
+        
+        if (itemDate.isLessThanDate(dateToCompare: soon) && itemDate.isGreaterThanDate(dateToCompare: today)) {
+            
+            return true
+        }
+        
+        return false
+    }
+    
+    func findExcludedItems(item: Item) -> AnyView? {
+        
+        var isDue = false
+        
+        if (item.isDateSet()) {
+            
+            isDue = dueSoon(itemDate: item.getDate()!)
+        }
+        
+        if (item.isHabit() || isDue || item.isCompleted() || item.hasLabels()) {
+            
+            return nil
+        }
+        
+        return AnyView(ItemElement(item: item))
+    }
     
     var body: some View {
         
@@ -21,38 +55,29 @@ struct AllItemsView: View {
                 
                 HStack {
                     
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                    Button(action: {self.session.loggedInUser?.items.sorted(by: {$0.title < $1.title})}) {
                         Image(uiImage: UIImage(named: "Icons/Filter.png")!)
                             .renderingMode(.original)
                             .padding(.horizontal)
                     }
                     
-                    TextField("Search", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/).textFieldStyle(RoundedBorderTextFieldStyle())
-
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                        Image(uiImage: UIImage(named: "Icons/Search.png")!)
-                            .renderingMode(.original)
-                            .padding(.horizontal)
-                    }
+                    SearchBarView(text: $searchText)
                 }
                 
-                Text("D u e  S o o n")
-                    .font(Font.custom("Montserrat-SemiBold", size: 20))
-                    .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
-                    .multilineTextAlignment(.leading)
-                    .padding()
-                
-                Text("H a b i t s")
-                    .font(Font.custom("Montserrat-SemiBold", size: 20))
-                    .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
-                    .multilineTextAlignment(.leading)
-                    .padding()
-                
-                Text("C u s t o m  L a b e l  1")
-                    .font(Font.custom("Montserrat-SemiBold", size: 20))
-                    .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
-                    .multilineTextAlignment(.leading)
-                    .padding()
+                ScrollView {
+                    
+                    ForEach(self.session.loggedInUser?.items.filter({searchText.isEmpty ? true : $0.getTitle().contains(searchText)}) ?? [], id: \.title) { item in
+                        
+                        let currentItem: Item = item
+                        
+                        findExcludedItems(item: currentItem)
+                    }
+                    
+                    AllItemsDueSoonView(searchText: searchText)
+                    AllItemsHabitView(searchText: searchText)
+                    AllItemsLabelView(searchText: searchText)
+                    AllItemsCompletedView(searchText: searchText)
+                }
                 
                 Spacer()
             }
@@ -67,5 +92,63 @@ struct AllItemsView: View {
 struct AllItemsView_Previews: PreviewProvider {
     static var previews: some View {
         AllItemsView(viewRouter: ViewRouter())
+    }
+}
+
+extension NSDate {
+
+    func isGreaterThanDate(dateToCompare: NSDate) -> Bool {
+        //Declare Variables
+        var isGreater = false
+
+        //Compare Values
+        if self.compare(dateToCompare as Date) == ComparisonResult.orderedDescending {
+            isGreater = true
+        }
+
+        //Return Result
+        return isGreater
+    }
+
+    func isLessThanDate(dateToCompare: NSDate) -> Bool {
+        //Declare Variables
+        var isLess = false
+
+        //Compare Values
+        if self.compare(dateToCompare as Date) == ComparisonResult.orderedAscending {
+            isLess = true
+        }
+
+        //Return Result
+        return isLess
+    }
+
+    func equalToDate(dateToCompare: NSDate) -> Bool {
+        //Declare Variables
+        var isEqualTo = false
+
+        //Compare Values
+        if self.compare(dateToCompare as Date) == ComparisonResult.orderedSame {
+            isEqualTo = true
+        }
+
+        //Return Result
+        return isEqualTo
+    }
+
+    func addDays(daysToAdd: Int) -> NSDate {
+        let secondsInDays: TimeInterval = Double(daysToAdd) * 60 * 60 * 24
+        let dateWithDaysAdded: NSDate = self.addingTimeInterval(secondsInDays)
+
+        //Return Result
+        return dateWithDaysAdded
+    }
+
+    func addHours(hoursToAdd: Int) -> NSDate {
+        let secondsInHours: TimeInterval = Double(hoursToAdd) * 60 * 60
+        let dateWithHoursAdded: NSDate = self.addingTimeInterval(secondsInHours)
+
+        //Return Result
+        return dateWithHoursAdded
     }
 }
