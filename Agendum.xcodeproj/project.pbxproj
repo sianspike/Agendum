@@ -34,10 +34,11 @@
 		D777A78823EB3A860021315E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D777A78723EB3A860021315E /* Preview Assets.xcassets */; };
 		D79A543824B632DC007DEDEC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC2CD0D22423BFF4004A1D8E /* GoogleService-Info.plist */; };
 		D7B1570D2403CAEA0031671F /* FocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B1570C2403CAEA0031671F /* FocusView.swift */; };
-		D7B1570F2403CBB90031671F /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B1570E2403CBB90031671F /* Timer.swift */; };
+		D7B1570F2403CBB90031671F /* FocusTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B1570E2403CBB90031671F /* FocusTimer.swift */; };
 		D7B157112407B8720031671F /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = D777A7AE23EB3BD30021315E /* Fonts */; };
 		D7B157152407D6160031671F /* AllItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B157142407D6160031671F /* AllItemsView.swift */; };
 		D7B157172407DE600031671F /* FloatingAddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B157162407DE600031671F /* FloatingAddButton.swift */; };
+		D7B5CBFF2562895300AE12D1 /* FocusPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B5CBFE2562895300AE12D1 /* FocusPicker.swift */; };
 		D7C3296523FFD2CA008F3F4F /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C3296423FFD2CA008F3F4F /* NavigationBar.swift */; };
 		D7C3296723FFD6D4008F3F4F /* Icons in Resources */ = {isa = PBXBuildFile; fileRef = D7C3296623FFD6D4008F3F4F /* Icons */; };
 		D7E2564324D3506D0041364F /* CareKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = D7E2564224D3506D0041364F /* CareKitUI */; };
@@ -91,9 +92,10 @@
 		D777A78723EB3A860021315E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D777A7AE23EB3BD30021315E /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		D7B1570C2403CAEA0031671F /* FocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusView.swift; sourceTree = "<group>"; };
-		D7B1570E2403CBB90031671F /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		D7B1570E2403CBB90031671F /* FocusTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimer.swift; sourceTree = "<group>"; };
 		D7B157142407D6160031671F /* AllItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllItemsView.swift; sourceTree = "<group>"; };
 		D7B157162407DE600031671F /* FloatingAddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingAddButton.swift; sourceTree = "<group>"; };
+		D7B5CBFE2562895300AE12D1 /* FocusPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusPicker.swift; sourceTree = "<group>"; };
 		D7C3296423FFD2CA008F3F4F /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		D7C3296623FFD6D4008F3F4F /* Icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icons; sourceTree = "<group>"; };
 		E915D66670AE9F3B82F7469E /* Pods_Agendum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Agendum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,7 +208,7 @@
 				D7C3296423FFD2CA008F3F4F /* NavigationBar.swift */,
 				D743ED9323F6CE0B007341D5 /* ProgressBar.swift */,
 				D743ED9123F6C906007341D5 /* TextWithBottomBorder.swift */,
-				D7B1570E2403CBB90031671F /* Timer.swift */,
+				D7B1570E2403CBB90031671F /* FocusTimer.swift */,
 				D7B157162407DE600031671F /* FloatingAddButton.swift */,
 				D73B80502408006A0098FAD0 /* ButtonOne.swift */,
 				D73B805224080A240098FAD0 /* AddItemView.swift */,
@@ -235,6 +237,7 @@
 				D71DF041255033A6003AC048 /* AllItemsLabelView.swift */,
 				D71DF04425503F96003AC048 /* AllItemsCompletedView.swift */,
 				D71DF047255041EA003AC048 /* SearchBarView.swift */,
+				D7B5CBFE2562895300AE12D1 /* FocusPicker.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 				FC7469AF243B2E6700AFC1E9 /* HomeView.swift in Sources */,
 				FC54A0B824615C8D009938C2 /* Item.swift in Sources */,
 				FCBCB21924348E1A00FFA65F /* ViewRouter.swift in Sources */,
+				D7B5CBFF2562895300AE12D1 /* FocusPicker.swift in Sources */,
 				FCC21D5B2423BCBF00485781 /* Agendum.xcdatamodeld in Sources */,
 				D71DF042255033A6003AC048 /* AllItemsLabelView.swift in Sources */,
 				D73B804D2407FA170098FAD0 /* SettingsView.swift in Sources */,
@@ -417,7 +421,7 @@
 				D756916524B60EDF00CCD17B /* CalendarController.swift in Sources */,
 				FC385DE52455BFC300DE256D /* TextFieldWithBottomBorder.swift in Sources */,
 				D743ED9223F6C906007341D5 /* TextWithBottomBorder.swift in Sources */,
-				D7B1570F2403CBB90031671F /* Timer.swift in Sources */,
+				D7B1570F2403CBB90031671F /* FocusTimer.swift in Sources */,
 				D71DF03F2550304C003AC048 /* AllItemsHabitView.swift in Sources */,
 				D73B80512408006A0098FAD0 /* ButtonOne.swift in Sources */,
 				D71DF04525503F96003AC048 /* AllItemsCompletedView.swift in Sources */,
