@@ -12,21 +12,31 @@ struct FocusPicker: View {
     
     @Binding var timerLength: Int
     var timeIntervals: [String]
+    @Binding var done: Bool
     
     var body: some View {
         
-        Picker(selection: $timerLength, label: Text("How long?")) {
+        VStack {
             
-            ForEach(0 ..< timeIntervals.count) {
+            Picker(selection: $timerLength, label: Text("")) {
                 
-                Text(self.timeIntervals[$0]).tag($0)
+                ForEach(0 ..< timeIntervals.count) {
+                    
+                    Text(self.timeIntervals[$0]).tag($0)
+                }
             }
+            .frame(width: 300, height: 100)
+            .clipped()
+            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            
+            Button(action: {done = false}, label: {
+                
+                Text("Done")
+            })
+            .padding(.vertical)
         }
-        .frame(width: 300, height: 100)
-        .clipped()
-        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-        .background(Color.white)
-        .cornerRadius(10)
+        .background(Color(.white))
         .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+        .cornerRadius(10)
     }
 }

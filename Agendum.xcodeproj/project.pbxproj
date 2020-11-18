@@ -41,6 +41,8 @@
 		D7B5CBFF2562895300AE12D1 /* FocusPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B5CBFE2562895300AE12D1 /* FocusPicker.swift */; };
 		D7C3296523FFD2CA008F3F4F /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C3296423FFD2CA008F3F4F /* NavigationBar.swift */; };
 		D7C3296723FFD6D4008F3F4F /* Icons in Resources */ = {isa = PBXBuildFile; fileRef = D7C3296623FFD6D4008F3F4F /* Icons */; };
+		D7C51D342563F56000B5F313 /* FocusPageOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C51D332563F56000B5F313 /* FocusPageOneView.swift */; };
+		D7C51D372565142C00B5F313 /* FocusPageTwoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C51D362565142C00B5F313 /* FocusPageTwoView.swift */; };
 		D7E2564324D3506D0041364F /* CareKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = D7E2564224D3506D0041364F /* CareKitUI */; };
 		D7E2564524D3506D0041364F /* CareKit in Frameworks */ = {isa = PBXBuildFile; productRef = D7E2564424D3506D0041364F /* CareKit */; };
 		D7E2564724D3506D0041364F /* CareKitStore in Frameworks */ = {isa = PBXBuildFile; productRef = D7E2564624D3506D0041364F /* CareKitStore */; };
@@ -98,6 +100,8 @@
 		D7B5CBFE2562895300AE12D1 /* FocusPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusPicker.swift; sourceTree = "<group>"; };
 		D7C3296423FFD2CA008F3F4F /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		D7C3296623FFD6D4008F3F4F /* Icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icons; sourceTree = "<group>"; };
+		D7C51D332563F56000B5F313 /* FocusPageOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusPageOneView.swift; sourceTree = "<group>"; };
+		D7C51D362565142C00B5F313 /* FocusPageTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusPageTwoView.swift; sourceTree = "<group>"; };
 		E915D66670AE9F3B82F7469E /* Pods_Agendum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Agendum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC2CD0CE2423BF80004A1D8E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "Agendum/Support Files/AppDelegate.swift"; sourceTree = SOURCE_ROOT; };
 		FC2CD0D22423BFF4004A1D8E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -238,6 +242,8 @@
 				D71DF04425503F96003AC048 /* AllItemsCompletedView.swift */,
 				D71DF047255041EA003AC048 /* SearchBarView.swift */,
 				D7B5CBFE2562895300AE12D1 /* FocusPicker.swift */,
+				D7C51D332563F56000B5F313 /* FocusPageOneView.swift */,
+				D7C51D362565142C00B5F313 /* FocusPageTwoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -404,6 +410,7 @@
 				FCE8AF42246840820038DCF6 /* ItemRow.swift in Sources */,
 				FC7469AF243B2E6700AFC1E9 /* HomeView.swift in Sources */,
 				FC54A0B824615C8D009938C2 /* Item.swift in Sources */,
+				D7C51D372565142C00B5F313 /* FocusPageTwoView.swift in Sources */,
 				FCBCB21924348E1A00FFA65F /* ViewRouter.swift in Sources */,
 				D7B5CBFF2562895300AE12D1 /* FocusPicker.swift in Sources */,
 				FCC21D5B2423BCBF00485781 /* Agendum.xcdatamodeld in Sources */,
@@ -430,6 +437,7 @@
 				D73B804F2407FF780098FAD0 /* ResetPasswordView.swift in Sources */,
 				D73B805324080A240098FAD0 /* AddItemView.swift in Sources */,
 				D7B1570D2403CAEA0031671F /* FocusView.swift in Sources */,
+				D7C51D342563F56000B5F313 /* FocusPageOneView.swift in Sources */,
 				D71DF03C25502FA2003AC048 /* AllItemsDueSoonView.swift in Sources */,
 				D743ED8E23F6A908007341D5 /* SignInView.swift in Sources */,
 				D743ED8823F692A2007341D5 /* HorizontalLineShape.swift in Sources */,
