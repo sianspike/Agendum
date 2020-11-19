@@ -10,38 +10,14 @@ import SwiftUI
 
 struct FocusPageOneView: View {
     
-    @State private var timerLength = 0
-    @State var timerTapped: Bool = false
     @State var beginTapped: Bool = false
-    @State var timerInterval: TimeInterval? = 0
-    
-    var timeIntervals = ["25 minutes", "30 minutes", "50 minutes", "1 hour", "1.5 hours", "2 hours"]
-    
-    func convertToInterval(interval: Int) -> TimeInterval? {
-        
-        let minute: TimeInterval = 60.0
-        let hour: TimeInterval = 60.0 * minute
-        
-        switch interval {
-        
-            case 0:
-                timerInterval = minute * 25
-            case 1:
-                timerInterval = minute * 30
-            case 2:
-                timerInterval = minute * 50
-            case 3:
-                timerInterval = hour
-            case 4:
-                timerInterval = hour + (minute * 30)
-            case 5:
-                timerInterval = hour * 2
-            default:
-                timerInterval = nil
-        }
-        
-        return timerInterval
-    }
+    @State var breakTask: Bool = false
+    @State var resetTimer: Bool = false
+    @Binding var focusTimerInterval: TimeInterval?
+    @Binding var breakTimerInterval: TimeInterval?
+    @Binding var selectedTask: String
+    @Binding var focusTimerLength: Int
+    @Binding var breakTimerLength: Int
     
     var body: some View {
         
@@ -51,12 +27,7 @@ struct FocusPageOneView: View {
                 
                 Spacer()
                 
-                FocusTimer(time: $timerInterval, counting: beginTapped)
-                    .gesture(TapGesture()
-                                .onEnded { _ in
-                                    
-                                    timerTapped.toggle()
-                                })
+                FocusTimer(time: breakTask ? $breakTimerInterval : $focusTimerInterval, reset: $resetTimer, counting: beginTapped)
                 
                 Spacer()
                 
@@ -67,40 +38,28 @@ struct FocusPageOneView: View {
                 })
                 .padding(.horizontal)
                 
+                ButtonOne(text: breakTask ? "T A S K" : "B R E A K", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {
+                    
+                    breakTask.toggle()
+                    beginTapped = false
+                })
+                .padding(.horizontal)
+                
+                ButtonOne(text: "R E S E T", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {
+                    
+                    resetTimer = true
+                    beginTapped = false
+                    breakTask = false
+                })
+                    .padding(.horizontal)
+                
                 Spacer()
                 
-                Text("C u r r e n t  T a s k")
+                Text("\(selectedTask)")
                     .font(Font.custom("Monsterrat-Regular", size: 20))
                 
                 Spacer()
             }
-            
-            if (timerTapped) {
-                
-                VStack {
-                    
-                    if #available(iOS 14.0, *) {
-//                        FocusPicker(timerLength: $timerLength, timeIntervals: timeIntervals)
-//                            .onChange(of: timerLength){ newValue in
-//                                timerInterval = convertToInterval(interval: newValue)
-//                            }
-                    } else {
-                        // Fallback on earlier versions
-                    }
-                    
-                    Button(action: {self.timerTapped = false}, label: {
-                        
-                        Text("Done")
-                    })
-                }
-            }
         }
-
-    }
-}
-
-struct FocusPageOneView_Previews: PreviewProvider {
-    static var previews: some View {
-        FocusPageOneView()
     }
 }

@@ -13,49 +13,23 @@ import SwiftUIPager
 struct FocusView: View {
     
     @ObservedObject var viewRouter: ViewRouter
-    @State private var timerLength = 0
-    @State var timerTapped: Bool = false
-    @State var beginTapped: Bool = false
-    @State var timerInterval: TimeInterval? = 0
     @State var currentPage: Int = 0
+    @State var selectedTask: String = "No task selected"
+    @State var focusTimerLength = 0
+    @State var breakTimerLength = 0
+    @State var focusTimerInterval: TimeInterval? = 1500 //25 mins
+    @State var breakTimerInterval: TimeInterval? = 300 //5 mins
     var pageItems: [Int] = [0, 1]
-    var timeIntervals = ["25 minutes", "30 minutes", "50 minutes", "1 hour", "1.5 hours", "2 hours"]
-    
-    func convertToInterval(interval: Int) -> TimeInterval? {
-        
-        let minute: TimeInterval = 60.0
-        let hour: TimeInterval = 60.0 * minute
-        
-        switch interval {
-        
-            case 0:
-                timerInterval = minute * 25
-            case 1:
-                timerInterval = minute * 30
-            case 2:
-                timerInterval = minute * 50
-            case 3:
-                timerInterval = hour
-            case 4:
-                timerInterval = hour + (minute * 30)
-            case 5:
-                timerInterval = hour * 2
-            default:
-                timerInterval = nil
-        }
-        
-        return timerInterval
-    }
     
     func pageView(_ page: Int) -> AnyView {
         
         if (page == 0) {
             
-            return AnyView(FocusPageOneView())
+            return AnyView(FocusPageOneView(focusTimerInterval: $focusTimerInterval, breakTimerInterval: $breakTimerInterval, selectedTask: $selectedTask, focusTimerLength: $focusTimerLength, breakTimerLength: $breakTimerLength))
             
         } else {
             
-            return AnyView(FocusPageTwoView())
+            return AnyView(FocusPageTwoView(focusTimerInterval: $focusTimerInterval, breakTimerInterval: $breakTimerInterval, selectedTask: $selectedTask))
         }
     }
     

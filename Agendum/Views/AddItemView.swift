@@ -205,7 +205,7 @@ struct AddItemView: View {
                                         }
                                     }
                                 
-                            }.background(self.selectedLabels.contains(label) ? Color.init(red: 0.6, green: 0.9, blue: 1.0) : Color.white)
+                                }.background(self.selectedLabels.contains(label) ? Color.init(red: 0.6, green: 0.9, blue: 1.0) : Color.white)
                         }
                     }
                 }.frame(width: UIScreen.main.bounds.width)

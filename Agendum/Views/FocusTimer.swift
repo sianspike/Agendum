@@ -12,9 +12,10 @@ import Combine
 struct FocusTimer: View {
     
     @Binding var time: TimeInterval?
+    @Binding var reset: Bool
     var counting: Bool
+    @State var originalTime: TimeInterval? = 0
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    @State var interval: TimeInterval? = nil
     
     func convertToString(time: TimeInterval) -> String {
         
@@ -39,17 +40,23 @@ struct FocusTimer: View {
             Text(convertToString(time: time!))
                 .font(Font.custom("Montserrat-Bold", size: 30))
                 .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
+                .onAppear(perform: {
+                    
+                    originalTime = time
+                })
                 .onReceive(timer) { _ in
                     
                     if (time! > 0 && counting) {
 
                         time! -= 1
                     }
+                    
+                    if (reset) {
+                        
+                        time = originalTime
+                        reset = false
+                    }
                 }
-        }
-        .onAppear {
-            
-            
         }
     }
 }
