@@ -31,7 +31,7 @@ struct CustomAlertView: View {
                 
                 Divider()
                 
-                if (alertTitle == "Reauthenticate") {
+                if (alertTitle == "Reauthenticate" || alertTitle == "Change Password") {
                     
                     SecureField(placeholder, text: $textEntered)
                         .padding(5)

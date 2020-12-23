@@ -314,6 +314,17 @@ class FirebaseSession: ObservableObject {
         }
     }
     
+    func updatePassword(newPassword: String) {
+        
+        Auth.auth().currentUser?.updatePassword(to: newPassword) { (error) in
+          
+            if((error) != nil) {
+                
+                print(error!.localizedDescription)
+            }
+        }
+    }
+    
     func reauthenticate(password: String) {
         
         let user = Auth.auth().currentUser
