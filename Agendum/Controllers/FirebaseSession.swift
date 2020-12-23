@@ -11,6 +11,7 @@ import Firebase
 import Combine
 import SwiftUI
 import FBSDKLoginKit
+import LocalAuthentication
 
 class FirebaseSession: ObservableObject {
     
@@ -300,5 +301,57 @@ class FirebaseSession: ObservableObject {
         if let handle = handle {
             Auth.auth().removeStateDidChangeListener(handle)
         }
+    }
+    
+    func updateEmail(newEmail: String) {
+           
+        Auth.auth().currentUser?.updateEmail(to: newEmail) { error in
+        
+            if ((error) != nil) {
+                
+                print(error!.localizedDescription)
+            }
+        }
+    }
+    
+    func reauthenticate(password: String) {
+        
+        let user = Auth.auth().currentUser
+        var credential: AuthCredential
+        var authenticated = false
+//        let context = LAContext()
+//        var error: NSError?
+        
+        credential = EmailAuthProvider.credential(withEmail: (user?.email)!, password: password)
+        
+        user?.reauthenticate(with: credential) { result, error in
+            
+            if let error = error {
+                
+                print(error)
+                
+            }
+        }
+
+        // Prompt the user to re-provide their sign-in credentials
+//        if (context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)) {
+//
+//            let reason = "We need to check it's you"
+//
+//            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+//
+//                DispatchQueue.main.async {
+//
+//                    if (success) {
+//
+//                    } else {
+//
+//                    }
+//                }
+//            }
+//        } else {
+//
+//
+//        }
     }
 }

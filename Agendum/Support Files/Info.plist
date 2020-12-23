@@ -78,6 +78,8 @@
 		<string>Resources/Fonts/Montserrat-Regular.ttf</string>
 		<string>Resources/Fonts/Montserrat-Bold.ttf</string>
 	</array>
+	<key>NSFaceIDUsageDescription</key>
+	<string>We need to check it&apos;s you</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
