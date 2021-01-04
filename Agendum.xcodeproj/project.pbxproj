@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D701FC7124F41D9600C7E892 /* MonthDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D701FC7024F41D9600C7E892 /* MonthDetailView.swift */; };
 		D7093736259354240065CBE6 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7093735259354240065CBE6 /* CustomAlertView.swift */; };
+		D710684925A3645200B5684F /* KeychainServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = D710684825A3645200B5684F /* KeychainServices.swift */; };
 		D71DF03C25502FA2003AC048 /* AllItemsDueSoonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71DF03B25502FA1003AC048 /* AllItemsDueSoonView.swift */; };
 		D71DF03F2550304C003AC048 /* AllItemsHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71DF03E2550304C003AC048 /* AllItemsHabitView.swift */; };
 		D71DF042255033A6003AC048 /* AllItemsLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71DF041255033A6003AC048 /* AllItemsLabelView.swift */; };
@@ -69,6 +70,7 @@
 		5F8ED031BD8A7560857E9F55 /* Pods-Agendum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendum.debug.xcconfig"; path = "Target Support Files/Pods-Agendum/Pods-Agendum.debug.xcconfig"; sourceTree = "<group>"; };
 		D701FC7024F41D9600C7E892 /* MonthDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthDetailView.swift; sourceTree = "<group>"; };
 		D7093735259354240065CBE6 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
+		D710684825A3645200B5684F /* KeychainServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainServices.swift; sourceTree = "<group>"; };
 		D71DF03B25502FA1003AC048 /* AllItemsDueSoonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllItemsDueSoonView.swift; sourceTree = "<group>"; };
 		D71DF03E2550304C003AC048 /* AllItemsHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllItemsHabitView.swift; sourceTree = "<group>"; };
 		D71DF041255033A6003AC048 /* AllItemsLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllItemsLabelView.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 		FC3DC45824222F45003610D2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D710684825A3645200B5684F /* KeychainServices.swift */,
 				FC54A0B724615C8D009938C2 /* Item.swift */,
 				FC9A92AF2420DFD4005F6888 /* User.swift */,
 			);
@@ -447,6 +450,7 @@
 				D743ED8823F692A2007341D5 /* HorizontalLineShape.swift in Sources */,
 				FC9A92B22420E0A8005F6888 /* FirebaseSession.swift in Sources */,
 				D7549B9724DAEABE00EF002F /* ItemDetailView.swift in Sources */,
+				D710684925A3645200B5684F /* KeychainServices.swift in Sources */,
 				D7C3296523FFD2CA008F3F4F /* NavigationBar.swift in Sources */,
 				D756916924B6125100CCD17B /* CalendarWeekView.swift in Sources */,
 				FC9A92B02420DFD4005F6888 /* User.swift in Sources */,

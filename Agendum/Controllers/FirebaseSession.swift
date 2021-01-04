@@ -28,7 +28,12 @@ class FirebaseSession: ObservableObject {
                 self.viewRouter.viewRouter = "Dashboard"
                 // if we have a user, create a new user model
                 print("Got user: \(user)")
-                self.loggedInUser = User(email: user.email, username: user.displayName, uid: user.uid,  items: [], labels: [], progress: 0)
+                
+                if (self.loggedInUser == nil) {
+                    
+                    self.loggedInUser = User(email: user.email, username: user.displayName, uid: user.uid,  items: [], labels: [], progress: 0)
+                }
+                self.loggedInUser?.uid = user.uid
                 self.retrieveItems()
                 self.retrieveLabels()
                 self.retrieveProgress()
@@ -42,7 +47,7 @@ class FirebaseSession: ObservableObject {
     
     func deleteItem(item: Item) {
         
-        let itemsLocation = db.collection("users").document(loggedInUser!.uid).collection("items")
+        let itemsLocation = db.collection("users").document(loggedInUser!.uid!).collection("items")
         
         itemsLocation.document(item.getTitle()).delete() { error in
             if let error = error {
@@ -58,7 +63,7 @@ class FirebaseSession: ObservableObject {
     
     func saveItem(item: Item) {
         
-        let itemsLocation = db.collection("users").document(loggedInUser!.uid).collection("items")
+        let itemsLocation = db.collection("users").document(loggedInUser!.uid!).collection("items")
         
         for existingItems in loggedInUser!.items {
             
@@ -92,7 +97,7 @@ class FirebaseSession: ObservableObject {
     }
     
     func saveItems(items: Array<Item>) {
-        let itemsLocation = db.collection("users").document(loggedInUser!.uid).collection("items")
+        let itemsLocation = db.collection("users").document(loggedInUser!.uid!).collection("items")
         
         for item in items {
             
@@ -124,7 +129,7 @@ class FirebaseSession: ObservableObject {
     
     func retrieveProgress() {
         
-        let progressRef = db.collection("users").document(loggedInUser!.uid).collection("progress")
+        let progressRef = db.collection("users").document(loggedInUser!.uid!).collection("progress")
         var progress: Double = 0
 
         progressRef.getDocuments() { querySnapshot, error in
@@ -148,7 +153,7 @@ class FirebaseSession: ObservableObject {
     
     func saveProgress(progress: Double) {
         
-        let progressLocation = db.collection("users").document(loggedInUser!.uid).collection("progress")
+        let progressLocation = db.collection("users").document(loggedInUser!.uid!).collection("progress")
         
         progressLocation.document("progress").setData([
             
@@ -170,7 +175,7 @@ class FirebaseSession: ObservableObject {
     
     func retrieveLabels() {
         
-        let labelsRef = db.collection("users").document(loggedInUser!.uid).collection("labels")
+        let labelsRef = db.collection("users").document(loggedInUser!.uid!).collection("labels")
         var labelArray: Array<String> = []
         
         labelsRef.getDocuments() { querySnapshot, error in
@@ -194,7 +199,7 @@ class FirebaseSession: ObservableObject {
     
     func saveLabels(labels: Array<String>) {
         
-        let labelLocation = db.collection("users").document(loggedInUser!.uid).collection("labels")
+        let labelLocation = db.collection("users").document(loggedInUser!.uid!).collection("labels")
         
         for label in labels {
             
@@ -216,7 +221,7 @@ class FirebaseSession: ObservableObject {
     
     func retrieveItems() {
         
-        let itemsRef = db.collection("users").document(loggedInUser!.uid).collection("items")
+        let itemsRef = db.collection("users").document(loggedInUser!.uid!).collection("items")
         var itemArray: Array<Item> = []
         
         itemsRef.getDocuments() { querySnapshot, error in
@@ -271,7 +276,9 @@ class FirebaseSession: ObservableObject {
         handler: @escaping AuthDataResultCallback
         ) {
         Auth.auth().createUser(withEmail: email, password: password, completion: handler)
-    
+        
+        self.loggedInUser = User(email: Auth.auth().currentUser?.email, username: Auth.auth().currentUser?.displayName, uid: Auth.auth().currentUser?.uid,  items: [], labels: [], progress: 0)
+        loggedInUser!.updateStoredPassword(password)
     }
     
     func fbSignUp(with: AuthCredential, handler: @escaping AuthDataResultCallback) {
@@ -323,15 +330,14 @@ class FirebaseSession: ObservableObject {
                 print(error!.localizedDescription)
             }
         }
+        
+        loggedInUser!.updateStoredPassword(newPassword)
     }
     
     func reauthenticate(password: String) {
         
         let user = Auth.auth().currentUser
         var credential: AuthCredential
-        var authenticated = false
-//        let context = LAContext()
-//        var error: NSError?
         
         credential = EmailAuthProvider.credential(withEmail: (user?.email)!, password: password)
         
@@ -343,26 +349,5 @@ class FirebaseSession: ObservableObject {
                 
             }
         }
-
-        // Prompt the user to re-provide their sign-in credentials
-//        if (context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)) {
-//
-//            let reason = "We need to check it's you"
-//
-//            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
-//
-//                DispatchQueue.main.async {
-//
-//                    if (success) {
-//
-//                    } else {
-//
-//                    }
-//                }
-//            }
-//        } else {
-//
-//
-//        }
     }
 }

@@ -105,5 +105,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSFaceIDUsageDescription</key>
+	<string>We need to check it&apos;s you.</string>
 </dict>
 </plist>

@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Firebase
+import LocalAuthentication
 
 struct SignInView: View {
     
@@ -16,16 +17,13 @@ struct SignInView: View {
     @State var loading = false
     @State var error = false
     @ObservedObject var viewRouter: ViewRouter
-    
     @EnvironmentObject var session: FirebaseSession
     
-    func signIn() {
+    func signIn(email: String, password: String) {
         loading = true
         error = false
-        let emailAsString = $email.wrappedValue
-        let passwordAsString = $password.wrappedValue
         
-        session.signIn(email: emailAsString, password: passwordAsString) { (result, error) in
+        session.signIn(email: email, password: password) { (result, error) in
             self.loading = false
             if error != nil {
                 self.error = true
@@ -34,6 +32,42 @@ struct SignInView: View {
                 self.password = ""
                 self.viewRouter.viewRouter = "Dashboard"
             }
+        }
+    }
+    
+    func tryBiometricAuthentication() {
+        
+        let context: LAContext = LAContext()
+        var error: NSError?
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            
+            let reason = "Authenticate to unlock your account."
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { authenticated, error in
+                
+                DispatchQueue.main.async {
+                    if authenticated {
+                        
+                        //No logged in user when this is happening
+                        self.signIn(email: (session.loggedInUser?.email)! as String, password: (session.loggedInUser?.getStoredPassword())! as String)
+                        
+                    } else {
+                        
+                        if let errorString = error?.localizedDescription {
+                            
+                            print("Error in biometric policy evaluation: \(errorString)")
+                        }
+                    }
+                }
+            }
+        } else {
+            
+            if let errorString = error?.localizedDescription {
+                
+                print("Error in biometric policy evaluation: \(errorString)")
+            }
+            
+            //show normal login
         }
     }
     
@@ -60,10 +94,22 @@ struct SignInView: View {
                     HorizontalLineShape
                         .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: .infinity)
                 }.padding()
-
-                ButtonOne(text: "S I G N  I N", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {
-                    self.signIn()
-                    }).padding()
+                
+                HStack {
+                    
+                    ButtonOne(text: "S I G N  I N", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {
+                        self.signIn(email: $email.wrappedValue, password: $password.wrappedValue)
+                        }).padding()
+                    
+                    Button(action: {
+                        
+                        tryBiometricAuthentication()
+                        
+                    }) {
+                        
+                        Text("Click me")
+                    }
+                }
                 
                 FaceBookLoginView(viewRouter: viewRouter).frame(height: 40).padding(.horizontal)
                 
