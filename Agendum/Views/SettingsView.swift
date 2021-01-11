@@ -23,6 +23,9 @@ struct SettingsView: View {
     @State private var password = ""
     @AppStorage("biometricsEnabled") var biometrics = false
     var biometricsEnabled = Biometrics()
+    @State private var editingEmail = false
+    @State private var editingPassword = false
+    @State private var deletingAccount = false
     
     func signOut() {
         
@@ -36,6 +39,7 @@ struct SettingsView: View {
         print("error signing out")
     }
 
+    //change email and password not working correctly
     var body: some View {
         
         ZStack {
@@ -46,9 +50,24 @@ struct SettingsView: View {
                 
                 ButtonOne(text: "C H A N G E  E M A I L", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {
                     
-                    userAuthenticated = true
-                    changeEmailShowing = true
+                    editingEmail = true
                     
+                    if (biometrics) {
+                        
+                        let authenticated = biometricsEnabled.tryBiometricAuthentication()
+                        
+                        if (authenticated) {
+                            
+                            changeEmailShowing = true
+                        }
+                        
+                    } else {
+                        
+                        userAuthenticated = true
+                        changeEmailShowing = true
+                    }
+                    
+                    editingEmail = false
                 })
                 .padding()
                 .alert(isPresented: $authError) {
@@ -58,9 +77,24 @@ struct SettingsView: View {
             
                 ButtonOne(text: "C H A N G E  P A S S W O R D", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {
                     
-                    userAuthenticated = true
-                    changePasswordShowing = true
+                    editingPassword = true
                     
+                    if (biometrics) {
+                        
+                        let authenticated = biometricsEnabled.tryBiometricAuthentication()
+                        
+                        if (authenticated) {
+                            
+                            changePasswordShowing = true
+                        }
+                        
+                    } else {
+                        
+                        userAuthenticated = true
+                        changePasswordShowing = true
+                    }
+                    
+                    editingPassword = false
                 })
                 .padding()
                 .alert(isPresented: $authError) {
@@ -118,6 +152,8 @@ struct SettingsView: View {
                 
                 ButtonOne(text: "D E L E T E  A C C O U N T", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {
                     
+                    deletingAccount = true
+                    
                     if (biometrics) {
                         
                         let authenticated = biometricsEnabled.tryBiometricAuthentication()
@@ -133,6 +169,8 @@ struct SettingsView: View {
                         userAuthenticated = true
                         biometrics = false
                     }
+                    
+                    deletingAccount = false
                 })
                 .padding()
             }
@@ -141,7 +179,8 @@ struct SettingsView: View {
                 
                 CustomAlertView(textEntered: $newEmail, alertTitle: "Change Email", placeholder: "New Email", dismissText: "Submit", action: {
                     
-                    session.updateEmail(newEmail: $newEmail.wrappedValue)
+                    session.updateEmail(password: (session.currentUser?.email)!, newEmail: $newEmail.wrappedValue)
+                    newEmail = ""
                     changeEmailShowing = false
                 })
             }
@@ -149,8 +188,9 @@ struct SettingsView: View {
             if(changePasswordShowing) {
                 
                 CustomAlertView(textEntered: $newPassword, alertTitle: "Change Password", placeholder: "New Password", dismissText: "Submit", action: {
-                    
-                    session.updatePassword(newPassword: $newPassword.wrappedValue)
+                
+                    session.updatePassword(oldPassword: (session.currentUser?.getStoredPassword())!, newPassword: $newPassword.wrappedValue)
+                    newPassword = ""
                     changePasswordShowing = false
                 })
             }
@@ -159,8 +199,14 @@ struct SettingsView: View {
                 
                 CustomAlertView(textEntered: $password, alertTitle: "Reauthenticate", placeholder: "Password", dismissText: "OK", action: {
                     
-                    session.delete(password: $password.wrappedValue)
-                    //session.reauthenticate(password: $password.wrappedValue)
+                    if (editingPassword || editingEmail) {
+                        
+                        session.reauthenticate(password: $password.wrappedValue)
+                        
+                    } else if (deletingAccount) {
+                        
+                        session.delete(password: $password.wrappedValue)
+                    }
                     
                     userAuthenticated = false
                 })

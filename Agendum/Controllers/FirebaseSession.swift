@@ -347,24 +347,26 @@ class FirebaseSession: ObservableObject {
         }
     }
     
-    func updateEmail(newEmail: String) {
+    func updateEmail(password: String, newEmail: String) {
            
         Auth.auth().currentUser?.updateEmail(to: newEmail) { error in
         
             if ((error) != nil) {
                 
                 print(error!.localizedDescription)
+                self.reauthenticate(password: password)
             }
         }
     }
     
-    func updatePassword(newPassword: String) {
+    func updatePassword(oldPassword: String, newPassword: String) {
         
         Auth.auth().currentUser?.updatePassword(to: newPassword) { (error) in
           
             if((error) != nil) {
                 
                 print(error!.localizedDescription)
+                self.reauthenticate(password: oldPassword)
             }
         }
         
