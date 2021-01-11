@@ -116,7 +116,25 @@ struct SettingsView: View {
                     
                 }).padding()
                 
-                ButtonOne(text: "D E L E T E  A C C O U N T", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {}).padding()
+                ButtonOne(text: "D E L E T E  A C C O U N T", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {
+                    
+                    if (biometrics) {
+                        
+                        let authenticated = biometricsEnabled.tryBiometricAuthentication()
+                        
+                        if (authenticated) {
+                            
+                            session.delete(password: (session.currentUser?.getStoredPassword())!)
+                            biometrics = false
+                        }
+                        
+                    } else {
+                        
+                        userAuthenticated = true
+                        biometrics = false
+                    }
+                })
+                .padding()
             }
             
             if (changeEmailShowing) {
@@ -141,7 +159,8 @@ struct SettingsView: View {
                 
                 CustomAlertView(textEntered: $password, alertTitle: "Reauthenticate", placeholder: "Password", dismissText: "OK", action: {
                     
-                    session.reauthenticate(password: $password.wrappedValue)
+                    session.delete(password: $password.wrappedValue)
+                    //session.reauthenticate(password: $password.wrappedValue)
                     
                     userAuthenticated = false
                 })

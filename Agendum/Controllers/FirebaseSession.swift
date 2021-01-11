@@ -24,7 +24,7 @@ class FirebaseSession: ObservableObject {
 
     func listen() {
         // monitor authentication changes using firebase
-        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+        handle = Auth.auth().addStateDidChangeListener { [self] (auth, user) in
             if let user = user {
                 self.viewRouter.viewRouter = "Dashboard"
                 // if we have a user, create a new user model
@@ -41,7 +41,7 @@ class FirebaseSession: ObservableObject {
             } else {
                 // if we don't have a user, set our session to nil
                 self.loggedInUser = nil
-                self.viewRouter.viewRouter = "Sign In"
+                viewRouter.viewRouter = "Sign In"
             }
         }
     }
@@ -257,6 +257,42 @@ class FirebaseSession: ObservableObject {
                 }
         }
     }
+    
+    func deleteUserData() {
+        
+        retrieveItems()
+        retrieveLabels()
+        retrieveProgress()
+       
+        let userPath = db.collection("users").document(Auth.auth().currentUser!.uid)
+        let itemPath = userPath.collection("items")
+        let labelPath = userPath.collection("labels")
+        let progressPath = userPath.collection("progress")
+        
+        for item in self.loggedInUser!.items {
+            
+            itemPath.document(item.getTitle()).delete()
+        }
+        
+        for label in self.loggedInUser!.labels {
+            
+            labelPath.document(label).delete()
+        }
+        
+        progressPath.document("progress").delete()
+        
+        db.collection("users").document(Auth.auth().currentUser!.uid).delete() { err in
+            
+            if let error = err {
+                
+                print("Error removing data: \(error)")
+                
+            } else {
+                
+                print("User data succesfully deleted.")
+            }
+        }
+    }
 
     func addUsername(username: String) {
         
@@ -348,6 +384,27 @@ class FirebaseSession: ObservableObject {
                 
                 print(error)
                 
+            }
+        
+        }
+    }
+    
+    func delete(password: String) {
+        
+        let user = Auth.auth().currentUser
+        self.deleteUserData()
+        
+        user?.delete { error in
+            
+            if let error = error {
+                
+                print("There was an error while deleting the user: \(error)")
+                self.reauthenticate(password: password)
+                
+            } else {
+                
+                print("User succesfully deleted.")
+                self.currentUser = nil
             }
         }
     }

@@ -60,7 +60,7 @@ struct ContentView: View {
                     } else {
                         // Fallback on earlier versions
                     }
-                } else if (viewRouter.viewRouter == "Sign Up") {
+                } else {
                     SignUpView(viewRouter: viewRouter)
                 }
             }
