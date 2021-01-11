@@ -3,3 +3,6 @@ Agendum.xcworkspace/xcuserdata/*
 .DS_Store
 Agendum/.DS_Store
 Agendum.xcodeproj/xcuserdata/*
+Podfile.lock
+Pods/Manifest.lock
+Pods/Pods.xcodeproj/xcuserdata/*
