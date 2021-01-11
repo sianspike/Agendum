@@ -18,6 +18,7 @@ struct ContentView: View {
         session.listen()
     }
     
+    @available(iOS 14.0, *)
     func switchViews() -> AnyView {
         switch viewRouter.viewRouter {
         case "Dashboard":
@@ -43,14 +44,22 @@ struct ContentView: View {
             
             if(session.loggedInUser != nil) {
 
-                switchViews()
+                if #available(iOS 14.0, *) {
+                    switchViews()
+                } else {
+                    // Fallback on earlier versions
+                }
                 
                 HomeView(viewRouter: viewRouter)
 
             } else {
 
                 if (viewRouter.viewRouter == "Sign In" || viewRouter.viewRouter == "Dashboard") {
-                    SignInView(viewRouter: viewRouter)
+                    if #available(iOS 14.0, *) {
+                        SignInView(viewRouter: viewRouter)
+                    } else {
+                        // Fallback on earlier versions
+                    }
                 } else if (viewRouter.viewRouter == "Sign Up") {
                     SignUpView(viewRouter: viewRouter)
                 }

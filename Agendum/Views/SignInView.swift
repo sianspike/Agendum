@@ -10,6 +10,7 @@ import SwiftUI
 import Firebase
 import LocalAuthentication
 
+@available(iOS 14.0, *)
 struct SignInView: View {
     
     @State var email: String = ""
@@ -18,9 +19,10 @@ struct SignInView: View {
     @State var error = false
     @State var errorMessage = ""
     @ObservedObject var viewRouter: ViewRouter
+    var biometricsEnabled = Biometrics()
     @EnvironmentObject var session: FirebaseSession
-    var biometrics = Biometrics()
     @State var alert = false
+    @AppStorage("biometricsEnabled") var biometrics = false
 
     
     func signIn(email: String, password: String) {
@@ -74,29 +76,32 @@ struct SignInView: View {
                         
                         Alert(title: Text("Authentication Error"), message: Text(errorMessage), dismissButton: .default(Text("Dismiss")))
                     }
+                    
+                    if (biometrics) {
                         
-                    Button(action: {
-                        
-                        if (biometrics.tryBiometricAuthentication()) {
+                        Button(action: {
                             
-                            if (session.currentUser?.email == nil || session.currentUser?.getStoredPassword() == nil) {
+                            if (biometricsEnabled.tryBiometricAuthentication()) {
                                 
-                                alert = true
-                                
-                            } else {
-                                
-                                self.signIn(email: (session.currentUser?.email)! as String, password: (session.currentUser?.getStoredPassword())! as String)
+                                if (session.currentUser?.email == nil || session.currentUser?.getStoredPassword() == nil) {
+                                    
+                                    alert = true
+                                    
+                                } else {
+                                    
+                                    self.signIn(email: (session.currentUser?.email)! as String, password: (session.currentUser?.getStoredPassword())! as String)
+                                }
                             }
-                        }
-                            
-                    }) {
+                                
+                        }) {
 
-                        Image(systemName: biometrics.faceIDAvailable() ? "faceid" : "touchid")
-                    }
-                    .padding(.trailing)
-                    .alert(isPresented: $alert) {
-                        
-                        Alert(title: Text("Authentication Failed"), message: Text("Please sign in using your email and password"), dismissButton: .default(Text("OK")))
+                            Image(systemName: biometricsEnabled.faceIDAvailable() ? "faceid" : "touchid")
+                        }
+                        .padding(.trailing)
+                        .alert(isPresented: $alert) {
+                            
+                            Alert(title: Text("Authentication Failed"), message: Text("Please sign in using your email and password"), dismissButton: .default(Text("OK")))
+                        }
                     }
                 }
                 
@@ -115,6 +120,10 @@ struct SignInView: View {
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView(viewRouter: ViewRouter()).environmentObject(FirebaseSession())
+        if #available(iOS 14.0, *) {
+            SignInView(viewRouter: ViewRouter()).environmentObject(FirebaseSession())
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }

@@ -8,18 +8,21 @@
 
 import SwiftUI
 
+@available(iOS 14.0, *)
 struct SettingsView: View {
     
     @EnvironmentObject var session: FirebaseSession
     @ObservedObject var viewRouter: ViewRouter
-    @State private var biometrics = false
     @State private var newEmail = ""
     @State private var newPassword = ""
     @State private var changeEmailShowing = false
     @State private var changePasswordShowing = false
     @State private var userAuthenticated = false
     @State private var authError = false
+    @State private var bioFailed = false
     @State private var password = ""
+    @AppStorage("biometricsEnabled") var biometrics = false
+    var biometricsEnabled = Biometrics()
     
     func signOut() {
         
@@ -33,7 +36,6 @@ struct SettingsView: View {
         print("error signing out")
     }
 
-    
     var body: some View {
         
         ZStack {
@@ -70,12 +72,40 @@ struct SettingsView: View {
                 
                 HStack{
                     
-                    Toggle(isOn: $biometrics) {
-                        
-                        Text("T o u c h  I D / F a c e  I D")
-                            .font(Font.custom("Montserrat-Regular", size: 15))
-     
-                    }.padding()
+        
+                        Toggle(isOn: $biometrics) {
+                            
+                            Text("T o u c h  I D / F a c e  I D")
+                                .font(Font.custom("Montserrat-Regular", size: 15))
+                            
+                        }
+                        .padding()
+                        .onChange(of: biometrics) { (value) in
+                            
+                            var success = false
+                            
+                            if (value) {
+                                
+                                success = biometricsEnabled.tryBiometricAuthentication()
+                                
+                                if (success) {
+                                    
+                                    biometrics = true
+                                    
+                                } else {
+                                    
+                                    bioFailed = true
+                                }
+                                
+                            } else {
+                                
+                                biometrics = false
+                            }
+                        }
+                        .alert(isPresented: $bioFailed) {
+                            
+                            Alert(title: Text("AuthenticationFailed"), message: Text("Unable to enable biometric authentication."), dismissButton: .default(Text("OK")))
+                        }
                 }
                 
                 Spacer()
@@ -122,6 +152,10 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(viewRouter: ViewRouter())
+        if #available(iOS 14.0, *) {
+            SettingsView(viewRouter: ViewRouter())
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }
