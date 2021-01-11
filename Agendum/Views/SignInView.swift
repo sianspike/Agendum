@@ -16,58 +16,27 @@ struct SignInView: View {
     @State var password: String = ""
     @State var loading = false
     @State var error = false
+    @State var errorMessage = ""
     @ObservedObject var viewRouter: ViewRouter
     @EnvironmentObject var session: FirebaseSession
+    var biometrics = Biometrics()
+    @State var alert = false
+
     
     func signIn(email: String, password: String) {
         loading = true
         error = false
         
-        session.signIn(email: email, password: password) { (result, error) in
+        session.signIn(email: email, password: password) { (result, err) in
             self.loading = false
-            if error != nil {
+            if err != nil {
                 self.error = true
+                self.errorMessage = err!.localizedDescription
             } else {
                 self.email = ""
                 self.password = ""
                 self.viewRouter.viewRouter = "Dashboard"
             }
-        }
-    }
-    
-    func tryBiometricAuthentication() {
-        
-        let context: LAContext = LAContext()
-        var error: NSError?
-        
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            
-            let reason = "Authenticate to unlock your account."
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { authenticated, error in
-                
-                DispatchQueue.main.async {
-                    if authenticated {
-                        
-                        //No logged in user when this is happening
-                        self.signIn(email: (session.loggedInUser?.email)! as String, password: (session.loggedInUser?.getStoredPassword())! as String)
-                        
-                    } else {
-                        
-                        if let errorString = error?.localizedDescription {
-                            
-                            print("Error in biometric policy evaluation: \(errorString)")
-                        }
-                    }
-                }
-            }
-        } else {
-            
-            if let errorString = error?.localizedDescription {
-                
-                print("Error in biometric policy evaluation: \(errorString)")
-            }
-            
-            //show normal login
         }
     }
     
@@ -99,15 +68,35 @@ struct SignInView: View {
                     
                     ButtonOne(text: "S I G N  I N", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {
                         self.signIn(email: $email.wrappedValue, password: $password.wrappedValue)
-                        }).padding()
-                    
+                    })
+                    .padding()
+                    .alert(isPresented: $error) {
+                        
+                        Alert(title: Text("Authentication Error"), message: Text(errorMessage), dismissButton: .default(Text("Dismiss")))
+                    }
+                        
                     Button(action: {
                         
-                        tryBiometricAuthentication()
-                        
+                        if (biometrics.tryBiometricAuthentication()) {
+                            
+                            if (session.currentUser?.email == nil || session.currentUser?.getStoredPassword() == nil) {
+                                
+                                alert = true
+                                
+                            } else {
+                                
+                                self.signIn(email: (session.currentUser?.email)! as String, password: (session.currentUser?.getStoredPassword())! as String)
+                            }
+                        }
+                            
                     }) {
+
+                        Image(systemName: biometrics.faceIDAvailable() ? "faceid" : "touchid")
+                    }
+                    .padding(.trailing)
+                    .alert(isPresented: $alert) {
                         
-                        Text("Click me")
+                        Alert(title: Text("Authentication Failed"), message: Text("Please sign in using your email and password"), dismissButton: .default(Text("OK")))
                     }
                 }
                 
@@ -116,12 +105,8 @@ struct SignInView: View {
                 ButtonOne(text: "S I G N  U P", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {
                     self.viewRouter.viewRouter = "Sign Up"
                     
-                }).padding()
-                
-                
-                if (error) {
-                    Text("error")
-                }
+                })
+                .padding()
                 
             }.padding()
         }

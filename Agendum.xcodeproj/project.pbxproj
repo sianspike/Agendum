@@ -45,6 +45,7 @@
 		D7C3296723FFD6D4008F3F4F /* Icons in Resources */ = {isa = PBXBuildFile; fileRef = D7C3296623FFD6D4008F3F4F /* Icons */; };
 		D7C51D342563F56000B5F313 /* FocusPageOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C51D332563F56000B5F313 /* FocusPageOneView.swift */; };
 		D7C51D372565142C00B5F313 /* FocusPageTwoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C51D362565142C00B5F313 /* FocusPageTwoView.swift */; };
+		D7D01DAC25A4986B00794D71 /* Biometrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D01DAB25A4986B00794D71 /* Biometrics.swift */; };
 		D7E2564324D3506D0041364F /* CareKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = D7E2564224D3506D0041364F /* CareKitUI */; };
 		D7E2564524D3506D0041364F /* CareKit in Frameworks */ = {isa = PBXBuildFile; productRef = D7E2564424D3506D0041364F /* CareKit */; };
 		D7E2564724D3506D0041364F /* CareKitStore in Frameworks */ = {isa = PBXBuildFile; productRef = D7E2564624D3506D0041364F /* CareKitStore */; };
@@ -106,6 +107,7 @@
 		D7C3296623FFD6D4008F3F4F /* Icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icons; sourceTree = "<group>"; };
 		D7C51D332563F56000B5F313 /* FocusPageOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusPageOneView.swift; sourceTree = "<group>"; };
 		D7C51D362565142C00B5F313 /* FocusPageTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusPageTwoView.swift; sourceTree = "<group>"; };
+		D7D01DAB25A4986B00794D71 /* Biometrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Biometrics.swift; sourceTree = "<group>"; };
 		E915D66670AE9F3B82F7469E /* Pods_Agendum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Agendum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC2CD0CE2423BF80004A1D8E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "Agendum/Support Files/AppDelegate.swift"; sourceTree = SOURCE_ROOT; };
 		FC2CD0D22423BFF4004A1D8E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 				D777A78223EB3A840021315E /* ContentView.swift */,
 				FC9A92B12420E0A8005F6888 /* FirebaseSession.swift */,
 				FCBCB21824348E1A00FFA65F /* ViewRouter.swift */,
+				D7D01DAB25A4986B00794D71 /* Biometrics.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				D743ED8E23F6A908007341D5 /* SignInView.swift in Sources */,
 				D743ED8823F692A2007341D5 /* HorizontalLineShape.swift in Sources */,
 				FC9A92B22420E0A8005F6888 /* FirebaseSession.swift in Sources */,
+				D7D01DAC25A4986B00794D71 /* Biometrics.swift in Sources */,
 				D7549B9724DAEABE00EF002F /* ItemDetailView.swift in Sources */,
 				D710684925A3645200B5684F /* KeychainServices.swift in Sources */,
 				D7C3296523FFD2CA008F3F4F /* NavigationBar.swift in Sources */,

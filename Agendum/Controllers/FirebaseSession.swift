@@ -16,6 +16,7 @@ import LocalAuthentication
 class FirebaseSession: ObservableObject {
     
     @Published var loggedInUser: User?
+    var currentUser: User?
     static let shared = FirebaseSession()
     var viewRouter = ViewRouter()
     var handle: AuthStateDidChangeListenerHandle?
@@ -28,15 +29,15 @@ class FirebaseSession: ObservableObject {
                 self.viewRouter.viewRouter = "Dashboard"
                 // if we have a user, create a new user model
                 print("Got user: \(user)")
-                
-                if (self.loggedInUser == nil) {
                     
-                    self.loggedInUser = User(email: user.email, username: user.displayName, uid: user.uid,  items: [], labels: [], progress: 0)
-                }
+                self.loggedInUser = User(email: user.email, username: user.displayName, uid: user.uid,  items: [], labels: [], progress: 0)
+                self.currentUser = User(email: user.email, username: user.displayName, uid: user.uid,  items: [], labels: [], progress: 0)
                 self.loggedInUser?.uid = user.uid
+                self.currentUser?.uid = user.uid
                 self.retrieveItems()
                 self.retrieveLabels()
                 self.retrieveProgress()
+                
             } else {
                 // if we don't have a user, set our session to nil
                 self.loggedInUser = nil
@@ -277,8 +278,8 @@ class FirebaseSession: ObservableObject {
         ) {
         Auth.auth().createUser(withEmail: email, password: password, completion: handler)
         
-        self.loggedInUser = User(email: Auth.auth().currentUser?.email, username: Auth.auth().currentUser?.displayName, uid: Auth.auth().currentUser?.uid,  items: [], labels: [], progress: 0)
-        loggedInUser!.updateStoredPassword(password)
+        currentUser = User(email: Auth.auth().currentUser?.email, username: Auth.auth().currentUser?.displayName, uid: Auth.auth().currentUser?.uid,  items: [], labels: [], progress: 0)
+        currentUser!.updateStoredPassword(password)
     }
     
     func fbSignUp(with: AuthCredential, handler: @escaping AuthDataResultCallback) {
@@ -331,7 +332,7 @@ class FirebaseSession: ObservableObject {
             }
         }
         
-        loggedInUser!.updateStoredPassword(newPassword)
+        currentUser!.updateStoredPassword(newPassword)
     }
     
     func reauthenticate(password: String) {

@@ -48,8 +48,6 @@ struct SignUpView: View {
                 self.viewRouter.viewRouter = "Dashboard"
             }
         }
-        
-        print(session.loggedInUser!)
     }
     
     var body: some View {
@@ -83,8 +81,6 @@ struct SignUpView: View {
                     HorizontalLineShape
                         .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: .infinity)
             }.padding()
-            
-            Text("\(email)")
             
             ButtonOne(text: "C R E A T E  A C C O U N T", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {
                 self.signUp()

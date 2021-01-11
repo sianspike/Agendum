@@ -12,7 +12,7 @@ struct SettingsView: View {
     
     @EnvironmentObject var session: FirebaseSession
     @ObservedObject var viewRouter: ViewRouter
-    @State private var touchID = false
+    @State private var biometrics = false
     @State private var newEmail = ""
     @State private var newPassword = ""
     @State private var changeEmailShowing = false
@@ -70,9 +70,9 @@ struct SettingsView: View {
                 
                 HStack{
                     
-                    Toggle(isOn: $touchID) {
+                    Toggle(isOn: $biometrics) {
                         
-                        Text("T o u c h  I D")
+                        Text("T o u c h  I D / F a c e  I D")
                             .font(Font.custom("Montserrat-Regular", size: 15))
      
                     }.padding()
@@ -83,6 +83,7 @@ struct SettingsView: View {
                 ButtonOne(text: "L O G  O U T", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {
                     
                     self.signOut()
+                    
                 }).padding()
                 
                 ButtonOne(text: "D E L E T E  A C C O U N T", color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), action: {}).padding()
