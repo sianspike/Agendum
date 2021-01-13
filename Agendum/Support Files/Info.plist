@@ -4,6 +4,8 @@
 <dict>
 	<key>NSCalendarsUsageDescription</key>
 	<string>We can view your calendar and base suggestions on your events.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>We can view your calendar and base suggestions on your events.</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

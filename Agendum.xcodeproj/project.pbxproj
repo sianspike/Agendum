@@ -20,6 +20,7 @@
 		D73B804F2407FF780098FAD0 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73B804E2407FF780098FAD0 /* ResetPasswordView.swift */; };
 		D73B80512408006A0098FAD0 /* ButtonOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73B80502408006A0098FAD0 /* ButtonOne.swift */; };
 		D73B805324080A240098FAD0 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73B805224080A240098FAD0 /* AddItemView.swift */; };
+		D742726F25AEFE7D0091DDAD /* CalendarChooser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D742726E25AEFE7D0091DDAD /* CalendarChooser.swift */; };
 		D743ED8823F692A2007341D5 /* HorizontalLineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED8723F692A2007341D5 /* HorizontalLineShape.swift */; };
 		D743ED8C23F6A8C8007341D5 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED8B23F6A8C8007341D5 /* SignUpView.swift */; };
 		D743ED8E23F6A908007341D5 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED8D23F6A908007341D5 /* SignInView.swift */; };
@@ -82,6 +83,7 @@
 		D73B804E2407FF780098FAD0 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		D73B80502408006A0098FAD0 /* ButtonOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonOne.swift; sourceTree = "<group>"; };
 		D73B805224080A240098FAD0 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
+		D742726E25AEFE7D0091DDAD /* CalendarChooser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarChooser.swift; sourceTree = "<group>"; };
 		D743ED8723F692A2007341D5 /* HorizontalLineShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalLineShape.swift; sourceTree = "<group>"; };
 		D743ED8B23F6A8C8007341D5 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		D743ED8D23F6A908007341D5 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				FC9A92B12420E0A8005F6888 /* FirebaseSession.swift */,
 				FCBCB21824348E1A00FFA65F /* ViewRouter.swift */,
 				D7D01DAB25A4986B00794D71 /* Biometrics.swift */,
+				D742726E25AEFE7D0091DDAD /* CalendarChooser.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 				D71DF03F2550304C003AC048 /* AllItemsHabitView.swift in Sources */,
 				D73B80512408006A0098FAD0 /* ButtonOne.swift in Sources */,
 				D71DF04525503F96003AC048 /* AllItemsCompletedView.swift in Sources */,
+				D742726F25AEFE7D0091DDAD /* CalendarChooser.swift in Sources */,
 				D7B157152407D6160031671F /* AllItemsView.swift in Sources */,
 				D7093736259354240065CBE6 /* CustomAlertView.swift in Sources */,
 				D7B157172407DE600031671F /* FloatingAddButton.swift in Sources */,

@@ -14,6 +14,8 @@ struct SettingsView: View {
     
     @EnvironmentObject var session: FirebaseSession
     @ObservedObject var viewRouter: ViewRouter
+    @AppStorage("biometricsEnabled") var biometrics = false
+    @AppStorage("calendarConnected") var calendar = false
     @State private var newEmail = ""
     @State private var newPassword = ""
     @State private var changeEmailShowing = false
@@ -22,13 +24,13 @@ struct SettingsView: View {
     @State private var authError = false
     @State private var bioFailed = false
     @State private var password = ""
-    @AppStorage("biometricsEnabled") var biometrics = false
-    @AppStorage("calendarConnected") var calendar = false
-    var biometricsEnabled = Biometrics()
     @State private var editingEmail = false
     @State private var editingPassword = false
     @State private var deletingAccount = false
-    let store = EKEventStore()
+    @State private var showingCalendarChooser = false
+    private let store = EKEventStore()
+    private let biometricsEnabled = Biometrics()
+    @State var calendarSet: Set<EKCalendar>? = nil
     
     func signOut() {
         
@@ -117,11 +119,14 @@ struct SettingsView: View {
                     
                     ButtonOne(text: "C O N N E C T  C A L E N D A R", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {
                         
+                        showingCalendarChooser = true
+                        
                         store.requestAccess(to: .event) { granted, error in
                             
                             if (granted) {
                                 
                                 calendar = true
+                                calendarSet = Set(store.calendars(for: .event))
                                 
                             } else {
                                 
@@ -129,7 +134,12 @@ struct SettingsView: View {
                                 calendar = false
                             }
                         }
-                    }).padding()
+                    })
+                    .padding()
+                    .sheet(isPresented: $showingCalendarChooser, onDismiss: {print($calendarSet)}) {
+                        
+                        CalendarChooser(calendars: $calendarSet, store: store)
+                    }
                 }
                 
                 HStack{
@@ -218,6 +228,7 @@ struct SettingsView: View {
                 CustomAlertView(textEntered: $newPassword, alertTitle: "Change Password", placeholder: "New Password", dismissText: "Submit", action: {
                 
                     session.updatePassword(oldPassword: (session.currentUser?.getStoredPassword())!, newPassword: $newPassword.wrappedValue)
+                    
                     newPassword = ""
                     changePasswordShowing = false
                 })
@@ -239,16 +250,6 @@ struct SettingsView: View {
                     userAuthenticated = false
                 })
             }
-        }
-    }
-}
-
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        if #available(iOS 14.0, *) {
-            SettingsView(viewRouter: ViewRouter())
-        } else {
-            // Fallback on earlier versions
         }
     }
 }
