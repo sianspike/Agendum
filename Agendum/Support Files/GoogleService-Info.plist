@@ -105,6 +105,8 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSCalendarsUsageDescription</key>
+	<string>We can view your calendar and base suggestions on your events.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>We need to check it&apos;s you.</string>
 </dict>

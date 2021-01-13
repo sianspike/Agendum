@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import EventKit
 
 @available(iOS 14.0, *)
 struct SettingsView: View {
@@ -22,10 +23,12 @@ struct SettingsView: View {
     @State private var bioFailed = false
     @State private var password = ""
     @AppStorage("biometricsEnabled") var biometrics = false
+    @AppStorage("calendarConnected") var calendar = false
     var biometricsEnabled = Biometrics()
     @State private var editingEmail = false
     @State private var editingPassword = false
     @State private var deletingAccount = false
+    let store = EKEventStore()
     
     func signOut() {
         
@@ -39,7 +42,6 @@ struct SettingsView: View {
         print("error signing out")
     }
 
-    //change email and password not working correctly
     var body: some View {
         
         ZStack {
@@ -102,7 +104,33 @@ struct SettingsView: View {
                     Alert(title: Text("Error"), message: Text("Authentication Failed"), dismissButton: .default(Text("OK")))
                 }
                 
-                ButtonOne(text: "C O N N E C T  C A L E N D A R", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {}).padding()
+                if (calendar) {
+                    
+                    ButtonOne(text: "D I S C O N N E C T  C A L E N D A R", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {
+                        
+                        calendar = false
+                        //remove all non-app created events
+                    })
+                        .padding()
+                    
+                } else {
+                    
+                    ButtonOne(text: "C O N N E C T  C A L E N D A R", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {
+                        
+                        store.requestAccess(to: .event) { granted, error in
+                            
+                            if (granted) {
+                                
+                                calendar = true
+                                
+                            } else {
+                                
+                                print("There was an error connecting your calendars: \(String(describing: error))")
+                                calendar = false
+                            }
+                        }
+                    }).padding()
+                }
                 
                 HStack{
                     
