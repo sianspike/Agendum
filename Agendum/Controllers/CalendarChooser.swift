@@ -10,11 +10,14 @@ import Foundation
 import SwiftUI
 import EventKitUI
 
+@available(iOS 14.0, *)
 struct CalendarChooser: UIViewControllerRepresentable {
     
     @Environment(\.presentationMode) var presentationMode
     @Binding var calendars: Set<EKCalendar>?
     let store: EKEventStore
+    @AppStorage("selectedCalendars") var selected: Data = Data()
+    @State var temp: EKCalendarChooser? = nil
     
     func makeCoordinator() -> Coordinator {
         
@@ -28,6 +31,8 @@ struct CalendarChooser: UIViewControllerRepresentable {
         chooser.delegate = context.coordinator
         chooser.showsDoneButton = true
         chooser.showsCancelButton = true
+        
+        temp = chooser
         
         return UINavigationController(rootViewController: chooser)
     }
@@ -49,10 +54,39 @@ struct CalendarChooser: UIViewControllerRepresentable {
             
             parent.calendars = calendarChooser.selectedCalendars
             
+            var calendarArray: Array<String> = []
+            
+            for calendar in parent.temp!.selectedCalendars {
+                
+                calendarArray.append(calendar.title)
+            
+            }
+            
+            //archive array
+            //base64encode archive
+            //convert to data
+            let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: calendarArray, requiringSecureCoding: false)
+            //let base64String = encodedData!.base64EncodedString()
+            //let data = Data(base64Encoded: base64String)
+            parent.selected = encodedData!
+            
             parent.presentationMode.wrappedValue.dismiss()
         }
 
         func calendarChooserDidCancel(_ calendarChooser: EKCalendarChooser) {
+            
+            var calendarArray: Array<String> = []
+            
+            for calendar in parent.temp!.selectedCalendars {
+                
+                calendarArray.append(calendar.title)
+            
+            }
+            
+            let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: calendarArray, requiringSecureCoding: false)
+            let base64String = encodedData!.base64EncodedString()
+            let data = Data(base64Encoded: base64String)
+            parent.selected = data!
             
             parent.presentationMode.wrappedValue.dismiss()
         }
