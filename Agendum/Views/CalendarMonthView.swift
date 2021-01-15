@@ -8,6 +8,7 @@
 
 import SwiftUI
 import KVKCalendar
+import EventKit
 
 struct CalendarMonthView: UIViewRepresentable {
     
@@ -16,13 +17,14 @@ struct CalendarMonthView: UIViewRepresentable {
     var calendarMonthView: CalendarView = {
         var style = Style()
         style.defaultType = .month
-        style.timeHourSystem = .twentyFourHour
+        style.timeSystem = .twentyFour
         style.headerScroll.isScrollEnabled = false
-        style.headerScroll.isHiddenTitleDate = true
-        style.headerScroll.isHiddenCornerTitleDate = true
+        style.headerScroll.isHiddenSubview = true
+        //style.headerScroll.isHiddenTitleDate = true
+        //style.headerScroll.isHiddenCornerTitleDate = true
         style.headerScroll.heightHeaderWeek = 0
-        style.headerScroll.heightTitleDate = 0
-        style.event.isEnableMoveEvent = true
+        style.headerScroll.heightSubviewHeader = 0
+        //style.event.isEnableMoveEvent = true
         style.locale = Locale.current
         style.timezone = TimeZone.current
         style.allDay.isPinned = true
@@ -51,7 +53,7 @@ struct CalendarMonthView: UIViewRepresentable {
     
     // MARK: Calendar DataSource and Delegate
     class Coordinator: NSObject, CalendarDataSource, CalendarDelegate {
-        
+
         private let view: CalendarMonthView
         var events = [Event]()
         
@@ -68,14 +70,9 @@ struct CalendarMonthView: UIViewRepresentable {
             }
         }
         
-        func eventsForCalendar() -> [Event] {
+        func eventsForCalendar(systemEvents: [EKEvent]) -> [Event] {
             
             return events
-        }
-        
-        func willDisplayDate(_ date: Date?, events: [Event]) -> DateStyle? {
-            
-            return nil
         }
         
         func didSelectEvent(_ event: Event, type: CalendarType, frame: CGRect?) {
@@ -149,8 +146,7 @@ struct CalendarMonthView: UIViewRepresentable {
                 
                 if (item.isDateSet()) {
                     
-                    var event = Event()
-                    event.id = item.id
+                    var event = Event(ID: item.getID())
                     event.start = item.getDate()! as Date
                     
                     if (item.getDuration() != nil) {
@@ -162,7 +158,7 @@ struct CalendarMonthView: UIViewRepresentable {
                         event.isAllDay = true
                     }
                     
-                    event.color = EventColor(UIColor(red: 0.6, green: 0.8, blue: 1, alpha: 1))
+                    event.color = Event.Color(UIColor(red: 0.6, green: 0.8, blue: 1, alpha: 1))
                     event.backgroundColor = UIColor(red: 0.6, green: 0.8, blue: 1, alpha: 1)
                     event.text = "\(item.getTitle())"
                     events.append(event)

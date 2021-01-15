@@ -49,6 +49,7 @@
 		D7E2564324D3506D0041364F /* CareKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = D7E2564224D3506D0041364F /* CareKitUI */; };
 		D7E2564524D3506D0041364F /* CareKit in Frameworks */ = {isa = PBXBuildFile; productRef = D7E2564424D3506D0041364F /* CareKit */; };
 		D7E2564724D3506D0041364F /* CareKitStore in Frameworks */ = {isa = PBXBuildFile; productRef = D7E2564624D3506D0041364F /* CareKitStore */; };
+		D7FEEA7F25B1ABED00C1FF28 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC2CD0D22423BFF4004A1D8E /* GoogleService-Info.plist */; };
 		D8A787546A20F116506414C7 /* Pods_Agendum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E915D66670AE9F3B82F7469E /* Pods_Agendum.framework */; };
 		FC2CD0CF2423BF81004A1D8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2CD0CE2423BF80004A1D8E /* AppDelegate.swift */; };
 		FC385DE52455BFC300DE256D /* TextFieldWithBottomBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC385DE42455BFC300DE256D /* TextFieldWithBottomBorder.swift */; };
@@ -356,6 +357,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7FEEA7F25B1ABED00C1FF28 /* GoogleService-Info.plist in Resources */,
 				D7B157112407B8720031671F /* Fonts in Resources */,
 				D7C3296723FFD6D4008F3F4F /* Icons in Resources */,
 				FCCC972F243CBA480085A4FE /* LaunchScreen.storyboard in Resources */,
@@ -519,7 +521,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -575,7 +577,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

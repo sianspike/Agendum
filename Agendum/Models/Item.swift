@@ -21,6 +21,7 @@ class Item: Identifiable {
     private var labels: Array<String>
     private var completed: Bool
     private var duration: TimeInterval?
+    internal var id = UUID()
     
     init(title: String, task: Bool, habit: Bool, dateToggle: Bool, reminderToggle: Bool, completed: Bool, event: Bool) {
         self.title = title
@@ -48,6 +49,11 @@ class Item: Identifiable {
         self.reminder = reminder
         self.labels = labels
         self.duration = duration
+    }
+    
+    func getID() -> String {
+        
+        return self.id.uuidString
     }
     
     func isEvent() -> Bool {
