@@ -14,23 +14,63 @@ struct CalendarMonthView: UIViewRepresentable {
     
     @EnvironmentObject var session: FirebaseSession
     
+    var selected = UserDefaults().data(forKey: "selectedCalendars")
+    @State var calendars: Set<String> = []
+    
     var calendarMonthView: CalendarView = {
+        
+        var selected = UserDefaults().data(forKey: "selectedCalendars")
+        var calendars: Set<String> = []
+        
+        func getSystemCalendars() -> Set<String> {
+            
+            var base64encodedstring = String(bytes: selected!, encoding: .utf8)
+            base64encodedstring = base64encodedstring!.replacingOccurrences(of: "[", with: "")
+            base64encodedstring = base64encodedstring!.replacingOccurrences(of: "]", with: "")
+            base64encodedstring = base64encodedstring!.replacingOccurrences(of: "\"", with: "")
+            
+            let calendarArray: [String] = base64encodedstring!.components(separatedBy: ",")
+            
+            for calendar in calendarArray {
+
+                calendars.insert(calendar)
+            }
+            
+            return calendars
+        }
+        
         var style = Style()
         style.defaultType = .month
         style.timeSystem = .twentyFour
         style.headerScroll.isScrollEnabled = false
         style.headerScroll.isHiddenSubview = true
-        //style.headerScroll.isHiddenTitleDate = true
-        //style.headerScroll.isHiddenCornerTitleDate = true
         style.headerScroll.heightHeaderWeek = 0
         style.headerScroll.heightSubviewHeader = 0
-        //style.event.isEnableMoveEvent = true
         style.locale = Locale.current
         style.timezone = TimeZone.current
         style.allDay.isPinned = true
+        style.systemCalendars = getSystemCalendars()
+        style.month.selectionMode = .single
         
         return CalendarView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 400), style: style)
     }()
+    
+    func getSystemCalendars() -> Set<String> {
+        
+        var base64encodedstring = String(bytes: selected!, encoding: .utf8)
+        base64encodedstring = base64encodedstring!.replacingOccurrences(of: "[", with: "")
+        base64encodedstring = base64encodedstring!.replacingOccurrences(of: "]", with: "")
+        base64encodedstring = base64encodedstring!.replacingOccurrences(of: "\"", with: "")
+        
+        let calendarArray: [String] = base64encodedstring!.components(separatedBy: ",")
+        
+        for calendar in calendarArray {
+
+            calendars.insert(calendar)
+        }
+        
+        return calendars
+    }
     
     func makeUIView(context: UIViewRepresentableContext<CalendarMonthView>) -> CalendarView {
 
@@ -72,7 +112,9 @@ struct CalendarMonthView: UIViewRepresentable {
         
         func eventsForCalendar(systemEvents: [EKEvent]) -> [Event] {
             
-            return events
+            let mappedEvents = systemEvents.compactMap({ $0.transform() })
+            
+            return events + mappedEvents
         }
         
         func didSelectEvent(_ event: Event, type: CalendarType, frame: CGRect?) {
@@ -88,9 +130,16 @@ struct CalendarMonthView: UIViewRepresentable {
                 }
             }
             
-            let vc = UIHostingController(rootView: ItemDetailView(item: currentItem!))
-            
-            view.calendarMonthView.findViewController()?.present(vc, animated: true)
+            if (currentItem != nil) {
+                
+                let vc = UIHostingController(rootView: ItemDetailView(item: currentItem!))
+                
+                view.calendarMonthView.findViewController()?.present(vc, animated: true)
+                
+            } else {
+                
+                //item is from native calendar - find way to show details?
+            }
         }
         
         func convertDate(date: NSDate) -> String {
@@ -113,7 +162,7 @@ struct CalendarMonthView: UIViewRepresentable {
             }
         }
         
-        func didSelectDate(_ date: Date?, type: CalendarType, frame: CGRect?) {
+        func didSelectDates(_ dates: [Date], type: CalendarType, frame: CGRect?) {
             
             let items = self.view.session.loggedInUser!.items
             var currentItems: [Item] = []
@@ -122,12 +171,36 @@ struct CalendarMonthView: UIViewRepresentable {
                 
                 if (item.isDateSet()) {
                     
-                    if (convertDate(date: item.getDate()!) == convertDate(date: date! as NSDate)) {
+                    if (convertDate(date: item.getDate()!) == convertDate(date: dates[0] as NSDate)) {
                         
                         currentItems.append(item)
                     }
                 }
             }
+            
+            let store = EKEventStore()
+            var calendarList: [EKCalendar]? = []
+            
+            for cal in view.getSystemCalendars() {
+                
+                for systemCal in store.calendars(for: .event) {
+                    
+                    if (cal == systemCal.title) {
+                        
+                        calendarList!.append(systemCal)
+                    }
+                }
+            }
+            
+            let endOfDay: TimeInterval = 86340
+            let predicate = store.predicateForEvents(withStart: dates[0], end: dates[0] + endOfDay, calendars: calendarList)
+            let events = store.events(matching: predicate)
+            
+            for event in events {
+                
+                currentItems.append(Item(title: event.title, task: false, habit: false, dateToggle: true, date: event.startDate as NSDate?, reminderToggle: false, reminder: nil, completed: false, labels: [], event: true, duration: event.endDate.timeIntervalSince(event.startDate)))
+            }
+            
             
             let vc = UIHostingController(rootView: MonthDetailView(items: currentItems))
             

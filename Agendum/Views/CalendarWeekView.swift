@@ -15,16 +15,37 @@ struct CalendarWeekView: UIViewRepresentable {
     @EnvironmentObject var session: FirebaseSession
     
     var calendarWeekView: CalendarView = {
+        
+        var selected = UserDefaults().data(forKey: "selectedCalendars")
+        var calendars: Set<String> = []
+        
+        func getSystemCalendars() -> Set<String> {
+            
+            var base64encodedstring = String(bytes: selected!, encoding: .utf8)
+            base64encodedstring = base64encodedstring!.replacingOccurrences(of: "[", with: "")
+            base64encodedstring = base64encodedstring!.replacingOccurrences(of: "]", with: "")
+            base64encodedstring = base64encodedstring!.replacingOccurrences(of: "\"", with: "")
+            
+            let calendarArray: [String] = base64encodedstring!.components(separatedBy: ",")
+            
+            for calendar in calendarArray {
+
+                calendars.insert(calendar)
+            }
+            
+            return calendars
+        }
+        
         var style = Style()
         style.startWeekDay = .monday
         style.timeSystem = .twentyFour
-        //style.timeHourSystem = .twentyFourHour
         style.headerScroll.isScrollEnabled = false
-        //style.event.isEnableMoveEvent = true
         style.locale = Locale.current
         style.timezone = TimeZone.current
         style.allDay.isPinned = true
         style.timeline.startFromFirstEvent = false
+        style.systemCalendars = getSystemCalendars()
+        style.headerScroll.heightHeaderWeek = 70
         
         return CalendarView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 470), style: style)
     }()
@@ -70,7 +91,9 @@ struct CalendarWeekView: UIViewRepresentable {
         
         func eventsForCalendar(systemEvents: [EKEvent]) -> [Event] {
             
-            return events
+            let mappedEvents = systemEvents.compactMap({ $0.transform() })
+            
+            return events + mappedEvents
         }
         
         func willDisplayDate(_ date: Date?, events: [Event]) {
