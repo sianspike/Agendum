@@ -138,6 +138,7 @@ struct SettingsView: View {
                     .padding()
                     .sheet(isPresented: $showingCalendarChooser, onDismiss: {print($calendarSet)}) {
                         
+                        //NEEDS TO BE TESTED - SWIFTUI BUG CAUSES IT TO DISSAPEAR IMMEDIATELY
                         CalendarChooser(calendars: $calendarSet, store: store)
                     }
                 }

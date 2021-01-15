@@ -7,8 +7,7 @@
 
 import UIKit
 
-final class YearHeaderView: UIView {
-    static let identifier = #file
+final class YearHeaderView: UICollectionReusableView {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -18,8 +17,13 @@ final class YearHeaderView: UIView {
     
     var date: Date? {
         didSet {
-            if let date = date {
-                titleLabel.text = style.year.formatter.string(from: date)
+            guard let date = date else { return }
+            
+            titleLabel.text = date.titleForLocale(style.locale, formatter: style.year.titleFormatter)
+            if Date().year == date.year {
+                titleLabel.textColor = .systemRed
+            } else {
+                titleLabel.textColor = style.year.colorTitleHeader
             }
         }
     }
@@ -29,14 +33,13 @@ final class YearHeaderView: UIView {
             titleLabel.textColor = style.year.colorTitleHeader
             titleLabel.font = style.year.fontTitleHeader
             titleLabel.textAlignment = style.year.aligmentTitleHeader
-            
             backgroundColor = style.year.colorBackgroundHeader
         }
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        titleLabel.frame = frame
+        titleLabel.frame = CGRect(x: 20, y: 0, width: frame.width - 10, height: frame.height)
         addSubview(titleLabel)
     }
     

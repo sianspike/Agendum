@@ -35,7 +35,6 @@
 		D777A77E23EB3A840021315E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D777A77D23EB3A840021315E /* SceneDelegate.swift */; };
 		D777A78323EB3A840021315E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D777A78223EB3A840021315E /* ContentView.swift */; };
 		D777A78823EB3A860021315E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D777A78723EB3A860021315E /* Preview Assets.xcassets */; };
-		D79A543824B632DC007DEDEC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC2CD0D22423BFF4004A1D8E /* GoogleService-Info.plist */; };
 		D7B1570D2403CAEA0031671F /* FocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B1570C2403CAEA0031671F /* FocusView.swift */; };
 		D7B1570F2403CBB90031671F /* FocusTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B1570E2403CBB90031671F /* FocusTimer.swift */; };
 		D7B157112407B8720031671F /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = D777A7AE23EB3BD30021315E /* Fonts */; };
@@ -323,7 +322,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = "Sian Pike";
 				TargetAttributes = {
 					D777A77723EB3A840021315E = {
@@ -357,7 +356,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D79A543824B632DC007DEDEC /* GoogleService-Info.plist in Resources */,
 				D7B157112407B8720031671F /* Fonts in Resources */,
 				D7C3296723FFD6D4008F3F4F /* Icons in Resources */,
 				FCCC972F243CBA480085A4FE /* LaunchScreen.storyboard in Resources */,

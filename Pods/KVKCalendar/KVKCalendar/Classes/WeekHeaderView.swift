@@ -9,107 +9,111 @@ import UIKit
 
 final class WeekHeaderView: UIView {
     private var style: Style
-    private let fromYear: Bool
+    private let isFromYear: Bool
+    private var days = [Date]()
     
-    private let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .center
+        label.textAlignment = style.month.titleDateAligment
+        label.font = style.month.fontTitleDate
+        label.tag = -999
         return label
     }()
     
-    var font: UIFont = .systemFont(ofSize: 17) {
-        willSet {
-            subviews.filter({ $0 is UILabel }).forEach { (label) in
-                if let label = label as? UILabel {
-                    label.font = newValue
-                }
-            }
-        }
-    }
-    
-    var backgroundColorWeekends: UIColor = .clear {
-        willSet {
-            subviews.filter({ $0 is UILabel }).forEach { (label) in
-                if let label = label as? UILabel {
-                    if label.tag == DayType.sunday.shiftDay || label.tag == DayType.saturday.shiftDay {
-                        label.backgroundColor = newValue
-                    } else {
-                        label.backgroundColor = .clear
-                    }
-                }
-            }
-        }
-    }
-    
     var date: Date? {
-        willSet {
-            setDateToTitle(date: newValue, style: style)
+        didSet {
+            setDateToTitle(date: date, style: style)
         }
     }
     
     init(frame: CGRect, style: Style, fromYear: Bool = false) {
         self.style = style
-        self.fromYear = fromYear
+        self.isFromYear = fromYear
         super.init(frame: frame)
-        addViews(frame: frame, fromYear: fromYear)
+        addViews(frame: frame, isFromYear: fromYear)
     }
     
-    private func addViews(frame: CGRect, fromYear: Bool) {
-        var days = DayType.allCases.filter({ $0 != .empty })
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func getOffsetDate(offset: Int, to date: Date?) -> Date? {
+        guard let dateTemp = date else { return nil }
         
-        if let idx = days.firstIndex(where: { $0 == .sunday }), style.startWeekDay == .sunday {
-            let leftDays = days[..<idx]
-            days[..<idx] = []
-            days += leftDays
+        return style.calendar.date(byAdding: .day, value: offset, to: dateTemp)
+    }
+    
+    private func addViews(frame: CGRect, isFromYear: Bool) {
+        let startWeekDate = style.startWeekDay == .sunday ? Date().startSundayOfWeek : Date().startMondayOfWeek
+        if days.isEmpty {
+            days = Array(0..<7).compactMap({ getOffsetDate(offset: $0, to: startWeekDate) })
         }
         
+        if !style.month.isHiddenTitleDate && !isFromYear {
+            titleLabel.frame = CGRect(x: 10,
+                                      y: 5,
+                                      width: frame.width - 20,
+                                      height: style.month.heightTitleDate)
+            addSubview(titleLabel)
+        }
+        
+        let y = isFromYear ? 0 : (style.month.heightTitleDate + 5)
+        let xOffset: CGFloat = isFromYear ? 0 : 10
         let width = frame.width / CGFloat(days.count)
         for (idx, value) in days.enumerated() {
-            let label = UILabel(frame: CGRect(x: width * CGFloat(idx),
-                                              y: 0,
-                                              width: width,
-                                              height: fromYear ? frame.height : style.month.heightHeaderWeek))
+            let label = UILabel(frame: CGRect(x: (width * CGFloat(idx)) + xOffset,
+                                              y: y,
+                                              width: width - (xOffset * 2),
+                                              height: isFromYear ? frame.height : style.month.heightHeaderWeek))
             label.adjustsFontSizeToFitWidth = true
-            label.textAlignment = .center
-            label.textColor = (value == .sunday || value == .saturday) ? style.week.colorWeekendDate : style.week.colorDate
-            if !style.headerScroll.titleDays.isEmpty, let title = style.headerScroll.titleDays[safe: value.shiftDay] {
+            label.minimumScaleFactor = 0.6
+            label.textAlignment = isFromYear ? style.year.weekDayAligment : style.month.weekDayAligment
+            label.font = isFromYear ? style.year.weekFont : style.month.weekFont
+            
+            if value.isWeekend {
+                label.textColor = style.week.colorWeekendDate
+                label.backgroundColor = style.week.colorWeekendBackground
+            } else if value.isWeekday {
+                label.textColor = style.week.colorDate
+                label.backgroundColor = style.week.colorWeekdayBackground
+            } else {
+                label.textColor = .clear
+                label.backgroundColor = .clear
+            }
+
+            if !style.headerScroll.titleDays.isEmpty, let title = style.headerScroll.titleDays[safe: value.weekday - 1] {
                 label.text = title
             } else {
-                label.text = value.rawValue.capitalized
+                let weekdayFormatter = isFromYear ? style.year.weekdayFormatter : style.month.weekdayFormatter
+                label.text = value.titleForLocale(style.locale, formatter: weekdayFormatter).capitalized
             }
-            label.tag = value.shiftDay
+            label.tag = value.weekday
             addSubview(label)
-        }
-        if !style.month.isHiddenTitleDate && !fromYear {
-            titleLabel.frame = CGRect(x: 0,
-                                      y: style.month.heightHeaderWeek,
-                                      width: frame.width,
-                                      height: style.month.heightTitleDate - 10)
-            addSubview(titleLabel)
         }
     }
     
     private func setDateToTitle(date: Date?, style: Style) {
-        if let date = date, !style.month.isHiddenTitleDate {
-            var monthStyle = style.month
-            let formatter = monthStyle.formatter
-            titleLabel.text = formatter.string(from: date)
+        if let date = date, !style.month.isHiddenTitleDate, !isFromYear {
+            titleLabel.text = date.titleForLocale(style.locale, formatter: style.month.titleFormatter)
+            
+            if Date().year == date.year && Date().month == date.month {
+                titleLabel.textColor = .systemRed
+            } else {
+                titleLabel.textColor = style.month.colorTitleDate
+            }
         }
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
 
 extension WeekHeaderView: CalendarSettingProtocol {
     func reloadFrame(_ frame: CGRect) {
         self.frame.size.width = frame.width
+        
         titleLabel.removeFromSuperview()
-        DayType.allCases.filter({ $0 != .empty }).forEach { (day) in
-            subviews.filter({ $0.tag == day.shiftDay }).forEach({ $0.removeFromSuperview() })
+        days.forEach { (day) in
+            subviews.filter({ $0.tag == day.weekday }).forEach({ $0.removeFromSuperview() })
         }
-        addViews(frame: self.frame, fromYear: fromYear)
+        addViews(frame: self.frame, isFromYear: isFromYear)
     }
     
     func updateStyle(_ style: Style) {

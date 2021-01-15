@@ -5,30 +5,58 @@
 //  Created by Sergei Kviatkovskii on 02/01/2019.
 //
 
-import Foundation
+import UIKit
 
-final class MonthData: CompareEventDateProtocol {
+final class MonthData: EventDateProtocol {
     var days: [Day]
     var date: Date
-    var data: YearData
+    var data: CalendarData
+    var isAnimate: Bool = false
+    let tagEventPagePreview = -20
+    let eventPreviewYOffset: CGFloat = 30
+    var eventPreviewXOffset: CGFloat = 60
+    var willSelectDate: Date
+    let rowsInPage = 6
+    let columnsInPage = 7
+    var middleRowInPage: Int {
+        return (rowsInPage * columnsInPage) / 2
+    }
+    var columns: Int {
+        return ((days.count / itemsInPage) * columnsInPage) + (days.count % itemsInPage)
+    }
+    var itemsInPage: Int {
+        return columnsInPage * rowsInPage
+    }
+    var isFirstLoad = true
+    var movingEvent: EventViewGeneral?
+    var selectedDates: Set<Date> = []
     
     private let cachedDays: [Day]
+    private let calendar: Calendar
+    private let scrollDirection: UICollectionView.ScrollDirection
     
-    init(yearData: YearData, startDay: StartDayType) {
-        self.data = yearData
-        let months = yearData.months.reduce([], { (acc, month) -> [Month] in
-            var daysTemp = yearData.addStartEmptyDay(days: month.days, startDay: startDay)
-            if daysTemp.count < yearData.boxCount {
-                Array(1...yearData.boxCount - daysTemp.count).forEach { _ in
-                    daysTemp.append(.empty())
+    init(data: CalendarData, startDay: StartDayType, calendar: Calendar, scrollDirection: UICollectionView.ScrollDirection) {
+        self.data = data
+        self.calendar = calendar
+        self.scrollDirection = scrollDirection
+        
+        let months = data.months.reduce([], { (acc, month) -> [Month] in
+            var daysTemp = data.addStartEmptyDays(month.days, startDay: startDay)
+            if let lastDay = daysTemp.last, daysTemp.count < data.boxCount {
+                let emptyEndDays = Array(1...(data.boxCount - daysTemp.count)).compactMap { (idx) -> Day in
+                    var day = Day.empty()
+                    day.date = data.getOffsetDate(offset: idx, to: lastDay.date)
+                    return day
                 }
+                daysTemp += emptyEndDays
             }
             var monthTemp = month
             monthTemp.days = daysTemp
             return acc + [monthTemp]
         })
-        data.months = months
-        self.date = yearData.date
+        self.data.months = months
+        self.date = data.date
+        self.willSelectDate = data.date
         self.days = months.flatMap({ $0.days })
         self.cachedDays = days
     }
@@ -37,26 +65,68 @@ final class MonthData: CompareEventDateProtocol {
         return day.date?.year == date?.year && day.date?.month == date?.month
     }
     
-    func reloadEventsInDays(events: [Event]) {
+    func updateSelectedDates(_ dates: Set<Date>, date: Date, calendar: Calendar) -> Set<Date> {
+        var selectedDates = dates
+        if let firstDate = selectedDates.min(by: { $0 < $1 }), firstDate.compare(date) == .orderedDescending {
+            selectedDates.removeAll()
+            selectedDates.insert(date)
+        } else if let lastDate = selectedDates.max(by: { $0 < $1 }) {
+            let offset = date.day - lastDate.day
+            if offset >= 1 {
+                let dates = (1...offset).compactMap({ calendar.date(byAdding: .day, value: $0, to: lastDate) })
+                selectedDates.formUnion(dates)
+            } else if offset < 0 {
+                selectedDates = selectedDates.filter({ $0.compare(date) == .orderedAscending })
+                selectedDates.insert(date)
+            } else {
+                selectedDates.remove(date)
+            }
+        } else {
+            selectedDates.insert(date)
+        }
+        
+        return selectedDates
+    }
+    
+    func reloadEventsInDays(events: [Event]) -> (events: [Event], dates: [Date?]) {
+        let recurringEvents = events.filter({ $0.recurringType != .none })
         let startDate = date.startOfMonth
         let endDate = date.endOfMonth?.startOfDay
         let startIdx = cachedDays.firstIndex(where: { $0.date?.day == startDate?.day && compareDate(day: $0, date: startDate) }) ?? 0
         let endIdx = cachedDays.firstIndex(where: { $0.date?.day == endDate?.day && compareDate(day: $0, date: endDate) }) ?? 0
+        
+        var displayableEvents = [Event]()
         let newDays = cachedDays[startIdx...endIdx].reduce([], { (acc, day) -> [Day] in
             var newDay = day
             guard newDay.events.isEmpty else { return acc + [day] }
             
-            let filteredEventsByDay = events.filter({ $0.start.month == day.date?.month && $0.start.year == day.date?.year && $0.start.day == day.date?.day })
+            let filteredEventsByDay = events.filter({ compareStartDate(day.date, with: $0) && !$0.isAllDay })
             let filteredAllDayEvents = events.filter({ $0.isAllDay })
-            let allDayEvents = filteredAllDayEvents.filter({ compareStartDate(event: $0, date: day.date) || compareEndDate(event: $0, date: day.date) })
-            let otherEvents = filteredEventsByDay.filter({ !$0.isAllDay }).sorted(by: { $0.start.hour < $1.start.hour })
-            newDay.events = allDayEvents + otherEvents
+            let allDayEvents = filteredAllDayEvents.filter({ compareStartDate(day.date, with: $0) || compareEndDate(day.date, with: $0) })
+            
+            let recurringEventByDate: [Event]
+            if !recurringEvents.isEmpty, let date = day.date {
+                recurringEventByDate = recurringEvents.reduce([], { (acc, event) -> [Event] in
+                    guard !filteredEventsByDay.contains(where: { $0.ID == event.ID })
+                            && date.compare(event.start) == .orderedDescending else { return acc }
+                    
+                    guard let recurringEvent = event.updateDate(newDate: day.date, calendar: calendar) else {
+                        return acc
+                    }
+                    
+                    return acc + [recurringEvent]
+                })
+            } else {
+                recurringEventByDate = []
+            }
+            
+            let sortedEvents = (filteredEventsByDay + recurringEventByDate).sorted(by: { $0.start.hour < $1.start.hour })
+            newDay.events = allDayEvents + sortedEvents.sorted(by: { $0.isAllDay && !$1.isAllDay })
+            displayableEvents += newDay.events
             return acc + [newDay]
         })
+        
         days[startIdx...endIdx] = ArraySlice(newDays)
+        return (displayableEvents, newDays.map({ $0.date }))
     }
-}
-
-protocol DisplayDataSource: class {
-    func willDisplayDate(_ date: Date?, events: [Event]) -> DateStyle?    
 }

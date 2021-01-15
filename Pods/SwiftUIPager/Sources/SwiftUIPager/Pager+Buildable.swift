@@ -1,54 +1,86 @@
 //
-//  Pager+ViewModifiers.swift
-//  SwiftUIPager
+//  Pager+Buildable.swift
+//  SwiftUIPagerExample
 //
-//  Created by Fernando Moya de Rivas on 19/01/2020.
+//  Created by Fernando Moya de Rivas on 23/07/2020.
 //  Copyright © 2020 Fernando Moya de Rivas. All rights reserved.
 //
 
 import SwiftUI
 
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Pager: Buildable {
 
-    /// Swipe direction for a vertical `Pager`
-    public enum HorizontalSwipeDirection {
+    /// Result of paginating
+    public typealias DragResult = (page: Int, newPage: Int, translation: CGFloat, velocity: Double)
 
-        /// Pages move from left to right
-        case leftToRight
-
-        /// Pages move from right to left
-        case rightToLeft
+    /// Sets the animation to be applied when the user stops dragging
+    ///
+    /// - Parameter value: callback to get an animation based on the result of dragging
+    public func pagingAnimation(_ value: ((DragResult) -> PagingAnimation)?) -> Self {
+        mutating(keyPath: \.pagingAnimation, value: value)
     }
 
-    /// Swipe direction for a horizontal `Pager`
-    public enum VerticalSwipeDirection {
-
-        /// Pages move from top left to bottom
-        case topToBottom
-
-        /// Pages move from bottom to top
-        case bottomToTop
+    /// Allows to page more than one page at a time.
+    ///
+    /// - Note: This will change `contentLoadingPolicy` to `.eager`. Modifying this value will result in an unpredictable UI.
+    public func multiplePagination() -> Self {
+        mutating(keyPath: \.allowsMultiplePagination, value: true)
+            .mutating(keyPath: \.contentLoadingPolicy, value: .eager)
     }
 
-    /// Defines the area in `Pager` that allows hits and listens to swipes
-    public enum SwipeInteractionArea {
+    /// Allows to scroll one page at a time. Use `ratio` to limit next item's reveal ratio.
+    /// Once reached, items won't keep scrolling further.
+    /// `Pager` will use then `sensitivity` to determine whether to paginate to the next page.
+    ///
+    /// - Parameter ratio: max page reveal ratio. Should be `0 < ratio < 1`. `default` is `1`
+    /// - Parameter sensitivity: sensitivity to be applied when paginating. `default` is `medium` a.k.a `0.5`
+    ///
+    /// For instance, setting `ratio` to `0.33` will make `Pager` reveal up to a third of the next item.
+    /// A proper  `sensitivy` for this scenario would be `high` (a.k.a, `0.33`) or a custom value lower than `ratio`
+    public func singlePagination(ratio: CGFloat = 1, sensitivity: PaginationSensitivity = .medium) -> Self {
+        mutating(keyPath: \.pageRatio, value: min(1, max(0, ratio)))
+            .mutating(keyPath: \.allowsMultiplePagination, value: false)
+            .mutating(keyPath: \.sensitivity, value: sensitivity)
+    }
 
-        /// All available space inside `Pager`
-        case allAvailable
-
-        /// Just the page frame
-        case page
+    /// Sets the policy followed to load `Pager` content.
+    ///
+    /// - Parameter value: policy to load the content.
+    ///
+    /// Choose `lazy` to load pages on demand so that the right amount of memory is used. Choose `eager` if
+    /// `Pager` won't hold many items or if memory isn't  an issue.
+    public func contentLoadingPolicy(_ value: ContentLoadingPolicy) -> Self {
+        mutating(keyPath: \.contentLoadingPolicy, value: value)
     }
 
     /// Sets `Pager` to loop the items in a never-ending scroll.
     ///
     /// - Parameter value: `true` if `Pager` should loop the pages. `false`, otherwise.
+    /// - Parameter count: number of times the input data should be repeated in a looping `Pager`. Default is _1_.
     ///
-    /// To have a nice experience, ensure that  the `data` passed in the intializer has enough elements to fill enough
-    /// pages on both the screen and the sides.
-    /// - Note: You can try experimenting with the `itemAspectRatio` or the `itemSpacing`.
-    public func loopPages(_ value: Bool = true) -> Self {
+    /// To have a nice experience, ensure that  the `data` passed in the intializer has enough elements to fill
+    /// pages on both the screen and the sides. If your sequence is not large enough, use `count` to
+    /// repeat it and pass more elements.
+    public func loopPages(_ value: Bool = true, repeating count: UInt = 1) -> Self {
         mutating(keyPath: \.isInifinitePager, value: value)
+            .mutating(keyPath: \.loopingCount, value: count)
+    }
+
+    #if !os(tvOS)
+
+    /// Sensitivity used to determine whether or not to swipe the page
+    ///
+    /// - Parameter value: sensitivity to be applied when paginating
+    public func sensitivity(_ value: PaginationSensitivity) -> Self {
+        mutating(keyPath: \.sensitivity, value: value)
+    }
+
+    /// Makes `Pager` not delay gesture recognition
+    ///
+    /// - Parameter value: whether or not touches should be delayed
+    public func delaysTouches(_ value: Bool) -> Self {
+        mutating(keyPath: \.delaysTouches, value: value)
     }
 
     /// Disables dragging on `Pager`
@@ -63,9 +95,15 @@ extension Pager: Buildable {
         mutating(keyPath: \.allowsDragging, value: value)
     }
 
-    /// Sets the `DragGesture`'s minimumDistance to zero. Useful when embedded inside an interactive modal
-    public func highPriorityGesture() -> Self {
-        mutating(keyPath: \.minimumDistance, value: 0)
+    /// Sets the priority used for paging the items
+    ///
+    /// - Parameter value: priority to receive touches
+    ///
+    /// By default, touches in a page may be blocked if the they occur on top a `View` with a `Gesture`.
+    /// For instance, a `NavigationLink` or a `MagnificationGesture` inside a page can "break" the swiping in `Pager`.
+    /// To solve this issue, use `pagingPriority(.simultaneous)` to let the touch be received for both the page content and `Pager`.
+    public func pagingPriority(_ value: GesturePriority) -> Self {
+        mutating(keyPath: \.gesturePriority, value: value)
     }
 
     /// Indicates which area should allow hits and react to swipes
@@ -74,6 +112,34 @@ extension Pager: Buildable {
     public func swipeInteractionArea(_ value: SwipeInteractionArea) -> Self {
         mutating(keyPath: \.swipeInteractionArea, value: value)
     }
+
+    /// Sets whether `Pager` should bounce or not
+    public func bounces(_ value: Bool) -> Self {
+        mutating(keyPath: \.bounces, value: value)
+    }
+
+    /// Adds a callback to react when dragging begins
+    ///
+    /// - Parameter callback: block to be called when  dragging begins
+    public func onDraggingBegan(_ callback: (() -> Void)?) -> Self {
+        mutating(keyPath: \.onDraggingBegan, value: callback)
+    }
+
+    /// Adds a callback to react when dragging changes
+    ///
+    /// - Parameter callback: block to be called when  dragging changes. `pageInrement` is passed as argument
+    public func onDraggingChanged(_ callback: ((Double) -> Void)?) -> Self {
+        mutating(keyPath: \.onDraggingChanged, value: callback)
+    }
+
+    /// Adds a callback to react when dragging ends
+    ///
+    /// - Parameter callback: block to be called when  dragging ends. `pageInrement` is passed as argument
+    public func onDraggingEnded(_ callback: ((Double) -> Void)?) -> Self {
+        mutating(keyPath: \.onDraggingEnded, value: callback)
+    }
+
+    #endif
 
     /// Changes the a the  alignment of the pages relative to their container
     ///
@@ -86,18 +152,16 @@ extension Pager: Buildable {
     ///
     /// - Parameter swipeDirection: direction of the swipe. Defaults to `.leftToRight`
     public func horizontal(_ swipeDirection: HorizontalSwipeDirection = .leftToRight) -> Self {
-        let scrollDirectionAngle: Angle = swipeDirection == .leftToRight ? .zero : Angle(degrees: 180)
-        return mutating(keyPath: \.isHorizontal, value: true)
-            .mutating(keyPath: \.scrollDirectionAngle, value: scrollDirectionAngle)
+        mutating(keyPath: \.isHorizontal, value: true)
+            .mutating(keyPath: \.horizontalSwipeDirection, value: swipeDirection)
     }
 
     /// Returns a vertical pager
     ///
     /// - Parameter swipeDirection: direction of the swipe. Defaults to `.topToBottom`
     public func vertical(_ swipeDirection: VerticalSwipeDirection = .topToBottom) -> Self {
-        let scrollDirectionAngle: Angle = swipeDirection == .topToBottom ? .zero : Angle(degrees: 180)
-        return mutating(keyPath: \.isHorizontal, value: false)
-            .mutating(keyPath: \.scrollDirectionAngle, value: scrollDirectionAngle)
+        mutating(keyPath: \.isHorizontal, value: false)
+            .mutating(keyPath: \.verticalSwipeDirection, value: swipeDirection)
     }
 
     /// Call this method to provide a shrink ratio that will apply to the items that are not focused.
@@ -109,7 +173,7 @@ extension Pager: Buildable {
         guard scale > 0, scale < 1 else { return self }
         return mutating(keyPath: \.interactiveScale, value: scale)
     }
-    
+
     /// Call this method to add a 3D rotation effect.
     ///
     /// - Parameter value: `true` if the pages should have a 3D rotation effect
@@ -143,13 +207,30 @@ extension Pager: Buildable {
     /// - `value > 1` will make the page spread horizontally and have a width larger than its height.
     /// - `value < 1` will give the page a larger height.
     /// - `nil` will reset to the _default_ value and the page will take up all the available space
-    /// Note: `value` should be greater than 0
+    /// - By calling this modifier, you'll be invalidating the previous values of `preferredItemSize`
+    ///
+    /// - Note: `value` should be greater than 0
+    ///
     public func itemAspectRatio(_ value: CGFloat?, alignment: PositionAlignment = .center) -> Self {
         guard (value ?? 1) > 0 else { return self }
-        return mutating(keyPath: \.itemAspectRatio, value: value)
+        return mutating(keyPath: \.preferredItemSize, value: nil)
+            .mutating(keyPath: \.itemAspectRatio, value: value)
             .mutating(keyPath: \.itemAlignment, value: alignment)
     }
-    
+
+    /// Sets the preferred size for the items.
+    ///
+    /// - Parameter value: size
+    /// - Parameter alignment: page position inside `Pager` when there's available spacer
+    ///
+    /// - Note: This will invalidate previous values of `padding` and `itemAspectRatio`
+    public func preferredItemSize(_ value: CGSize, alignment: PositionAlignment = .center) -> Self {
+        mutating(keyPath: \.sideInsets, value: 0)
+            .mutating(keyPath: \.itemAspectRatio, value: nil)
+            .mutating(keyPath: \.itemAlignment, value: alignment)
+            .mutating(keyPath: \.preferredItemSize, value: value)
+    }
+
     /// Sets the `itemAspectRatio` to take up all the space available
     public func expandPageToEdges() -> Self {
         itemAspectRatio(nil)
@@ -185,9 +266,11 @@ extension Pager: Buildable {
     /// - Parameter edges: edges the padding should be applied along. Defaults to `.all`
     /// - Parameter lenght: padding to be applied. Default to `8`.
     public func padding(_ edges: Edge.Set = .all, _ length: CGFloat? = nil) -> Self {
+        guard preferredItemSize == nil else { return self }
         let allowedEdges: Edge.Set = isHorizontal ? .vertical : .horizontal
         guard edges == .all || edges == allowedEdges else { return self }
         return mutating(keyPath: \.sideInsets, value: length ?? 8)
     }
 
 }
+

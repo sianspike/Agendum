@@ -1,4 +1,4 @@
-<img src="Screenshots/iphone.png" width="300"> <img src="Screenshots/ipad.png" width="550">
+<img src="Screenshots/iphone_month.png" width="280"> <img src="Screenshots/ipad_white.png" width="530">
 
 [![CI Status](https://img.shields.io/travis/kvyatkovskys/KVKCalendar.svg?style=flat)](https://travis-ci.org/kvyatkovskys/KVKCalendar)
 [![Version](https://img.shields.io/cocoapods/v/KVKCalendar.svg?style=flat)](https://cocoapods.org/pods/KVKCalendar)
@@ -8,11 +8,16 @@
 
 # KVKCalendar
 
-**KVKCalendar** is a most fully customization calendar library. Library consists of four modules for displaying various types of calendar (*day*, *week*, *month*, *year*). You can choose any module or use all. It is designed based on a standard iOS calendar, but with additional features. Timeline displays the schedule for the day and week.
+**KVKCalendar** is a most fully customization calendar and timleline library. Library consists of four modules for displaying various types of calendar (*day*, *week*, *month*, *year*). You can choose any module or use all. It is designed based on a standard iOS calendar, but with additional features. Timeline displays the schedule for the day and week.
+
+## Need Help?
+If you have a **question** about how to use KVKCalendar in your application, ask it on StackOverflow using the [KVKCalendar](https://stackoverflow.com/questions/tagged/kvkcalendar) tag.
+
+Please, use [Issues](https://github.com/kvyatkovskys/KVKCalendar/issues) only for reporting **bugs** or requesting a new **features** in the library.
 
 ## Requirements
 
-- iOS 10.0+
+- iOS 10.0+, iPadOS 10.0+, MacOS 10.15+ (Supports Mac Catalyst)
 - Swift 5.0+
 
 ## Installation
@@ -56,51 +61,73 @@ class ViewController: UIViewController {
 extension ViewController {
     func createEvents(completion: ([Event]) -> Void) {
         let models = // Get events from storage / API
-        var events = [Event]()
         
-        for model in models {
-            var event = Event()
-            event.id = model.id
-            event.start = model.startDate // start date event
-            event.end = model.endDate // end date event
-            event.color = model.color
-            event.isAllDay = model.allDay
-            event.isContainsFile = !model.files.isEmpty
+        let events = models.compactMap({ (item) in
+            var event = Event(ID: item.id)
+            event.start = item.startDate // start date event
+            event.end = item.endDate // end date event
+            event.color = item.color
+            event.isAllDay = item.allDay
+            event.isContainsFile = !item.files.isEmpty
+            event.recurringType = // recurring event type - .everyDay, .everyWeek
         
             // Add text event (title, info, location, time)
-            if model.allDay {
-                event.text = "\(model.title)"
+            if item.allDay {
+                event.text = "\(item.title)"
             } else {
-                event.text = "\(startTime) - \(endTime)\n\(model.title)"
+                event.text = "\(startTime) - \(endTime)\n\(item.title)"
             }
-            events.append(event)
-        }
+            return event
+        })
         completion(events)
     }
 }
 
 extension ViewController: CalendarDataSource {
-    func eventsForCalendar() -> [Event] {
-        return events
+    func eventsForCalendar(systemEvents: [EKEvent]) -> [Event] {
+        // if you want to get events from iOS calendars
+        // set calendars name to style.systemCalendars = ["Test"]
+        let mappedEvents = systemEvents.compactMap({ $0.transform() })
+        return events + mappedEvents
     }
 }
 ```
 
-Implement `CalendarDelegate` to handle user action.
+Implement `CalendarDelegate` to handle user action and control calenadr behavior.
 
 ```swift
 calendar.delegate = self
+```
 
-extension ViewController: CalendarDelegate {
-    func didSelectDate(date: Date?, type: CalendarType) {
-        print(date, type)
+To use a custom view for specific event or date you need to create a new view of class `EventViewGeneral` and return the view in function.
+
+```swift
+class CustomViewEvent: EventViewGeneral {
+    override init(style: Style, event: Event, frame: CGRect) {
+        super.init(style: style, event: event, frame: frame)
     }
+}
 
-    func didSelectEvent(_ event: Event, type: CalendarType, frame: CGRect?) {
-        print(event)
+// optional function from CalendarDataSource
+func willDisplayEventView(_ event: Event, frame: CGRect, date: Date?) -> EventViewGeneral? {
+    guard event.ID == id else { return nil }
+    
+    return customEventView
+}
+```
+
+<img src="Screenshots/custom_event_view.png" width="300">
+
+To use a custom date cell, just subscribe on this optional method from `CalendarDataSourcse` (works for Day/Week/Month/Year views).
+```swift
+func dequeueDateCell(date: Date?, type: CalendarType, collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell? {    
+    return collectionView.dequeueCell(indexPath: indexPath) { (cell: CustomDayCell) in
+        configurate a cell
     }
 }
 ```
+
+<img src="Screenshots/custom_day_cell.png" width="300">
 
 ## Usage for SwiftUI
 Add a new `SwiftUI` file and import `KVKCalendar`.
@@ -140,7 +167,7 @@ struct CalendarDisplayView: UIViewRepresentable {
             super.init()
         }
         
-        func eventsForCalendar() -> [Event] {
+        func eventsForCalendar(systemEvents: [EKEvent]) -> [Event] {
             return events
         }
     }
@@ -177,22 +204,24 @@ struct CalendarContentView_Previews: PreviewProvider {
 To customize calendar create an object `Style` and add to `init` class `CalendarView`.
 
 ```swift
-var style = Style()
-style.monthStyle.isHiddenSeporator = false
-style.timelineStyle.offsetTimeY = 80
-style.timelineStyle.offsetEvent = 3
-style.allDayStyle.isPinned = true
-style.timelineStyle.widthEventViewer = 500
-style.event.isEnableMoveEvent = true
-style.followInSystemTheme = true
-let calendar = CalendarView(frame: frame, style: style)
-```
-
-If needed to customize `Locale`, `TimeZone`.
-
-```swift
-style.locale = Locale // create any
-style.timezone = TimeZone //create any
+public struct Style {
+    public var event = EventStyle()
+    public var timeline = TimelineStyle()
+    public var week = WeekStyle()
+    public var allDay = AllDayStyle()
+    public var headerScroll = HeaderScrollStyle()
+    public var month = MonthStyle()
+    public var year = YearStyle()
+    public var list = ListViewStyle()
+    public var locale = Locale.current
+    public var calendar = Calendar.current
+    public var timezone = TimeZone.current
+    public var defaultType: CalendarType?
+    public var timeHourSystem: TimeHourSystem = .twentyFourHour
+    public var startWeekDay: StartDayType = .monday
+    public var followInSystemTheme: Bool = false 
+    public var systemCalendars: Set<String> = []
+}
 ```
 
 ## Author

@@ -7,41 +7,38 @@
 
 import Foundation
 
-struct CrossPageTree: Hashable {
-    let parent: Parent
-    var children: [Child]
+struct CrossEvent: Hashable {
+    let eventTime: EventTime
     var count: Int
     
-    init(parent: Parent, children: [Child]) {
-        self.parent = parent
-        self.children = children
-        self.count = children.count + 1
+    init(eventTime: EventTime, count: Int = 1) {
+        self.eventTime = eventTime
+        self.count = count
     }
     
-    func equalToChildren(_ event: Event) -> Bool {
-        return children.contains(where: { $0.start == event.start.timeIntervalSince1970 })
-    }
-    
-    func excludeToChildren(_ event: Event) -> Bool {
-        return children.contains(where: { $0.start..<$0.end ~= event.start.timeIntervalSince1970 })
-    }
-    
-    static func == (lhs: CrossPageTree, rhs: CrossPageTree) -> Bool {
-        return lhs.parent == rhs.parent
-            && lhs.children == rhs.children
+    static func == (lhs: CrossEvent, rhs: CrossEvent) -> Bool {
+        return lhs.eventTime == rhs.eventTime
             && lhs.count == rhs.count
     }
 }
 
-struct Parent: Equatable, Hashable {
+extension CrossEvent {
+    var displayValue: String {
+        return "\(Date(timeIntervalSince1970: eventTime.start).toLocalTime()) - \(Date(timeIntervalSince1970: eventTime.end).toLocalTime()) = \(count)"
+    }
+}
+
+struct TimeContainer {
+    var minute: Int
+    var hour: Int
+}
+
+struct EventTime: Equatable, Hashable {
     let start: TimeInterval
     let end: TimeInterval
 }
 
-struct Child: Equatable, Hashable {
-    let start: TimeInterval
-    let end: TimeInterval
-}
+typealias ResizeTime = (hour: Int, minute: Int)
 
 protocol TimelineDelegate: AnyObject {
     func didDisplayEvents(_ events: [Event], dates: [Date?])
@@ -49,21 +46,40 @@ protocol TimelineDelegate: AnyObject {
     func nextDate()
     func previousDate()
     func swipeX(transform: CGAffineTransform, stop: Bool)
-    func didChangeEvent(_ event: Event, minute: Int, hour: Int, point: CGPoint)
-    func didAddEvent(minute: Int, hour: Int, point: CGPoint)
+    func didChangeEvent(_ event: Event, minute: Int, hour: Int, point: CGPoint, newDay: Int?)
+    func didAddNewEvent(_ event: Event, minute: Int, hour: Int, point: CGPoint)
+    func didResizeEvent(_ event: Event, startTime: ResizeTime, endTime: ResizeTime)
 }
 
-protocol CompareEventDateProtocol {
-    func compareStartDate(event: Event, date: Date?) -> Bool
-    func compareEndDate(event: Event, date: Date?) -> Bool
+extension TimelineDelegate {
+    func swipeX(transform: CGAffineTransform, stop: Bool) {}
 }
 
-extension CompareEventDateProtocol {
-    func compareStartDate(event: Event, date: Date?) -> Bool {
+protocol EventDateProtocol {}
+
+extension EventDateProtocol {
+    func compareStartDate(_ date: Date?, with event: Event) -> Bool {
         return event.start.year == date?.year && event.start.month == date?.month && event.start.day == date?.day
     }
     
-    func compareEndDate(event: Event, date: Date?) -> Bool {
+    func compareEndDate(_ date: Date?, with event: Event) -> Bool {
         return event.end.year == date?.year && event.end.month == date?.month && event.end.day == date?.day
+    }
+    
+    func checkMultipleDate(_ date: Date?, with event: Event) -> Bool {
+        guard let timeInterval = date?.timeIntervalSince1970 else { return false }
+        
+        return event.start.day != event.end.day && event.start.timeIntervalSince1970...event.end.timeIntervalSince1970 ~= timeInterval && event.start.year == date?.year && event.start.month == date?.month
+    }
+}
+
+extension TimelineView {
+    struct StubEvent {
+        let event: Event
+        let frame: CGRect
+    }
+    
+    enum ScrollDirectionType: Int {
+        case up, down
     }
 }
