@@ -51,6 +51,7 @@ struct CalendarMonthView: UIViewRepresentable {
         style.allDay.isPinned = true
         style.systemCalendars = getSystemCalendars()
         style.month.selectionMode = .single
+        style.month.isHiddenTitle = true
         
         return CalendarView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 400), style: style)
     }()
@@ -110,6 +111,55 @@ struct CalendarMonthView: UIViewRepresentable {
             }
         }
         
+        func getEventsFromSystemCalendar(dates: [Date]?) -> [EKEvent] {
+            
+            let store = EKEventStore()
+            var calendarList: [EKCalendar]? = []
+            
+            for cal in view.getSystemCalendars() {
+                
+                for systemCal in store.calendars(for: .event) {
+                    
+                    if (cal == systemCal.title) {
+                        
+                        calendarList!.append(systemCal)
+                    }
+                }
+            }
+            
+            var predicate: NSPredicate? = nil
+            
+            if dates != nil {
+                
+                let endOfDay: TimeInterval = 86340
+                predicate = store.predicateForEvents(withStart: dates![0], end: dates![0] + endOfDay, calendars: calendarList)
+                
+            } else {
+                
+                let date = Date()
+                var startOfMonth: Date {
+                    
+                    let calendar = Calendar(identifier: .gregorian)
+                    let components = calendar.dateComponents([.year, .month], from: date)
+
+                    return  calendar.date(from: components)!
+                }
+                
+                var endOfMonth: Date {
+                    var components = DateComponents()
+                    components.month = 1
+                    components.second = -1
+                    
+                    return Calendar(identifier: .gregorian).date(byAdding: components, to: startOfMonth)!
+                }
+                
+                predicate = store.predicateForEvents(withStart: startOfMonth, end: endOfMonth, calendars: calendarList)
+            }
+         
+            
+            return store.events(matching: predicate!)
+        }
+        
         func eventsForCalendar(systemEvents: [EKEvent]) -> [Event] {
             
             let mappedEvents = systemEvents.compactMap({ $0.transform() })
@@ -130,16 +180,22 @@ struct CalendarMonthView: UIViewRepresentable {
                 }
             }
             
-            if (currentItem != nil) {
+            if (currentItem == nil) {
                 
-                let vc = UIHostingController(rootView: ItemDetailView(item: currentItem!))
+                let events = getEventsFromSystemCalendar(dates: nil)
                 
-                view.calendarMonthView.findViewController()?.present(vc, animated: true)
-                
-            } else {
-                
-                //item is from native calendar - find way to show details?
+                for iosEvent in events {
+                    
+                    if (iosEvent.title == event.text) {
+                        
+                        currentItem = Item(title: iosEvent.title, task: false, habit: false, dateToggle: true, date: iosEvent.startDate as NSDate?, reminderToggle: false, reminder: nil, completed: false, labels: [], event: true, duration: iosEvent.endDate.timeIntervalSince(iosEvent.startDate))
+                    }
+                }
             }
+            
+            let vc = UIHostingController(rootView: ItemDetailView(item: currentItem!))
+                
+            view.calendarMonthView.findViewController()?.present(vc, animated: true)
         }
         
         func convertDate(date: NSDate) -> String {
@@ -167,6 +223,7 @@ struct CalendarMonthView: UIViewRepresentable {
             let items = self.view.session.loggedInUser!.items
             var currentItems: [Item] = []
         
+            //Items not from iOS Calendar
             for item in items {
                 
                 if (item.isDateSet()) {
@@ -178,23 +235,8 @@ struct CalendarMonthView: UIViewRepresentable {
                 }
             }
             
-            let store = EKEventStore()
-            var calendarList: [EKCalendar]? = []
-            
-            for cal in view.getSystemCalendars() {
-                
-                for systemCal in store.calendars(for: .event) {
-                    
-                    if (cal == systemCal.title) {
-                        
-                        calendarList!.append(systemCal)
-                    }
-                }
-            }
-            
-            let endOfDay: TimeInterval = 86340
-            let predicate = store.predicateForEvents(withStart: dates[0], end: dates[0] + endOfDay, calendars: calendarList)
-            let events = store.events(matching: predicate)
+            //Items from iOS Calendar
+            let events = getEventsFromSystemCalendar(dates: dates)
             
             for event in events {
                 
