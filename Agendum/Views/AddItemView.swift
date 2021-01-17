@@ -8,8 +8,12 @@
 
 import SwiftUI
 import Firebase
+import EventKit
 
 struct AddItemView: View {
+    
+    @EnvironmentObject var session: FirebaseSession
+    @ObservedObject var viewRouter: ViewRouter
     @State private var title: String = ""
     @State private var taskToggle = false
     @State private var habitToggle = false
@@ -25,11 +29,8 @@ struct AddItemView: View {
     @State private var newLabel: String = ""
     @State private var addLabel: Bool = false
     @State private var selectedLabels: Array<String> = []
-    
+    var store = EKEventStore()
     var timeIntervals = ["30 minutes", "1 hour", "1.5 hours", "2 hours"]
-    
-    @EnvironmentObject var session: FirebaseSession
-    @ObservedObject var viewRouter: ViewRouter
     
     func convertToInterval(interval: Int) -> TimeInterval? {
         
@@ -52,6 +53,53 @@ struct AddItemView: View {
         }
         
         return newInterval
+    }
+    
+    private func generateEvent(item: Item) -> EKEvent {
+        
+        let newEvent = EKEvent(eventStore: store)
+        newEvent.calendar = store.defaultCalendarForNewEvents
+        newEvent.title = item.getTitle()
+        newEvent.startDate = item.getDate() as Date?
+        newEvent.endDate = item.getDate()! as Date + item.getDuration()!
+        
+        return newEvent
+    }
+    
+    private func addEvent(item: Item) {
+        
+        let eventToAdd = generateEvent(item: item)
+        
+        if !eventAlreadyExists(event: eventToAdd) {
+            
+            do {
+                
+                try store.save(eventToAdd, span: .thisEvent)
+                
+            } catch {
+                
+                print("there was an error saving the event.")
+            }
+            
+        } else {
+            
+            print("Event already exists")
+        }
+      
+    }
+    
+    
+    private func eventAlreadyExists(event eventToAdd: EKEvent) -> Bool {
+        
+        let predicate = store.predicateForEvents(withStart: eventToAdd.startDate, end: eventToAdd.endDate, calendars: nil)
+        let existingEvents = store.events(matching: predicate)
+        
+        let eventAlreadyExists = existingEvents.contains { (event) -> Bool in
+            
+            return eventToAdd.title == event.title && event.startDate == eventToAdd.startDate && event.endDate == eventToAdd.endDate
+        }
+        
+        return eventAlreadyExists
     }
     
     var body: some View {
@@ -215,7 +263,14 @@ struct AddItemView: View {
                 
                 if (self.title != "") {
                     
-                    self.session.loggedInUser?.items.append(Item(title: self.title, task: self.taskToggle, habit: self.habitToggle, dateToggle: self.dateToggle, date: self.date as NSDate, reminderToggle: self.reminderToggle, reminder: self.reminder as NSDate, completed: self.completedToggle, labels: self.selectedLabels, event: self.eventToggle, duration: convertToInterval(interval: eventDuration)))
+                    let newItem = Item(title: self.title, task: self.taskToggle, habit: self.habitToggle, dateToggle: self.dateToggle, date: self.date as NSDate, reminderToggle: self.reminderToggle, reminder: self.reminder as NSDate, completed: self.completedToggle, labels: self.selectedLabels, event: self.eventToggle, duration: convertToInterval(interval: eventDuration))
+                    
+                    if (calendarToggle) {
+                        
+                        addEvent(item: newItem)
+                    }
+                    
+                    self.session.loggedInUser?.items.append(newItem)
                     self.session.saveItems(items: self.session.loggedInUser?.items ?? [])
                     self.session.saveLabels(labels: self.session.loggedInUser?.labels ?? [])
                     self.viewRouter.viewRouter = "Dashboard"
@@ -241,11 +296,5 @@ struct MyTextStyle {
         .background(
             Color(.red)
         )
-    }
-}
-
-struct AddItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddItemView(viewRouter: ViewRouter())
     }
 }
