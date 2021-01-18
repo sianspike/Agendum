@@ -33,6 +33,8 @@ struct ContentView: View {
             return AnyView(SettingsView(viewRouter: viewRouter))
         case "Add Item":
             return AnyView(AddItemView(viewRouter: viewRouter))
+        case "Add Friend":
+            return AnyView(AddFriendView(viewRouter: viewRouter))
         default:
             return AnyView(SignInView(viewRouter: viewRouter))
         }

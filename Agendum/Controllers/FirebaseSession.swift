@@ -48,7 +48,7 @@ class FirebaseSession: ObservableObject {
     
     func deleteItem(item: Item) {
         
-        let itemsLocation = db.collection("users").document(loggedInUser!.uid!).collection("items")
+        let itemsLocation = db.collection("data").document(loggedInUser!.uid!).collection("items")
         
         itemsLocation.document(item.getTitle()).delete() { error in
             if let error = error {
@@ -64,7 +64,7 @@ class FirebaseSession: ObservableObject {
     
     func saveItem(item: Item) {
         
-        let itemsLocation = db.collection("users").document(loggedInUser!.uid!).collection("items")
+        let itemsLocation = db.collection("data").document(loggedInUser!.uid!).collection("items")
         
         for existingItems in loggedInUser!.items {
             
@@ -98,7 +98,7 @@ class FirebaseSession: ObservableObject {
     }
     
     func saveItems(items: Array<Item>) {
-        let itemsLocation = db.collection("users").document(loggedInUser!.uid!).collection("items")
+        let itemsLocation = db.collection("data").document(loggedInUser!.uid!).collection("items")
         
         for item in items {
             
@@ -130,7 +130,7 @@ class FirebaseSession: ObservableObject {
     
     func retrieveProgress() {
         
-        let progressRef = db.collection("users").document(loggedInUser!.uid!).collection("progress")
+        let progressRef = db.collection("data").document(loggedInUser!.uid!).collection("progress")
         var progress: Double = 0
 
         progressRef.getDocuments() { querySnapshot, error in
@@ -154,7 +154,7 @@ class FirebaseSession: ObservableObject {
     
     func saveProgress(progress: Double) {
         
-        let progressLocation = db.collection("users").document(loggedInUser!.uid!).collection("progress")
+        let progressLocation = db.collection("data").document(loggedInUser!.uid!).collection("progress")
         
         progressLocation.document("progress").setData([
             
@@ -176,7 +176,7 @@ class FirebaseSession: ObservableObject {
     
     func retrieveLabels() {
         
-        let labelsRef = db.collection("users").document(loggedInUser!.uid!).collection("labels")
+        let labelsRef = db.collection("data").document(loggedInUser!.uid!).collection("labels")
         var labelArray: Array<String> = []
         
         labelsRef.getDocuments() { querySnapshot, error in
@@ -200,7 +200,7 @@ class FirebaseSession: ObservableObject {
     
     func saveLabels(labels: Array<String>) {
         
-        let labelLocation = db.collection("users").document(loggedInUser!.uid!).collection("labels")
+        let labelLocation = db.collection("data").document(loggedInUser!.uid!).collection("labels")
         
         for label in labels {
             
@@ -222,7 +222,7 @@ class FirebaseSession: ObservableObject {
     
     func retrieveItems() {
         
-        let itemsRef = db.collection("users").document(loggedInUser!.uid!).collection("items")
+        let itemsRef = db.collection("data").document(loggedInUser!.uid!).collection("items")
         var itemArray: Array<Item> = []
         
         itemsRef.getDocuments() { querySnapshot, error in
@@ -264,7 +264,7 @@ class FirebaseSession: ObservableObject {
         retrieveLabels()
         retrieveProgress()
        
-        let userPath = db.collection("users").document(Auth.auth().currentUser!.uid)
+        let userPath = db.collection("data").document(Auth.auth().currentUser!.uid)
         let itemPath = userPath.collection("items")
         let labelPath = userPath.collection("labels")
         let progressPath = userPath.collection("progress")
@@ -281,7 +281,7 @@ class FirebaseSession: ObservableObject {
         
         progressPath.document("progress").delete()
         
-        db.collection("users").document(Auth.auth().currentUser!.uid).delete() { err in
+        db.collection("data").document(Auth.auth().currentUser!.uid).delete() { err in
             
             if let error = err {
                 

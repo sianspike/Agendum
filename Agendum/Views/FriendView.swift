@@ -9,9 +9,12 @@
 import SwiftUI
 
 struct FriendView: View {
+    
     @ObservedObject var viewRouter: ViewRouter
+    @EnvironmentObject var session: FirebaseSession
     
     var body: some View {
+        
         ZStack {
             
             VStack (alignment: .leading){
@@ -31,7 +34,7 @@ struct FriendView: View {
                     
                     Spacer()
                     
-                    Text("6 9")
+                    Text("\(Int(session.loggedInUser!.progress))")
                         .font(Font.custom("Montserrat-Regular", size: 15))
                     
                 }.padding()
