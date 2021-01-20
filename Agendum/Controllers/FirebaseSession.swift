@@ -37,6 +37,7 @@ class FirebaseSession: ObservableObject {
                 self.retrieveItems()
                 self.retrieveLabels()
                 self.retrieveProgress()
+                addUser()
                 
             } else {
                 // if we don't have a user, set our session to nil
@@ -44,6 +45,65 @@ class FirebaseSession: ObservableObject {
                 viewRouter.viewRouter = "Sign In"
             }
         }
+    }
+    
+    func addUser() {
+        
+        let userLocation = db.collection("users")
+        
+        userLocation.document((loggedInUser?.email)!).setData(["dummy": "dummy"], merge: true)
+
+        userLocation.document((loggedInUser?.email)!).collection("UserID").document((loggedInUser?.uid)!).setData([
+            "uid": (loggedInUser?.uid!)! as String
+        ]) { error in
+
+            if let error = error {
+
+                print("error saving user: \(error)")
+
+            } else {
+
+                print("succesfully saved user")
+            }
+        }
+    }
+    
+    func findUser(email: String) {
+        
+        let email = email.lowercased()
+        let userLocation = db.collection("users").document(email)
+        
+        userLocation.getDocument { (document, error) in
+        
+            if let document = document, document.exists {
+                
+                print("user found")
+                var uid = ""
+                document.reference.collection("UserID").getDocuments { (documents, error) in
+
+                    if (error == nil) {
+
+                        for document in documents!.documents {
+                            
+                            uid = document.get("uid") as! String
+                        }
+                        
+                        self.followUser(following: uid)
+                    }
+                }
+                
+            } else {
+                
+                print("user doesn't exist")
+            }
+        }
+    }
+    
+    func followUser(following: String) {
+        
+        let userLocation = db.collection("users").document((loggedInUser?.email!)!).collection("following").document(following)
+        
+        userLocation.setData(["following": FieldValue.arrayUnion([following])], merge: true)
     }
     
     func deleteItem(item: Item) {

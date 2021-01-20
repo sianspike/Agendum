@@ -9,12 +9,13 @@
 import SwiftUI
 import SwiftUIPager
 
+@available(iOS 14.0, *)
 struct Dashboard: View {
     
     @EnvironmentObject var session: FirebaseSession
     @ObservedObject var viewRouter: ViewRouter
-    @State var timePageNum = 0
-    @State var calPageNum = 0
+    @StateObject var timePageNum: Page = .first()
+    @StateObject var calPageNum: Page = .first()
     var timePages: [String] = ["T o d a y", "T h i s  w e e k", "T h i s  M o n t h"]
     var calPages: [String] = ["A g e n d a", "C a l e n d a r"]
     
@@ -24,7 +25,7 @@ struct Dashboard: View {
                 
             VStack(alignment: .leading) {
                     
-                Pager(page: self.$timePageNum, data: timePages, id: \.self) {
+                Pager(page: timePageNum, data: timePages, id: \.self) {
                         
                     TextWithBottomBorder(text: $0)
                         
@@ -32,20 +33,20 @@ struct Dashboard: View {
                     
                 ProgressBar(progress: session.loggedInUser!.progress)
                     
-                Pager(page: self.$calPageNum, data: calPages, id: \.self) {
+                Pager(page: calPageNum, data: calPages, id: \.self) {
                         
                     TextWithBottomBorder(text: $0)
                             .font(Font.custom("Montserrat-Regular", size: 25))
                         
                 }.frame(height: 100)
                     
-                if (calPageNum == 0) {
+                if (calPageNum.index == 0) {
                                 
-                    AgendaView(timeFrame: timePageNum)
+                    AgendaView(timeFrame: timePageNum.index)
                                 
-                } else if (calPageNum == 1) {
+                } else if (calPageNum.index == 1) {
                             
-                    CalendarController(timeFrame: timePageNum)
+                    CalendarController(timeFrame: timePageNum.index)
                 }
             }
         
@@ -55,11 +56,5 @@ struct Dashboard: View {
                 self.viewRouter.viewRouter = "Add Item"
             })
         }
-    }
-}
-
-struct Dashboard_Previews: PreviewProvider {
-    static var previews: some View {
-        Dashboard(viewRouter: ViewRouter())
     }
 }

@@ -12,7 +12,7 @@ struct AddFriendView: View {
     
     @ObservedObject var viewRouter: ViewRouter
     @EnvironmentObject var session: FirebaseSession
-    @State var email: String = ""
+    @State private var email: String = ""
     
     var body: some View {
 
@@ -35,14 +35,25 @@ struct AddFriendView: View {
             
             Spacer()
             
-            TextFieldWithBottomBorder(placeholder: "F r i e n d  E m a i l", text: $email)
+            VStack {
+                
+                TextField("E m a i l", text: $email)
+                    .multilineTextAlignment(TextAlignment.center)
+                    .font(Font.custom("Montserrat-Regular", size: 20))
+                HorizontalLineShape
+                    .HorizontalLine(color: Color(red: 0.6, green: 1.0, blue: 0.8, opacity: 1.0), height: 3, width: .infinity)
+                
+            }.padding()
             
             Spacer()
             
             ButtonOne(text: "S u b m i t", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {
                 
+                session.findUser(email: $email.wrappedValue)
+                viewRouter.viewRouter = "Friends"
+                
             })
-                .padding()
+            .padding()
         }
     }
 }

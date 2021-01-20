@@ -10,10 +10,11 @@ import SwiftUI
 import Combine
 import SwiftUIPager
 
+@available(iOS 14.0, *)
 struct FocusView: View {
     
     @ObservedObject var viewRouter: ViewRouter
-    @State var currentPage: Int = 0
+    @StateObject var currentPage: Page = .first()
     @State var selectedTask: String = "No task selected"
     @State var focusTimerLength = 0
     @State var breakTimerLength = 0
@@ -39,16 +40,10 @@ struct FocusView: View {
                 
             TextWithBottomBorder(text: "F o c u s")
                 
-            Pager(page: $currentPage, data: pageItems, id: \.self, content: { index in
+            Pager(page: currentPage, data: pageItems, id: \.self, content: { index in
 
                 self.pageView(index)
             })
         }
-    }
-}
-
-struct FocusView_Previews: PreviewProvider {
-    static var previews: some View {
-        FocusView(viewRouter: ViewRouter())
     }
 }

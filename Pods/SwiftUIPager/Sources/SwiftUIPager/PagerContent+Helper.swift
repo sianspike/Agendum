@@ -10,6 +10,30 @@ import SwiftUI
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Pager.PagerContent {
+    
+    #if !os(tvOS)
+    
+    /// `swipeGesture` translation on the X-Axis
+    var draggingOffset: CGFloat {
+        pagerModel.draggingOffset
+    }
+
+    /// `swipeGesture` last translation on the X-Axis
+    var lastDraggingValue: DragGesture.Value? {
+        pagerModel.lastDraggingValue
+    }
+
+    /// `swipeGesture` velocity on the X-Axis
+    var draggingVelocity: Double {
+        pagerModel.draggingVelocity
+    }
+    
+    #endif
+
+    /// Increment resulting from the last swipe
+    var pageIncrement: Int {
+        pagerModel.pageIncrement
+    }
 
     /// Manages the number of items that should be displayed in the screen.
     var recyclingRatio: Int {
@@ -21,9 +45,9 @@ extension Pager.PagerContent {
         }
     }
 
-    /// Work around to avoid @State keeps wrong value
+    /// Current page index
     var page: Int {
-        return min(pagerModel.page, numberOfPages - 1)
+        pagerModel.index
     }
 
     /// `true` if `Pager` is vertical
@@ -88,7 +112,11 @@ extension Pager.PagerContent {
 
     /// Addition of `draggingOffset` and `contentOffset`
     var totalOffset: CGFloat {
-        draggingOffset + contentOffset
+        #if !os(tvOS)
+        return draggingOffset + contentOffset
+        #else
+        return contentOffset
+        #endif
     }
 
     /// Size of each item. Takes into account `itemAspectRatio` and `verticalInsets` to fit the page into its container

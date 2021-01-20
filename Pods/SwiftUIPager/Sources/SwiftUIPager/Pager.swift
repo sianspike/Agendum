@@ -136,7 +136,10 @@ public struct Pager<Element, ID, PageView>: View  where PageView: View, Element:
     /// Will try to have the items fit this size
     var preferredItemSize: CGSize?
 
-    /// Callback for every new page
+    /// Callback invoked when a new page will be set
+    var onPageWillChange: ((Int) -> Void)?
+
+    /// Callback invoked when a new page is set
     var onPageChanged: ((Int) -> Void)?
 	
 	/// Callback for when dragging begins
@@ -146,58 +149,29 @@ public struct Pager<Element, ID, PageView>: View  where PageView: View, Element:
     var onDraggingChanged: ((Double) -> Void)?
 
     /// Callback for when dragging ends
-    var onDraggingEnded: ((Double) -> Void)?
+    var onDraggingEnded: (() -> Void)?
 
     /*** State and Binding properties ***/
 
-    /// Size of the view
-    @State var size: CGSize = .zero
-
-    /// `swipeGesture` translation on the X-Axis
-    @State var draggingOffset: CGFloat = 0
-
-    /// `swipeGesture` last translation on the X-Axis
-    #if !os(tvOS)
-    @State var lastDraggingValue: DragGesture.Value?
-    #endif
-
-    /// `swipeGesture` velocity on the X-Axis
-    @State var draggingVelocity: Double = 0
-
-    /// Increment resulting from the last swipe
-    @State var pageIncrement = 1
-
-    /// Page index
-    @Binding var page: Int {
-        didSet {
-            onPageChanged?(page)
-        }
-    }
-
-    @ObservedObject var pagerModel: PagerModel
-
+    let pagerModel: Page
+    
     /// Initializes a new `Pager`.
     ///
-    /// - Parameter page: Binding to the page index
+    /// - Parameter page: Current page index
     /// - Parameter data: Collection of items to populate the content
     /// - Parameter id: KeyPath to identifiable property
     /// - Parameter content: Factory method to build new pages
-    public init<Data: RandomAccessCollection>(page: Binding<Int>, data: Data, id: KeyPath<Element, ID>, @ViewBuilder content: @escaping (Element) -> PageView) where Data.Index == Int, Data.Element == Element {
-        self._page = page
-        self.pagerModel = PagerModel(page: page.wrappedValue)
+    public init<Data: RandomAccessCollection>(page: Page, data: Data, id: KeyPath<Element, ID>, @ViewBuilder content: @escaping (Element) -> PageView) where Data.Index == Int, Data.Element == Element {
+        self.pagerModel = page
         self.data = Array(data)
         self.id = id
         self.content = content
+        self.pagerModel.totalPages = data.count
     }
 
     public var body: some View {
         GeometryReader { proxy in
             self.content(for: proxy.size)
-                .environmentObject(pagerModel)
-                .onReceive(pagerModel.$page) { (page) in
-                    guard self.page != page else { return }
-                    self.page = page
-                }
         }
         .clipped()
     }
@@ -217,6 +191,7 @@ public struct Pager<Element, ID, PageView>: View  where PageView: View, Element:
                 .itemSpacing(itemSpacing)
                 .itemAspectRatio(itemAspectRatio, alignment: itemAlignment)
                 .onPageChanged(onPageChanged)
+                .onPageWillChange(onPageWillChange)
                 .padding(sideInsets)
                 .pagingAnimation(pagingAnimation)
                 .partialPagination(pageRatio)
@@ -249,12 +224,13 @@ public struct Pager<Element, ID, PageView>: View  where PageView: View, Element:
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Pager where ID == Element.ID, Element : Identifiable {
-
+    
     /// Initializes a new Pager.
     ///
+    /// - Parameter page: Current page index
     /// - Parameter data: Collection of items to populate the content
     /// - Parameter content: Factory method to build new pages
-    public init<Data: RandomAccessCollection>(page: Binding<Int>, data: Data, @ViewBuilder content: @escaping (Element) -> PageView) where Data.Index == Int, Data.Element == Element {
+    public init<Data: RandomAccessCollection>(page: Page, data: Data, @ViewBuilder content: @escaping (Element) -> PageView) where Data.Index == Int, Data.Element == Element {
         self.init(page: page, data: Array(data), id: \Element.id, content: content)
     }
 
