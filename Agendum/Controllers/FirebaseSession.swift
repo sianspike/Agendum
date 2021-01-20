@@ -30,13 +30,14 @@ class FirebaseSession: ObservableObject {
                 // if we have a user, create a new user model
                 print("Got user: \(user)")
                     
-                self.loggedInUser = User(email: user.email, username: user.displayName, uid: user.uid,  items: [], labels: [], progress: 0)
-                self.currentUser = User(email: user.email, username: user.displayName, uid: user.uid,  items: [], labels: [], progress: 0)
+                self.loggedInUser = User(email: user.email, username: user.displayName, uid: user.uid,  items: [], labels: [], progress: 0, following: [])
+                self.currentUser = User(email: user.email, username: user.displayName, uid: user.uid,  items: [], labels: [], progress: 0, following: [])
                 self.loggedInUser?.uid = user.uid
                 self.currentUser?.uid = user.uid
                 self.retrieveItems()
                 self.retrieveLabels()
                 self.retrieveProgress()
+                self.retrieveFollowing()
                 addUser()
                 
             } else {
@@ -88,7 +89,7 @@ class FirebaseSession: ObservableObject {
                             uid = document.get("uid") as! String
                         }
                         
-                        self.followUser(following: uid)
+                        self.followUser(uid: uid, email: email)
                     }
                 }
                 
@@ -99,11 +100,37 @@ class FirebaseSession: ObservableObject {
         }
     }
     
-    func followUser(following: String) {
+    func followUser(uid: String, email: String) {
         
-        let userLocation = db.collection("users").document((loggedInUser?.email!)!).collection("following").document(following)
+        let userLocation = db.collection("users").document((loggedInUser?.email!)!).collection("following").document(uid)
         
-        userLocation.setData(["following": FieldValue.arrayUnion([following])], merge: true)
+        userLocation.setData(["uid": uid, "email": email], merge: true)
+    }
+    
+    func retrieveFollowing() {
+        
+        let followersLocation = db.collection("users").document((loggedInUser?.email!)!).collection("following")
+        var following: Array<String> = []
+        
+        followersLocation.getDocuments { (documents, error) in
+            
+            if (error == nil) {
+                
+                for document in documents!.documents {
+                    
+                    print(document.data())
+                    
+                    following.append(document.get("email") as! String)
+                }
+                
+                self.loggedInUser?.following = following
+                
+            } else {
+                
+                print("there was an error: \(error)")
+                
+            }
+        }
     }
     
     func deleteItem(item: Item) {
@@ -323,12 +350,15 @@ class FirebaseSession: ObservableObject {
         retrieveItems()
         retrieveLabels()
         retrieveProgress()
+        retrieveFollowing()
        
         let userPath = db.collection("data").document(Auth.auth().currentUser!.uid)
         let itemPath = userPath.collection("items")
         let labelPath = userPath.collection("labels")
         let progressPath = userPath.collection("progress")
-        
+        let userIDPath = db.collection("users").document((loggedInUser?.email)!).collection("UserID").document((loggedInUser?.uid!)!)
+        let followingPath = db.collection("users").document((loggedInUser?.email!)!).collection("following")
+    
         for item in self.loggedInUser!.items {
             
             itemPath.document(item.getTitle()).delete()
@@ -340,6 +370,18 @@ class FirebaseSession: ObservableObject {
         }
         
         progressPath.document("progress").delete()
+        userIDPath.delete()
+       
+        followingPath.getDocuments { documents, error in
+            
+            if (error == nil) {
+                
+                for document in documents!.documents {
+                    
+                    //delete
+                }
+            }
+        }
         
         db.collection("data").document(Auth.auth().currentUser!.uid).delete() { err in
             
@@ -374,7 +416,7 @@ class FirebaseSession: ObservableObject {
         ) {
         Auth.auth().createUser(withEmail: email, password: password, completion: handler)
         
-        currentUser = User(email: Auth.auth().currentUser?.email, username: Auth.auth().currentUser?.displayName, uid: Auth.auth().currentUser?.uid,  items: [], labels: [], progress: 0)
+        currentUser = User(email: Auth.auth().currentUser?.email, username: Auth.auth().currentUser?.displayName, uid: Auth.auth().currentUser?.uid,  items: [], labels: [], progress: 0, following: [])
         currentUser!.updateStoredPassword(password)
     }
     

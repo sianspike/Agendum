@@ -17,9 +17,16 @@ struct FriendView: View {
         
         ZStack {
             
-            VStack (alignment: .leading){
+            VStack (alignment: .leading) {
                 
                 TextWithBottomBorder(text: "F r i e n d s")
+                
+                //retrieve following points also
+                ForEach(self.session.loggedInUser?.following ?? [], id: \.self) { user in
+                    
+                    Text(user)
+                        .padding()
+                }
                 
                 Spacer()
                 
