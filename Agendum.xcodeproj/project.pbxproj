@@ -46,6 +46,7 @@
 		D7C3296723FFD6D4008F3F4F /* Icons in Resources */ = {isa = PBXBuildFile; fileRef = D7C3296623FFD6D4008F3F4F /* Icons */; };
 		D7C51D342563F56000B5F313 /* FocusPageOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C51D332563F56000B5F313 /* FocusPageOneView.swift */; };
 		D7C51D372565142C00B5F313 /* FocusPageTwoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C51D362565142C00B5F313 /* FocusPageTwoView.swift */; };
+		D7C69B9925BB3474005C3E85 /* FriendDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C69B9825BB3474005C3E85 /* FriendDetailView.swift */; };
 		D7D01DAC25A4986B00794D71 /* Biometrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D01DAB25A4986B00794D71 /* Biometrics.swift */; };
 		D7E2564324D3506D0041364F /* CareKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = D7E2564224D3506D0041364F /* CareKitUI */; };
 		D7E2564524D3506D0041364F /* CareKit in Frameworks */ = {isa = PBXBuildFile; productRef = D7E2564424D3506D0041364F /* CareKit */; };
@@ -111,6 +112,7 @@
 		D7C3296623FFD6D4008F3F4F /* Icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icons; sourceTree = "<group>"; };
 		D7C51D332563F56000B5F313 /* FocusPageOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusPageOneView.swift; sourceTree = "<group>"; };
 		D7C51D362565142C00B5F313 /* FocusPageTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusPageTwoView.swift; sourceTree = "<group>"; };
+		D7C69B9825BB3474005C3E85 /* FriendDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetailView.swift; sourceTree = "<group>"; };
 		D7D01DAB25A4986B00794D71 /* Biometrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Biometrics.swift; sourceTree = "<group>"; };
 		E915D66670AE9F3B82F7469E /* Pods_Agendum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Agendum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC2CD0CE2423BF80004A1D8E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "Agendum/Support Files/AppDelegate.swift"; sourceTree = SOURCE_ROOT; };
@@ -256,6 +258,7 @@
 				D7C51D362565142C00B5F313 /* FocusPageTwoView.swift */,
 				D7093735259354240065CBE6 /* CustomAlertView.swift */,
 				D7834AEF25B57FD900EF11EE /* AddFriendView.swift */,
+				D7C69B9825BB3474005C3E85 /* FriendDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				D71DF042255033A6003AC048 /* AllItemsLabelView.swift in Sources */,
 				D73B804D2407FA170098FAD0 /* SettingsView.swift in Sources */,
 				FCD940CB24867AE1006ABB8C /* ItemElement.swift in Sources */,
+				D7C69B9925BB3474005C3E85 /* FriendDetailView.swift in Sources */,
 				D777A78323EB3A840021315E /* ContentView.swift in Sources */,
 				D701FC7124F41D9600C7E892 /* MonthDetailView.swift in Sources */,
 				D743ED8C23F6A8C8007341D5 /* SignUpView.swift in Sources */,

@@ -102,6 +102,32 @@ class FirebaseSession: ObservableObject {
         }
     }
     
+    func unfollowUser(email: String) {
+        
+        let followingLocation = db.collection("users").document(email)
+        let currentLocation = db.collection("users").document(loggedInUser!.email!).collection("following")
+        var uid = ""
+        
+        followingLocation.getDocument { (document, error) in
+            
+            if let document = document, document.exists {
+                
+                document.reference.collection("UserID").getDocuments { (documents, error) in
+                    
+                    if (error == nil) {
+                        
+                        for document in documents!.documents {
+                            
+                            uid = document.get("uid") as! String
+                        }
+                        
+                        currentLocation.document(uid).delete()
+                    }
+                }
+            }
+        }
+    }
+    
     func followUser(uid: String, email: String, progress: Double) {
         
         let userLocation = db.collection("users").document((loggedInUser?.email!)!).collection("following").document(uid)

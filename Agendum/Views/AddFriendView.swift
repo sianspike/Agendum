@@ -50,9 +50,9 @@ struct AddFriendView: View {
             ButtonOne(text: "S u b m i t", color: Color(red: 0.6, green: 0.8, blue: 1.0, opacity: 1.0), action: {
                 
                 session.findUser(email: $email.wrappedValue)
+                session.addUser()
                 session.retrieveFollowing()
                 viewRouter.viewRouter = "Friends"
-                
             })
             .padding()
         }
