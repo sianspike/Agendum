@@ -30,15 +30,15 @@ class FirebaseSession: ObservableObject {
                 // if we have a user, create a new user model
                 print("Got user: \(user)")
                     
-                self.loggedInUser = User(email: user.email, username: user.displayName, uid: user.uid,  items: [], labels: [], progress: 0, following: [])
-                self.currentUser = User(email: user.email, username: user.displayName, uid: user.uid,  items: [], labels: [], progress: 0, following: [])
+                self.loggedInUser = User(email: user.email, username: user.displayName, uid: user.uid,  items: [], labels: [], progress: 0, following: [], followingProgress: [])
+                self.currentUser = User(email: user.email, username: user.displayName, uid: user.uid,  items: [], labels: [], progress: 0, following: [], followingProgress: [])
                 self.loggedInUser?.uid = user.uid
                 self.currentUser?.uid = user.uid
                 self.retrieveItems()
                 self.retrieveLabels()
                 self.retrieveProgress()
-                self.retrieveFollowing()
                 addUser()
+                self.retrieveFollowing()
                 
             } else {
                 // if we don't have a user, set our session to nil
@@ -55,7 +55,8 @@ class FirebaseSession: ObservableObject {
         userLocation.document((loggedInUser?.email)!).setData(["dummy": "dummy"], merge: true)
 
         userLocation.document((loggedInUser?.email)!).collection("UserID").document((loggedInUser?.uid)!).setData([
-            "uid": (loggedInUser?.uid!)! as String
+            "uid": (loggedInUser?.uid!)! as String,
+            "progress": (loggedInUser!.progress) as Double
         ]) { error in
 
             if let error = error {
@@ -80,6 +81,7 @@ class FirebaseSession: ObservableObject {
                 
                 print("user found")
                 var uid = ""
+                var progress: Double = 0
                 document.reference.collection("UserID").getDocuments { (documents, error) in
 
                     if (error == nil) {
@@ -87,9 +89,9 @@ class FirebaseSession: ObservableObject {
                         for document in documents!.documents {
                             
                             uid = document.get("uid") as! String
+                            progress = document.get("progress") as! Double
+                            self.followUser(uid: uid, email: email, progress: progress)
                         }
-                        
-                        self.followUser(uid: uid, email: email)
                     }
                 }
                 
@@ -100,17 +102,18 @@ class FirebaseSession: ObservableObject {
         }
     }
     
-    func followUser(uid: String, email: String) {
+    func followUser(uid: String, email: String, progress: Double) {
         
         let userLocation = db.collection("users").document((loggedInUser?.email!)!).collection("following").document(uid)
         
-        userLocation.setData(["uid": uid, "email": email], merge: true)
+        userLocation.setData(["uid": uid, "email": email, "progress": progress], merge: true)
     }
     
     func retrieveFollowing() {
         
         let followersLocation = db.collection("users").document((loggedInUser?.email!)!).collection("following")
         var following: Array<String> = []
+        var followingProgress: Array<Double> = []
         
         followersLocation.getDocuments { (documents, error) in
             
@@ -120,10 +123,15 @@ class FirebaseSession: ObservableObject {
                     
                     print(document.data())
                     
+                    self.findUser(email: document.get("email") as! String)
+                    
                     following.append(document.get("email") as! String)
+                    followingProgress.append(document.get("progress") as! Double)
+                    
                 }
                 
                 self.loggedInUser?.following = following
+                self.loggedInUser?.followingProgress = followingProgress
                 
             } else {
                 
@@ -218,6 +226,7 @@ class FirebaseSession: ObservableObject {
     func retrieveProgress() {
         
         let progressRef = db.collection("data").document(loggedInUser!.uid!).collection("progress")
+        let userProgress = db.collection("users").document(loggedInUser!.email!).collection("UserID").document(loggedInUser!.uid!)
         var progress: Double = 0
 
         progressRef.getDocuments() { querySnapshot, error in
@@ -232,6 +241,7 @@ class FirebaseSession: ObservableObject {
                 for document in querySnapshot!.documents {
 
                     progress = document.get("progress") as! Double
+                    userProgress.setData(["progress": progress], merge: true)
                 }
 
                 self.loggedInUser?.progress = progress
@@ -242,6 +252,9 @@ class FirebaseSession: ObservableObject {
     func saveProgress(progress: Double) {
         
         let progressLocation = db.collection("data").document(loggedInUser!.uid!).collection("progress")
+        let userLocation = db.collection("users").document(loggedInUser!.email!).collection("UserID").document(loggedInUser!.uid!)
+        
+        userLocation.setData(["progress": progress], merge: true)
         
         progressLocation.document("progress").setData([
             
@@ -256,6 +269,7 @@ class FirebaseSession: ObservableObject {
                     
                 } else {
                     
+                    self.addUser()
                     print("Saved progress succesfully!")
                 }
         }
@@ -416,7 +430,7 @@ class FirebaseSession: ObservableObject {
         ) {
         Auth.auth().createUser(withEmail: email, password: password, completion: handler)
         
-        currentUser = User(email: Auth.auth().currentUser?.email, username: Auth.auth().currentUser?.displayName, uid: Auth.auth().currentUser?.uid,  items: [], labels: [], progress: 0, following: [])
+        currentUser = User(email: Auth.auth().currentUser?.email, username: Auth.auth().currentUser?.displayName, uid: Auth.auth().currentUser?.uid,  items: [], labels: [], progress: 0, following: [], followingProgress: [])
         currentUser!.updateStoredPassword(password)
     }
     

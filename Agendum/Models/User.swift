@@ -17,6 +17,7 @@ struct User {
     var labels: Array<String>
     var progress: Double
     var following: Array<String>
+    var followingProgress: Array<Double>
     
     func getStoredPassword() -> String {
         

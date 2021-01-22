@@ -21,12 +21,29 @@ struct FriendView: View {
                 
                 TextWithBottomBorder(text: "F r i e n d s")
                 
-                //retrieve following points also
-                ForEach(self.session.loggedInUser?.following ?? [], id: \.self) { user in
+                HStack {
                     
-                    Text(user)
-                        .padding()
+                    VStack(alignment: .leading) {
+                        
+                        ForEach(session.loggedInUser?.following ?? [], id: \.self) { email in
+                            
+                            Text(email)
+                                .padding()
+                        }
+                    }
+                    .frame(width: (UIScreen.main.bounds.width) / 2)
+                    
+                    
+                    VStack {
+                        ForEach(session.loggedInUser?.followingProgress ?? [], id:\.self) { progress in
+                            
+                            Text("\(Int(progress))")
+                                .padding()
+                        }
+                    }
+                    .frame(width: (UIScreen.main.bounds.width) / 2, alignment: .trailing)
                 }
+                .frame(width: UIScreen.main.bounds.width)
                 
                 Spacer()
                 
