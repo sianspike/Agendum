@@ -28,12 +28,6 @@ struct FriendDetailView: View {
             
             Spacer()
             
-            TextWithBottomBorder(text: "R e c e n t  A c t i v i t y")
-            
-            Text("Recent activity")
-            
-            Spacer()
-            
             ButtonOne(text: "D E L E T E", color: Color(red: 0.59, green: 0.76, blue: 0.96, opacity: 1.0), action: {
                 
                 session.unfollowUser(email: email)
