@@ -8,6 +8,7 @@
 
 import SwiftUI
 import SwiftUIPager
+import UserNotifications
 
 @available(iOS 14.0, *)
 struct Dashboard: View {

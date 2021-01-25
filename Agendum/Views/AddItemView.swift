@@ -29,6 +29,7 @@ struct AddItemView: View {
     @State private var newLabel: String = ""
     @State private var addLabel: Bool = false
     @State private var selectedLabels: Array<String> = []
+    @State private var notifications: Notifications? = nil
     var store = EKEventStore()
     var timeIntervals = ["30 minutes", "1 hour", "1.5 hours", "2 hours"]
     
@@ -270,10 +271,19 @@ struct AddItemView: View {
                         addEvent(item: newItem)
                     }
                     
+                    if (reminderToggle) {
+                        
+                        notifications = Notifications(title: title, reminderDate: reminder)
+                        
+                        notifications!.requestPermissions()
+                    }
+                    
+                    notifications!.generateNotification()
                     self.session.loggedInUser?.items.append(newItem)
                     self.session.saveItems(items: self.session.loggedInUser?.items ?? [])
                     self.session.saveLabels(labels: self.session.loggedInUser?.labels ?? [])
                     self.viewRouter.viewRouter = "Dashboard"
+                    
                     
                 } else {
                     
