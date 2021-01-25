@@ -161,7 +161,7 @@ class FirebaseSession: ObservableObject {
                 
             } else {
                 
-                print("there was an error: \(error)")
+                print("there was an error: \(error!)")
                 
             }
         }
@@ -418,10 +418,12 @@ class FirebaseSession: ObservableObject {
                 
                 for document in documents!.documents {
                     
-                    //delete
+                    followingPath.document(document.documentID).delete()
                 }
             }
         }
+        
+        db.collection("users").document((loggedInUser?.email!)!).delete()
         
         db.collection("data").document(Auth.auth().currentUser!.uid).delete() { err in
             
