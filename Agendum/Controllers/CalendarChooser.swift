@@ -62,12 +62,7 @@ struct CalendarChooser: UIViewControllerRepresentable {
             
             }
             
-            //archive array
-            //base64encode archive
-            //convert to data
             let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: calendarArray, requiringSecureCoding: false)
-            //let base64String = encodedData!.base64EncodedString()
-            //let data = Data(base64Encoded: base64String)
             parent.selected = encodedData!
             
             parent.presentationMode.wrappedValue.dismiss()

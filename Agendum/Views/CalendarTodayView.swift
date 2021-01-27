@@ -22,6 +22,7 @@ struct CalendarTodayView: UIViewRepresentable {
         
         func getSystemCalendars() -> Set<String> {
             
+            //selected is nil (probabaly the selecting calendars bug, hard code)
             var base64encodedstring = String(bytes: selected!, encoding: .utf8)
             base64encodedstring = base64encodedstring!.replacingOccurrences(of: "[", with: "")
             base64encodedstring = base64encodedstring!.replacingOccurrences(of: "]", with: "")
@@ -58,6 +59,9 @@ struct CalendarTodayView: UIViewRepresentable {
         calendarDayView.delegate = context.coordinator
 
         calendarDayView.reloadData()
+        
+        let test = CalendarAvailability()
+        test.getAvailabilityBetween(startDate: Date().startOfDay!, endDate: Date().endOfDay!)
 
         return calendarDayView
     }

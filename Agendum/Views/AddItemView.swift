@@ -278,7 +278,11 @@ struct AddItemView: View {
                         notifications!.requestPermissions()
                     }
                     
-                    notifications!.generateNotification()
+                    if (notifications != nil) {
+                        
+                        notifications!.generateNotification()
+                    }
+                
                     self.session.loggedInUser?.items.append(newItem)
                     self.session.saveItems(items: self.session.loggedInUser?.items ?? [])
                     self.session.saveLabels(labels: self.session.loggedInUser?.labels ?? [])

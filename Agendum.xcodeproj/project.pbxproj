@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D701FC7124F41D9600C7E892 /* MonthDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D701FC7024F41D9600C7E892 /* MonthDetailView.swift */; };
+		D70466E925C1665000833251 /* CalendarAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70466E825C1665000833251 /* CalendarAvailability.swift */; };
 		D7093736259354240065CBE6 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7093735259354240065CBE6 /* CustomAlertView.swift */; };
 		D710684925A3645200B5684F /* KeychainServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = D710684825A3645200B5684F /* KeychainServices.swift */; };
 		D71DF03C25502FA2003AC048 /* AllItemsDueSoonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71DF03B25502FA1003AC048 /* AllItemsDueSoonView.swift */; };
@@ -74,6 +75,7 @@
 		027507F23D6C28B021C483AB /* Pods-Agendum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendum.release.xcconfig"; path = "Target Support Files/Pods-Agendum/Pods-Agendum.release.xcconfig"; sourceTree = "<group>"; };
 		5F8ED031BD8A7560857E9F55 /* Pods-Agendum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendum.debug.xcconfig"; path = "Target Support Files/Pods-Agendum/Pods-Agendum.debug.xcconfig"; sourceTree = "<group>"; };
 		D701FC7024F41D9600C7E892 /* MonthDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthDetailView.swift; sourceTree = "<group>"; };
+		D70466E825C1665000833251 /* CalendarAvailability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAvailability.swift; sourceTree = "<group>"; };
 		D7093735259354240065CBE6 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		D710684825A3645200B5684F /* KeychainServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainServices.swift; sourceTree = "<group>"; };
 		D71DF03B25502FA1003AC048 /* AllItemsDueSoonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllItemsDueSoonView.swift; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				D7D01DAB25A4986B00794D71 /* Biometrics.swift */,
 				D742726E25AEFE7D0091DDAD /* CalendarChooser.swift */,
 				D736BB3225BED1A100491967 /* Notifications.swift */,
+				D70466E825C1665000833251 /* CalendarAvailability.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				D71DF04525503F96003AC048 /* AllItemsCompletedView.swift in Sources */,
 				D742726F25AEFE7D0091DDAD /* CalendarChooser.swift in Sources */,
 				D7B157152407D6160031671F /* AllItemsView.swift in Sources */,
+				D70466E925C1665000833251 /* CalendarAvailability.swift in Sources */,
 				D7093736259354240065CBE6 /* CustomAlertView.swift in Sources */,
 				D7B157172407DE600031671F /* FloatingAddButton.swift in Sources */,
 				D73B804F2407FF780098FAD0 /* ResetPasswordView.swift in Sources */,

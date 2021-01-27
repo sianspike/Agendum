@@ -142,16 +142,7 @@ struct CalendarWeekView: UIViewRepresentable {
                     
                     event.color = Event.Color(UIColor(red: 0.6, green: 0.8, blue: 1, alpha: 1))
                     event.backgroundColor = UIColor(red: 0.6, green: 0.8, blue: 1, alpha: 1)
-                    
-                    //event.isContainsFile = !item.files.isEmpty
-                    
-                    // Add text event (title, info, location, time)
-                    //if item.allDay {
-                    //    event.text = "\(model.title)"
-                    //} else {
                     event.text = "\(item.getTitle())"
-                    //}
-                    
                     events.append(event)
                 }
             }

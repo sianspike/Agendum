@@ -25,11 +25,8 @@ struct CalendarController: View {
                 CalendarWeekView()
                 
             } else if (timeFrame == 2) {
-                
-                //ScrollView {
                     
-                    CalendarMonthView()
-                //}
+                CalendarMonthView()
             }
         }
     }
