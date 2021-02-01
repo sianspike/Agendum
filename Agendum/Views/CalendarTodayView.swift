@@ -22,17 +22,25 @@ struct CalendarTodayView: UIViewRepresentable {
         
         func getSystemCalendars() -> Set<String> {
             
-            //selected is nil (probabaly the selecting calendars bug, hard code)
-            var base64encodedstring = String(bytes: selected!, encoding: .utf8)
-            base64encodedstring = base64encodedstring!.replacingOccurrences(of: "[", with: "")
-            base64encodedstring = base64encodedstring!.replacingOccurrences(of: "]", with: "")
-            base64encodedstring = base64encodedstring!.replacingOccurrences(of: "\"", with: "")
-            
-            let calendarArray: [String] = base64encodedstring!.components(separatedBy: ",")
-            
-            for calendar in calendarArray {
+            //remove later
+            if (selected == nil) {
+                
+                calendars.insert("Calendar")
+                
+            } else {
+                
+                //selected is nil (probabaly the selecting calendars bug, hard code)
+                var base64encodedstring = String(bytes: selected!, encoding: .utf8)
+                base64encodedstring = base64encodedstring!.replacingOccurrences(of: "[", with: "")
+                base64encodedstring = base64encodedstring!.replacingOccurrences(of: "]", with: "")
+                base64encodedstring = base64encodedstring!.replacingOccurrences(of: "\"", with: "")
+                
+                let calendarArray: [String] = base64encodedstring!.components(separatedBy: ",")
+                
+                for calendar in calendarArray {
 
-                calendars.insert(calendar)
+                    calendars.insert(calendar)
+                }
             }
             
             return calendars
@@ -60,7 +68,7 @@ struct CalendarTodayView: UIViewRepresentable {
 
         calendarDayView.reloadData()
         
-        let test = CalendarAvailability()
+        let test = CalendarAvailability(session: session)
         test.getAvailabilityBetween(startDate: Date().startOfDay!, endDate: Date().endOfDay!)
 
         return calendarDayView

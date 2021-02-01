@@ -29,6 +29,7 @@
 		D743ED9023F6C712007341D5 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED8F23F6C712007341D5 /* Dashboard.swift */; };
 		D743ED9223F6C906007341D5 /* TextWithBottomBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED9123F6C906007341D5 /* TextWithBottomBorder.swift */; };
 		D743ED9423F6CE0B007341D5 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED9323F6CE0B007341D5 /* ProgressBar.swift */; };
+		D7544BF425C30530003E9BE5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC2CD0D22423BFF4004A1D8E /* GoogleService-Info.plist */; };
 		D7549B9724DAEABE00EF002F /* ItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7549B9624DAEABE00EF002F /* ItemDetailView.swift */; };
 		D756916524B60EDF00CCD17B /* CalendarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D756916424B60EDF00CCD17B /* CalendarController.swift */; };
 		D756916724B60FFC00CCD17B /* CalendarTodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D756916624B60FFC00CCD17B /* CalendarTodayView.swift */; };
@@ -53,7 +54,6 @@
 		D7E2564324D3506D0041364F /* CareKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = D7E2564224D3506D0041364F /* CareKitUI */; };
 		D7E2564524D3506D0041364F /* CareKit in Frameworks */ = {isa = PBXBuildFile; productRef = D7E2564424D3506D0041364F /* CareKit */; };
 		D7E2564724D3506D0041364F /* CareKitStore in Frameworks */ = {isa = PBXBuildFile; productRef = D7E2564624D3506D0041364F /* CareKitStore */; };
-		D7FEEA7F25B1ABED00C1FF28 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC2CD0D22423BFF4004A1D8E /* GoogleService-Info.plist */; };
 		D8A787546A20F116506414C7 /* Pods_Agendum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E915D66670AE9F3B82F7469E /* Pods_Agendum.framework */; };
 		FC2CD0CF2423BF81004A1D8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2CD0CE2423BF80004A1D8E /* AppDelegate.swift */; };
 		FC385DE52455BFC300DE256D /* TextFieldWithBottomBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC385DE42455BFC300DE256D /* TextFieldWithBottomBorder.swift */; };
@@ -335,7 +335,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1230;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "Sian Pike";
 				TargetAttributes = {
 					D777A77723EB3A840021315E = {
@@ -369,7 +369,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D7FEEA7F25B1ABED00C1FF28 /* GoogleService-Info.plist in Resources */,
+				D7544BF425C30530003E9BE5 /* GoogleService-Info.plist in Resources */,
 				D7B157112407B8720031671F /* Fonts in Resources */,
 				D7C3296723FFD6D4008F3F4F /* Icons in Resources */,
 				FCCC972F243CBA480085A4FE /* LaunchScreen.storyboard in Resources */,

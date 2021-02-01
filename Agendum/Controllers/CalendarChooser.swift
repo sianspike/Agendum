@@ -62,8 +62,16 @@ struct CalendarChooser: UIViewControllerRepresentable {
             
             }
             
+            //remove later
+            if (calendarArray.isEmpty) {
+                
+                calendarArray.append("Calendar")
+            }
+            
             let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: calendarArray, requiringSecureCoding: false)
-            parent.selected = encodedData!
+            let base64String = encodedData!.base64EncodedString()
+            let data = Data(base64Encoded: base64String)
+            parent.selected = data!
             
             parent.presentationMode.wrappedValue.dismiss()
         }
@@ -76,6 +84,12 @@ struct CalendarChooser: UIViewControllerRepresentable {
                 
                 calendarArray.append(calendar.title)
             
+            }
+            
+            //remove later
+            if (calendarArray.isEmpty) {
+                
+                calendarArray.append("Calendar")
             }
             
             let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: calendarArray, requiringSecureCoding: false)
