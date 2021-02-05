@@ -97,18 +97,38 @@ class CalendarAvailability {
         return possibleTasks
     }
     
+    func removeDuplicates(itemToRemove: Item, suggestions: inout [Item]) -> [Item] {
+        
+        for i in 0...(suggestions.count - 2) {
+            
+            if (suggestions[i].getTitle() == itemToRemove.getTitle()) {
+                
+                suggestions.remove(at: i)
+            }
+        }
+        
+        return suggestions
+    }
+    
     func refineSuggestions(suggestions: [String:[Item]]) {
         
         var refinedSuggestions: [String: Item?] = [:]
+        var closestItem: Item? = nil
         
-        for suggestion in suggestions {
+        //suggestion -> 1/4 time ranges (e.g start of day to first event)
+        for var suggestion in suggestions {
             
-            var closestItem: Item? = nil
+            //maybe should remove using refinedsuggestions instead
+            if (closestItem != nil) {
+                
+                suggestion.value = removeDuplicates(itemToRemove: closestItem!, suggestions: &suggestion.value)
+            }
             
             if (!suggestion.value.isEmpty) {
                 
                 closestItem = suggestion.value[0]
                 
+                //item -> each item available in a suggestion
                 for item in suggestion.value {
                     
                     if (item.isDateSet() && closestItem!.isDateSet() && item.getDate()!.isLessThanDate(dateToCompare: closestItem!.getDate()!)) {
@@ -118,10 +138,9 @@ class CalendarAvailability {
                 }
             }
             
+            suggestion.value = removeDuplicates(itemToRemove: closestItem!, suggestions: &suggestion.value)
             refinedSuggestions[suggestion.key] = closestItem
         }
-        
-        //find a way to remove closest item from arrays once its been put into  refinedSuggestions
         
         print(refinedSuggestions)
     }
