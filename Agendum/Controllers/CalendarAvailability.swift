@@ -97,13 +97,23 @@ class CalendarAvailability {
         return possibleTasks
     }
     
-    func removeDuplicates(itemToRemove: Item, suggestions: inout [Item]) -> [Item] {
+    func removeDuplicates(itemToRemove: [String: Item?], suggestions: inout [Item]) -> [Item] {
         
-        for i in 0...(suggestions.count - 2) {
+        var i = 0
+        
+        if (suggestions.count > 0) {
             
-            if (suggestions[i].getTitle() == itemToRemove.getTitle()) {
+            for suggestion in suggestions {
                 
-                suggestions.remove(at: i)
+                for item in itemToRemove {
+                    
+                    if (suggestion.getTitle() == item.value?.getTitle()) {
+                        
+                        suggestions.remove(at: i)
+                    }
+                }
+                
+                i += 1
             }
         }
         
@@ -117,12 +127,8 @@ class CalendarAvailability {
         
         //suggestion -> 1/4 time ranges (e.g start of day to first event)
         for var suggestion in suggestions {
-            
-            //maybe should remove using refinedsuggestions instead
-            if (closestItem != nil) {
                 
-                suggestion.value = removeDuplicates(itemToRemove: closestItem!, suggestions: &suggestion.value)
-            }
+            suggestion.value = removeDuplicates(itemToRemove: refinedSuggestions, suggestions: &suggestion.value)
             
             if (!suggestion.value.isEmpty) {
                 
@@ -138,11 +144,9 @@ class CalendarAvailability {
                 }
             }
             
-            suggestion.value = removeDuplicates(itemToRemove: closestItem!, suggestions: &suggestion.value)
             refinedSuggestions[suggestion.key] = closestItem
+            suggestion.value = removeDuplicates(itemToRemove: refinedSuggestions, suggestions: &suggestion.value)
         }
-        
-        print(refinedSuggestions)
     }
     
     func getSystemCalendars() -> [EKCalendar]? {
