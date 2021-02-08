@@ -105,8 +105,11 @@ struct CalendarTodayView: UIViewRepresentable {
         func eventsForCalendar(systemEvents: [EKEvent]) -> [Event] {
             
             let mappedEvents = systemEvents.compactMap({ $0.transform() })
+            var mergedEvents = events + mappedEvents
+        
+            //mergedEvents = mergedEvents.filter({ item in !mappedEvents.contains(where: {$0.text == item.text}) })
             
-            return events + mappedEvents
+            return mergedEvents
         }
         
         func didSelectEvent(_ event: Event, type: CalendarType, frame: CGRect?) {

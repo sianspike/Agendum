@@ -37,11 +37,14 @@ class CalendarAvailability {
             //start date -> start of event
             let startToFirst = events![0].startDate.timeIntervalSince(startDate)
             intervals["StartDateToFirstEvent"] = startToFirst
-        
-            //end of event -> start of event
-            for i in 0...(events!.count - 2) {
+            
+            if (events!.count > 1) {
                 
-                intervals["Event\(i)ToEvent\(i + 1)"] = events![i + 1].startDate.timeIntervalSince(events![i].endDate)
+                //end of event -> start of event
+                for i in 0...(events!.count - 2) {
+                    
+                    intervals["Event\(i+1)ToEvent\(i + 2)"] = events![i + 1].startDate.timeIntervalSince(events![i].endDate)
+                }
             }
             
             //end of event -> end date
@@ -67,13 +70,16 @@ class CalendarAvailability {
         
         for event in exclude {
             
-            for i in 0...(items!.count - 2) {
+            if (items!.count > 1) {
                 
-                if (event.title == items![i].getTitle()) {
+                for i in 0...(items!.count - 2) {
                     
-                    items!.remove(at: i)
+                    if (event.title == items![i].getTitle()) {
+                        
+                        items!.remove(at: i)
+                    }
                 }
-            }
+            } 
         }
         
         for interval in intervals {
