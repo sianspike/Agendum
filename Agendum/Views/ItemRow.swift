@@ -33,35 +33,36 @@ struct ItemRow: View {
         } else if (isTask && item.isTask()){
                 
             return AnyView(ItemElement(item: item))
+            
         }
         
         return AnyView(EmptyView())
     }
     
     var body: some View {
-
+            
         Group {
             
             if (item.isDateSet() || item.isReminderSet()) {
-                
-                if (timeFrame == 0) {
                         
+                if (timeFrame == 0) {
+                                
                     if ((Calendar.current.component(.day, from: item.getDate()! as Date) == today && Calendar.current.component(.month, from: item.getDate()! as Date) == thisMonth && Calendar.current.component(.year, from: item.getDate()! as Date) == thisYear) || (Calendar.current.component(.day, from: item.getReminderDate()! as Date) == today && Calendar.current.component(.month, from: item.getReminderDate()! as Date) == thisMonth && Calendar.current.component(.year, from: item.getReminderDate()! as Date) == thisYear)) {
-                            
+                                    
                         chooseCategory()
                     }
 
                 } else if (timeFrame == 1) {
-                    
+                            
                     if ((Calendar.current.component(.weekOfYear, from: self.item.getDate()! as Date) == thisWeek && Calendar.current.component(.month, from: item.getDate()! as Date) == thisMonth && Calendar.current.component(.year, from: item.getDate()! as Date) == thisYear) || (Calendar.current.component(.weekOfYear, from: self.item.getReminderDate()! as Date) == thisWeek && Calendar.current.component(.month, from: item.getReminderDate()! as Date) == thisMonth && Calendar.current.component(.year, from: item.getReminderDate()! as Date) == thisYear)) {
-                        
+                                
                         chooseCategory()
                     }
-                    
+                            
                 } else if (timeFrame == 2) {
-                    
+                            
                     if ((Calendar.current.component(.month, from: item.getDate()! as Date) == thisMonth && Calendar.current.component(.year, from: item.getDate()! as Date) == thisYear) || (Calendar.current.component(.month, from: item.getReminderDate()! as Date) == thisMonth && Calendar.current.component(.year, from: item.getReminderDate()! as Date) == thisYear)) {
-                        
+                                
                         chooseCategory()
                     }
                 }

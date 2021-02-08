@@ -27,12 +27,12 @@ class CalendarAvailability {
         return store.events(matching: predicate)
     }
     
-    func getAvailabilityBetween(startDate: Date, endDate: Date) {
+    func getAvailabilityBetween(startDate: Date, endDate: Date) -> [String: Item?] {
         
         let events = getEventsBetween(startDate: startDate, endDate: endDate)
         var intervals: [String: TimeInterval] = [:]
         
-        if (events != nil) {
+        if (!events!.isEmpty) {
             
             //start date -> start of event
             let startToFirst = events![0].startDate.timeIntervalSince(startDate)
@@ -57,7 +57,7 @@ class CalendarAvailability {
         
         let suggestions = generateSuggestions(intervals: intervals, exclude: events ?? [])
         
-        refineSuggestions(suggestions: suggestions)
+        return refineSuggestions(suggestions: suggestions)
     }
     
     func generateSuggestions(intervals: [String:TimeInterval], exclude: [EKEvent]) -> [String:[Item]] {
@@ -120,7 +120,7 @@ class CalendarAvailability {
         return suggestions
     }
     
-    func refineSuggestions(suggestions: [String:[Item]]) {
+    func refineSuggestions(suggestions: [String:[Item]]) -> [String: Item?] {
         
         var refinedSuggestions: [String: Item?] = [:]
         var closestItem: Item? = nil
@@ -147,6 +147,8 @@ class CalendarAvailability {
             refinedSuggestions[suggestion.key] = closestItem
             suggestion.value = removeDuplicates(itemToRemove: refinedSuggestions, suggestions: &suggestion.value)
         }
+        
+        return refinedSuggestions
     }
     
     func getSystemCalendars() -> [EKCalendar]? {

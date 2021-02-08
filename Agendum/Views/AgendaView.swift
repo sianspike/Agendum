@@ -20,7 +20,6 @@ struct AgendaView: View {
             
         session.loggedInUser?.items.remove(atOffsets: offsets)            
         print("deleted")
-        
     }
     
     var body: some View {
@@ -71,6 +70,42 @@ struct AgendaView: View {
                         .font(Font.custom("Montserrat-SemiBold", size: 20))
                         .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
                         .padding()
+                    
+                    ForEach(Array(CalendarAvailability(session: session).getAvailabilityBetween(startDate: Date().startOfDay!, endDate: Date().endOfDay!).keys), id: \.self) { key in
+                        
+                        let item = CalendarAvailability(session: session).getAvailabilityBetween(startDate: Date().startOfDay!, endDate: Date().endOfDay!)[key]!
+                        
+                        let regex = try! NSRegularExpression(pattern: "[0-9]")
+                        
+                        switch(key) {
+                        
+                        case "StartDateToEndDate":
+                            Text("Complete anytime today.")
+                                .bold()
+                                .padding()
+                            
+                        case "LastEventToEndDate":
+                            Text("Complete after your last event.")
+                                .bold()
+                                .padding()
+                            
+                        case "StartDateToFirstEvent":
+                            Text("Complete before your first event.")
+                                .bold()
+                                .padding()
+                            
+                        case "Event\(regex)ToEvent\(regex)":
+                            Text("Complete between your events.")
+                                .bold()
+                                .padding()
+                            
+                        default:
+                            Text("")
+                        }
+                        
+                        Text(item?.getTitle() ?? "Loading...")
+                            .padding()
+                    }
                     
                 }.frame(width: geometry.size.width, alignment: .leading)
                 
