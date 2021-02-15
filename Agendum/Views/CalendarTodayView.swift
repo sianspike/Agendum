@@ -67,9 +67,6 @@ struct CalendarTodayView: UIViewRepresentable {
         calendarDayView.delegate = context.coordinator
 
         calendarDayView.reloadData()
-        
-        let test = CalendarAvailability(session: session)
-        test.getAvailabilityBetween(startDate: Date().startOfDay!, endDate: Date().endOfDay!)
 
         return calendarDayView
     }
@@ -105,9 +102,7 @@ struct CalendarTodayView: UIViewRepresentable {
         func eventsForCalendar(systemEvents: [EKEvent]) -> [Event] {
             
             let mappedEvents = systemEvents.compactMap({ $0.transform() })
-            var mergedEvents = events + mappedEvents
-        
-            //mergedEvents = mergedEvents.filter({ item in !mappedEvents.contains(where: {$0.text == item.text}) })
+            let mergedEvents = events + mappedEvents
             
             return mergedEvents
         }

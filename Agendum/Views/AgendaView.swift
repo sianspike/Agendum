@@ -22,6 +22,22 @@ struct AgendaView: View {
         print("deleted")
     }
     
+    func timeFrameChooser() -> (Date, Date) {
+        
+        if (timeFrame == 0) {
+            
+            return (Date().startOfDay!, Date().endOfDay!)
+            
+        } else if (timeFrame == 1) {
+            
+            return (Date().startMondayOfWeek!, Date().endSundayOfWeek!)
+            
+        } else {
+            
+            return (Date().startOfMonth!, Date().endOfMonth!)
+        }
+    }
+    
     var body: some View {
         
         GeometryReader { geometry in
@@ -65,45 +81,39 @@ struct AgendaView: View {
                             .padding(.horizontal)
                         
                     }
+                    
                         
                     Text("S u g g e s t i o n s")
                         .font(Font.custom("Montserrat-SemiBold", size: 20))
                         .foregroundColor(Color(red: 0.6, green: 0.9, blue: 1.0, opacity: 1.0))
                         .padding()
                     
-                    ForEach(Array(CalendarAvailability(session: session).getAvailabilityBetween(startDate: Date().startOfDay!, endDate: Date().endOfDay!).keys), id: \.self) { key in
+                    ForEach(Array(CalendarAvailability(session: session).getAvailabilityBetween(startDate: timeFrameChooser().0, endDate: timeFrameChooser().1)), id: \.key) { item in
                         
-                        let item = CalendarAvailability(session: session).getAvailabilityBetween(startDate: Date().startOfDay!, endDate: Date().endOfDay!)[key]!
-                        
-                        let regex = try! NSRegularExpression(pattern: "[0-9]")
-                        
-                        switch(key) {
-                        
+                        switch(item.key) {
+
                         case "StartDateToEndDate":
                             Text("Complete anytime today.")
                                 .bold()
                                 .padding()
-                            
+
                         case "LastEventToEndDate":
                             Text("Complete after your last event.")
                                 .bold()
                                 .padding()
-                            
+
                         case "StartDateToFirstEvent":
                             Text("Complete before your first event.")
                                 .bold()
                                 .padding()
-                            
-                        case "Event\(regex)ToEvent\(regex)":
-                            Text("Complete between your events.")
+
+                        default:
+                            Text("Complete between event \(item.key[5]) and event \(item.key[13])")
                                 .bold()
                                 .padding()
-                            
-                        default:
-                            Text("")
                         }
                         
-                        Text(item?.getTitle() ?? "Loading...")
+                        Text(item.value?.getTitle() ?? "Loading...")
                             .padding()
                     }
                     
@@ -117,5 +127,32 @@ struct AgendaView: View {
 struct AgendaView_Previews: PreviewProvider {
     static var previews: some View {
         AgendaView(timeFrame: 0)
+    }
+}
+
+extension String {
+
+    var length: Int {
+        return count
+    }
+
+    subscript (i: Int) -> String {
+        return self[i ..< i + 1]
+    }
+
+    func substring(fromIndex: Int) -> String {
+        return self[min(fromIndex, length) ..< length]
+    }
+
+    func substring(toIndex: Int) -> String {
+        return self[0 ..< max(0, toIndex)]
+    }
+
+    subscript (r: Range<Int>) -> String {
+        let range = Range(uncheckedBounds: (lower: max(0, min(length, r.lowerBound)),
+                                            upper: min(length, max(0, r.upperBound))))
+        let start = index(startIndex, offsetBy: range.lowerBound)
+        let end = index(start, offsetBy: range.upperBound - range.lowerBound)
+        return String(self[start ..< end])
     }
 }

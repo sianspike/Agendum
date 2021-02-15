@@ -105,21 +105,17 @@ class CalendarAvailability {
     
     func removeDuplicates(itemToRemove: [String: Item?], suggestions: inout [Item]) -> [Item] {
         
-        var i = 0
-        
         if (suggestions.count > 0) {
             
-            for suggestion in suggestions {
+            for i in 0...(suggestions.count - 2) {
                 
                 for item in itemToRemove {
                     
-                    if (suggestion.getTitle() == item.value?.getTitle()) {
+                    if (i < suggestions.count && suggestions[i].getTitle() == item.value?.getTitle()) {
                         
                         suggestions.remove(at: i)
                     }
                 }
-                
-                i += 1
             }
         }
         
