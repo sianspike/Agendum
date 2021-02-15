@@ -22,6 +22,8 @@
 		D73B804F2407FF780098FAD0 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73B804E2407FF780098FAD0 /* ResetPasswordView.swift */; };
 		D73B80512408006A0098FAD0 /* ButtonOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73B80502408006A0098FAD0 /* ButtonOne.swift */; };
 		D73B805324080A240098FAD0 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73B805224080A240098FAD0 /* AddItemView.swift */; };
+		D73EA48025DA9FDA006DD190 /* AgendumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73EA47F25DA9FDA006DD190 /* AgendumTests.swift */; };
+		D73EA49025DAA0AF006DD190 /* AgendumUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73EA48F25DAA0AF006DD190 /* AgendumUITests.swift */; };
 		D742726F25AEFE7D0091DDAD /* CalendarChooser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D742726E25AEFE7D0091DDAD /* CalendarChooser.swift */; };
 		D743ED8823F692A2007341D5 /* HorizontalLineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED8723F692A2007341D5 /* HorizontalLineShape.swift */; };
 		D743ED8C23F6A8C8007341D5 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D743ED8B23F6A8C8007341D5 /* SignUpView.swift */; };
@@ -71,6 +73,23 @@
 		FCE8AF42246840820038DCF6 /* ItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8AF41246840820038DCF6 /* ItemRow.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		D73EA48225DA9FDA006DD190 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D777A77023EB3A840021315E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D777A77723EB3A840021315E;
+			remoteInfo = Agendum;
+		};
+		D73EA49225DAA0AF006DD190 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D777A77023EB3A840021315E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D777A77723EB3A840021315E;
+			remoteInfo = Agendum;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		027507F23D6C28B021C483AB /* Pods-Agendum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendum.release.xcconfig"; path = "Target Support Files/Pods-Agendum/Pods-Agendum.release.xcconfig"; sourceTree = "<group>"; };
 		5F8ED031BD8A7560857E9F55 /* Pods-Agendum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agendum.debug.xcconfig"; path = "Target Support Files/Pods-Agendum/Pods-Agendum.debug.xcconfig"; sourceTree = "<group>"; };
@@ -89,6 +108,12 @@
 		D73B804E2407FF780098FAD0 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		D73B80502408006A0098FAD0 /* ButtonOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonOne.swift; sourceTree = "<group>"; };
 		D73B805224080A240098FAD0 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
+		D73EA47D25DA9FDA006DD190 /* AgendumTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AgendumTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D73EA47F25DA9FDA006DD190 /* AgendumTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendumTests.swift; sourceTree = "<group>"; };
+		D73EA48125DA9FDA006DD190 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D73EA48D25DAA0AF006DD190 /* AgendumUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AgendumUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D73EA48F25DAA0AF006DD190 /* AgendumUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendumUITests.swift; sourceTree = "<group>"; };
+		D73EA49125DAA0AF006DD190 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D742726E25AEFE7D0091DDAD /* CalendarChooser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarChooser.swift; sourceTree = "<group>"; };
 		D743ED8723F692A2007341D5 /* HorizontalLineShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalLineShape.swift; sourceTree = "<group>"; };
 		D743ED8B23F6A8C8007341D5 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -138,6 +163,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D73EA47A25DA9FDA006DD190 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D73EA48A25DAA0AF006DD190 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D777A77523EB3A840021315E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -169,10 +208,30 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		D73EA47E25DA9FDA006DD190 /* AgendumTests */ = {
+			isa = PBXGroup;
+			children = (
+				D73EA47F25DA9FDA006DD190 /* AgendumTests.swift */,
+				D73EA48125DA9FDA006DD190 /* Info.plist */,
+			);
+			path = AgendumTests;
+			sourceTree = "<group>";
+		};
+		D73EA48E25DAA0AF006DD190 /* AgendumUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D73EA48F25DAA0AF006DD190 /* AgendumUITests.swift */,
+				D73EA49125DAA0AF006DD190 /* Info.plist */,
+			);
+			path = AgendumUITests;
+			sourceTree = "<group>";
+		};
 		D777A76F23EB3A840021315E = {
 			isa = PBXGroup;
 			children = (
 				D777A77A23EB3A840021315E /* Agendum */,
+				D73EA47E25DA9FDA006DD190 /* AgendumTests */,
+				D73EA48E25DAA0AF006DD190 /* AgendumUITests */,
 				D777A77923EB3A840021315E /* Products */,
 				8AB2F1CA9E6607C109BFE975 /* Pods */,
 				881ECF120CD6E19ED241CC56 /* Frameworks */,
@@ -183,6 +242,8 @@
 			isa = PBXGroup;
 			children = (
 				D777A77823EB3A840021315E /* Agendum.app */,
+				D73EA47D25DA9FDA006DD190 /* AgendumTests.xctest */,
+				D73EA48D25DAA0AF006DD190 /* AgendumUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -304,6 +365,42 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D73EA47C25DA9FDA006DD190 /* AgendumTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D73EA48625DA9FDA006DD190 /* Build configuration list for PBXNativeTarget "AgendumTests" */;
+			buildPhases = (
+				D73EA47925DA9FDA006DD190 /* Sources */,
+				D73EA47A25DA9FDA006DD190 /* Frameworks */,
+				D73EA47B25DA9FDA006DD190 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D73EA48325DA9FDA006DD190 /* PBXTargetDependency */,
+			);
+			name = AgendumTests;
+			productName = AgendumTests;
+			productReference = D73EA47D25DA9FDA006DD190 /* AgendumTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D73EA48C25DAA0AF006DD190 /* AgendumUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D73EA49425DAA0AF006DD190 /* Build configuration list for PBXNativeTarget "AgendumUITests" */;
+			buildPhases = (
+				D73EA48925DAA0AF006DD190 /* Sources */,
+				D73EA48A25DAA0AF006DD190 /* Frameworks */,
+				D73EA48B25DAA0AF006DD190 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D73EA49325DAA0AF006DD190 /* PBXTargetDependency */,
+			);
+			name = AgendumUITests;
+			productName = AgendumUITests;
+			productReference = D73EA48D25DAA0AF006DD190 /* AgendumUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		D777A77723EB3A840021315E /* Agendum */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D777A7A523EB3A860021315E /* Build configuration list for PBXNativeTarget "Agendum" */;
@@ -334,10 +431,18 @@
 		D777A77023EB3A840021315E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1130;
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "Sian Pike";
 				TargetAttributes = {
+					D73EA47C25DA9FDA006DD190 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = D777A77723EB3A840021315E;
+					};
+					D73EA48C25DAA0AF006DD190 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = D777A77723EB3A840021315E;
+					};
 					D777A77723EB3A840021315E = {
 						CreatedOnToolsVersion = 11.3.1;
 					};
@@ -360,11 +465,27 @@
 			projectRoot = "";
 			targets = (
 				D777A77723EB3A840021315E /* Agendum */,
+				D73EA47C25DA9FDA006DD190 /* AgendumTests */,
+				D73EA48C25DAA0AF006DD190 /* AgendumUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D73EA47B25DA9FDA006DD190 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D73EA48B25DAA0AF006DD190 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D777A77623EB3A840021315E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -423,6 +544,22 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D73EA47925DA9FDA006DD190 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D73EA48025DA9FDA006DD190 /* AgendumTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D73EA48925DAA0AF006DD190 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D73EA49025DAA0AF006DD190 /* AgendumUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D777A77423EB3A840021315E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -484,7 +621,102 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		D73EA48325DA9FDA006DD190 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D777A77723EB3A840021315E /* Agendum */;
+			targetProxy = D73EA48225DA9FDA006DD190 /* PBXContainerItemProxy */;
+		};
+		D73EA49325DAA0AF006DD190 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D777A77723EB3A840021315E /* Agendum */;
+			targetProxy = D73EA49225DAA0AF006DD190 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		D73EA48425DA9FDA006DD190 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = F5XRH8MLFK;
+				INFOPLIST_FILE = AgendumTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sianspike.AgendumTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Agendum.app/Agendum";
+			};
+			name = Debug;
+		};
+		D73EA48525DA9FDA006DD190 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = F5XRH8MLFK;
+				INFOPLIST_FILE = AgendumTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sianspike.AgendumTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Agendum.app/Agendum";
+			};
+			name = Release;
+		};
+		D73EA49525DAA0AF006DD190 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = F5XRH8MLFK;
+				INFOPLIST_FILE = AgendumUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sianspike.AgendumUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Agendum;
+			};
+			name = Debug;
+		};
+		D73EA49625DAA0AF006DD190 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = F5XRH8MLFK;
+				INFOPLIST_FILE = AgendumUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sianspike.AgendumUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Agendum;
+			};
+			name = Release;
+		};
 		D777A7A323EB3A860021315E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -654,6 +886,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D73EA48625DA9FDA006DD190 /* Build configuration list for PBXNativeTarget "AgendumTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D73EA48425DA9FDA006DD190 /* Debug */,
+				D73EA48525DA9FDA006DD190 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D73EA49425DAA0AF006DD190 /* Build configuration list for PBXNativeTarget "AgendumUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D73EA49525DAA0AF006DD190 /* Debug */,
+				D73EA49625DAA0AF006DD190 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D777A77323EB3A840021315E /* Build configuration list for PBXProject "Agendum" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
