@@ -26,8 +26,10 @@ class AgendumUITests: XCTestCase {
     }
 
     func testLoginSuccess() throws {
+        
         // UI tests must launch the application that they test.
         app = XCUIApplication()
+        
         let email = app.textFields["U s e r n a m e  o r  E m a i l"]
         let password = app.secureTextFields["P a s s w o r d"]
         let signIn = app.buttons["S I G N  I N"]
@@ -45,6 +47,7 @@ class AgendumUITests: XCTestCase {
     func testLoginFail() throws {
         
         app = XCUIApplication()
+        
         let signIn = app.buttons["S I G N  I N"]
         let scrollViewsQuery = app.alerts["Authentication Error"].scrollViews
         
@@ -56,26 +59,31 @@ class AgendumUITests: XCTestCase {
     func testFacebookLogin() throws {
         
         app = XCUIApplication()
+        
         let facebook = app.buttons["Continue with Facebook"]
-        let facebookAlert = app.alerts["“Agendum” Wants to Use “facebook.com” to Sign In"]
-        let facebookLoginWindow = app.webViews.webViews.webViews.otherElements["Log in to Facebook | Facebook"]
         
         app.launch()
         facebook.tap()
         
-        addUIInterruptionMonitor(withDescription: "") { alert -> Bool in
-
-            if facebookAlert.buttons["Continue"].exists { //doesnt get here second time
-
-                facebookAlert.buttons["Continue"].tap()
-
-                return true
-            }
-
-            return false
-        }
+        addUIInterruptionMonitor(withDescription: "System Dialog") {
+            
+            (alert) -> Bool in
+            
+            XCTAssertTrue(alert.isEnabled)
         
-        app.activate()
-        XCTAssertTrue(facebookLoginWindow.exists)
+            return true
+        }
+    }
+    
+    func testSignUp() throws {
+        
+        app = XCUIApplication()
+        
+        let signUpButton = app.buttons["S I G N  U P"]
+        let signUpView = app.windows.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element
+        
+        app.launch()
+        signUpButton.tap()
+        XCTAssertTrue(signUpView.isEnabled)
     }
 }
