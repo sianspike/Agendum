@@ -25,7 +25,7 @@ class AgendumUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testLoginSuccess() throws {
+    func testSignInSuccess() throws {
         
         // UI tests must launch the application that they test.
         app = XCUIApplication()
@@ -44,7 +44,7 @@ class AgendumUITests: XCTestCase {
         XCTAssertFalse(loginScreen.isHittable)
     }
     
-    func testLoginFail() throws {
+    func testSignInFail() throws {
         
         app = XCUIApplication()
         
@@ -75,7 +75,7 @@ class AgendumUITests: XCTestCase {
         }
     }
     
-    func testSignUp() throws {
+    func testSignUpButton() throws {
         
         app = XCUIApplication()
         
@@ -85,5 +85,79 @@ class AgendumUITests: XCTestCase {
         app.launch()
         signUpButton.tap()
         XCTAssertTrue(signUpView.isEnabled)
+    }
+    
+    func testSignUpSuccess() throws {
+        
+        app = XCUIApplication()
+        
+        let usernameField = app.textFields["U s e r n a m e"]
+        let emailField = app.textFields["E m a i l"]
+        let passwordField = app.secureTextFields["P a s s w o r d"]
+        let createAccountButton = app.buttons["C R E A T E  A C C O U N T"]
+        let dashboard = app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 5)
+        
+        try testSignUpButton()
+        
+        usernameField.tap()
+        usernameField.typeText("b")
+        emailField.tap()
+        emailField.typeText("b@test.com")
+        passwordField.tap()
+        passwordField.typeText("test@1234")
+        createAccountButton.tap()
+        XCTAssertTrue(dashboard.isEnabled)
+    }
+    
+    func testSignUpFail() throws {
+        
+        app = XCUIApplication()
+        
+        let signUpButton = app.buttons["C R E A T E  A C C O U N T"]
+        let scrollViewsQuery = app.alerts["Authentication Error"].scrollViews
+        
+        app.launch()
+        
+        try testSignUpButton()
+        
+        signUpButton.tap()
+        XCTAssertTrue(scrollViewsQuery.otherElements.containing(.staticText, identifier: "Authentication Error").element.exists)
+    }
+    
+    func testSignInButton() throws {
+        
+        app = XCUIApplication()
+        
+        let signInButton = app.buttons["S I G N  I N"]
+        let signInView = app.windows.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element
+        
+        app.launch()
+        
+        try testSignUpButton()
+        
+        signInButton.tap()
+        XCTAssertTrue(signInView.isEnabled)
+    }
+    
+    func testFacebookSignUp() throws {
+        
+        app = XCUIApplication()
+        
+        let facebook = app.buttons["Continue with Facebook"]
+        
+        app.launch()
+        
+        try testSignUpButton()
+        
+        facebook.tap()
+        
+        addUIInterruptionMonitor(withDescription: "System Dialog") {
+            
+            (alert) -> Bool in
+            
+            XCTAssertTrue(alert.isEnabled)
+        
+            return true
+        }
     }
 }
