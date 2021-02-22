@@ -8,6 +8,8 @@
 
 import XCTest
 
+@testable import Agendum
+
 class AgendumTests: XCTestCase {
 
     override func setUpWithError() throws {
@@ -18,16 +20,23 @@ class AgendumTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+    func signUp() throws {
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
+        let sut = FirebaseSession()
+        
+        sut.signUp(email: "abc@test.com", password: "test@1234") { result, error in
+            
+            XCTAssert((result != nil) || (error != nil))
         }
     }
-
+    
+    func signIn() throws {
+        
+        let sut = FirebaseSession()
+        
+        sut.signIn(email: "abc@test.com", password: "test@1234") { result, error in
+            
+            XCTAssert((result != nil) || (error != nil))
+        }
+    }
 }
