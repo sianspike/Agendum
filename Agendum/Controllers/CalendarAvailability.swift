@@ -107,7 +107,7 @@ class CalendarAvailability {
         
         if (suggestions.count > 0) {
             
-            for i in 0...(suggestions.count - 2) {
+            for i in 0...(suggestions.count - 1) {
                 
                 for item in itemToRemove {
                     

@@ -24,16 +24,19 @@ struct CalendarMonthView: UIViewRepresentable {
         
         func getSystemCalendars() -> Set<String> {
             
-            var base64encodedstring = String(bytes: selected!, encoding: .utf8)
-            base64encodedstring = base64encodedstring!.replacingOccurrences(of: "[", with: "")
-            base64encodedstring = base64encodedstring!.replacingOccurrences(of: "]", with: "")
-            base64encodedstring = base64encodedstring!.replacingOccurrences(of: "\"", with: "")
-            
-            let calendarArray: [String] = base64encodedstring!.components(separatedBy: ",")
-            
-            for calendar in calendarArray {
+            if selected != nil {
+                
+                var base64encodedstring = String(bytes: selected!, encoding: .utf8)
+                base64encodedstring = base64encodedstring!.replacingOccurrences(of: "[", with: "")
+                base64encodedstring = base64encodedstring!.replacingOccurrences(of: "]", with: "")
+                base64encodedstring = base64encodedstring!.replacingOccurrences(of: "\"", with: "")
+                
+                let calendarArray: [String] = base64encodedstring!.components(separatedBy: ",")
+                
+                for calendar in calendarArray {
 
-                calendars.insert(calendar)
+                    calendars.insert(calendar)
+                }
             }
             
             return calendars
@@ -58,16 +61,19 @@ struct CalendarMonthView: UIViewRepresentable {
     
     func getSystemCalendars() -> Set<String> {
         
-        var base64encodedstring = String(bytes: selected!, encoding: .utf8)
-        base64encodedstring = base64encodedstring!.replacingOccurrences(of: "[", with: "")
-        base64encodedstring = base64encodedstring!.replacingOccurrences(of: "]", with: "")
-        base64encodedstring = base64encodedstring!.replacingOccurrences(of: "\"", with: "")
-        
-        let calendarArray: [String] = base64encodedstring!.components(separatedBy: ",")
-        
-        for calendar in calendarArray {
+        if selected != nil {
+            
+            var base64encodedstring = String(bytes: selected!, encoding: .utf8)
+            base64encodedstring = base64encodedstring!.replacingOccurrences(of: "[", with: "")
+            base64encodedstring = base64encodedstring!.replacingOccurrences(of: "]", with: "")
+            base64encodedstring = base64encodedstring!.replacingOccurrences(of: "\"", with: "")
+            
+            let calendarArray: [String] = base64encodedstring!.components(separatedBy: ",")
+            
+            for calendar in calendarArray {
 
-            calendars.insert(calendar)
+                calendars.insert(calendar)
+            }
         }
         
         return calendars
